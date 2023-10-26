@@ -1,7 +1,7 @@
 ---
   layout: home
   hero:
-    image: 
+    image:
       src: /logo.png
       alt: zmx2321
     name: zmx的前端日志
@@ -17,5 +17,8 @@
     - theme: alt
       text: 我的vuepress
       link: https://zmx2321.github.io/blog/
+    - theme: alt
+      text: 当前地址
+      link: https://zmx2321.github.io/vite-blog/
 ---
 <Home />
