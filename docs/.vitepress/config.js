@@ -61,12 +61,33 @@ export default {
       copyright: "MIT Licensed | Copyright © 2020-present zmx2321@gmail.com",
     },
 
-    // lastUpdated: 'Last Updated', // string | boolean
     // 搜索
-    algolia: {
+    /* algolia: {
       apiKey: "your_api_key",
       indexName: "index_name",
-    },
+    }, */
+    /* search: {
+      // provider: 'local', // 可以开启本地搜索
+      provider: "algolia",
+      options: {
+        appId: "你的appId",
+        apiKey: "你的apiKey",
+        indexName: "你的indexName",
+        placeholder: "请输入关键词",
+        translations: {
+          button: {
+            buttonText: "请输入关键词",
+          },
+        },
+      },
+    }, */
+    /* algolia: {
+      appId: "RDDxxx", // 需要替换
+      apiKey: "9302dbxxx", // 需要替换
+      indexName: "chodocs", // 需要替换
+      placeholder: "请输入关键词",
+      buttonText: "搜索",
+    }, */
 
     returnToTopLabel: "返回顶部",
 
