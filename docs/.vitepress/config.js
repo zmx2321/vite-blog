@@ -6,7 +6,7 @@ export default {
   description: "zmx2321",
 
   // 部署到github相关的配置
-  base: "/vitepress_empty/",
+  base: "/vite-blog/",
 
   locales: {
     "/": {
@@ -50,7 +50,7 @@ export default {
 
     // 编辑链接
     editLink: {
-      pattern: "https://github.com/zmx2321/vitepress_empty",
+      pattern: "https://github.com/zmx2321/vite-blog",
       text: "在 github 上编辑此页",
     },
 
@@ -79,7 +79,7 @@ export default {
 
     // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
     // 当你提供了 themeConfig.repo 选项，将会自动在每个页面的导航栏生成生成一个 GitHub 链接，以及在页面的底部生成一个 "Edit this page" 链接
-    repo: "zmx2321/vitepress_empty",
+    repo: "zmx2321/vite-blog",
 
     // 假如文档不是放在仓库的根目录下
     docsDir: "docs",
