@@ -1,6 +1,7 @@
 <template>
   <section class="leancloud_wrap">
-    <div class="visitor_cont" id="visitor" :data-flag-title="fileName"></div>
+    <!-- <div class="visitor_cont" id="visitor" :data-flag-title="fileName"></div> -->
+    <div class="visitor_cont" id="visitor"></div>
     <!-- <span class="leancloud-visitors" data-flag-title="Your Article Title">
       <em class="post-meta-item-text">访问量： </em>
       <i class="leancloud-visitors-count"></i>
@@ -18,22 +19,15 @@ import { ref, onMounted } from "vue";
 import Valine from "valine";
 
 const valine = new Valine();
-const path = window.location.pathname;
-const fileName = ref(path.split("/")[path.split("/").length - 1]);
-
-const props = defineProps({
-  isShowComments: {
-    type: Boolean,
-    default: true,
-  },
-});
+/* const path = window.location.pathname;
+const fileName = ref(path.split("/")[path.split("/").length - 1]); */
 
 const init = () => {
   valine.init({
     el: "#vcomments",
     appId: "wvnzPTX6Bl11I4U3FZ8ehzmx-gzGzoHsz", // your appId
     appKey: "8DeYTNaZ7rFPmSW5D2iwOY5x", // your appKey
-    path,
+    // path,
     visitor: true,
     avatar: "mm",
     placeholder: "快来发表评论吧 ~",
