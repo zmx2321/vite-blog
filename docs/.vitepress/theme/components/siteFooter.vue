@@ -1,7 +1,8 @@
 <template>
   <div class="site-footer">自定义底部信息</div>
 
-  <back-top />
+  <back-top :isShowVisit="false" />
+  <!-- <valine /> -->
 </template>
 <script setup>
 const props = defineProps({
