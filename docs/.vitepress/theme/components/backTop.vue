@@ -1,32 +1,31 @@
 <template>
-  <div :class="['back-top', showIcon ? 'back-top-show': '']">
+  <div :class="['back-top', showIcon ? 'back-top-show' : '']">
     <div class="iconfont icon icon-fanhuidingbu2" @click="onScroll"></div>
   </div>
 </template>
 <script setup>
-  import debounce from "lodash.debounce";
-  import { ref, onMounted, onUnmounted } from "vue";
-  import "../../../public/font/iconfont.css";
-  function onScroll() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-  let showIcon = ref(false);
-  function handleScroll () {
-    let top = Math.floor(document.documentElement.scrollTop || document.body.scrollTop);
-    showIcon.value = top > 200;
-  }
-  onMounted(() => {
-    window.addEventListener(
-      "scroll",
-      debounce(() => {
-        handleScroll();
-      }, 100),
-    );
-  });
-  onUnmounted(() => {
-    window.removeEventListener("scroll", handleScroll);
-  })
-
+import debounce from "lodash.debounce";
+import { ref, onMounted, onUnmounted } from "vue";
+import "../../../public/font/iconfont.css";
+function onScroll() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+let showIcon = ref(false);
+function handleScroll() {
+  let top = Math.floor(document.documentElement.scrollTop || document.body.scrollTop);
+  showIcon.value = top > 200;
+}
+onMounted(() => {
+  window.addEventListener(
+    "scroll",
+    debounce(() => {
+      handleScroll();
+    }, 100),
+  );
+});
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 <style lang="scss">
 :root {

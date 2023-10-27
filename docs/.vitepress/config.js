@@ -142,6 +142,19 @@ export default {
         },
       },
     ], */
+    /* [
+      "vuepress-plugin-comment",
+      {
+        choosen: "valine",
+        // options选项中的所有参数，会传给Valine的配置
+        options: {
+          el: "#valine-vuepress-comment",
+          appId: "PzBRAo1U271H7HJLjo1z72Nd-gzGzoHsz",
+          appKey: "8eVX45J8i5VFTlkejnfBMuhh",
+          visitor: false, // 阅读量统计
+        },
+      },
+    ], */
 
     // 移除console
     // drop_console和pure_funcs的区别，drop_console是把console.log()注释掉了，而pure_funcs是把console.log()移除掉了
