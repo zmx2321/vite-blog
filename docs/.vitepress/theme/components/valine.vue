@@ -1,6 +1,10 @@
 <template>
   <section class="leancloud_wrap">
     <div class="visitor_cont" id="visitor" :data-flag-title="fileName"></div>
+    <!-- <span class="leancloud-visitors" data-flag-title="Your Article Title">
+      <em class="post-meta-item-text">访问量： </em>
+      <i class="leancloud-visitors-count"></i>
+    </span> -->
     <div class="comments_wrap">
       <h3>评 论：</h3>
       <div id="vcomments" file-name></div>

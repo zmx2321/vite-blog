@@ -61,6 +61,12 @@ export default {
       copyright: "MIT Licensed | Copyright © 2020-present zmx2321@gmail.com",
     },
 
+    algolia: {
+      apiKey: "dcfd99877026391712379be4bfa9708b",
+      indexName: "zmx2321-184059744",
+      appId: "4QM57J77LG",
+    },
+
     // 搜索
     /* algolia: {
       apiKey: "your_api_key",
