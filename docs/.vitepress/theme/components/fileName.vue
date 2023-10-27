@@ -10,6 +10,8 @@ let fileName = ref("");
 if (typeof window !== "undefined") {
   const path = window.location.pathname;
   fileName.value = path.split("/")[path.split("/").length - 1].split(".")[0];
+
+  console.log("File: " + fileName.value);
 }
 
 /* let path
