@@ -16,27 +16,36 @@
 <script setup>
 import { ref, onMounted } from "vue";
 
-import Valine from "valine";
+// import Valine from "valine";
 
-const valine = new Valine();
 /* const path = window.location.pathname;
 const fileName = ref(path.split("/")[path.split("/").length - 1]); */
 
-const init = () => {
-  valine.init({
-    el: "#vcomments",
-    appId: "wvnzPTX6Bl11I4U3FZ8ehzmx-gzGzoHsz", // your appId
-    appKey: "8DeYTNaZ7rFPmSW5D2iwOY5x", // your appKey
-    // path,
-    visitor: true,
-    avatar: "mm",
-    placeholder: "快来发表评论吧 ~",
-  });
-};
+// const init = () => {
+//   const Valine = require("valine");
+//   // import Valine from "valine";
 
-onMounted(() => {
-  init();
-});
+//   console.log(Valine);
+
+//   /* const valine = new Valine();
+
+//   valine.init({
+//     el: "#vcomments",
+//     appId: "wvnzPTX6Bl11I4U3FZ8ehzmx-gzGzoHsz", // your appId
+//     appKey: "8DeYTNaZ7rFPmSW5D2iwOY5x", // your appKey
+//     // path,
+//     visitor: true,
+//     avatar: "mm",
+//     placeholder: "快来发表评论吧 ~",
+//   }); */
+// };
+
+// onMounted(() => {
+//   /* if (typeof window !== "undefined") {
+//     init();
+//   } */
+//   init();
+// });
 </script>
 
 <style lang="scss" scoped>
