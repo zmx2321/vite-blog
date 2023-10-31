@@ -56,23 +56,20 @@ export default {
 
     // 站点页脚配置
     footer: {
-      copyright: "MIT Licensed | Copyright © 2020-present zmx2321@gmail.com",
+      copyright: "MIT Licensed | Copyright © 2023-present zmx2321@gmail.com",
     },
 
-    // lastUpdated: 'Last Updated', // string | boolean
     // 搜索
-    algolia: {
-      apiKey: "your_api_key",
-      indexName: "index_name",
-    },
+    /* algolia: {
+      apiKey: "dcfd99877026391712379be4bfa9708b",
+      indexName: "zmx2321-184059744",
+      appId: "4QM57J77LG",
+    }, */
 
     returnToTopLabel: "返回顶部",
 
     // 你可以通过 themeConfig.lastUpdated 选项来获取每个文件最后一次 git 提交的 UNIX 时间戳(ms)，同时它将以合适的日期格式显示在每一页的底部
     lastUpdatedText: "最后更新", // string
-
-    // 默认值：false  显示所有页面的标题链接
-    // displayAllHeaders: true,
 
     // 默认情况下，当用户通过滚动查看页面的不同部分时，嵌套的标题链接和 URL 中的 Hash 值会实时更新
     activeHeaderLinks: true,
@@ -95,9 +92,6 @@ export default {
 
     // 是否开启 PWA
     serviceWorker: true,
-
-    // 显示所有页面的标题链接
-    // displayAllHeaders: true // 默认值：false
   },
 
   // 插件
@@ -106,33 +100,5 @@ export default {
     "@vuepress/back-to-top", // 返回顶部插件
     "@vuepress/medium-zoom", // 图片预览插件
     "@vuepress/nprogress", //页面顶部进度条
-    /* [
-      "vuepress-plugin-comment",
-      {
-        choosen: "valine",
-        // options选项中的所有参数，会传给Valine的配置
-        options: {
-          el: "#valine-vuepress-comment",
-          appId: "PzBRAo1U271H7HJLjo1z72Nd-gzGzoHsz",
-          appKey: "8eVX45J8i5VFTlkejnfBMuhh",
-          visitor: false, // 阅读量统计
-        },
-      },
-    ], */
-
-    // 移除console
-    // drop_console和pure_funcs的区别，drop_console是把console.log()注释掉了，而pure_funcs是把console.log()移除掉了
-    /* new UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-              warnings: false,
-              drop_debugger: true, //debugger
-              drop_console: true,// console
-              pure_funcs:['console.log'] // 移除console
-          },
-        },
-        sourceMap: false,
-        parallel: true,
-    }), */
   ],
 };
