@@ -7,7 +7,7 @@
   </section>
 
   <!-- 回到顶部 -->
-  <backTop />
+  <back-top />
 </template>
 <script setup>
 import { ref, onMounted } from "vue";

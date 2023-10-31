@@ -19,17 +19,16 @@ module.exports = [
     ],
   },
   {
-    text: "前端导航",
-    items: [
-      { text: "前端综合", link: "/pages/site/page" },
-      { text: "HTML/CSS", link: "/pages/site/html-css" },
-      { text: "框架组件", link: "/pages/site/framework" },
-    ],
-  },
-
-  {
     text: "examples",
     link: "/examples/",
+  },
+  {
+    text: "前端导航",
+    items: [
+      { text: "前端综合", link: "/site/page" },
+      { text: "HTML/CSS", link: "/site/html-css" },
+      { text: "框架组件", link: "/site/framework" },
+    ],
   },
 
   { text: "更新日志", link: "https://github.com/zmx2321/vite-blog" },

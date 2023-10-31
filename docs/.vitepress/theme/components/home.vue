@@ -11,7 +11,8 @@
     </ul>
   </section>
 
-  <!-- <BackTop></BackTop> -->
+  <!-- 回到顶部 -->
+  <back-top />
 </template>
 <script setup>
 import { siteData } from "../model/siteData.js";
