@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-home">
+  <section class="ui-home">
     <h2 class="ui-title">前端开源项目推荐</h2>
     <ul class="ui-project">
       <li class="item" v-for="v in siteData" :key="v.name">
@@ -9,35 +9,42 @@
         </a>
       </li>
     </ul>
-  </div>
-  <BackTop></BackTop>
+  </section>
+
+  <!-- <BackTop></BackTop> -->
 </template>
 <script setup>
-import { siteData } from '../model/siteData.js'
-
+import { siteData } from "../model/siteData.js";
 </script>
-<style lang="scss">
-.color-pink1 {background: #90f;}
-.color-red {background: #b91d47;}
-.color-blue-deep4 {background: #3360a3;}
-.color-blue-light6 {background: #2db7f5;}
-.color-green-gradient1{
-	background: -webkit-linear-gradient(120deg, #86b91a 30%, #edd532);
-	background: linear-gradient(120deg, #86b91a 30%, #edd532);
+<style lang="scss" scoped>
+.color-pink1 {
+  background: #90f;
 }
-.color-green-gradient2{
-	background: -webkit-linear-gradient(315deg, #42d392 25%, #647eff);
-	background: linear-gradient(315deg, #42d392 25%, #647eff);
+.color-red {
+  background: #b91d47;
 }
-.color-green-gradient3{
-	background: -webkit-linear-gradient(315deg, #51a256 25%, #f7d336);
-	background: linear-gradient(315deg, #51a256 25%, #f7d336);
+.color-blue-deep4 {
+  background: #3360a3;
+}
+.color-blue-light6 {
+  background: #2db7f5;
+}
+.color-green-gradient1 {
+  background: -webkit-linear-gradient(120deg, #86b91a 30%, #edd532);
+  background: linear-gradient(120deg, #86b91a 30%, #edd532);
+}
+.color-green-gradient2 {
+  background: -webkit-linear-gradient(315deg, #42d392 25%, #647eff);
+  background: linear-gradient(315deg, #42d392 25%, #647eff);
+}
+.color-green-gradient3 {
+  background: -webkit-linear-gradient(315deg, #51a256 25%, #f7d336);
+  background: linear-gradient(315deg, #51a256 25%, #f7d336);
 }
 .color-pink-gradient {
-	background: -webkit-linear-gradient(120deg, #bd44fe 35%, #42d1ff);
-	background: linear-gradient(120deg, #bd44fe 35%, #42d1ff);
+  background: -webkit-linear-gradient(120deg, #bd44fe 35%, #42d1ff);
+  background: linear-gradient(120deg, #bd44fe 35%, #42d1ff);
 }
-
 
 /**首页网址推荐**/
 .ui-home {
@@ -52,11 +59,11 @@ import { siteData } from '../model/siteData.js'
   }
 }
 .ui-project {
-	display: grid;
-	gap: 20px;
-	grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
-	justify-content: space-between;
-	margin-top: 20px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+  justify-content: space-between;
+  margin-top: 20px;
   .item,
   .link {
     height: 220px;
@@ -68,11 +75,11 @@ import { siteData } from '../model/siteData.js'
       background: #fff;
       border: 1px solid #f1f1f1;
       border-radius: 6px;
-      transition: all .4s;
+      transition: all 0.4s;
     }
     .link:hover {
       -webkit-filter: brightness(1.2);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
       transform: rotateY(-0.1deg) scale(1.03) translateZ(0);
     }
     .title {

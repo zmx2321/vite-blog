@@ -34,8 +34,8 @@ module.exports = [
 
   { text: "更新日志", link: "https://github.com/zmx2321/vite-blog" },
 
-  {
+  /* {
     text: "关于我",
     link: "/about/page",
-  },
+  }, */
 ];
