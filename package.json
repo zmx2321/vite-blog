@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "element-plus": "^2.3.14",
-    "lodash.debounce": "^4.0.8",
-    "valine": "^1.5.1"
+    "lodash.debounce": "^4.0.8"
   }
 }

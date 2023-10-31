@@ -1,8 +1,6 @@
 const navConfig = require("./config/navConfig");
 const sidebarConfig = require("./config/sideBarConfig");
 
-// console.log(import.meta.env.VITE_USER_NODE_ENV);
-
 export default {
   title: "zmx的前端日志",
   description: "zmx2321",
@@ -61,39 +59,12 @@ export default {
       copyright: "MIT Licensed | Copyright © 2020-present zmx2321@gmail.com",
     },
 
-    algolia: {
-      apiKey: "dcfd99877026391712379be4bfa9708b",
-      indexName: "zmx2321-184059744",
-      appId: "4QM57J77LG",
-    },
-
+    // lastUpdated: 'Last Updated', // string | boolean
     // 搜索
-    /* algolia: {
+    algolia: {
       apiKey: "your_api_key",
       indexName: "index_name",
-    }, */
-    /* search: {
-      // provider: 'local', // 可以开启本地搜索
-      provider: "algolia",
-      options: {
-        appId: "你的appId",
-        apiKey: "你的apiKey",
-        indexName: "你的indexName",
-        placeholder: "请输入关键词",
-        translations: {
-          button: {
-            buttonText: "请输入关键词",
-          },
-        },
-      },
-    }, */
-    /* algolia: {
-      appId: "RDDxxx", // 需要替换
-      apiKey: "9302dbxxx", // 需要替换
-      indexName: "chodocs", // 需要替换
-      placeholder: "请输入关键词",
-      buttonText: "搜索",
-    }, */
+    },
 
     returnToTopLabel: "返回顶部",
 
@@ -135,19 +106,6 @@ export default {
     "@vuepress/back-to-top", // 返回顶部插件
     "@vuepress/medium-zoom", // 图片预览插件
     "@vuepress/nprogress", //页面顶部进度条
-    /* [
-      "vuepress-plugin-comment",
-      {
-        choosen: "valine",
-        // options选项中的所有参数，会传给Valine的配置
-        options: {
-          el: "#valine-vuepress-comment",
-          appId: "PzBRAo1U271H7HJLjo1z72Nd-gzGzoHsz",
-          appKey: "8eVX45J8i5VFTlkejnfBMuhh",
-          visitor: false, // 阅读量统计
-        },
-      },
-    ], */
     /* [
       "vuepress-plugin-comment",
       {
