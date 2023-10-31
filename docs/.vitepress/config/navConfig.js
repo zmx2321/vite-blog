@@ -28,6 +28,7 @@ module.exports = [
       { text: "前端综合", link: "/site/page" },
       { text: "HTML/CSS", link: "/site/html-css" },
       { text: "框架组件", link: "/site/framework" },
+      { text: "地图相关", link: "/site/mapUrl" },
     ],
   },
 
