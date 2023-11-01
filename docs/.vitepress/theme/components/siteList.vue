@@ -43,6 +43,25 @@ const createTitle = computed(() => {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.dark {
+  .site-section {
+    .title {
+      color: #b5b5b5 !important;
+    }
+
+    .list {
+      .item {
+        background: #000;
+
+        .link {
+          border-color: #979797;
+        }
+      }
+    }
+  }
+}
+
 .site-section {
   .title {
     color: #222;

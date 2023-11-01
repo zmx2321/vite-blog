@@ -48,7 +48,8 @@ onUnmounted(() => {
     vertical-align: middle;
   }
   .icon:hover {
-    color: var(--back-to-top-color-hover);
+    // color: var(--back-to-top-color-hover);
+    color: #34e1ff;
     cursor: pointer;
     transition: all 0.2s ease-out 50ms;
   }
