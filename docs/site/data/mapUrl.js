@@ -84,6 +84,12 @@ const siteData = [
         desc: "maplibre的代码示例",
         link: "https://maplibre.org/maplibre-gl-js/docs/API/classes/maplibregl.Map/",
       },
+      {
+        icon: "",
+        name: "mapbox介绍",
+        desc: "掘金文章-mapbox+vue全攻略",
+        link: "https://juejin.cn/post/7222938641034461245",
+      },
     ],
   },
   {

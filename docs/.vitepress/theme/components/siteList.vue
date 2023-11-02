@@ -12,7 +12,7 @@
         <a class="link" :href="v.link" target="_blank">
           <span class="num">{{ index + 1 }}</span>
           <h4 class="name">{{ v.name }}</h4>
-          <p class="desc">{{ v.desc }}</p>
+          <p class="desc" :title="v.desc">{{ v.desc }}</p>
         </a>
       </li>
     </ul>
