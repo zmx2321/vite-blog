@@ -27,6 +27,18 @@ const siteData = [
         desc: "基础面试题代码案例",
         link: `https://zmx2321.github.io/blog_code/interview/interview-one-side/`,
       },
+      {
+        icon: "",
+        name: "vue2的一些案例",
+        desc: "使用vue2做的一些案例",
+        link: `https://zmx2321.github.io/vue_demo/`,
+      },
+      {
+        icon: "",
+        name: "vue3的一些案例",
+        desc: "使用vue3做的一些案例",
+        link: `https://zmx2321.github.io/vue3-demo/`,
+      },
     ],
   },
 ];
