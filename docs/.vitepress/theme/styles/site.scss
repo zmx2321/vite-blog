@@ -3,7 +3,6 @@
 **/
 
 .site-layout {
-
   .VPDoc {
     .container {
       max-width: 100% !important;
@@ -36,4 +35,10 @@
   .VPDocFooter {
     display: none;
   }
+}
+
+.site_h_title {
+  margin-top: 0 !important;
+  padding: 0 0 10px 8px;
+  cursor: pointer;
 }
