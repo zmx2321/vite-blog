@@ -1,10 +1,10 @@
 // https://vitepress.dev/guide/custom-theme
 import { h } from "vue";
 import { useData } from "vitepress";
-import siteList from "./components/siteList.vue";
+import SiteList from "./components/SiteList.vue";
 import siteFooter from "./components/siteFooter.vue";
-import home from "./components/home.vue";
-import backTop from "./components/backTop.vue";
+import Home from "./components/Home.vue";
+import BackTop from "./components/BackTop.vue";
 
 import DefaultTheme from "vitepress/theme";
 import "./styles/custom.scss";
@@ -23,9 +23,9 @@ export default {
     // siteData is a ref of current site-level metadata.
     app.use(ElementPlus);
     // 注册全局组件
-    app.component("SiteList", siteList);
-    app.component("Home", home);
-    app.component("BackTop", backTop);
+    app.component("SiteList", SiteList);
+    app.component("Home", Home);
+    app.component("BackTop", BackTop);
   },
   // 自定义布局配置
   Layout: () => {

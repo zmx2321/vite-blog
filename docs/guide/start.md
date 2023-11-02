@@ -1,5 +1,11 @@
-## 测试内容
+---
+pageClass: site-layout
+---
 
-> 历史的博客都在上面记录，目前正在往现在这个vitepress版本上迁移
+<h3 style='padding: 0 0 10px 8px; cursor: pointer;'>博客快捷导航</h3>
 
-vuepress代码地址：[https://zmx2321.github.io/blog/](https://zmx2321.github.io/blog/)
+<site-list v-for="model in siteData" :key="model.title" :title="model.title" :data="model.items" />
+<script setup>
+// 网址导航页面的数据
+import siteData from "../.vitepress/theme/model/guideSiteData.js";
+</script>

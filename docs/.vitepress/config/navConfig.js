@@ -1,6 +1,5 @@
 module.exports = [
-  // 以docs为根目录
-  { text: "Home", link: "/" },
+  { text: "Home", link: "/" }, // 以docs为根目录
 
   {
     text: "demo",
@@ -19,10 +18,6 @@ module.exports = [
     ],
   },
   {
-    text: "examples",
-    link: "/examples/",
-  },
-  {
     text: "前端导航",
     items: [
       { text: "前端综合", link: "/site/page" },
@@ -33,11 +28,4 @@ module.exports = [
       { text: "其他导航", link: "/site/other" },
     ],
   },
-
-  // { text: "更新日志", link: "https://github.com/zmx2321/vite-blog" },
-
-  /* {
-    text: "关于我",
-    link: "/about/page",
-  }, */
 ];

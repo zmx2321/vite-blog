@@ -12,14 +12,14 @@
       text: 开始使用
       link: /guide/start
     - theme: alt
-      text: 我的GitHub
-      link: https://github.com/zmx2321
-    - theme: alt
       text: 我的vuepress
       link: https://zmx2321.github.io/blog/
+    - theme: alt
+      text: 我的GitHub
+      link: https://github.com/zmx2321
     - theme: alt
       text: 当前地址
       link: https://zmx2321.github.io/vite-blog/
 ---
 
-<Home />
+<home />

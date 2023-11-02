@@ -1,3 +1,7 @@
+/**
+ * 主页快捷导航
+ * 前端官网快捷导航
+ */
 export const siteData = [
   {
     name: "Vue3",

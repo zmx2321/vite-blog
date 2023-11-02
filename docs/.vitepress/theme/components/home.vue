@@ -15,7 +15,7 @@
   <back-top />
 </template>
 <script setup>
-import { siteData } from "../model/siteData.js";
+import { siteData } from "../model/homeSiteData.js";
 </script>
 <style lang="scss" scoped>
 .color-pink1 {

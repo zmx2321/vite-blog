@@ -2,8 +2,8 @@
 pageClass: site-layout
 ---
 
-<SiteList v-for="model in siteData" :key="model.title" :title="model.title" :data="model.items" />
+<site-list v-for="model in siteData" :key="model.title" :title="model.title" :data="model.items" />
 <script setup>
 // 网址导航页面的数据
-import siteData from "./data/tools.js";
+import siteData from "./data/other.js";
 </script>
