@@ -1,6 +1,6 @@
 <template>
   <section class="ui-home">
-    <h2 class="ui-title">前端开源项目推荐</h2>
+    <h2 class="ui-title">前端官网快捷导航</h2>
     <ul class="ui-project">
       <li class="item" v-for="v in siteData" :key="v.name">
         <a class="link" :href="v.link" target="_blank">

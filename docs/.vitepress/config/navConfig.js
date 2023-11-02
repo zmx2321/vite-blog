@@ -30,6 +30,7 @@ module.exports = [
       { text: "框架组件", link: "/site/framework" },
       { text: "地图相关", link: "/site/mapUrl" },
       { text: "前端工具集", link: "/site/tools" },
+      { text: "其他导航", link: "/site/other" },
     ],
   },
 
