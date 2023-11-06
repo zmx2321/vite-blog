@@ -1,7 +1,4 @@
 # 运行环境
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 [代码笔记](https://zmx2321.github.io/blog_code/interview/interview-one-side/16.html)
 
@@ -156,7 +153,7 @@
 #### 3.2.4. 加载渲染优化示例
 - 资源合并
   - 请求次数越少越划算
-  ![yh_zyhb](/vite-blog/images/interview/foundation/yh_zyhb.png)
+  ![yh_zyhb](https://zmx2321.github.io/vite-blog/images/interview/foundation/yh_zyhb.png)
 - 缓存
   - webpack中的contenthash会根据内容生成hash值
   - 静态资源加hash后缀，根据文件内容计算hash
@@ -164,14 +161,14 @@
   - url和文件不变，则会自动触发http缓存机制，返回304
   - 浏览器和服务器都会遵从http缓存机制，前端只需要尽可能去命中这个缓存就行了
   - 比如新上线一个功能，只改了一个js，这时候只有一个js名字会改，返回200，其余的都不变，不变的资源加载会命中缓存，返回304
-  ![yh_hc](/vite-blog/images/interview/foundation/yh_hc.png)
+  ![yh_hc](https://zmx2321.github.io/vite-blog/images/interview/foundation/yh_hc.png)
 - CDN
   - 大厂静态资源基本都是用cdn做的
   - 用cdn会更大程度满足网络的性能
   - 因为cdn是专门做静态文件的服务
   - 而且是根据地域来做网络服务的
   - 而且cdn是完全满足上面说的http缓存机制(304机制)的
-  ![yh_cdn](/vite-blog/images/interview/foundation/yh_cdn.png)
+  ![yh_cdn](https://zmx2321.github.io/vite-blog/images/interview/foundation/yh_cdn.png)
 - SSR
   - 是一个比较宽泛的概念，全称是：server side render，即服务端渲染
   - 服务端渲染：将网页和数据一起加载、一起渲染
@@ -184,15 +181,15 @@
   - 我们可以把图片设置成一个默认地址(小)
   - 把图片的真实地址放到`data-xxx`下面，在这里图片不会加载
   - 根据事件判断到可视区的时候，把`data-xxx`的值赋值给src
-  ![yh_ljz](/vite-blog/images/interview/foundation/yh_ljz.png)
+  ![yh_ljz](https://zmx2321.github.io/vite-blog/images/interview/foundation/yh_ljz.png)
 - 缓存DOM查询
   - 把dom结果赋值成变量
   - js计算和dom查询不是一个数量级的，js计算非常快
-  ![yh_dom1](/vite-blog/images/interview/foundation/yh_dom1.png)
+  ![yh_dom1](https://zmx2321.github.io/vite-blog/images/interview/foundation/yh_dom1.png)
   - 多个dom操作一起插入到dom结构，使用代码片段
-  ![yh_dom2](/vite-blog/images/interview/foundation/yh_dom2.png)
+  ![yh_dom2](https://zmx2321.github.io/vite-blog/images/interview/foundation/yh_dom2.png)
 - 尽早开始js执行
-  ![yh_js](/vite-blog/images/interview/foundation/yh_js.png)
+  ![yh_js](https://zmx2321.github.io/vite-blog/images/interview/foundation/yh_js.png)
 
 #### 3.2.5. 防抖(debounce)
 - 场景

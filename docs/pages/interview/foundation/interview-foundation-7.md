@@ -1,7 +1,4 @@
 # JS基础-异步和单线程(必考)
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 [代码笔记](https://zmx2321.github.io/blog_code/interview/interview-one-side/7.html)
 

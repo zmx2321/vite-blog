@@ -1,7 +1,4 @@
 # JS-Web-API-BOM
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 [代码笔记](https://zmx2321.github.io/blog_code/interview/interview-one-side/10.html)
 

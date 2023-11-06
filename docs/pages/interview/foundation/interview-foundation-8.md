@@ -1,7 +1,4 @@
 # JS 异步进阶
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 [代码笔记](https://zmx2321.github.io/blog_code/interview/interview-one-side/8.html)
 
@@ -149,7 +146,7 @@
   - 不要扣细节，不要扩大范围，核心是event loop的过程
 - 开始讲解事件循环过程
   - 图示1 => 最初的状态
-    ![event-loop1](/vite-blog/images/interview/foundation/event-loop1.png)
+    ![event-loop1](https://zmx2321.github.io/vite-blog/images/interview/foundation/event-loop1.png)
     - Browser console => 浏览器环境console界面
     - Call Stact => js运行中重要的模块
       - 调用栈
@@ -843,7 +840,7 @@ console.log('Bye');
       - 触发事件循环机制
       - 最后执行宏任务
     - 图示
-      ![event-loop2](/vite-blog/images/interview/foundation/event-loop2.png)
+      ![event-loop2](https://zmx2321.github.io/vite-blog/images/interview/foundation/event-loop2.png)
   - 总结(面试题)
     - 宏任务有哪些？微任务有哪些？为什么微任务触发时机更早
     - 宏任务、微任务和DOM渲染的关系

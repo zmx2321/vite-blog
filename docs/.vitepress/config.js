@@ -93,7 +93,7 @@ export default {
     // 是否开启 PWA
     serviceWorker: true,
 
-    socialLinks: [{ icon: "github", link: "https://github.com/zmx2321/vite_blog" }], // 可以连接到 github
+    socialLinks: [{ icon: "github", link: "https://github.com/zmx2321/vite-blog" }], // 可以连接到 github
   },
 
   // 插件

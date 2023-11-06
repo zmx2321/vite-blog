@@ -1,7 +1,4 @@
 # 说说面试的那些事儿
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 [代码笔记](https://zmx2321.github.io/blog_code/interview/interview-one-side)
 
@@ -142,7 +139,7 @@
 - HTTP协议
 
 ## 10. 思维导图
-![interview](/vite-blog/images/interview/foundation/interview.png)
+![interview](https://zmx2321.github.io/vite-blog/images/interview/foundation/interview.png)
 
 ## 11. 使用http-server启前端服务
 - `npm install -g http-server`

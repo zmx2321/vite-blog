@@ -1,7 +1,4 @@
 # 开发环境
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. 简述
 - 面试官想通过开发环境了解候选人的实际工作情况

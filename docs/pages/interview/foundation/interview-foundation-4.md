@@ -1,7 +1,4 @@
 # JS基础-变量类型和计算
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 [代码笔记](https://zmx2321.github.io/blog_code/interview/interview-one-side/4.html)
 

@@ -1,7 +1,4 @@
 # http (前端的生命线)
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. 简述
 - 前端工程师开发界面
@@ -183,7 +180,7 @@
 #### 3.4.2. http缓存策略(强制缓存+协商缓存)(常考)
 ##### 3.4.2.1. 强制缓存
 - 图示 => 第一次请求(静态资源)
-  ![cache1](/vite-blog/images/interview/foundation/cache1.png)
+  ![cache1](https://zmx2321.github.io/vite-blog/images/interview/foundation/cache1.png)
 - 根据图示梳理缓存流程
   1. 浏览器初次请求到服务器
     - 会经过本地缓存(设备) => 浏览器的机制
@@ -204,9 +201,9 @@
     - Cache-Control: max-age=31536000 (单位是秒 - 1年)
       - 即我们需要将某个资源文件在客户端缓存一年的时间
       - max-age表示最大的时间
-    ![cache-control](/vite-blog/images/interview/foundation/cache-control.png)
+    ![cache-control](https://zmx2321.github.io/vite-blog/images/interview/foundation/cache-control.png)
 - 图示 => 第二次请求(静态资源)
-  ![cache2](/vite-blog/images/interview/foundation/cache2.png)
+  ![cache2](https://zmx2321.github.io/vite-blog/images/interview/foundation/cache2.png)
 - 根据图示梳理缓存流程
   1. 初次请求说明见上
   2. 浏览器再次请求
@@ -218,11 +215,11 @@
     - 没有经过网络
   3. 浏览器有了资源之后就会开始继续工作
 - 从缓存获取资源示例
-  ![disk-cache](/vite-blog/images/interview/foundation/disk-cache.png)
+  ![disk-cache](https://zmx2321.github.io/vite-blog/images/interview/foundation/disk-cache.png)
 - 缓存过期了 
   - 缓存过期，浏览器会再次从服务端请求资源
     - 服务端会重新返回资源和Cache-Control
-  ![cache3](/vite-blog/images/interview/foundation/cache3.png)
+  ![cache3](https://zmx2321.github.io/vite-blog/images/interview/foundation/cache3.png)
 - Cache-Control的值介绍
   - max-age => 缓存最大过期时间(秒)
   - no-cache => 不用强制缓存，正常从服务端请求，服务端怎么做不管
@@ -251,7 +248,7 @@
     - 客户端资源和服务端资源是一样的，没有被修改
 - 服务端如何判断是否和缓存资源一致
   - 图示 => 协商缓存
-  ![negotiation-cache1](/vite-blog/images/interview/foundation/negotiation-cache1.png)
+  ![negotiation-cache1](https://zmx2321.github.io/vite-blog/images/interview/foundation/negotiation-cache1.png)
   - 浏览器本身是自带一个缓存机制的，不过上图没有表现出来
     - 存储服务器的缓存资源
   - 根据图示梳理缓存流程
@@ -265,7 +262,7 @@
 - 资源标识简介
   - 在response headers中，有两种
     - Last-Modified => 资源的最后修改时间
-      ![last-modified](/vite-blog/images/interview/foundation/last-modified.png)
+      ![last-modified](https://zmx2321.github.io/vite-blog/images/interview/foundation/last-modified.png)
       - 服务端返回资源和Last-modified
         - 值是最后修改时间
       - 浏览器再次请求的时候，请求头会带着If-Modified-Since
@@ -279,7 +276,7 @@
         - 服务端每返回一个Last-Modified，If-Modified-Since的值就会修改，服务端根据带来的时间和资源的最后修改时间做一个协商，做一个对比，看看能不能返回304
         - 新的Last-Modified力求下次能命中缓存
     - Etag => 资源的唯一标识(一个字符串，类似人类的指纹)
-      ![etag](/vite-blog/images/interview/foundation/etag.png)
+      ![etag](https://zmx2321.github.io/vite-blog/images/interview/foundation/etag.png)
       - 服务端返回资源和Etag(就是一个字符串)，但是要保证唯一性
         - 浏览器发现有Etag之后，就会把资源缓存下来，把Etag也记下来
       - 浏览器再次请求，请求头带着If-None-Match
@@ -289,8 +286,8 @@
         - 如果对比值不一样，就会返回一个新的Etag和新的资源
       - 返回304，或返回资源和新的Etag
   - 协商缓存图示
-    ![negotiation-cache2](/vite-blog/images/interview/foundation/negotiation-cache2.png)
-    ![negotiation-cache3](/vite-blog/images/interview/foundation/negotiation-cache3.png)
+    ![negotiation-cache2](https://zmx2321.github.io/vite-blog/images/interview/foundation/negotiation-cache2.png)
+    ![negotiation-cache3](https://zmx2321.github.io/vite-blog/images/interview/foundation/negotiation-cache3.png)
 - Last-Modified和Etag注意事项
   - 会优先使用Etag
     - 因为Last-Modified只能精确到秒级
@@ -302,7 +299,7 @@
 
 ##### 3.4.2.3. 缓存总结(重点)
 - 如图所示
-  ![cache-all](/vite-blog/images/interview/foundation/cache-all.png)
+  ![cache-all](https://zmx2321.github.io/vite-blog/images/interview/foundation/cache-all.png)
 - 根据图示梳理缓存流程
   - 第一种情况
     1. 发送http请求

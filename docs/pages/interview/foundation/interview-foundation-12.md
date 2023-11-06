@@ -1,7 +1,4 @@
 # JS-Web-API-Ajax
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 [代码笔记](https://zmx2321.github.io/blog_code/interview/interview-one-side/12.html)
 

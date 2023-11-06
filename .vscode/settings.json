@@ -63,6 +63,8 @@
     "datetimerange",
     "dtiles",
     "echarts",
+    "etag",
+    "fancybox",
     "fangda",
     "geeker",
     "ghelper",
@@ -110,7 +112,8 @@
     "xiaoxi",
     "yingyongmokuaiguanli",
     "zhongyingwen",
-    "zhuti"
+    "zhuti",
+    "zyhb"
   ],
   "livePreview.defaultPreviewPath": "/dist/index.html"
 }

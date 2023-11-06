@@ -1,7 +1,4 @@
 # JS基础-原型和原型链(必考)
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 [代码笔记](https://zmx2321.github.io/blog_code/interview/interview-one-side/5.html)
 
@@ -150,7 +147,7 @@ console.log(xialuo.__proto__ === Student.prototype)
   - 先在自身的属性和方法寻找
   - 如果找不到则自动去__proto__(隐式原型)中查找
 - 示例图
-![proto](/vite-blog/images/interview/foundation/proto.png)
+![proto](https://zmx2321.github.io/vite-blog/images/interview/foundation/proto.png)
 
 #### 3.3.2. 原型链
 - 示例
@@ -172,7 +169,7 @@ console.log(People.prototype === Student.prototype.__proto__);
   - 我们要访问xialuo.eat(), 我们一层层往上找，Student的原型中没有，于是在Student的隐式原型中去找，即People的原型(即people的prototype对象)中去找
   - 这个就是原型链
 - 示例图
-![proto__](/vite-blog/images/interview/foundation/proto__.png)
+![proto__](https://zmx2321.github.io/vite-blog/images/interview/foundation/proto__.png)
 
 - 【扩展】如何判断某个属性是否是某个对象的属性
 ```js
@@ -182,7 +179,7 @@ xialuo.hasOwnProperty('sayHi')  // false
 - hasOwnProperty是如何来的，我们可以做以下假设
   - hasOwnProperty也是xialuo身上的方法，但他也不是他自身的属性
   - 即示例图
-  ![proto__main](/vite-blog/images/interview/foundation/proto__main.png)
+  ![proto__main](https://zmx2321.github.io/vite-blog/images/interview/foundation/proto__main.png)
 - People继承于object
   - 所以people的隐式原型指向object这个原型，即object的prototype对象，而object的隐式原型__proto__为null
   - object这个原型是js引擎自己有的，他有toString()、hasOwnProperty()等方法

@@ -1,7 +1,4 @@
 # 总结
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. 知识体系回顾
 ### 1.1. css基础知识

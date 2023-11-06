@@ -1,7 +1,4 @@
 # 面试前的准备
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. 面试的环境和流程
 ### 1.1. 什么是面试
