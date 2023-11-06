@@ -1,5 +1,5 @@
-const navConfig = require("./config/navConfig");
-const sidebarConfig = require("./config/sideBarConfig");
+const navConfig = require("./config/nav-config");
+const sidebarConfig = require("./config/sidebar-config");
 
 export default {
   title: "zmx的前端日志",

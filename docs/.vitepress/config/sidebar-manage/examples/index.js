@@ -1,12 +1,12 @@
 export const examples1Config = [
   {
-    text: "examples",
+    // text: "examples",
     items: [
       {
         text: "examples",
         link: "/examples/",
       },
-      ...require("./examplesItems/examplesConfigItems"),
+      ...require("./examples-items/examplesConfigItems"),
     ],
   },
 ];

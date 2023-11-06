@@ -2,21 +2,21 @@ module.exports = [
   { text: "Home", link: "/" }, // 以docs为根目录
 
   {
-    text: "demo",
+    text: "面试题",
     items: [
-      { text: "demo1", link: "/pages/demo/demo1/index" },
-      { text: "demo2", link: "/pages/demo/demo2/index" },
-      { text: "demo3", link: "/pages/demo/demo3/index" },
+      { text: "导航", link: "/pages/interview/index" },
+      { text: "前端基础面试题", link: "/pages/interview/foundation/index" },
+      { text: "前端面试题积累", link: "/pages/interview/accumulate/index" },
     ],
   },
-  {
+  /* {
     text: "note",
     items: [
       { text: "note1", link: "/pages/note/note1/index" },
       { text: "note2", link: "/pages/note/note2/index" },
       { text: "note3", link: "/pages/note/note3/index" },
     ],
-  },
+  }, */
   {
     text: "前端导航",
     items: [

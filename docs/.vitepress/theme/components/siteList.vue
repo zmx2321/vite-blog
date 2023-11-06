@@ -17,8 +17,8 @@
       </li>
     </ul>
   </section>
-  <!-- <BackTop></BackTop> -->
 </template>
+
 <script setup>
 import { computed } from "vue";
 import { slugify } from "@mdit-vue/shared";
