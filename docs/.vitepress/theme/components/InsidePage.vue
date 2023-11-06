@@ -1,13 +1,16 @@
 <template>
   <section class="inside-section">
-    <iframe
-      src="https://zmx2321.github.io/blog_code/interview/interview-one-side"
-      frameborder="0"
-      width="100%"
-      height="400"
-    ></iframe>
+    <iframe :src="url" frameborder="0" width="100%" :height="height"></iframe>
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+const props = defineProps({
+  url: String,
+  height: {
+    type: String,
+    default: 400,
+  },
+});
+</script>
 <style lang="scss" scoped></style>
