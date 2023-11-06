@@ -9,14 +9,6 @@ module.exports = [
       { text: "前端面试题积累", link: "/pages/interview/accumulate/index" },
     ],
   },
-  /* {
-    text: "note",
-    items: [
-      { text: "note1", link: "/pages/note/note1/index" },
-      { text: "note2", link: "/pages/note/note2/index" },
-      { text: "note3", link: "/pages/note/note3/index" },
-    ],
-  }, */
   {
     text: "前端导航",
     items: [

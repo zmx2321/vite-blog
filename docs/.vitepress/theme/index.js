@@ -5,6 +5,7 @@ import SiteList from "./components/SiteList.vue";
 import siteFooter from "./components/siteFooter.vue";
 import Home from "./components/Home.vue";
 import BackTop from "./components/BackTop.vue";
+import InsidePage from "./components/InsidePage.vue";
 
 import DefaultTheme from "vitepress/theme";
 import "./styles/custom.scss";
@@ -26,6 +27,7 @@ export default {
     app.component("SiteList", SiteList);
     app.component("Home", Home);
     app.component("BackTop", BackTop);
+    app.component("InsidePage", InsidePage);
   },
   // 自定义布局配置
   Layout: () => {
