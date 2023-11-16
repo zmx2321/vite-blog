@@ -2,8 +2,9 @@
  * 前端相关学习笔记
  */
 export const noteFront = {
-  // 算法
-  algorithm: require("./note-front-items/note-algorithm-items"),
+  vue: require("./note-front-items/note-vue-items"), // vue学习笔记
+  react: require("./note-front-items/note-react-items"), // react学习笔记
+  algorithm: require("./note-front-items/note-algorithm-items"), // 算法
 };
 
 /**
@@ -19,8 +20,9 @@ export const noteBack = {
  * 其他笔记
  */
 export const noteOther = {
-  elk: [{ items: [...require("./note-other-items/other-elk-items")] }],
+  git: [{ items: [...require("./note-other-items/other-git-items")] }],
   nginx: [{ items: [...require("./note-other-items/other-nginx-items")] }],
+  elk: [{ items: [...require("./note-other-items/other-elk-items")] }],
   other: [
     { text: "其他笔记", items: [{ text: "笔记分类", link: "/pages/note/other/" }] },
     { items: [...require("./note-other-items")] },

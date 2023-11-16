@@ -16,13 +16,16 @@ module.exports = {
    * 笔记
    */
   // 前端相关
+  "/pages/note/front/vue-note": note.noteFront.vue, // vue学习笔记
+  "/pages/note/front/react-note": note.noteFront.react, // react学习笔记
   "/pages/note/front/algorithm-note": note.noteFront.algorithm, // 算法
   // 后端相关
   "/pages/note/back/java-note": note.noteBack.java, // java学习笔记
   "/pages/note/back/mysql-note": note.noteBack.mysql, // mysql学习笔记
   "/pages/note/back/linux-note": note.noteBack.linux, // linux学习笔记
   // 其他笔记
-  "/pages/note/other/elk-note": note.noteOther.elk, // elk学习笔记
+  "/pages/note/other/git-note": note.noteOther.git, // git学习笔记
   "/pages/note/other/nginx-note": note.noteOther.nginx, // nginx学习笔记
+  "/pages/note/other/elk-note": note.noteOther.elk, // elk学习笔记
   "/pages/note/other": note.noteOther.other, // 其他学习笔记,
 };

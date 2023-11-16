@@ -7,15 +7,21 @@ const siteData = [
     items: [
       {
         icon: "",
-        name: "elk学习笔记",
+        name: "git学习笔记",
         desc: "",
-        link: `${base}/pages/note/other/elk-note/elk-note-1`,
+        link: `${base}/pages/note/other/git-note/git-note-1`,
       },
       {
         icon: "",
         name: "nginx学习笔记",
         desc: "",
         link: `${base}/pages/note/other/nginx-note/nginx-note-1`,
+      },
+      {
+        icon: "",
+        name: "elk学习笔记",
+        desc: "",
+        link: `${base}/pages/note/other/elk-note/elk-note-1`,
       },
     ],
   },
