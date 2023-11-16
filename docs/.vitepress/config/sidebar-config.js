@@ -16,6 +16,7 @@ module.exports = {
    * 笔记
    */
   // 前端相关
+  "/pages/note/front/algorithm-note": note.noteFront.algorithm, // 算法
   // 后端相关
   "/pages/note/back/java-note": note.noteBack.java, // java学习笔记
   "/pages/note/back/mysql-note": note.noteBack.mysql, // mysql学习笔记

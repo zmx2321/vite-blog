@@ -9,6 +9,7 @@ export const interviewFoundation = [
 // 前端面试题积累
 export const interviewAccumulate = [
   {
+    text: "前端面试题积累",
     items: [...require("./interview-items/interview-accumulate-items")],
   },
 ];

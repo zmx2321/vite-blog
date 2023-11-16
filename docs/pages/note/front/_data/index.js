@@ -1,13 +1,15 @@
+const base = "/vite-blog";
+
 /* 博客笔记快捷导航 **/
 const siteData = [
   {
-    title: "前端相关",
+    title: "前端相关笔记",
     items: [
       {
         icon: "",
-        name: "xxxx",
+        name: "算法",
         desc: "",
-        link: "https://xxxx.com",
+        link: `${base}/pages/note/front/algorithm-note/`,
       },
     ],
   },

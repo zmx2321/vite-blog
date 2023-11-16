@@ -4,9 +4,9 @@ module.exports = [
   {
     text: "面试题",
     items: [
-      { text: "导航", link: "/pages/interview/index" },
-      { text: "前端基础面试题", link: "/pages/interview/foundation/index" },
-      { text: "前端面试题积累", link: "/pages/interview/accumulate/index" },
+      { text: "导航", link: "/pages/interview/" },
+      { text: "前端基础面试题", link: "/pages/interview/foundation/" },
+      { text: "前端面试题积累", link: "/pages/interview/accumulate/interview-accumulate-1" },
     ],
   },
   {

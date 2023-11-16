@@ -1,3 +1,5 @@
+const base = "/vite-blog";
+
 /**
  * 我的导航
  */
@@ -65,6 +67,16 @@ const siteData = [
         name: "云南",
         desc: "旅游-云南-小视频",
         link: "http://mp.weixin.qq.com/mp/video?__biz=MzI2MTUzNzQ4OA==&mid=100000312&sn=1b9d323339de01c08f84b6cd00c9027c&vid=wxv_2144521043917488129&idx=1&vidsn=ec708214b327b2034839a5a4aeea21ba&fromid=1&scene=20&xtrack=1&sessionid=0&subscene=7&ascene=7&realreporttime=1698908952771&clicktime=1698908951&enterid=1698908951&forceh5=1",
+      },
+    ],
+  },
+  {
+    title: "关于我",
+    items: [
+      {
+        icon: "自我介绍",
+        name: "对自身做一个检查",
+        link: `${base}/about/about-my-work`,
       },
     ],
   },

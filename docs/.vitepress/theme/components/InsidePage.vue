@@ -9,7 +9,7 @@ const props = defineProps({
   url: String,
   height: {
     type: String,
-    default: 400,
+    default: "400",
   },
 });
 </script>
