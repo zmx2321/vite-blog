@@ -10,6 +10,14 @@ module.exports = [
     ],
   },
   {
+    text: "笔记",
+    items: [
+      { text: "前端相关", link: "/pages/note/front/index" },
+      { text: "后端相关", link: "/pages/note/back/index" },
+      { text: "其他笔记", link: "/pages/note/other/index" },
+    ],
+  },
+  {
     text: "前端导航",
     items: [
       { text: "前端综合", link: "/site/page" },

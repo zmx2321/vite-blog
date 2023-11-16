@@ -6,7 +6,7 @@ export const examples1Config = [
         text: "examples",
         link: "/examples/",
       },
-      ...require("./examples-items/examplesConfigItems"),
+      ...require("./examples-items/examples-config-items"),
     ],
   },
 ];
