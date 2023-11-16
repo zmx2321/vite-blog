@@ -1,7 +1,4 @@
 # es查询
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. 查询所有数据
 ```js

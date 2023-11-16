@@ -1,7 +1,4 @@
 # elk学习总结
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. 总结
 1. kibana在ELK家族中的作用，主要用来可视化数据

@@ -231,7 +231,7 @@
 - Preferences -> Profiles -> window -> 看到backgroundImage -> 勾选enabled
 
 ### 9.8. item2配置最终效果
-![item2](/blog//images/accumulation/other/mac/item2.png)
+![item2](https://zmx2321.github.io/vite-blog/images/note/other/mac/item2.png)
 
 ## 10. mac查看硬盘损耗
 - 安装以及查看

@@ -1,11 +1,8 @@
 # 初识elk
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 > [官方说明手册传送门](https://www.elastic.co/guide/cn/kibana/current/index.html)
 
-## 1. 适用对象
+ ## 1. 适用对象
 - 对各种数据可视化需求并期望找到一个解决方案的同学
 - 希望对运维有一些了解的同学
 - 本文档需要有一些基础的互联网开发知识，对ElasticSearch有了解
@@ -30,9 +27,9 @@
 - 不建议ELK系列软件使用root用户运行
   - 可以创建一个elastic用户
 - 下载命令：
-  - wget https://artifacts.elastic.co/downloads/kibana/kibana-7.11.2-x86_64.tar.gz => 49M
+  - `wget https://artifacts.elastic.co/downloads/kibana/kibana-7.11.2-x86_64.tar.gz => 49M`
 - 解压：
-  - tar -zxvf kibana-7.11.2-linux-x86_64.tar.gz
+  - `tar -zxvf kibana-7.11.2-linux-x86_64.tar.gz`
   - 之后可以重命名一下:`mv kibana-7.11.2-linux-x86_64 kibana`
   - 放到local中: `mv kibana /usr/local/`
 - 配置
@@ -65,28 +62,27 @@
   - `nohub /usr/local/kibana/bin/kibana > /dev/null &` => 后台运行
   - 初始化用户名: kibana / 初始密码: changeme
 
-
 ## 4. kibana配置项
-- server.port => kibana绑定的端口号，默认是5601
-- server.host => 默认是localhost
-- server.name => 实例名称，默认主机名
-- kibana.defaultAppId => 进入kibana时加载的应用，默认是discover
-- eleasticsearch.url => ES实例地址，用来处理所有的查询请求，默认是 http://localhost:9200
-- eleasticsearch.username => 链接ES时使用的用户名，如果ES没有设置用户权限，此项可不以启用
-- eleasticsearch.password => 链接ES时使用的密码，如果ES没有设置用户权限，此项可不以启用
-- kibana.index => kibana需要在ES中创建一个索引来存储kibana的搜索、可视化和仪表盘的数据。如果该索引不存在，则会自动创建，默认是.kibana
-- elasticsearch.pingTimeout => 设置请求ES的响应超时时间，单位毫秒，默认是elasticsearch.requestTimeout
-- elasticsearch.requestTimeout => ES响应超时时间(毫秒)，该值必须为正整数，默认3000
-- elasticsearch.shardTimeout => ES等待碎片响应的时间(毫秒)。设置为0以禁用。默认值为0
-- logging.dest => kibana日志输出文件，默认是stdout
-- logging.slient => 设置改配置，所有日志都输出，默认是false
-- xpack.security.encrypitopnKey => 加密秘钥，防止密码被暴力破解
-  - 原先没有，要自己加，最后一个key是大写
-- [更多配置传送带](https://www.elastic.co/guide/en/kibana/current/settings.html)
+- `server.port` => kibana绑定的端口号，默认是5601
+- `server.host` => 默认是localhost
+- `server.name` => 实例名称，默认主机名
+- `kibana.defaultAppId` => 进入kibana时加载的应用，默认是discover
+- `eleasticsearch.url` => ES实例地址，用来处理所有的查询请求，默认是 `http://localhost:9200`
+- `eleasticsearch.username` => 链接ES时使用的用户名，如果ES没有设置用户权限，此项可不以启用
+- `eleasticsearch.password` => 链接ES时使用的密码，如果ES没有设置用户权限，此项可不以启用
+- `kibana.index` => kibana需要在ES中创建一个索引来存储kibana的搜索、可视化和仪表盘的数据。如果该索引不存在，则会自动创建，默认是.kibana
+- `elasticsearch.pingTimeout` => 设置请求ES的响应超时时间，单位毫秒，默认是elasticsearch.requestTimeout
+- `elasticsearch.requestTimeout` => ES响应超时时间(毫秒)，该值必须为正整数，默认3000
+- `elasticsearch.shardTimeout` => ES等待碎片响应的时间(毫秒)。设置为0以禁用。默认值为0
+- `logging.dest` => kibana日志输出文件，默认是stdout
+- `logging.slient` => 设置改配置，所有日志都输出，默认是false
+- `xpack.security.encrypitopnKey` => 加密秘钥，防止密码被暴力破解
+    - 原先没有，要自己加，最后一个key是大写
+    - [更多配置传送带](https://www.elastic.co/guide/en/kibana/current/settings.html)
 
 ## 5. kibana汉化
 > 这个过程是不可逆的，汉化工具是直接修改原始Kibana程序里面的文字来进行汉化的，如果要改回来，需要重装
 - kibana的配置文件目录，包含kibana.yml文件
 - 修改kibana.yml文件最后一行
 - 改成`i18n.local:"zh-CN"`
-- 重启
+- 重启 

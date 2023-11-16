@@ -1,7 +1,4 @@
 # kibana的使用
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. ElasticSearch注意情况
 - 我们的数据是存储在ElasticSearch里的，因为要做数据分析，因为要做数据分析，所以在ES里的数据需要是结构化的，不要是一大段没有结构的文本，这样是无法进行分析的 。

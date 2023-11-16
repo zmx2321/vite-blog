@@ -1,7 +1,4 @@
 # elasticSearch相关基础
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. elasticSearch相关基本概念
 ### 1.1. 索引的含义

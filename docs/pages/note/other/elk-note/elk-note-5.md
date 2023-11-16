@@ -1,7 +1,4 @@
 # elk相关问题
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. vue连接es
 ```js

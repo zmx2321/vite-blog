@@ -1,7 +1,4 @@
 # elk学习样例数据
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 > 在kibana首页，将数据添加到kibana栏目下有一个添加样例数据链接
 

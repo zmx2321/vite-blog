@@ -33,11 +33,6 @@ export const noteOther = {
       items: [...require("./note-items/note-other-items/other-elk-items")],
     },
   ],
-  git: [
-    {
-      items: [...require("./note-items/note-other-items/other-git-items")],
-    },
-  ],
   nginx: [
     {
       items: [...require("./note-items/note-other-items/other-nginx-items")],

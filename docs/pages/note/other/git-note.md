@@ -89,7 +89,7 @@
 ## 9. 使用git config --global设置用户名和邮件
 - 安装好git后，在命令行或终端中使用下面的命令可以设置git自己的名字和电子邮件
 - 这是因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址
-```git
+```js
 git config --global user.name "zmx2321"
 git config --global user.email "zmx2321@163.com"
 ```
@@ -97,17 +97,17 @@ git config --global user.email "zmx2321@163.com"
 - 配置好之后可以查看
   - `git config -l` 
 - 查看全局用户名密码
-```git
+```js
 git config --global user.name
 git config --global user.email
 ```
 - 为单一的仓库配置用户名和邮箱
-```git
+```js
 git config user.name "username"
 git config user.email "email"
 ```
 - 查看单一仓库的配置
-```git
+```js
 git config user.name
 git config user.email 
 ```

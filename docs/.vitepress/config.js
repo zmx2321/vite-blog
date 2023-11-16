@@ -103,4 +103,17 @@ export default {
     "@vuepress/medium-zoom", // 图片预览插件
     "@vuepress/nprogress", //页面顶部进度条
   ],
+
+  /* build: {
+    chunkSizeWarningLimit: 1500,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            return id.toString().split("node_modules/")[1].split("/")[0].toString();
+          }
+        },
+      },
+    },
+  }, */
 };

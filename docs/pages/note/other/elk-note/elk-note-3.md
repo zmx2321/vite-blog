@@ -1,7 +1,4 @@
 # kibana使用进阶
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. Graph
 > [图形分析组件](https://www.elastic.co/guide/en/kibana/7.11/xpack-graph.html)：图形分析功能使您可以发现ElasticSearch索引中的项目如何关联，<font color="#f00">您可以探索索引项之间的联系，并查看哪些联系最有意义。</font>从欺诈检测到推荐引擎，这在各种应用中都非常有用。例如，图形浏览可以帮助您发现黑客所针对的网站漏洞，从而可以加固您的网站。或者，您可以向电子商务客户提供基于图的个性化推荐。
