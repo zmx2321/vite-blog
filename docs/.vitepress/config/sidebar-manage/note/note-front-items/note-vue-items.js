@@ -1,5 +1,5 @@
 /**
- * 前端算法笔记
+ * vue笔记
  */
 const baseUrl = "/pages/note/front/vue-note";
 

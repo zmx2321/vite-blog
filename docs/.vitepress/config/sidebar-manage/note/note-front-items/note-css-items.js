@@ -1,9 +1,9 @@
 /**
- * react笔记
+ * css笔记
  */
-const baseUrl = "/pages/note/front/react-note";
+const baseUrl = "/pages/note/front/css-note";
 
-// react学习笔记
+/* // react学习笔记
 const reactCourseConfig = [
   { text: "React入门简介", link: `${baseUrl}/cour-react-note-1` },
   { text: "React组件及Class、参数、状态的使用", link: `${baseUrl}/cour-react-note-2` },
@@ -17,10 +17,9 @@ const reactCourseConfig = [
   { text: "使用WebPack配置正确React项目", link: `${baseUrl}/cour-react-note-10` },
 ];
 // react积累
-const reactConfig = [{ text: "react积累-1", link: `${baseUrl}/react-note-1` }];
+const reactConfig = [{ text: "react积累-1", link: `${baseUrl}/react-note-1` }]; */
 
 module.exports = [
-  { text: "react", items: [] },
-  { text: "react学习笔记", items: reactCourseConfig },
-  { text: "react积累", items: reactConfig },
+  { text: "css", items: [] },
+  { text: "css笔记", items: [{ text: "vue学习笔记", link: `${baseUrl}/css-note-1` }] },
 ];

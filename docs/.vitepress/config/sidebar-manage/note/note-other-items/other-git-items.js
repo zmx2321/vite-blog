@@ -1,5 +1,5 @@
 /**
- * 其他-nginx笔记
+ * 其他-git笔记
  */
 const baseUrl = "/pages/note/other/git-note";
 

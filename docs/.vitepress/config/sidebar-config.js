@@ -16,6 +16,8 @@ module.exports = {
    * 笔记
    */
   // 前端相关
+  "/pages/note/front/vue-note": note.noteFront.css, // css学习笔记
+  "/pages/note/front/vue-note": note.noteFront.js, // js学习笔记
   "/pages/note/front/vue-note": note.noteFront.vue, // vue学习笔记
   "/pages/note/front/react-note": note.noteFront.react, // react学习笔记
   "/pages/note/front/algorithm-note": note.noteFront.algorithm, // 算法
