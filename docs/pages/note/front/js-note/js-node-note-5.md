@@ -115,9 +115,3 @@ schedule.scheduleJob(rule, ()=> {
   httpGet();  // 获取状态码
 });
 ```
-
-
----
-<br />
-
-<font color="#666" size="5">\~End~</font>

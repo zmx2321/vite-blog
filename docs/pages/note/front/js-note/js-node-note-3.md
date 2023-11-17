@@ -415,9 +415,3 @@ module.exports = {
     - `http://localhost:3000/sendCode`
   - 登陆
     - `http://localhost:3000/codePhoneLogin`
-
-    
----
-<br />
-
-<font color="#666" size="5">\~End~</font>

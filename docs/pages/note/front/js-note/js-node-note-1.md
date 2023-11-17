@@ -563,9 +563,3 @@ superagent
         }
     });
 ```
-
-
----
-<br />
-
-<font color="#666" size="5">\~End~</font>

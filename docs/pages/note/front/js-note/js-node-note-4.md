@@ -38,9 +38,3 @@ module.exports = log4js.getLogger;
 const log = require('../lib/logger.js')("test");
 log.info({"test": "tttt"}); // write data into log
 ```
-
-
----
-<br />
-
-<font color="#666" size="5">\~End~</font>

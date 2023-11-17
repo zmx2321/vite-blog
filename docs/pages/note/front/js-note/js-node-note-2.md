@@ -258,9 +258,3 @@ module.exports = router;
 ```
 - 请求页面
   - `http://localhost:3000/getPostCate?id=1`
-
-  
----
-<br />
-
-<font color="#666" size="5">\~End~</font>
