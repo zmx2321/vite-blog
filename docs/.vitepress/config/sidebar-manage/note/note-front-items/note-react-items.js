@@ -16,6 +16,7 @@ const reactCourseConfig = [
   { text: "React高级选项卡(轮播图)", link: `${baseUrl}/cour-react-note-9` },
   { text: "使用WebPack配置正确React项目", link: `${baseUrl}/cour-react-note-10` },
 ];
+
 // react积累
 const reactConfig = [{ text: "react积累-1", link: `${baseUrl}/react-note-1` }];
 

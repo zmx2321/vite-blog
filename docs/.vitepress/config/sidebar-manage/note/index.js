@@ -2,11 +2,12 @@
  * 前端相关学习笔记
  */
 export const noteFront = {
-  css: require("./note-front-items/note-css-items"), // css学习笔记
   js: require("./note-front-items/note-js-items"), // js学习笔记
   vue: require("./note-front-items/note-vue-items"), // vue学习笔记
+  css: require("./note-front-items/note-css-items"), // css学习笔记
+  algorithm: require("./note-front-items/note-algorithm-items"), // 算法笔记
+  uniapp: require("./note-front-items/note-uniapp-items"), // uniapp笔记
   react: require("./note-front-items/note-react-items"), // react学习笔记
-  algorithm: require("./note-front-items/note-algorithm-items"), // 算法
 };
 
 /**

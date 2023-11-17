@@ -1,5 +1,5 @@
 /**
- * 前端算法笔记
+ * 算法笔记
  */
 const baseUrl = "/pages/note/front/algorithm-note";
 
@@ -20,7 +20,7 @@ const algorithmPracticeConfig = [
 ];
 
 module.exports = [
-  { text: "前端算法积累", items: [] },
+  { text: "算法笔记", items: [] },
   { text: "算法基础", items: algorithmBaseConfig },
   { text: "算法练习", items: algorithmPracticeConfig },
 ];

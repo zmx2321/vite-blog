@@ -3,23 +3,24 @@
  */
 const baseUrl = "/pages/note/front/vue-note";
 
-/* // react学习笔记
-const reactCourseConfig = [
-  { text: "React入门简介", link: `${baseUrl}/cour-react-note-1` },
-  { text: "React组件及Class、参数、状态的使用", link: `${baseUrl}/cour-react-note-2` },
-  { text: "React组件示例", link: `${baseUrl}/cour-react-note-3` },
-  { text: "React获取节点、双向绑定", link: `${baseUrl}/cour-react-note-4` },
-  { text: "React生命周期", link: `${baseUrl}/cour-react-note-5` },
-  { text: "React表单和数据交互", link: `${baseUrl}/cour-react-note-6` },
-  { text: "React中父子级组件通信", link: `${baseUrl}/cour-react-note-7` },
-  { text: "React小栗子(选项卡和jsonP)", link: `${baseUrl}/cour-react-note-8` },
-  { text: "React高级选项卡(轮播图)", link: `${baseUrl}/cour-react-note-9` },
-  { text: "使用WebPack配置正确React项目", link: `${baseUrl}/cour-react-note-10` },
+// vue2笔记
+const vue2Config = [
+  { text: "vue2项目开发基本知识点总结", link: `${baseUrl}/vue2-note-1` },
+  { text: "vue2工作积累", link: `${baseUrl}/vue2-note-2` },
+  { text: "vue2工具库", link: `${baseUrl}/vue2-note-3` },
+  { text: "vue2配置", link: `${baseUrl}/vue2-note-4` },
+  { text: "在vue2中使用MapLibre", link: `${baseUrl}/vue2-note-5` },
 ];
-// react积累
-const reactConfig = [{ text: "react积累-1", link: `${baseUrl}/react-note-1` }]; */
+
+// vue3笔记
+const vue3Config = [
+  { text: "初识Vue3.0 + vite", link: `${baseUrl}/vue3-note-1` },
+  { text: "Vue3.0中新特性及Compiler原理", link: `${baseUrl}/vue3-note-2` },
+  { text: "vue3工作积累", link: `${baseUrl}/vue3-note-3` },
+];
 
 module.exports = [
-  { text: "vue", items: [] },
-  { text: "vue学习笔记", items: [{ text: "vue学习笔记", link: `${baseUrl}/vue-note-1` }] },
+  { text: "vue笔记", items: [] },
+  { text: "vue2笔记", items: vue2Config },
+  { text: "vue3笔记", items: vue3Config },
 ];

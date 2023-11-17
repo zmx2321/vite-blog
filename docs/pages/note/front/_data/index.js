@@ -15,7 +15,7 @@ const siteData = [
         icon: "",
         name: "vue学习笔记",
         desc: "",
-        link: `${base}/pages/note/front/vue-note/vue-element-note-1`,
+        link: `${base}/pages/note/front/vue-note/`,
       },
       {
         icon: "",
@@ -25,9 +25,15 @@ const siteData = [
       },
       {
         icon: "",
-        name: "算法",
+        name: "算法笔记",
         desc: "",
         link: `${base}/pages/note/front/algorithm-note/`,
+      },
+      {
+        icon: "",
+        name: "uniapp笔记",
+        desc: "",
+        link: `${base}/pages/note/front/uniapp-note/uniapp-note-1`,
       },
       {
         icon: "",
