@@ -15,7 +15,7 @@ const siteData = [
         icon: "",
         name: "js笔记",
         desc: "",
-        link: `${base}/pages/note/front/js-note/js-note-1`,
+        link: `${base}/pages/note/front/js-note/js-base-note-1`,
       },
       {
         icon: "",

@@ -3,23 +3,34 @@
  */
 const baseUrl = "/pages/note/front/js-note";
 
-/* // react学习笔记
-const reactCourseConfig = [
-  { text: "React入门简介", link: `${baseUrl}/cour-react-note-1` },
-  { text: "React组件及Class、参数、状态的使用", link: `${baseUrl}/cour-react-note-2` },
-  { text: "React组件示例", link: `${baseUrl}/cour-react-note-3` },
-  { text: "React获取节点、双向绑定", link: `${baseUrl}/cour-react-note-4` },
-  { text: "React生命周期", link: `${baseUrl}/cour-react-note-5` },
-  { text: "React表单和数据交互", link: `${baseUrl}/cour-react-note-6` },
-  { text: "React中父子级组件通信", link: `${baseUrl}/cour-react-note-7` },
-  { text: "React小栗子(选项卡和jsonP)", link: `${baseUrl}/cour-react-note-8` },
-  { text: "React高级选项卡(轮播图)", link: `${baseUrl}/cour-react-note-9` },
-  { text: "使用WebPack配置正确React项目", link: `${baseUrl}/cour-react-note-10` },
+// js中基础理论及常用api
+const jsBaseConfig = [
+  { text: "js中基础理论及常用api", link: `${baseUrl}/js-base-note-1` },
+  { text: "js中的时间", link: `${baseUrl}/js-base-note-2` },
+  { text: "js中的dom操作", link: `${baseUrl}/js-base-note-3` },
+  { text: "echarts问题集锦", link: `${baseUrl}/js-base-note-4` },
 ];
-// react积累
-const reactConfig = [{ text: "react积累-1", link: `${baseUrl}/react-note-1` }]; */
+// js数据类型
+const jsDataTypeConfig = [
+  { text: "js中的数组操作", link: `${baseUrl}/js-data-type-note-1` },
+  { text: "js中的字符串操作", link: `${baseUrl}/js-data-type-note-2` },
+  { text: "js中的对象", link: `${baseUrl}/js-data-type-note-3` },
+];
+// js异步
+const jsSyncConfig = [{ text: "js中的异步", link: `${baseUrl}/js-async-note-1` }];
+// js正则
+const jsRegConfig = [{ text: "js中的正则", link: `${baseUrl}/js-reg-note-1` }];
+// js工具
+const jsToolsConfig = [{ text: "js工具库封装", link: `${baseUrl}/js-tools-note-1` }];
+// js - node
+const jsNodeConfig = [{ text: "", link: `${baseUrl}/js-node-note-1` }];
 
 module.exports = [
-  { text: "js", items: [] },
-  { text: "js笔记", items: [{ text: "js", link: `${baseUrl}/js-note-1` }] },
+  { text: "js笔记", items: [] },
+  { text: "", items: jsBaseConfig },
+  { text: "js数据类型", items: jsDataTypeConfig },
+  { text: "", items: jsSyncConfig },
+  { text: "", items: jsRegConfig },
+  { text: "", items: jsToolsConfig },
+  { text: "node学习积累", items: jsNodeConfig },
 ];
