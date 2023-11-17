@@ -4,7 +4,7 @@
 ### 1-1. 执行层面
 > 在执行层面带来的性能提升
 
-![vite](/blog/images/accumulation/front/vue3-vite-note/vitexn.png)
+![vite](https://zmx2321.github.io/vite-blog/images/front/vue3-note/vitexn.png)
 - 在纯js部分执行的效率对比
     - 从挂载、更新、内存三个角度进行对比
 
