@@ -2,7 +2,7 @@
 
 [代码笔记](https://zmx2321.github.io/blog_code/interview/interview-one-side/18.html)
 
-## 1. 简述
+ ## 1. 简述
 - 验证和复习之前学过的知识
 - 在之前的知识体系里面补充其他技能
   - 占的比重不是很大，是纯api的东西，并不是成体系的
@@ -1391,10 +1391,10 @@
   - 如果要字符串全部满足，就加`/^xxx$/`
     - 如果只是一部分，就不需要加
     - 如果要字符串只满足开头，就加`/^xxx/`
-    - 如果要字符串只满足结尾，就加`/xxx$/`
-  - `+` => 表达式至少出现1次，相当于 {1,}
-  - `*` => 表达式不出现或出现任意次，相当于 {0,}
-  - [手写demo传送门](https://zmx2321.github.io/blog_code/interview/interview-one-side/example/questions/正则.html)
+     - 如果要字符串只满足结尾，就加`/xxx$/`
+ - `+` => 表达式至少出现1次，相当于 `{1,}`
+  - `*` => 表达式不出现或出现任意次，相当于 `{0,}`
+ - [手写demo传送门](https://zmx2321.github.io/blog_code/interview/interview-one-side/example/questions/正则.html)
   ```js
   // 邮政 - 6位数字
   // \d表示数字
