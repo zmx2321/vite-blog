@@ -1,7 +1,4 @@
 # css工作积累
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. css实现从左往右渐变
 `background: linear-gradient(to right,#2F76ED,#2451B1);`

@@ -9,7 +9,8 @@
     <!-- 网址列表 -->
     <ul class="list">
       <li class="item" v-for="(v, index) in props.data" :key="v.name">
-        <a class="link" :href="v.link" target="_blank">
+        <!-- 如果是本地地址，不展开新页面，外网地址，则打开新页面 -->
+        <a class="link" :href="v.link" :target="v.link.indexOf('/') !== 0 ? '_blank' : ''">
           <span class="num">{{ index + 1 }}</span>
           <h4 class="name">{{ v.name }}</h4>
           <p class="desc" :title="v.desc">{{ v.desc }}</p>

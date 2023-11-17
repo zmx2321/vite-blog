@@ -23,7 +23,16 @@ const jsRegConfig = [{ text: "js中的正则", link: `${baseUrl}/js-reg-note-1` 
 // js工具
 const jsToolsConfig = [{ text: "js工具库封装", link: `${baseUrl}/js-tools-note-1` }];
 // js - node
-const jsNodeConfig = [{ text: "", link: `${baseUrl}/js-node-note-1` }];
+const jsNodeConfig = [
+  { text: "node爬虫相关", link: `${baseUrl}/js-node-note-1` },
+  { text: "node-express-mysql入门小栗子", link: `${baseUrl}/js-node-note-2` },
+  { text: "express登陆和注册", link: `${baseUrl}/js-node-note-3` },
+  { text: "node中的日志文件", link: `${baseUrl}/js-node-note-4` },
+  { text: "node定时任务", link: `${baseUrl}/js-node-note-5` },
+  { text: "node爬虫案例-定时发送邮件", link: `${baseUrl}/js-node-note-6` },
+  { text: "当node爬虫遇到登陆和验证码", link: `${baseUrl}/js-node-note-7` },
+  { text: "node问题集锦", link: `${baseUrl}/js-node-note-8` },
+];
 
 module.exports = [
   { text: "js笔记", items: [] },

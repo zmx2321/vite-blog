@@ -1,7 +1,4 @@
 # npm相关笔记
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. 删除node_modules
 ```

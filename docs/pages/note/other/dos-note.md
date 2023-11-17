@@ -1,7 +1,4 @@
 # dos相关笔记
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. 修改host文件
 > 以GitHub为例

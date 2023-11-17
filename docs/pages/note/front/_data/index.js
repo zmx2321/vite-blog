@@ -7,12 +7,6 @@ const siteData = [
     items: [
       {
         icon: "",
-        name: "css笔记",
-        desc: "",
-        link: `${base}/pages/note/front/css-note/css-note-1`,
-      },
-      {
-        icon: "",
         name: "js笔记",
         desc: "",
         link: `${base}/pages/note/front/js-note/js-base-note-1`,
@@ -21,19 +15,25 @@ const siteData = [
         icon: "",
         name: "vue学习笔记",
         desc: "",
-        link: `${base}/pages/note/front/vue-note/vue-note-1`,
+        link: `${base}/pages/note/front/vue-note/vue-element-note-1`,
       },
       {
         icon: "",
-        name: "react学习笔记",
+        name: "css笔记",
         desc: "",
-        link: `${base}/pages/note/front/react-note/cour-react-note-1`,
+        link: `${base}/pages/note/front/css-note/css-note-1`,
       },
       {
         icon: "",
         name: "算法",
         desc: "",
         link: `${base}/pages/note/front/algorithm-note/`,
+      },
+      {
+        icon: "",
+        name: "react学习笔记",
+        desc: "",
+        link: `${base}/pages/note/front/react-note/cour-react-note-1`,
       },
     ],
   },

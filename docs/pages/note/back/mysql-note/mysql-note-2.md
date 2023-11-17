@@ -1,7 +1,4 @@
 # MySQL升级5.7,sql语句报错解决
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 > MySQL升级5.7之后经常会出现这种错误：[Err] 1055 - Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'information_schema.PROFILING.SEQ',虽然不影响SQL执行，但感觉不好
 

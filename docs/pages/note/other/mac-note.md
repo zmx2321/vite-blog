@@ -1,7 +1,4 @@
 # mac相关笔记
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. 在mac上安装homebrew
 - 进入终端

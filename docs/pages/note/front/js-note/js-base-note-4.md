@@ -1,7 +1,4 @@
 # echarts问题集锦
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. vue中echarts图表
 - `yarn add echarts`

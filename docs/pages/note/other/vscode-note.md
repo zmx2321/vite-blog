@@ -1,7 +1,4 @@
 # vscode相关笔记
-<ClientOnly>
-  <Valine></Valine>
-</ClientOnly>
 
 ## 1. vscode改成eclipse快捷键习惯
 ### 1.1. windows
