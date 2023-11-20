@@ -6,7 +6,7 @@ import * as note from "./sidebar-manage/note"; // 笔记
 
 module.exports = {
   // examples
-  "/examples": examples.examples1Config,
+  "/examples": examples.examplesConfig,
 
   // 面试题
   "/pages/interview/foundation/": interview.interviewFoundation, // 前端基础面试题

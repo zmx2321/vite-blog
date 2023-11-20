@@ -61,10 +61,15 @@ export default {
 
     // 搜索
     /* algolia: {
+      appId: "4QM57J77LG",
       apiKey: "dcfd99877026391712379be4bfa9708b",
       indexName: "zmx2321-184059744",
-      appId: "4QM57J77LG",
+      chunkSize: 5000,
     }, */
+    // 搜索框
+    search: {
+      provider: "local",
+    },
 
     returnToTopLabel: "返回顶部",
 
@@ -94,6 +99,12 @@ export default {
     serviceWorker: true,
 
     socialLinks: [{ icon: "github", link: "https://github.com/zmx2321/vite-blog" }], // 可以连接到 github
+
+    /* carbonAds: {
+      carbon: "CEBDT27Y",
+      custom: "CKYD62QM",
+      placement: "vuejsorg",
+    }, */
   },
 
   // 插件
@@ -103,6 +114,34 @@ export default {
     "@vuepress/medium-zoom", // 图片预览插件
     "@vuepress/nprogress", //页面顶部进度条
   ],
+
+  vite: {
+    /* define: {
+      __VUE_OPTIONS_API__: false,
+    },
+    optimizeDeps: {
+      include: ["gsap", "dynamics.js"],
+      exclude: ["@vue/repl"],
+    },
+    // @ts-ignore
+    ssr: {
+      external: ["@vue/repl"],
+    },
+    server: {
+      host: true,
+      fs: {
+        // for when developing with locally linked theme
+        allow: ["../.."],
+      },
+    }, */
+    build: {
+      minify: "terser",
+      chunkSizeWarningLimit: Infinity,
+    },
+    /* json: {
+      stringify: true,
+    }, */
+  },
 
   /* build: {
     chunkSizeWarningLimit: 1500,

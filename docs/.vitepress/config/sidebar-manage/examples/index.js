@@ -1,4 +1,4 @@
-export const examples1Config = [
+export const examplesConfig = [
   {
     // text: "examples",
     items: [
