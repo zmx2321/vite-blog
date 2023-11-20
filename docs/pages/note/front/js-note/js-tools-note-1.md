@@ -1018,7 +1018,7 @@ if (typeof window !== "undefined") {
 // 判断详情数据是否在下拉列表中存在
 export const isHasIds = (dataNotArr = true, optionsArr, dataArr, optionsField = 'id', dataField = 'id') => {
   if (!dataNotArr) {
-    // console.log('是否是多选数据')
+    // console.log('是否是多选数据', dataArr)
 
     let optionIds = optionsArr.map((item) => item[optionsField])
 
@@ -1026,8 +1026,14 @@ export const isHasIds = (dataNotArr = true, optionsArr, dataArr, optionsField = 
     let unUseId = []
 
     dataArr.forEach((item) => {
-      if (!optionIds.includes(item[dataField])) {
-        unUseId.push(item[dataField])
+      if (typeof item === 'string') {
+        if (!optionIds.includes(item)) {
+          unUseId.push(item)
+        }
+      } else {
+        if (!optionIds.includes(item[dataField])) {
+          unUseId.push(item[dataField])
+        }
       }
       isHasId.push(optionIds.includes(item[optionsField]))
     })
@@ -1046,7 +1052,7 @@ export const isHasIds = (dataNotArr = true, optionsArr, dataArr, optionsField = 
     dataField = dataArr
     optionsField = optionsArr
     optionsArr = dataNotArr
-    // console.log(dataField, optionsField, optionsArr)
+    // console.log('000', dataField, optionsField, optionsArr)
 
     // return optionsArr.some((item) => item[dataArr] === optionsField)
     return optionsArr.some((item) => item[optionsField] === dataField)
@@ -1068,15 +1074,48 @@ if (unUseIdStr) {
     .catch(() => {})
 }
 
-let checkIds = isHasIds(businessOptions.value, 'id', res.content.businessId)
-// console.log(checkIds)
-if (!checkIds) {
-  ElMessageBox.confirm(`您选中的营业点「${res.content.businessId}」被停用，请联系管理员`, '警告', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
-    type: 'warning'
-  })
-    .then(() => {})
-    .catch(() => {})
-}
+let checkPrintIds = isHasIds(printerOptions.value, 'guid', ruleForm.value.printerGuid)
+  if (!checkPrintIds) {
+    ElMessageBox.confirm(`您选中的打印机「${ruleForm.value.printerGuid}」被停用，请联系管理员`, '警告', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
+      .then(() => {})
+      .catch(() => {})
+  }
+
+  let checkBusinessIds = isHasIds(businessOptions.value, 'id', ruleForm.value.businessId)
+  // console.log(checkGuidIds)
+  if (!checkBusinessIds) {
+    ElMessageBox.confirm(`您选中的营业点「${ruleForm.value.businessId}」被停用，请联系管理员`, '警告', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
+      .then(() => {})
+      .catch(() => {})
+  }
+
+  let unUseBusinessIdIdStr = isHasIds(false, businessOptions.value, ruleForm.value.businessIdList)
+  if (unUseBusinessIdIdStr) {
+    ElMessageBox.confirm(`您选中的归属营业点「${unUseBusinessIdIdStr}」被停用，请联系管理员`, '警告', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
+      .then(() => {})
+      .catch(() => {})
+  }
+
+  let unUseAreaIdIdStr = isHasIds(false, areaOptions.value, ruleForm.value.areaIdList)
+  if (unUseBusinessIdIdStr) {
+    ElMessageBox.confirm(`您选中的餐区「${unUseAreaIdIdStr}」被停用，请联系管理员`, '警告', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
+      .then(() => {})
+      .catch(() => {})
+  }
 ```
