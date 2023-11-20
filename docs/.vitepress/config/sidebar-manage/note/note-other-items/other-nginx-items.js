@@ -3,4 +3,4 @@
  */
 const baseUrl = "/pages/note/other/nginx-note";
 
-module.exports = [{ text: "nginx相关笔记", link: `${baseUrl}/nginx-note-1` }];
+module.exports = [{ text: "", link: `${baseUrl}/nginx-note-1` }];

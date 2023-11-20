@@ -22,12 +22,28 @@ export const noteBack = {
 /**
  * 其他笔记
  */
+const setOtherNote = obj => {
+  if (obj) {
+    return [
+      { text: "", items: [{ text: "笔记分类", link: "/pages/note/other/" }] },
+      ...obj,
+      { items: [...require("./note-other-items")] },
+    ];
+  }
+};
 export const noteOther = {
-  git: [{ items: [...require("./note-other-items/other-git-items")] }],
-  nginx: [{ items: [...require("./note-other-items/other-nginx-items")] }],
-  elk: [{ items: [...require("./note-other-items/other-elk-items")] }],
-  other: [
-    { text: "其他笔记", items: [{ text: "笔记分类", link: "/pages/note/other/" }] },
-    { items: [...require("./note-other-items")] },
-  ],
+  test: "/pages/note/other/",
+  git: setOtherNote([
+    { text: "", items: [...require("./note-other-items/note-list-items")] },
+    // { text: "git笔记", items: [...require("./note-other-items/other-git-items")] },
+  ]),
+  nginx: setOtherNote([
+    { text: "", items: [...require("./note-other-items/note-list-items")] },
+    // { text: "nginx笔记", items: [...require("./note-other-items/other-nginx-items")] },
+  ]),
+  elk: setOtherNote([
+    { text: "", items: [...require("./note-other-items/note-list-items")] },
+    { text: "elk笔记", items: [...require("./note-other-items/other-elk-items")] },
+  ]),
+  other: setOtherNote([]),
 };
