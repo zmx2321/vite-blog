@@ -1012,3 +1012,71 @@ if (typeof window !== "undefined") {
   console.log("File: " + fileName.value);
 }
 ```
+
+## 判断详情数据是否在下拉列表中存在
+```js
+// 判断详情数据是否在下拉列表中存在
+export const isHasIds = (dataNotArr = true, optionsArr, dataArr, optionsField = 'id', dataField = 'id') => {
+  if (!dataNotArr) {
+    // console.log('是否是多选数据')
+
+    let optionIds = optionsArr.map((item) => item[optionsField])
+
+    let isHasId = []
+    let unUseId = []
+
+    dataArr.forEach((item) => {
+      if (!optionIds.includes(item[dataField])) {
+        unUseId.push(item[dataField])
+      }
+      isHasId.push(optionIds.includes(item[optionsField]))
+    })
+    // console.log(isHasId)
+
+    // 如果有false，表示有数据不通过，需要提示 - 有一个false返回true
+    // console.log(isHasId.some((item) => item === false))
+    if (isHasId.some((item) => item === false)) {
+      // console.log('需要提示，失效的id是', unUseId.join(','))
+      return unUseId.join(',')
+    }
+  } else {
+    // 单选
+
+    // 重新赋值
+    dataField = dataArr
+    optionsField = optionsArr
+    optionsArr = dataNotArr
+    // console.log(dataField, optionsField, optionsArr)
+
+    // return optionsArr.some((item) => item[dataArr] === optionsField)
+    return optionsArr.some((item) => item[optionsField] === dataField)
+  }
+}
+
+import { ElMessageBox } from 'element-plus'
+import { isHasIds } from '@/utils/validate'
+
+let { roleDTOS } = ruleForm.value
+let unUseIdStr = isHasIds(false, userRolesOptions.value, roleDTOS)
+if (unUseIdStr) {
+  ElMessageBox.confirm(`您选中的角色「${unUseIdStr}」被停用，请联系管理员`, '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(() => {})
+    .catch(() => {})
+}
+
+let checkIds = isHasIds(businessOptions.value, 'id', res.content.businessId)
+// console.log(checkIds)
+if (!checkIds) {
+  ElMessageBox.confirm(`您选中的营业点「${res.content.businessId}」被停用，请联系管理员`, '警告', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(() => {})
+    .catch(() => {})
+}
+```
