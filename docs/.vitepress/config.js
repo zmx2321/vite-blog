@@ -135,8 +135,7 @@ export default {
       },
     }, */
     build: {
-      minify: "terser",
-      chunkSizeWarningLimit: Infinity,
+      chunkSizeWarningLimit: 1500,
     },
     /* json: {
       stringify: true,
