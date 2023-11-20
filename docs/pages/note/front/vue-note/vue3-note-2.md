@@ -4,7 +4,7 @@
 ### 1-1. 执行层面
 > 在执行层面带来的性能提升
 
-![vite](https://zmx2321.github.io/vite-blog/images/front/vue3-note/vitexn.png)
+![vite](https://zmx2321.github.io/vite-blog/images/note/front/vue3-note/vitexn.png)
 - 在纯js部分执行的效率对比
     - 从挂载、更新、内存三个角度进行对比
 
@@ -36,9 +36,9 @@
 **
 优化案例1：
 **<br />
-![Compiler](https://zmx2321.github.io/vite-blog/images/front/vue3-note/virxr.png)
-![Compiler](https://zmx2321.github.io/vite-blog/images/front/vue3-note/virxr2.png)
-![Compiler](https://zmx2321.github.io/vite-blog/images/front/vue3-note/virxr3.png)
+![Compiler](https://zmx2321.github.io/vite-blog/images/note/front/vue3-note/virxr.png)
+![Compiler](https://zmx2321.github.io/vite-blog/images/note/front/vue3-note/virxr2.png)
+![Compiler](https://zmx2321.github.io/vite-blog/images/note/front/vue3-note/virxr3.png)
 
 - 左边是vue3的源码中template的源码，右边是template编译成的代码
 - 当使用了div元素的时候，页面上会引用_createVNode，这个其实就是virtualDom的节点
@@ -54,8 +54,8 @@
 **
 优化案例2：
 **<br />
-![Compiler](https://zmx2321.github.io/vite-blog/images/front/vue3-note/virxr4.png)
-![Compiler](https://zmx2321.github.io/vite-blog/images/front/vue3-note/virxr5.png)
+![Compiler](https://zmx2321.github.io/vite-blog/images/note/front/vue3-note/virxr4.png)
+![Compiler](https://zmx2321.github.io/vite-blog/images/note/front/vue3-note/virxr5.png)
 
 - 在没开启cacheHandlers之前，他是绑定在上下文的，开启cacheHandlers之后，在全局进行了注册
 - 在单个节点里的单个单个事件可能还体现不出来，但在自定义的组件中，在某些组件里面我们会引用它，这时候会挂载到整个virtualDom上面去，就会对他进行实例化，多次进行实例化的话，按照原先处理的逻辑，可能就会每次都会去创建它对应的click指向。
