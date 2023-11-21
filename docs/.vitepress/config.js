@@ -158,17 +158,33 @@ export default {
         return `js/${fileName}/[name].[hash].js`;
       },
     }, */
-
+    define: {
+      __VUE_OPTIONS_API__: false, // Vue3中默认就是true，也就是默认支持OPTIONSAPI 咱们可以选择将其关闭，这样也可以减小打包之后的包体积
+    },
+    // 预编译
+    /* optimizeDeps: {
+      include: ["gsap", "dynamics.js"],
+      exclude: ["@vue/repl"],
+    }, */
+    server: {
+      host: true,
+      port: 6080,
+      cors: true,
+      fs: {
+        // for when developing with locally linked theme
+        allow: ["../.."],
+      },
+    },
+    json: {
+      stringify: true,
+    },
+    // @ts-ignore
+    ssr: {
+      external: ["@vue/repl"],
+    },
     build: {
       sourcemap: false,
-      // minify: "terser",
       chunkSizeWarningLimit: 1500,
-      /* terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-        },
-      }, */
       rollupOptions: {
         output: {
           manualChunks(id) {
@@ -187,17 +203,4 @@ export default {
       },
     },
   },
-
-  /* build: {
-    chunkSizeWarningLimit: 1500,
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes("node_modules")) {
-            return id.toString().split("node_modules/")[1].split("/")[0].toString();
-          }
-        },
-      },
-    },
-  }, */
 };
