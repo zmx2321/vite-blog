@@ -119,7 +119,7 @@ export default {
     define: {
       __VUE_OPTIONS_API__: false, // Vue3中默认就是true，也就是默认支持OPTIONSAPI 咱们可以选择将其关闭，这样也可以减小打包之后的包体积
     },
-    // 预编译 0
+    // 预编译
     /* optimizeDeps: {
       include: ["gsap", "dynamics.js"],
       exclude: ["@vue/repl"],
