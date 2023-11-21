@@ -116,52 +116,10 @@ export default {
   ],
 
   vite: {
-    /* define: {
-      __VUE_OPTIONS_API__: false,
-    },
-    optimizeDeps: {
-      include: ["gsap", "dynamics.js"],
-      exclude: ["@vue/repl"],
-    },
-    // @ts-ignore
-    ssr: {
-      external: ["@vue/repl"],
-    },
-    server: {
-      host: true,
-      fs: {
-        // for when developing with locally linked theme
-        allow: ["../.."],
-      },
-    }, */
-    /* build: {
-      // chunkSizeWarningLimit: Infinity,
-      chunkSizeWarningLimit: 1500,
-    }, */
-    /* json: {
-      stringify: true,
-    }, */
-    /* build: {
-      chunkSizeWarningLimit: 1500,
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes("node_modules")) {
-              return id.toString().split("node_modules/")[1].split("/")[0].toString();
-            }
-          },
-        },
-      },
-      chunkFileNames: chunkInfo => {
-        const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split("/") : [];
-        const fileName = facadeModuleId[facadeModuleId.length - 2] || "[name]";
-        return `js/${fileName}/[name].[hash].js`;
-      },
-    }, */
     define: {
       __VUE_OPTIONS_API__: false, // Vue3中默认就是true，也就是默认支持OPTIONSAPI 咱们可以选择将其关闭，这样也可以减小打包之后的包体积
     },
-    // 预编译1
+    // 预编译
     /* optimizeDeps: {
       include: ["gsap", "dynamics.js"],
       exclude: ["@vue/repl"],
