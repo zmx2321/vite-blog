@@ -7,4 +7,5 @@ git add .
 git commit -m 'feat init'
 
 git push
+# git push --force
 
