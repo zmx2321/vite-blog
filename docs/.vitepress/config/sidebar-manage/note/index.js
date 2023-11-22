@@ -43,7 +43,10 @@ export const noteOther = {
   ]),
   elk: setOtherNote([
     { text: "", items: [...require("./note-other-items/note-list-items")] },
-    { text: "elk笔记", items: [...require("./note-other-items/other-elk-items")] },
+    {
+      text: "elk笔记",
+      items: [...require("./note-other-items/other-elk-items")],
+    },
   ]),
   other: setOtherNote([]),
 };
