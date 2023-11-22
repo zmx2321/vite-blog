@@ -27,10 +27,10 @@ export default {
   // 获取每个文件最后一次 git 提交的 UNIX 时间戳(ms)，同时它将以合适的日期格式显示在每一页的底部
   lastUpdated: true, // string | boolean
 
-  // 导航栏
   themeConfig: {
     // 增加导航栏 Logo ，Logo 可以被放置在公共文件目录
-    // logo: '/assets/img/logo.png',
+    logo: "/ico.png",
+    siteTitle: "zmx2321",
 
     // 右侧边栏配置，默认值是"In hac pagina"
     outlineTitle: "本页目录",

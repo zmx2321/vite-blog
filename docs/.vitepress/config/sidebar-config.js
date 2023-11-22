@@ -22,6 +22,7 @@ module.exports = {
   "/pages/note/front/algorithm-note": note.noteFront.algorithm, // 算法笔记
   "/pages/note/front/uniapp-note": note.noteFront.uniapp, // uniapp笔记
   "/pages/note/front/react-note": note.noteFront.react, // react学习笔记
+  "/pages/note/front/v8-note": note.noteFront.v8, // v8学习笔记
 
   // 后端相关
   "/pages/note/back/java-note": note.noteBack.java, // java学习笔记
@@ -31,5 +32,5 @@ module.exports = {
   "/pages/note/other/git-note": note.noteOther.git, // git学习笔记
   "/pages/note/other/nginx-note": note.noteOther.nginx, // nginx学习笔记
   "/pages/note/other/elk-note": note.noteOther.elk, // elk学习笔记
-  "/pages/note/other": note.noteOther.other, // 其他学习笔记,
+  "/pages/note/other": note.noteOther.other, // 其他学习笔记
 };

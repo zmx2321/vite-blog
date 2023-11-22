@@ -41,6 +41,12 @@ const siteData = [
         desc: "",
         link: `${base}/pages/note/front/react-note/cour-react-note-1`,
       },
+      {
+        icon: "",
+        name: "v8学习笔记",
+        desc: "",
+        link: `${base}/pages/note/front/v8-note/v8-note-1`,
+      },
     ],
   },
 ];

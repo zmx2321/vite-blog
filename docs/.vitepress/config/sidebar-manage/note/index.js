@@ -8,6 +8,7 @@ export const noteFront = {
   algorithm: require("./note-front-items/note-algorithm-items"), // 算法笔记
   uniapp: require("./note-front-items/note-uniapp-items"), // uniapp笔记
   react: require("./note-front-items/note-react-items"), // react学习笔记
+  v8: require("./note-front-items/note-v8-items"), // v8学习笔记
 };
 
 /**
@@ -32,7 +33,6 @@ const setOtherNote = obj => {
   }
 };
 export const noteOther = {
-  test: "/pages/note/other/",
   git: setOtherNote([
     { text: "", items: [...require("./note-other-items/note-list-items")] },
     // { text: "git笔记", items: [...require("./note-other-items/other-git-items")] },
@@ -43,10 +43,7 @@ export const noteOther = {
   ]),
   elk: setOtherNote([
     { text: "", items: [...require("./note-other-items/note-list-items")] },
-    {
-      text: "elk笔记",
-      items: [...require("./note-other-items/other-elk-items")],
-    },
+    { text: "elk笔记", items: [...require("./note-other-items/other-elk-items")] },
   ]),
   other: setOtherNote([]),
 };

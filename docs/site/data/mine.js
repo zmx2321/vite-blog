@@ -28,6 +28,12 @@ const siteData = [
         desc: "方便公众号文章的编辑",
         link: "https://www.mdnice.com/",
       },
+      {
+        icon: "",
+        name: "极客时间",
+        desc: "极客时间PC官网",
+        link: "https://time.geekbang.org/",
+      },
     ],
   },
   {
