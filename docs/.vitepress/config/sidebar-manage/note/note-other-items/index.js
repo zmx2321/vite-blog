@@ -1,7 +1,7 @@
 /**
  * 其他笔记
  */
-const baseUrl = "/pages/note/other/";
+const baseUrl = "/pages/note/other";
 
 module.exports = [
   { text: "npm相关笔记", link: `${baseUrl}/npm-note` },

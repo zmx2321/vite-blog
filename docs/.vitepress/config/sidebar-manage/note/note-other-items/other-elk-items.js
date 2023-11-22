@@ -1,7 +1,7 @@
 /**
  * 其他-elk笔记
  */
-const baseUrl = "/pages/note/other/elk-note/";
+const baseUrl = "/pages/note/other/elk-note";
 
 module.exports = [
   { text: "初识elk", link: `${baseUrl}/elk-note-1` },

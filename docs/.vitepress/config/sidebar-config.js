@@ -32,5 +32,5 @@ module.exports = {
   "/pages/note/other/git-note": note.noteOther.git, // git学习笔记
   "/pages/note/other/nginx-note": note.noteOther.nginx, // nginx学习笔记
   "/pages/note/other/elk-note": note.noteOther.elk, // elk学习笔记
-  "/pages/note/other": note.noteOther.other, // 其他学习笔记
+  "/pages/note/other": note.noteOther.other, // 其他笔记
 };

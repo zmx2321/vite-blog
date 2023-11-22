@@ -1,4 +1,4 @@
-const baseUrl = "/pages/note/other/";
+const baseUrl = "/pages/note/other";
 
 module.exports = [
   { text: "git笔记", link: `${baseUrl}/git-note/git-note-1` },
