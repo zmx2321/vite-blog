@@ -1,4 +1,5 @@
 module.exports = [
+  // { text: "examples", link: "/examples/" },
   { text: "Button 按钮", link: "/examples/button" },
   { text: "Modal 对话框", link: "/examples/modal" },
   { text: "Tabs 标签页", link: "/examples/tabs" },
