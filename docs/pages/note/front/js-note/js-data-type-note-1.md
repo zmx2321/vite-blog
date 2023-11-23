@@ -464,3 +464,14 @@ if ([1, 2, 3].includes(type)) {
   // code
 }
 ```
+
+## 数组的链式操作
+- 判断数组中是否包含另一个对象数组中的数据，有的话，过滤出来
+- 将过滤出来的数组组装成只有名称的数组
+- 将只有名称的数组转换成字符串，并用逗号分隔
+```js
+groupTypesOptions()
+        .filter((item) => scope.row.groupTypes.includes(item.value))
+        .map((item) => item.label)
+        .join(','),
+```

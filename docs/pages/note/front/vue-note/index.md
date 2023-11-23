@@ -1,4 +1,4 @@
-# vue代码示例
+# vue演示
 
 ## vue2
 <inside-page :url="'https://zmx2321.github.io/vue_demo'" :height="'600'" />
