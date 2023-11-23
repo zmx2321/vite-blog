@@ -139,7 +139,8 @@
 - HTTP协议
 
 ## 10. 思维导图
-![interview](https://zmx2321.github.io/vite-blog/images/interview/foundation/interview.png)
+<!-- ![interview](https://zmx2321.github.io/vite-blog/images/interview/foundation/interview.png) -->
+<img-viewer :src="'https://zmx2321.github.io/vite-blog/images/interview/foundation/interview.png'" :alt="'interview'" />
 
 ## 11. 使用http-server启前端服务
 - `npm install -g http-server`

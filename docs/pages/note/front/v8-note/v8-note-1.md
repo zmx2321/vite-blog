@@ -48,6 +48,7 @@
 ## 编译流水线
 - 深入分析过 JavaScript 语言之后，我们就可以学习 V8 执行 JavaScript 代码的完整流程了。我们把这套流程称之为 V8 的编译流水线，其完整流程如下图所示：
 ![V8的编译流水线](https://zmx2321.github.io/vite-blog/images/note/front/v8-note/1/1-1.png)
+<!-- <img-viewer :src="'https://zmx2321.github.io/vite-blog/images/note/front/v8-note/1/1-1.png'" :alt="'V8的编译流水线'" /> -->
 - 编译流水线本身并不复杂，但是其中涉及到了很多技术，诸如 JIT、延迟解析、隐藏类、内联缓存等等。
 - 这些技术决定着一段 JavaScript 代码能否正常执行，以及代码的执行效率。
     - 比如 V8 中使用的隐藏类（Hide Class），这是将 JavaScript 中动态类型转换为静态类型的一种技术，可以消除动态类型的语言执行速度过慢的问题
@@ -58,7 +59,8 @@
     2. JavaScript 是一种自动垃圾回收的语言，V8 在执行垃圾回收时，会占用主线程的资源，如果我们编写的程序频繁触发垃圾回收，那么无疑会阻塞主线程，这也是我们经常会遇到的一个问题。我们需要知道 V8 是如何分配内存数据的，以及这些数据是如何被回收的，打通整个链路，建立完整的系统，当下次遇到内存问题时，就知道如何去排查了。
 
 ## v8学习思维导图
-![v8学习思维导图](https://zmx2321.github.io/vite-blog/images/note/front/v8-note/1/1-2.png)
+<!-- ![v8学习思维导图](https://zmx2321.github.io/vite-blog/images/note/front/v8-note/1/1-2.png) -->
+<img-viewer :src="'https://zmx2321.github.io/vite-blog/images/note/front/v8-note/1/1-2.png'" :alt="'v8学习思维导图'" />
 
 
 

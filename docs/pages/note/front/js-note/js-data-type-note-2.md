@@ -145,3 +145,6 @@ const name = '小明';
 const score = 59;
 const result = `${name}${score > 60?'的考试成绩及格':'的考试成绩不及格'}`;
 ```
+
+## 根据图片地址截取图片名称
+- `src.substring(src.lastIndexOf('/') + 1, src.length)`

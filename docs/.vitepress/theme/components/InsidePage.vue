@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   url: String,
   height: {
     type: String,

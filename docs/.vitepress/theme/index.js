@@ -2,10 +2,11 @@
 import { h } from "vue";
 import { useData } from "vitepress";
 import SiteList from "./components/SiteList.vue";
-import siteFooter from "./components/siteFooter.vue";
+import SiteFooter from "./components/SiteFooter.vue";
 import Home from "./components/Home.vue";
 import BackTop from "./components/BackTop.vue";
 import InsidePage from "./components/InsidePage.vue";
+import ImgViewer from "./components/ImgViewer.vue";
 
 import DefaultTheme from "vitepress/theme";
 import "./styles/custom.scss";
@@ -28,6 +29,7 @@ export default {
     app.component("Home", Home);
     app.component("BackTop", BackTop);
     app.component("InsidePage", InsidePage);
+    app.component("ImgViewer", ImgViewer);
   },
   // 自定义布局配置
   Layout: () => {
@@ -41,7 +43,7 @@ export default {
     }
     return h(DefaultTheme.Layout, props, {
       // 自定义文档底部
-      "doc-after": () => h(siteFooter),
+      "doc-after": () => h(SiteFooter),
     });
   },
 };

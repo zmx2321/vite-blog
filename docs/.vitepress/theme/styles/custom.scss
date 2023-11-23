@@ -121,6 +121,18 @@ a:active {
   .vp-doc div[class*="language-"] {
     background: #000;
   }
+
+  .el-dialog {
+    background: #000;
+
+    .el-dialog__header {
+      background: #000 !important;
+      box-shadow: -2px 1px 8px 2px #454545 !important;
+      .el-dialog__title {
+        color: #fff;
+      }
+    }
+  }
 }
 
 /*====== 滚动条样式：谷歌浏览器下 start ======*/
