@@ -52,7 +52,7 @@ const getImgView = () => {
     }
 
     .el-dialog__body {
-      padding-top: 65px;
+      padding: 65px 0 0 0;
     }
   }
 }
