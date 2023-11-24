@@ -53,6 +53,7 @@ const getImgView = () => {
 
     .el-dialog__body {
       padding: 65px 0 0 0;
+      background: #fff;
     }
   }
 }
