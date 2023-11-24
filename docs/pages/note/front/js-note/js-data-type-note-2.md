@@ -148,3 +148,7 @@ const result = `${name}${score > 60?'的考试成绩及格':'的考试成绩不�
 
 ## 根据图片地址截取图片名称
 - `src.substring(src.lastIndexOf('/') + 1, src.length)`
+
+## js大小写
+- `str.toLowerCase()` => 大写转小写
+- `str.toUpperCase()` => 小写转大写
