@@ -32,7 +32,7 @@ const getImgView = () => {
 </script>
 <style lang="scss" scoped>
 .img_viewer {
-  :deep .el-dialog {
+  ::v-deep(.el-dialog) {
     margin: 0;
     height: 100%;
 
