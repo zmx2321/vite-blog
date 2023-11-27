@@ -105,4 +105,4 @@ let a=1
 - `pt --trace-deopt test.js` => 查看那些代码被反优化了
 
 ## v8执行 JavaScript 代码思维导图
-<img-viewer :src="'https://zmx2321.github.io/vite-blog/images/note/front/v8-note/2/2-2.png'" :alt="'v8执行JavaScript代码思维导图'" />
+<img-viewer :src="'https://zmx2321.github.io/vite-blog/images/note/front/v8-note/2/2-0.png'" :alt="'v8执行JavaScript代码思维导图'" />
