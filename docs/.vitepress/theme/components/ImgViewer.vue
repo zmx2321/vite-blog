@@ -32,6 +32,12 @@ const getImgView = () => {
 </script>
 <style lang="scss" scoped>
 .img_viewer {
+  &, cursor: pointer;
+
+  img {
+    cursor: pointer;
+  }
+
   ::v-deep(.el-dialog) {
     margin: 0;
     width: 100%;
