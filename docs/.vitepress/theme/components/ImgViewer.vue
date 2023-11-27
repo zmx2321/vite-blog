@@ -32,9 +32,8 @@ const getImgView = () => {
 </script>
 <style lang="scss" scoped>
 .img_viewer {
-  &, cursor: pointer;
-
-  img {
+  &,
+  & img {
     cursor: pointer;
   }
 
