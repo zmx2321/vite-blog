@@ -12,12 +12,6 @@ const siteData = [
     items: [
       {
         icon: "",
-        name: "搜索",
-        desc: "最懂程序员的新一代 AI 搜索引擎",
-        link: "https://devv.ai",
-      },
-      {
-        icon: "",
         name: "微信公众平台",
         desc: "",
         link: "https://mp.weixin.qq.com/",

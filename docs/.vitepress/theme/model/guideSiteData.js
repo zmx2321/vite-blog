@@ -14,7 +14,7 @@ const siteData = [
         icon: "",
         name: "例子",
         desc: "一些博客使用上的案例的案例",
-        link: `${base}/examples/`,
+        link: `${base}/examples/button`,
       },
     ],
   },

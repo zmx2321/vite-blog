@@ -1,8 +1,25 @@
 /* 前端综合网址导航页面数据 **/
 const siteData = [
+  /* {
+    title: "ask",
+    items: [
+      {
+        icon: "",
+        name: "搜索",
+        desc: "最懂程序员的新一代 AI 搜索引擎",
+        link: "https://devv.ai",
+      },
+    ],
+  }, */
   {
     title: "工具",
     items: [
+      {
+        icon: "",
+        name: "搜索",
+        desc: "最懂程序员的新一代 AI 搜索引擎",
+        link: "https://devv.ai",
+      },
       {
         icon: "",
         name: "评论功能",
