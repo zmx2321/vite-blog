@@ -55,6 +55,24 @@ const siteData = [
         desc: "",
         link: "https://www.gushiwen.cn/",
       },
+      {
+        icon: "",
+        name: "音乐转换成mp3",
+        desc: "KGM-to-MP3",
+        link: "https://convert.freelrc.com/KGM-to-MP3",
+      },
+      {
+        icon: "",
+        name: "音乐转换成mp3",
+        desc: "KGM-to-MP3",
+        link: "https://openyyy.com/",
+      },
+      {
+        icon: "",
+        name: "unlock-music",
+        desc: "可下载代码运行-vue项目",
+        link: "https://demo.unlock-music.dev/",
+      },
     ],
   },
 ];
