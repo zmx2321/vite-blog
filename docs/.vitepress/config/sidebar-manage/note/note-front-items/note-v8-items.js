@@ -11,7 +11,7 @@ module.exports = [
       { text: "简单介绍v8的执行", link: `${baseUrl}/v8-note-2` },
       { text: "JavaScript的特性", link: `${baseUrl}/v8-note-3` },
       { text: "V8如何提升对象属性访问速度", link: `${baseUrl}/v8-note-4` },
-      { text: "5", link: `${baseUrl}/v8-note-5` },
+      { text: "函数表达式", link: `${baseUrl}/v8-note-5` },
       { text: "5", link: `${baseUrl}/v8-note-6` },
       { text: "5", link: `${baseUrl}/v8-note-7` },
       { text: "5", link: `${baseUrl}/v8-note-8` },
