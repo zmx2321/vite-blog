@@ -34,6 +34,8 @@ const getImgView = () => {
 .img_viewer {
   &,
   & img {
+    width: 100%;
+    min-height: 200px;
     cursor: pointer;
   }
 
@@ -41,7 +43,6 @@ const getImgView = () => {
     margin: 0;
     width: 100%;
     height: 100%;
-    min-height: 300px;
 
     .el-dialog__header {
       position: fixed;
