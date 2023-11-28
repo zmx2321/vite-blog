@@ -33,6 +33,12 @@ const siteData = [
     items: [
       {
         icon: "",
+        name: "谷歌浏览器安装",
+        desc: "官网",
+        link: "https://www.google.cn/chrome/next-steps.html?installdataindex=empty&statcb=1&defaultbrowser=0",
+      },
+      {
+        icon: "",
         name: "科学上网-谷歌插件官网",
         desc: "谷歌上网助手，依托于谷歌扩展程序，在此网站下载",
         link: "http://www.googlehelper.net/",
