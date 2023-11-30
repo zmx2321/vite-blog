@@ -58,13 +58,13 @@ const siteData = [
       {
         icon: "",
         name: "音乐转换成mp3",
-        desc: "KGM-to-MP3",
+        desc: "KGM-to-MP3 old",
         link: "https://convert.freelrc.com/KGM-to-MP3",
       },
       {
         icon: "",
         name: "音乐转换成mp3",
-        desc: "KGM-to-MP3",
+        desc: "KGM-to-MP3 openyyy",
         link: "https://openyyy.com/",
       },
       {
@@ -72,6 +72,12 @@ const siteData = [
         name: "unlock-music",
         desc: "可下载代码运行-vue项目",
         link: "https://demo.unlock-music.dev/",
+      },
+      {
+        icon: "",
+        name: "flacc转mp3",
+        desc: "各种音频视频的格式转换，包括flac转mp3",
+        link: "https://www.online-convert.com/",
       },
     ],
   },
