@@ -1,0 +1,1 @@
+<inside-page :url="'https://devv.ai/'" :width="'201%'" :height="'666'" :style="'margin-left: -208px'" />

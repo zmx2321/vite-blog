@@ -12,6 +12,12 @@ const siteData = [
     items: [
       {
         icon: "",
+        name: "AI 搜索",
+        desc: "最懂程序员的新一代 AI 搜索引擎",
+        link: `/guide/ask`,
+      },
+      {
+        icon: "",
         name: "例子",
         desc: "一些博客使用上的案例的案例",
         link: `${base}/examples/button`,

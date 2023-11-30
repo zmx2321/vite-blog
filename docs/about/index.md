@@ -10,5 +10,3 @@
 ## [更新日志](https://github.com/zmx2321/vite-blog)
 
 ## [我的](/site/mine)
-
-## [ask](/about/ask)
