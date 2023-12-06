@@ -361,3 +361,12 @@ p {
     text-justify:inter-ideograph;
 }
 ```
+
+## css向下箭头
+```css
+width: 0;
+height: 0;
+border-left: 5px solid transparent;
+border-right: 5px solid transparent;
+border-top: 5px solid #f00;
+```
