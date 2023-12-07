@@ -403,3 +403,406 @@ methods: {
 }
 </script>
 ```
+
+## 筛选框封装
+```vue
+<!-- 筛选表单 -->
+<form-layer #scrollView :filterOptions="filterOptions" @getFormData="getFormData"></form-layer>
+
+<script setup>
+import dayjs from 'dayjs'
+import FormLayer from '@/components/form-picker/FormLayer.vue'
+
+const formData = ref({
+  // 默认时间
+  startTime: dayjs(Date.now()).format('YYYY-MM-DD HH:mm'),
+  endTime: dayjs(Date.now() + 60 * 60 * 24 * 1000).format('YYYY-MM-DD HH:mm')
+})
+
+const getFormData = (val) => {
+  formData.value = val
+  // console.log(formData.value)
+
+  getList()
+}
+
+// 状态Map值
+const statusMap = new Map([
+  [1, '生效'],
+  [2, '作废']
+])
+
+const filterOptions = ref([
+  {
+    type: 'datetime',
+    label: '开始时间'
+  },
+  {
+    type: 'datetime',
+    label: '结束时间'
+  },
+  {
+    type: 'picker',
+    label: '类型',
+    props: 'auditType',
+    pickerColumns: [
+      [
+        {
+          label: '全部',
+          value: ''
+        },
+        {
+          label: auditTypeMap.get(0),
+          value: 0
+        },
+        {
+          label: auditTypeMap.get(1),
+          value: 1
+        },
+        {
+          label: auditTypeMap.get(2),
+          value: 2
+        }
+      ]
+    ]
+  },
+  {
+    type: 'picker',
+    label: '状态',
+    props: 'status',
+    pickClass: 'wd80',
+    pickerColumns: [
+      [
+        {
+          label: '全部',
+          value: ''
+        },
+        {
+          label: statusMap.get(1),
+          value: 1
+        },
+        {
+          label: statusMap.get(2),
+          value: 2
+        }
+      ]
+    ]
+  }
+])
+</script>
+```
+```vue
+<template>
+  <!-- <scroll-view scroll-x class="nav_scroll"> -->
+  <div class="nav_scroll" :class="{ nowrap: tagValue === '' }">
+    <ul class="nav_ul">
+      <li class="nav_li" v-for="(item, index) in filterOptions" :key="index">
+        <date-time v-if="item.type === 'datetime'" :label="item.label" @getDateTime="getDateTime" />
+        <select-picker
+          v-if="item.type === 'picker'"
+          @getPickerData="getPickerData"
+          :pickClass="item.pickClass"
+          :pickLabel="item.label"
+          :pickProps="item.props"
+          :pickerColumns="item.pickerColumns" />
+      </li>
+    </ul>
+
+    <b class="tag" @click="getMore">{{ tagValue }}</b>
+  </div>
+  <!-- </scroll-view> -->
+
+  <view style="position: absolute; right: 0; top: 0; background: #f7f8fa; height: 74rpx; width: 20rpx">
+  </view>
+</template>
+
+<script setup>
+import SelectPicker from '@/components/form-picker/SelectPicker.vue'
+import DateTime from '@/components/form-picker/DateTime.vue'
+
+import { ref } from 'vue'
+
+const emit = defineEmits(['getFormData'])
+
+const props = defineProps({
+  filterOptions: Array
+})
+
+const formData = {}
+
+const tagValue = ref('...')
+
+const getMore = () => {
+  // console.log('12456')
+
+  switch (tagValue.value) {
+    case '':
+      tagValue.value = '...'
+      break
+    case '...':
+      tagValue.value = ''
+      break
+  }
+}
+
+const getDateTime = (val, mode) => {
+  // console.log(val, mode)
+
+  switch (mode) {
+    case '开始时间':
+      formData.startTime = val
+      break
+    case '结束时间':
+      formData.endTime = val
+      break
+  }
+
+  emit('getFormData', formData)
+}
+
+const getPickerData = (obj, mode, keyValue) => {
+  // console.log(obj, mode, keyValue)
+
+  formData[mode] = obj[keyValue]
+
+  emit('getFormData', formData)
+}
+</script>
+
+<style scoped lang="scss">
+$navHeight: 80rpx;
+
+.nav_scroll {
+  position: relative;
+  white-space: nowrap;
+  height: 75rpx;
+  background: #f7f8fa;
+
+  .nav_ul {
+    height: $navHeight;
+    width: 92%;
+    overflow: hidden;
+
+    .nav_li {
+      display: inline-block;
+      height: $navHeight;
+      line-height: $navHeight;
+    }
+  }
+
+  .tag {
+    position: absolute;
+    right: 18rpx;
+    top: 1rpx;
+    font-size: 18px;
+    letter-spacing: 1px;
+    z-index: 9999;
+  }
+
+  &.nowrap {
+    white-space: initial;
+    height: initial;
+
+    .nav_ul {
+      height: initial;
+      overflow: initial;
+    }
+
+    .tag {
+      top: initial;
+      bottom: 22rpx;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 10px solid #8c8c8c;
+    }
+  }
+  // padding: 0 22rpx;
+
+  /* ::-webkit-scrollbar {
+    width: 4px !important;
+    height: 1px !important;
+    overflow: auto !important;
+    background: transparent !important;
+    -webkit-appearance: auto !important;
+    display: block;
+  } */
+
+  /* .item {
+    display: inline-block; // 设置为行内块
+    line-height: 95rpx;
+    padding: 0 22rpx;
+  } */
+}
+</style>
+
+```
+```vue
+<template>
+  <input class="input_wrap" v-model="selectTime" @click="showDatetime = true" :disabled="true" :placeholder="label" />
+
+  <u-datetime-picker
+    :show="showDatetime"
+    v-model="timeDate"
+    mode="datetime"
+    @cancel="showDatetime = false"
+    @confirm="onConfirm"
+    :closeOnClickOverlay="true"
+    @close="showDatetime = false"></u-datetime-picker>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import dayjs from 'dayjs'
+
+const props = defineProps({
+  label: {
+    type: String,
+    default: ''
+  },
+  formatTimeRule: {
+    type: String,
+    default: 'YYYY-MM-DD HH:mm:ss'
+  }
+})
+
+const emit = defineEmits(['getEndDateTime'])
+
+const timeDate = ref(Date.now())
+const showDatetime = ref(false)
+const selectTime = ref(null)
+
+const onConfirm = (e) => {
+  selectTime.value = selectTime.value = dayjs(e.value).format('YYYY-MM-DD HH:mm')
+
+  showDatetime.value = false
+
+  // console.log(selectTime.value)
+
+  emit('getDateTime', selectTime.value, props.label)
+}
+</script>
+
+<style scoped lang="scss">
+.input_wrap {
+  position: relative;
+  width: 263rpx;
+  display: inline-block;
+  line-height: 95rpx;
+  padding-right: 42rpx;
+  padding-left: 15rpx;
+  margin-right: 25rpx;
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+  }
+}
+</style>
+```
+```vue
+<template>
+  <input class="input_wrap" :class="pickClass" v-model="currentPicker" @click="setPickData(pickLabel)" :disabled="true" :placeholder="pickLabel" />
+
+  <u-picker
+    :show="showPicker"
+    :columns="pickerColumns"
+    :closeOnClickOverlay="true"
+    @close="showPicker = false"
+    @cancel="showPicker = false"
+    @confirm="onConfirm"
+    :keyName="keyName"
+    :keyValue="keyValue"></u-picker>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const props = defineProps({
+  pickLabel: String,
+  pickProps: String,
+  pickerColumns: {
+    type: Array,
+    default: () => []
+  },
+  keyName: {
+    type: String,
+    default: 'label'
+  },
+  keyValue: {
+    type: String,
+    default: 'value'
+  },
+  pickClass: {
+    type: String
+  }
+})
+
+const emit = defineEmits(['getPickerData'])
+
+const showPicker = ref(false)
+const currentPicker = ref('')
+
+const setPickData = (mode) => {
+  // console.log(mode)
+
+  showPicker.value = true
+}
+
+const onConfirm = (e) => {
+  showPicker.value = false
+
+  // console.log(e.value[0])
+
+  currentPicker.value = e.value[0].label
+
+  emit('getPickerData', e.value[0], props.pickProps, props.keyValue)
+}
+</script>
+
+<style scoped lang="scss">
+.input_wrap {
+  position: relative;
+  width: 126rpx;
+  display: inline-block;
+  line-height: 95rpx;
+  padding-right: 85rpx;
+  padding-left: 15rpx;
+  margin-right: 60rpx;
+
+  @for $i from 80 through 126 {
+    &.wd#{$i} {
+      width: #{$i}rpx !important;
+    }
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+  }
+}
+</style>
+```
