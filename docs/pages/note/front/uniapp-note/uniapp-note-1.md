@@ -405,6 +405,7 @@ methods: {
 ```
 
 ## 筛选框封装
+- 使用
 ```vue
 <!-- 筛选表单 -->
 <form-layer #scrollView :filterOptions="filterOptions" @getFormData="getFormData"></form-layer>
@@ -415,8 +416,8 @@ import FormLayer from '@/components/form-picker/FormLayer.vue'
 
 const formData = ref({
   // 默认时间
-  startTime: dayjs(Date.now()).format('YYYY-MM-DD HH:mm'),
-  endTime: dayjs(Date.now() + 60 * 60 * 24 * 1000).format('YYYY-MM-DD HH:mm')
+  startTime: dayjs(Date.now() - 60 * 60 * 24 * 1000 * 15).format('YYYY-MM-DD HH:mm'),
+  endTime: dayjs(Date.now()).format('YYYY-MM-DD HH:mm')
 })
 
 const getFormData = (val) => {
@@ -435,11 +436,13 @@ const statusMap = new Map([
 const filterOptions = ref([
   {
     type: 'datetime',
-    label: '开始时间'
+    label: '开始时间',
+    defaultTime: formData.value.startTime
   },
   {
     type: 'datetime',
-    label: '结束时间'
+    label: '结束时间',
+    defaultTime: formData.value.endTime
   },
   {
     type: 'picker',
@@ -491,13 +494,14 @@ const filterOptions = ref([
 ])
 </script>
 ```
+- FormLayer.vue
 ```vue
 <template>
   <!-- <scroll-view scroll-x class="nav_scroll"> -->
   <div class="nav_scroll" :class="{ nowrap: tagValue === '' }">
     <ul class="nav_ul">
       <li class="nav_li" v-for="(item, index) in filterOptions" :key="index">
-        <date-time v-if="item.type === 'datetime'" :label="item.label" @getDateTime="getDateTime" />
+        <date-time v-if="item.type === 'datetime'" :defaultTime="item.defaultTime" :label="item.label" @getDateTime="getDateTime" />
         <select-picker
           v-if="item.type === 'picker'"
           @getPickerData="getPickerData"
@@ -638,6 +642,7 @@ $navHeight: 80rpx;
 </style>
 
 ```
+- DateTime.vue
 ```vue
 <template>
   <input class="input_wrap" v-model="selectTime" @click="showDatetime = true" :disabled="true" :placeholder="label" />
@@ -664,6 +669,10 @@ const props = defineProps({
   formatTimeRule: {
     type: String,
     default: 'YYYY-MM-DD HH:mm:ss'
+  },
+  defaultTime: {
+    type: String,
+    default: ''
   }
 })
 
@@ -671,7 +680,7 @@ const emit = defineEmits(['getEndDateTime'])
 
 const timeDate = ref(Date.now())
 const showDatetime = ref(false)
-const selectTime = ref(null)
+const selectTime = ref(props.defaultTime)
 
 const onConfirm = (e) => {
   selectTime.value = selectTime.value = dayjs(e.value).format('YYYY-MM-DD HH:mm')
@@ -712,6 +721,7 @@ const onConfirm = (e) => {
 }
 </style>
 ```
+- SelectPicker.vue
 ```vue
 <template>
   <input class="input_wrap" :class="pickClass" v-model="currentPicker" @click="setPickData(pickLabel)" :disabled="true" :placeholder="pickLabel" />
