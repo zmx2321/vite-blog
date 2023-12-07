@@ -806,3 +806,165 @@ const onConfirm = (e) => {
 }
 </style>
 ```
+
+## uniapp校验
+```vue
+<template>
+  <u-modal :show="modalShow" :title="taskTitle" @confirm="submit" @cancel="modalShow = false" :showCancelButton="true">
+    <u--form labelPosition="left" :model="formData" ref="refUForm" labelWidth="100" :rules="rules">
+      <u-form-item prop="cancelRemark" label="作废备注" v-if="taskTitle === 'zf'">
+        <u--input
+          placeholder="请输入"
+          type="textarea"
+          height="100rpx"
+          auto-height="true"
+          v-model="formData.cancelRemark"
+          :border="true"
+          border-color="black"></u--input>
+      </u-form-item>
+      <u-form-item prop="abnormalCause" label="异常原因" v-if="taskTitle === 'cdk'">
+        <u--input
+          placeholder="请输入"
+          type="textarea"
+          height="100rpx"
+          auto-height="true"
+          v-model="formData.abnormalCause"
+          :border="true"
+          border-color="black"></u--input>
+      </u-form-item>
+      <u-form-item prop="handlerRemark" label="处理备注" v-if="taskTitle === 'cdk'">
+        <u--input
+          placeholder="请输入"
+          type="textarea"
+          height="100rpx"
+          auto-height="true"
+          v-model="formData.handlerRemark"
+          :border="true"
+          border-color="black"></u--input>
+      </u-form-item>
+    </u--form>
+  </u-modal>
+</template>
+
+<script setup name="process">
+import { ref } from 'vue'
+import { http } from '@/api/index.js'
+// import { getStorage } from '@/utils/storage'
+
+const emit = defineEmits(['dialogClosed'])
+const dialogClosed = () => {
+  emit('dialogClosed')
+}
+
+const refUForm = ref(null)
+
+const modalShow = ref(false)
+const taskTitle = ref('')
+
+const formData = ref({
+  cancelRemark: '',
+  abnormalCause: '',
+  handlerRemark: ''
+})
+
+const rules = ref({
+  cancelRemark: {
+    type: 'string',
+    required: true,
+    message: '请填写',
+    trigger: ['blur', 'change']
+  },
+  abnormalCause: {
+    type: 'string',
+    required: true,
+    message: '请填写',
+    trigger: ['blur', 'change']
+  },
+  handlerRemark: {
+    type: 'string',
+    required: true,
+    message: '请填写',
+    trigger: ['blur', 'change']
+  }
+})
+
+const showModal = (id, mode) => {
+  // console.log(id, mode)
+
+  modalShow.value = true
+
+  taskTitle.value = mode
+
+  formData.value = {
+    id
+  }
+}
+
+const submit = () => {
+  refUForm.value
+    .validate()
+    .then((res) => {
+      // console.log(res)
+      setTaskComfirm()
+    })
+    .catch((errors) => {
+      console.log(errors)
+      // uni.$u.toast('校验失败')
+    })
+}
+
+const setTaskComfirm = async () => {
+  let apiName = ref('')
+
+  switch (taskTitle.value) {
+    case 'zf':
+      apiName.value = 'cancellationAuditTaskResult'
+      break
+    case 'cdk':
+      apiName.value = 'disposeAuditTaskResult'
+      break
+    default:
+      break
+  }
+
+  const params = {
+    ...formData.value
+  }
+
+  // console.log(params)
+
+  uni.showToast({
+    title: '操作成功',
+    icon: 'none'
+  })
+  // modalShow.value = false
+
+  try {
+    let res = await http(apiName.value, params)
+    if (res.isError) return showReqError(res)
+    uni.showToast({
+      title: '操作成功',
+      icon: 'none'
+    })
+    modalShow.value = false
+    dialogClosed()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+defineExpose({ showModal })
+</script>
+<style scoped lang="scss">
+.btn {
+  width: 120rpx;
+  height: 60rpx;
+  background: #c3a767;
+  border-radius: 40rpx;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 24rpx;
+}
+</style>
+
+```
