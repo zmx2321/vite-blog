@@ -475,3 +475,23 @@ groupTypesOptions()
         .map((item) => item.label)
         .join(','),
 ```
+
+## map转对象数组
+```js
+export function mapToOptions(map) {
+  let arr = Array.from(map).map((item) => {
+    return {
+      label: item[1],
+      value: item[0]
+    }
+  })
+
+  return [
+    {
+      label: '全部',
+      value: ''
+    },
+    ...arr
+  ]
+}
+```

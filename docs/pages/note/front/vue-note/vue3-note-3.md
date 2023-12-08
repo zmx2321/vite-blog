@@ -675,3 +675,45 @@ const isHasWeek = (item) => {
   }
 }
 ```
+
+## v-model遇上props
+- 所有的 props 都遵循着单向绑定原则，props 因父组件的更新而变化，自然地将新的状态向下流往子组件，而不会逆向传递。这避免了子组件意外修改父组件的状态的情况，不然应用的数据流将很容易变得混乱而难以理解。另外，每次父组件更新后，所有的子组件中的 props 都会被更新到最新值，这意味着你不应该在子组件中去更改一个 prop。若你这么做了，Vue 会在控制台上向你抛出警告：
+  - v-model cannot be used on a prop, because local prop bindings are not writable
+- 创建一个中间值，v-model绑定中间值，监听传过来的数据，当prop数据发生改变,立即改变v-model的数据
+```html
+<le-dropdown
+v-model:menuList="currentMenuList"
+@onConfirm="onConfirm"
+/>
+
+<script setup>
+const props = defineProps({
+  // 导航数据
+  menuList: {
+    type: Array,
+    default: () => DropdownList
+  }
+})
+
+const currentMenuList = ref(props.menuList)
+
+watch(
+  () => props.menuList,
+  (newVal, oldVal) => {
+    console.log(newVal, oldVal)
+    currentMenuList.value = newVal
+  }
+)
+  </script>
+```
+
+## vue3的v-model
+- v-model 默认绑定的属性名为：modelValue
+- v-model 默认绑定的事件名为：update:modelValue
+```js
+// 所以我们需要使用 modelValue 和 update:modelValue 来接收
+export default {
+  props: ['modelValue'],
+  emits: ['update:modelValue']
+}
+```
