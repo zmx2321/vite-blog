@@ -127,4 +127,4 @@ retq
 5. 指令完成后，通过pc寄存器取出下一条指令地址，并更新pc寄存器中内容，再重复以上步骤。
 
 ## 二进制机器码执行流程思维导图
-<img-viewer :src="'https://zmx2321.github.io/vite-blog/images/note/front/v8-note/10/11-0.png'" :alt="'二进制机器码执行流程思维导图'" />
+<img-viewer :src="'https://zmx2321.github.io/vite-blog/images/note/front/v8-note/11/11-0.png'" :alt="'二进制机器码执行流程思维导图'" />

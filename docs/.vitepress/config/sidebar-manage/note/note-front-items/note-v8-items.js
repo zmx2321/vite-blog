@@ -32,7 +32,7 @@ module.exports = [
     items: [
       { text: "运行JavaScript代码的基石", link: `${baseUrl}/v8-note-10` },
       { text: "二进制机器码究竟是如何被CPU执行的", link: `${baseUrl}/v8-note-11` },
-      { text: "5", link: `${baseUrl}/v8-note-12` },
+      { text: "函数调用是如何影响到内存布局的", link: `${baseUrl}/v8-note-12` },
       { text: "5", link: `${baseUrl}/v8-note-13` },
       { text: "5", link: `${baseUrl}/v8-note-14` },
       { text: "5", link: `${baseUrl}/v8-note-15` },
