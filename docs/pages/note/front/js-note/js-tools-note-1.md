@@ -1139,3 +1139,36 @@ export function mapToOptions(map) {
   ]
 }
 ```
+
+## 对象名中字段为中文取值
+```js
+const setHeaderChildren = (objClass) =>
+Object.keys(tempObj[objClass]).map((item) => ({
+  prop: `${objClass}.${item}`,
+  minWidth,
+  label: item
+}))
+
+let eastNorthPayModelClassHeader = {
+  label: '东北区 - 支付方式',
+  minWidth,
+  align: 'center',
+  prop: 'eastNorthPayModelClass',
+  _children: setHeaderChildren('eastNorthPayModelClass')
+  /* _children: [
+    { prop: 'eastNorthPayModelClass.微信', minWidth: 120, label: '微信' },
+    { prop: 'eastNorthPayModelClass.现金', minWidth: 120, label: '现金' }
+  ] */
+}
+
+if (column.property.indexOf('.') !== -1) {
+  let currentArr = column.property.split('.')
+  if (JSON.stringify(sumData) !== '{}') {
+    // console.log(currentArr[0], currentArr[1], sumData[currentArr[0]][currentArr[1]])
+    // sums[index] = sumData.westSouthStatisCategoryClass['主食']
+    sums[index] = sumData[currentArr[0]][currentArr[1]]
+  }
+} else {
+  sums[index] = sumData[column.property] || '--'
+}
+```
