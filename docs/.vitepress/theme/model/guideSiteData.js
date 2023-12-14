@@ -76,6 +76,17 @@ const siteData = [
       },
     ],
   },
+  {
+    title: "学习资料",
+    items: [
+      {
+        icon: "",
+        name: "学习面试资料",
+        desc: "",
+        link: `https://www.ddkk.com/#qianduan`,
+      },
+    ],
+  },
 ];
 
 export default siteData;
