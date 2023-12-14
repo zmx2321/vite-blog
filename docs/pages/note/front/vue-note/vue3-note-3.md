@@ -717,3 +717,18 @@ export default {
   emits: ['update:modelValue']
 }
 ```
+
+## element-plus中date-picker组件属性default-time不生效解决办法
+```js
+<el-date-picker
+    v-model="ruleForm.datePicker"
+    type="datetimerange"
+    range-separator="—"
+    start-placeholder="开始日期"
+    end-placeholder="结束日期"
+    :default-time="defaultTime"
+    format="YYYY-MM-DD HH:mm:ss"
+    value-format="YYYY-MM-DD HH:mm:ss"></el-date-picker>
+
+const defaultTime = reactive([new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 23, 59, 59)])
+```
