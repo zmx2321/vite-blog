@@ -1172,3 +1172,188 @@ if (column.property.indexOf('.') !== -1) {
   sums[index] = sumData[column.property] || '--'
 }
 ```
+
+## 添加水印
+```js
+const addWaterMarker = (str, parentNode, font, textColor) => {
+  // 水印文字，父元素，字体，文字颜色
+  let can = document.createElement('canvas')
+  parentNode.appendChild(can)
+  can.width = 205
+  can.height = 140
+  can.style.display = 'none'
+  let cans = can.getContext('2d')
+  cans.rotate((-20 * Math.PI) / 180)
+  cans.font = font || '16px Microsoft JhengHei'
+  cans.fillStyle = textColor || 'rgba(180, 180, 180, 0.3)'
+  cans.textAlign = 'left'
+  cans.textBaseline = 'Middle'
+  cans.fillText(str, can.width / 10, can.height / 2)
+  parentNode.style.backgroundImage = `url(${can.toDataURL('image/png')})`
+}
+
+const waterMarker = {
+  mounted(el, binding) {
+    addWaterMarker(binding.value.text, el, binding.value.font, binding.value.textColor)
+  }
+}
+
+export default waterMarker
+```
+
+## 生成唯一 uuid
+```js
+export function generateUUID() {
+  let uuid = ''
+  for (let i = 0; i < 32; i += 1) {
+    // eslint-disable-next-line no-bitwise
+    let random = (Math.random() * 16) | 0
+    if (i === 8 || i === 12 || i === 16 || i === 20) uuid += '-'
+    // eslint-disable-next-line no-nested-ternary, no-bitwise
+    uuid += (i === 12 ? 4 : i === 16 ? (random & 3) | 8 : random).toString(16)
+  }
+  return uuid
+}
+```
+
+## 判断两个对象是否相同
+```js
+export function isObjectValueEqual(a, b) {
+  if (!a || !b) return false
+  let aProps = Object.getOwnPropertyNames(a)
+  let bProps = Object.getOwnPropertyNames(b)
+  if (aProps.length !== bProps.length) return false
+  for (let i = 0; i < aProps.length; i += 1) {
+    let propName = aProps[i]
+    let propA = a[propName]
+    let propB = b[propName]
+    // eslint-disable-next-line no-prototype-builtins
+    if (!b.hasOwnProperty(propName)) return false
+    if (propA instanceof Object) {
+      if (!isObjectValueEqual(propA, propB)) return false
+    } else if (propA !== propB) {
+      return false
+    }
+  }
+  return true
+}
+```
+
+## 生成随机数
+```js
+export function randomNum(min, max) {
+  let num = Math.floor(Math.random() * (min - max) + max)
+  return num
+}
+```
+
+## 获取当前时间对应的提示语
+```js
+export function getTimeState() {
+  let timeNow = new Date()
+  let hours = timeNow.getHours()
+  if (hours >= 6 && hours <= 10) return `早上好 ⛅`
+  if (hours >= 10 && hours <= 14) return `中午好 🌞`
+  if (hours >= 14 && hours <= 18) return `下午好 🌞`
+  if (hours >= 18 && hours <= 24) return `晚上好 🌛`
+  if (hours >= 0 && hours <= 6) return `凌晨好 🌛`
+}
+```
+
+## 获取浏览器默认语言
+```js
+export function getBrowserLang() {
+  let browserLang = navigator.language ? navigator.language : navigator.browserLanguage
+  let defaultBrowserLang = ''
+  if (['cn', 'zh', 'zh-cn'].includes(browserLang.toLowerCase())) {
+    defaultBrowserLang = 'zh'
+  } else {
+    defaultBrowserLang = 'en'
+  }
+  return defaultBrowserLang
+}
+```
+
+## 使用递归扁平化菜单，方便添加动态路由
+```js
+export function getFlatMenuList(menuList) {
+  let newMenuList = JSON.parse(JSON.stringify(menuList))
+  return newMenuList.flatMap((item) => [item, ...(item.children ? getFlatMenuList(item.children) : [])])
+}
+```
+
+## 处理地址信息
+```js
+export function escapeUrl(targetPath) {
+  const escapeMap = Object.freeze(
+    new Map([
+      ['%2B', '+'],
+      ['%2F', '/'],
+      ['%20', ' '],
+      ['%3F', '?'],
+      ['%25', '%'],
+      ['%3D', '='],
+      ['%23', '#'],
+      ['%26', '&'],
+      ['A1B2C3', '&']
+    ])
+  )
+  const typeArr = [...escapeMap.keys()]
+  typeArr.forEach((item) => {
+    const temType = escapeMap.get(item)
+    const reg = new RegExp(`${item}`, 'g')
+    if (targetPath && targetPath.includes(item)) {
+      targetPath = targetPath.replace(reg, temType)
+    }
+  })
+  return targetPath
+}
+
+```
+
+## 正则校验
+```js
+export const checkInput = (str, type) => {
+  // 校验
+  switch (type) {
+    case 'phone': // 手机号码
+      return /^1[0-9]{10}$/.test(str)
+    case 'tel': // 座机
+      return /^(0d{2,3}-d{7,8})(-d{1,4})?$/.test(str)
+    case 'card': // 身份证
+      return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(str)
+    case 'pwd': // 密码以字母开头，只能包含字母、数字和下划线
+      return /^[a-zA-Z]w{5,17}$/.test(str)
+    case 'postal': // 邮政编码
+      return /[1-9]d{5}(?!d)/.test(str)
+    case 'QQ': // QQ号
+      return /^[1-9][0-9]{4,9}$/.test(str)
+    case 'email': // 邮箱
+      return /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/.test(str)
+    case 'money': // 金钱(小数点两位)
+      return /^d*(?:.d{0,2})?$/.test(str)
+    case 'IP': // IP
+      return /((?:(?:25[0-5]|2[0-4]d|[01]?d?d).){3}(?:25[0-5]|2[0-4]d|[01]?d?d))/.test(str)
+    case 'date': // 日期时间
+      return /^(d{4})-(d{2})-(d{2}) (d{2})(?::d{2}|:(d{2}):(d{2}))$/.test(str) || /^(d{4})-(d{2})-(d{2})$/.test(str)
+    case 'number': // 数字
+      return /^[0-9]$/.test(str)
+    case 'english': // 英文
+      return /^[a-zA-Z]+$/.test(str)
+    case 'chinese': // 中文
+      return /^[u4E00-u9FA5]+$/.test(str)
+    case 'lower': // 小写
+      return /^[a-z]+$/.test(str)
+    case 'upper': // 大写
+      return /^[A-Z]+$/.test(str)
+    case 'HTML': // HTML标记
+      return /<("[^"]*"|'[^']*'|[^'">])*>/.test(str)
+    case 'input': // 常用输入框
+      return /^[\u4e00-\u9fa5A-Za-z0-9]{1,20}/.test(str)
+    case 'notChinese':
+      return /^[A-Za-z0-9]+$/.test(str)
+    default:
+      return true
+  }
+}
+```
