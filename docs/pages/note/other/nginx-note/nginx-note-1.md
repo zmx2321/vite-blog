@@ -1,4 +1,4 @@
-# nginx相关笔记
+# nginx工作积累
 
 ## 1. vue项目中使用proxy之后，在nginx中如何代理
 ```js

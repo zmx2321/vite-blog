@@ -39,7 +39,7 @@ export const noteOther = {
   ]),
   nginx: setOtherNote([
     { text: "", items: [...require("./note-other-items/note-list-items")] },
-    // { text: "nginx笔记", items: [...require("./note-other-items/other-nginx-items")] },
+    { text: "nginx笔记", items: [...require("./note-other-items/other-nginx-items")] },
   ]),
   elk: setOtherNote([
     { text: "", items: [...require("./note-other-items/note-list-items")] },
