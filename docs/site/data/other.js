@@ -45,6 +45,12 @@ const siteData = [
       },
       {
         icon: "",
+        name: "科学上网2",
+        desc: "每天免费1小时，轻松上github",
+        link: "https://greenhubtx.ga/#",
+      },
+      {
+        icon: "",
         name: "谷歌应用商店",
         desc: "需要翻墙才能进入，应用商店的东西可以直接应用到谷歌扩展程序，此地址跳转至ghelper，可以直接添加到谷歌浏览器",
         link: "https://chrome.google.com/webstore/detail/ghelper/nonmafimegllfoonjgplbabhmgfanaka",
