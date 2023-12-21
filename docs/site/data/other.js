@@ -57,6 +57,25 @@ const siteData = [
       },
       {
         icon: "",
+        name: "chartGpt",
+        desc: "chrome设置 - WebChatGPT",
+        link: "chrome-extension://lpfemeioodjbpieminkklglpmhlngfcn/pages/options/options.html#/search-with-ai",
+        // chrome-extension://mhnlakgilnojmhinhkckjpncpbhabphi/pages/settings/index.html#/me
+      },
+      {
+        icon: "",
+        name: "chartGpt",
+        desc: "在线WebChatGPT",
+        link: "chrome-extension://mhnlakgilnojmhinhkckjpncpbhabphi/pages/chat/index.html",
+      },
+      {
+        icon: "",
+        name: "openai",
+        desc: "",
+        link: "https://chat.openai.com/",
+      },
+      {
+        icon: "",
         name: "古诗词网",
         desc: "",
         link: "https://www.gushiwen.cn/",
