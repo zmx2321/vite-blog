@@ -1387,7 +1387,7 @@ const urlToBlobBase64 = (url) =>
   })
 
 export const downloadFileLink = async (url, fileName) => {
-  console.log(url, fileName)
+  // console.log(url, fileName)
 
   const loading = ElLoading.service({
     lock: true,
