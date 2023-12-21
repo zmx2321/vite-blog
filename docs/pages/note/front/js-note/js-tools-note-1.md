@@ -1357,3 +1357,60 @@ export const checkInput = (str, type) => {
   }
 }
 ```
+
+## blob根据地址下载
+> 已知资源地址可以在浏览器直接打开,下载的话，需要将资源地址转换成blob文件流，创建a标签进行下载
+```js
+const urlToBlobBase64 = (url) => {
+  new Promise((resolve, reject) => {
+    let xhr = new XMLHttpRequest()
+    xhr.open('get', url)
+    xhr.responseType = 'blob'
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        let blob = this.response
+        let oFileReader = new FileReader()
+        oFileReader.onloadend = function (e) {
+          resolve({ blob, base64: e.target.result })
+        }
+        oFileReader.readAsDataURL(blob)
+      } else {
+        reject(new Error('异常'))
+      }
+    }
+    xhr.send()
+    xhr.onerror = () => {
+      reject(new Error('异常'))
+    }
+  })
+}
+
+export const downloadFileLink = async (url, fileName) => {
+  // console.log(url, fileName)
+
+  urlToBlobBase64(url).then((blob) => {
+    // console.log(blob, fileName)
+
+    try {
+      const href = window.URL.createObjectURL(blob.blob) // 创建下载的链接
+      if (window.navigator.msSaveBlob) {
+        window.navigator.msSaveBlob(blob, fileName)
+      } else {
+        // 谷歌浏览器 创建a标签 添加download属性下载
+        const downloadElement = document.createElement('a')
+        downloadElement.href = href
+        downloadElement.target = '_blank'
+        downloadElement.download = fileName
+        document.body.appendChild(downloadElement)
+        downloadElement.click() // 点击下载
+        document.body.removeChild(downloadElement) // 下载完成移除元素
+        window.URL.revokeObjectURL(href) // 释放掉blob对象
+      }
+    } catch (e) {
+      console.log('下载失败')
+    }
+  })
+}
+
+downloadFileLink(url, name)
+```
