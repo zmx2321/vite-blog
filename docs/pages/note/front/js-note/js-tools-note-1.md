@@ -1361,7 +1361,9 @@ export const checkInput = (str, type) => {
 ## blob根据地址下载
 > 已知资源地址可以在浏览器直接打开,下载的话，需要将资源地址转换成blob文件流，创建a标签进行下载
 ```js
-const urlToBlobBase64 = (url) => {
+import { ElMessage, ElLoading } from 'element-plus'
+
+const urlToBlobBase64 = (url) =>
   new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest()
     xhr.open('get', url)
@@ -1371,7 +1373,7 @@ const urlToBlobBase64 = (url) => {
         let blob = this.response
         let oFileReader = new FileReader()
         oFileReader.onloadend = function (e) {
-          resolve({ blob, base64: e.target.result })
+          resolve({ blob, base64: e.target.result, dataURL: oFileReader.result })
         }
         oFileReader.readAsDataURL(blob)
       } else {
@@ -1383,16 +1385,24 @@ const urlToBlobBase64 = (url) => {
       reject(new Error('异常'))
     }
   })
-}
 
 export const downloadFileLink = async (url, fileName) => {
-  // console.log(url, fileName)
+  console.log(url, fileName)
+
+  const loading = ElLoading.service({
+    lock: true,
+    text: '正在下载，请稍后....',
+    background: 'rgba(0, 0, 0, 0.7)'
+  })
 
   urlToBlobBase64(url).then((blob) => {
-    // console.log(blob, fileName)
+    // console.log(blob, fileName, 6666)
 
     try {
+      loading.close()
+      ElMessage.success('下载完成！')
       const href = window.URL.createObjectURL(blob.blob) // 创建下载的链接
+      console.log(blob, fileName, href)
       if (window.navigator.msSaveBlob) {
         window.navigator.msSaveBlob(blob, fileName)
       } else {
