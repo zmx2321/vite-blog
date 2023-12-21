@@ -25,7 +25,10 @@ const jsSyncConfig = [{ text: "js中的异步", link: `${baseUrl}/js-async-note-
 const jsRegConfig = [{ text: "js中的正则", link: `${baseUrl}/js-reg-note-1` }];
 
 // js工具
-const jsToolsConfig = [{ text: "js工具库封装", link: `${baseUrl}/js-tools-note-1` }];
+const jsToolsConfig = [
+  { text: "js工具库封装", link: `${baseUrl}/js-tools-note-1` },
+  { text: "常用js工具方法", link: `${baseUrl}/js-tools-note-2` },
+];
 
 // js - node
 const jsNodeConfig = [
