@@ -732,3 +732,15 @@ export default {
 
 const defaultTime = reactive([new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 23, 59, 59)])
 ```
+
+## el-table中使用el-image的预览属性导致样式重叠
+```html
+<el-image src={scope.row.picUrl} preview-src-list={[scope.row.picUrl]} style="width:60px;height:60px"></el-image>
+
+<style>
+  /* 单元格样式 */
+.el-table__cell {
+   position: static !important; /* 解决el-image 和 el-table冲突层级冲突问题 */
+}
+</style>
+```
