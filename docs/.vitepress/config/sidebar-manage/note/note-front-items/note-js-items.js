@@ -30,18 +30,6 @@ const jsToolsConfig = [
   { text: "常用js工具方法", link: `${baseUrl}/js-tools-note-2` },
 ];
 
-// js - node
-const jsNodeConfig = [
-  { text: "node爬虫相关", link: `${baseUrl}/js-node-note-1` },
-  { text: "node-express-mysql入门小栗子", link: `${baseUrl}/js-node-note-2` },
-  { text: "express登陆和注册", link: `${baseUrl}/js-node-note-3` },
-  { text: "node中的日志文件", link: `${baseUrl}/js-node-note-4` },
-  { text: "node定时任务", link: `${baseUrl}/js-node-note-5` },
-  { text: "node爬虫案例-定时发送邮件", link: `${baseUrl}/js-node-note-6` },
-  { text: "当node爬虫遇到登陆和验证码", link: `${baseUrl}/js-node-note-7` },
-  { text: "node问题集锦", link: `${baseUrl}/js-node-note-8` },
-];
-
 module.exports = [
   { text: "js笔记", items: [] },
   { text: "", items: jsBaseConfig },
@@ -49,5 +37,4 @@ module.exports = [
   { text: "", items: jsSyncConfig },
   { text: "", items: jsRegConfig },
   { text: "", items: jsToolsConfig },
-  { text: "node学习积累", items: jsNodeConfig },
 ];

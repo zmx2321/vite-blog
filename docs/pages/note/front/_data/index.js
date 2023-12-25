@@ -13,15 +13,15 @@ const siteData = [
       },
       {
         icon: "",
-        name: "vue学习笔记",
+        name: "node笔记",
         desc: "",
-        link: `${base}/pages/note/front/vue-note/`,
+        link: `${base}/pages/note/front/node-note/node-base-note-1`,
       },
       {
         icon: "",
-        name: "css笔记",
+        name: "v8学习笔记",
         desc: "",
-        link: `${base}/pages/note/front/css-note/css-note-1`,
+        link: `${base}/pages/note/front/v8-note/v8-note-1`,
       },
       {
         icon: "",
@@ -31,9 +31,9 @@ const siteData = [
       },
       {
         icon: "",
-        name: "uniapp笔记",
+        name: "vue学习笔记",
         desc: "",
-        link: `${base}/pages/note/front/uniapp-note/uniapp-note-1`,
+        link: `${base}/pages/note/front/vue-note/`,
       },
       {
         icon: "",
@@ -43,9 +43,15 @@ const siteData = [
       },
       {
         icon: "",
-        name: "v8学习笔记",
+        name: "uniapp笔记",
         desc: "",
-        link: `${base}/pages/note/front/v8-note/v8-note-1`,
+        link: `${base}/pages/note/front/uniapp-note/uniapp-note-1`,
+      },
+      {
+        icon: "",
+        name: "css笔记",
+        desc: "",
+        link: `${base}/pages/note/front/css-note/css-note-1`,
       },
     ],
   },

@@ -3,12 +3,13 @@
  */
 export const noteFront = {
   js: require("./note-front-items/note-js-items"), // js学习笔记
-  vue: require("./note-front-items/note-vue-items"), // vue学习笔记
-  css: require("./note-front-items/note-css-items"), // css学习笔记
-  algorithm: require("./note-front-items/note-algorithm-items"), // 算法笔记
-  uniapp: require("./note-front-items/note-uniapp-items"), // uniapp笔记
-  react: require("./note-front-items/note-react-items"), // react学习笔记
+  node: require("./note-front-items/note-node-items"), // node学习笔记
   v8: require("./note-front-items/note-v8-items"), // v8学习笔记
+  algorithm: require("./note-front-items/note-algorithm-items"), // 算法笔记
+  vue: require("./note-front-items/note-vue-items"), // vue学习笔记
+  react: require("./note-front-items/note-react-items"), // react学习笔记
+  uniapp: require("./note-front-items/note-uniapp-items"), // uniapp笔记
+  css: require("./note-front-items/note-css-items"), // css学习笔记
 };
 
 /**

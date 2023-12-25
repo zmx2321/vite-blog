@@ -24,6 +24,8 @@ a:active {
     var(--vp-c-brand-next)
   );
   --vp-home-hero-image-filter: blur(180px);
+
+  --vp-sidebar-width: 280px; // 侧边栏宽度-通过此值计算
 }
 
 .VPNavBarMenuLink.active {
