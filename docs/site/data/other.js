@@ -101,7 +101,14 @@ const siteData = [
         icon: "",
         name: "unlock-music",
         desc: "可下载代码运行-vue项目",
+        // https://git.unlock-music.dev/um/web
         link: "https://demo.unlock-music.dev/",
+      },
+      {
+        icon: "",
+        name: "unlock-music",
+        desc: "我的在线解码",
+        link: "https://zmx2321.github.io/kgm-to-mp3/",
       },
       {
         icon: "",
