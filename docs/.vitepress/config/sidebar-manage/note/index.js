@@ -36,7 +36,7 @@ const setOtherNote = obj => {
 export const noteOther = {
   git: setOtherNote([
     { text: "", items: [...require("./note-other-items/note-list-items")] },
-    // { text: "git笔记", items: [...require("./note-other-items/other-git-items")] },
+    { text: "git笔记", items: [...require("./note-other-items/other-git-items")] },
   ]),
   nginx: setOtherNote([
     { text: "", items: [...require("./note-other-items/note-list-items")] },
