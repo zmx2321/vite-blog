@@ -8,10 +8,10 @@
 - 那么，只需给上面那个 {a:1,b:2} 加一个迭代器
 ```js
 // 给对象原型上加一个属性【symbol.iterator】，让它等于一个函数，且这个函数返回一个迭代器，其实就是按照es6的可迭代协议进行操作
- 
+
 Object.prototype[Symbol.iterator] = function(){
- 
+
   return Object.values(this)[Symbol.iterator]() //调用数组的迭代器
- 
+
 }
 ```

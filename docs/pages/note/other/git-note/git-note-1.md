@@ -102,12 +102,12 @@ git config --global user.name
 git config --global user.email
 ```
 - 为单一的仓库配置用户名和邮箱
-```js
+```bash
 git config user.name "username"
 git config user.email "email"
 ```
 - 查看单一仓库的配置
-```js
+```bash
 git config user.name
 git config user.email 
 ```

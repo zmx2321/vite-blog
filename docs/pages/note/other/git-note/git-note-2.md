@@ -3,7 +3,7 @@
 > 测试git站点：zmx2321.coding.net
 
 ## 单人开发的情况
-```
+```bash
 # 从站点拉取仓库代码
 # 使用https需要输入用户名和密码
 # ssh不用输入账号密码，但需要ssh key
@@ -88,7 +88,7 @@ git pull
 ```
 
 ## 模拟多人开发的情况
-```
+```bash
 # 进入文件夹
 cd testgit1
 

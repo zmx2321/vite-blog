@@ -74,3 +74,8 @@ rimraf node_modules
   - `nvm install node-version` – 安装一个版本的 Node
   - `nvm list` – 查看你机器上安装的 Node 版本
   - `nvm use node-version` – 使用特定版本的 Node
+### 使用淘宝源
+```bash
+nvm node_mirror https://npm.taobao.org/mirrors/node
+nvm npm_mirror https://npm.taobao.org/mirrors/npm
+```
