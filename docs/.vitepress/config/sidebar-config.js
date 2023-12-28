@@ -11,6 +11,7 @@ module.exports = {
   // 面试题
   "/pages/interview/foundation/": interview.interviewFoundation, // 前端基础面试题
   "/pages/interview/accumulate/": interview.interviewAccumulate, // 前端面试题积累
+  "/pages/interview/other/": interview.interviewOther, // 其他面试题
 
   /**
    * 笔记

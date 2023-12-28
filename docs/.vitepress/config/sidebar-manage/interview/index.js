@@ -13,3 +13,11 @@ export const interviewAccumulate = [
     items: [...require("./interview-items/interview-accumulate-items")],
   },
 ];
+
+// 其他面试题
+export const interviewOther = [
+  {
+    text: "其他面试题",
+    items: [...require("./interview-items/interview-other-items")],
+  },
+];
