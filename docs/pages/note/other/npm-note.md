@@ -79,3 +79,7 @@ rimraf node_modules
 nvm node_mirror https://npm.taobao.org/mirrors/node
 nvm npm_mirror https://npm.taobao.org/mirrors/npm
 ```
+
+## node版本不兼容
+- 忽略错误后重新yarn install
+  `yarn config set ignore-engines true`
