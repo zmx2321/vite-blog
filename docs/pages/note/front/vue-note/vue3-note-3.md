@@ -744,3 +744,13 @@ const defaultTime = reactive([new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 23, 
 }
 </style>
 ```
+
+- 选项卡
+```js
+<div  class="xny_part1_items" @click="itemTitle = '光伏'" :class="itemTitle === '光伏' && 'active'"></div>
+...
+
+<div class="lgcb_sub_cont" v-if="itemTitle === '光伏'"></div>
+
+let itemTitle = ref("光伏");
+```
