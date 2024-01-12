@@ -534,3 +534,16 @@ xhrequest('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-c1630b19-f7b9-499c-86e9-9cbe
     }
 )
 ```
+
+## 全屏
+```js
+const fullScreen = () => {
+  if (document.fullscreenElement) {
+    //取消全屏
+    document.exitFullscreen();
+  } else {
+    //页面全屏
+    document.documentElement.requestFullscreen();
+  }
+};
+```
