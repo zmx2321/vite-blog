@@ -941,3 +941,23 @@ export function escapeUrl(targetPath) {
 }
 
 ```
+
+## 简易选项卡
+```js
+const mapTabClick = (e) => {
+  const { target } = e
+  // console.log(target);
+  let { textContent } = target
+
+  let btnList = target.parentNode.querySelectorAll('li')
+  // console.log(btnList)
+
+  btnList.forEach((item) => {
+    item.classList.remove('active')
+  })
+
+  target.classList.add('active')
+
+  console.log(textContent)
+}
+```
