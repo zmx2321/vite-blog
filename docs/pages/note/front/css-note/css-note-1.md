@@ -415,3 +415,14 @@ border-top: 5px solid #f00;
   }
 }
 ```
+
+## css flex纵向靠右对齐
+```css
+.x {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: end;
+}
+```
