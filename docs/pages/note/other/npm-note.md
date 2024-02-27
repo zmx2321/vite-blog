@@ -80,6 +80,48 @@ nvm node_mirror https://npm.taobao.org/mirrors/node
 nvm npm_mirror https://npm.taobao.org/mirrors/npm
 ```
 
+### 在mac环境安装nvm
+- 如果之前安装过node,一定要把node卸载干净，如果没有安装过node直接卸载，如果没有安装过node，直接从第二个步骤开始
+  1. 如果是官网下载的node安装，直接安装，在终端直接输入下面的命令
+    - `sudo rm -rf /usr/local/{bin/{node,npm},lib/node_modules/npm,lib/node,share/man/*/node.*}`
+  2. 如果是通过homebrew安装的node，在终端执行下面命令
+    - brew uninstall node
+  3. 卸载npm相关
+  ```bash
+  npm uninstall npm -g
+  rm -rf ~/.npm
+  ```
+  4. 卸载user目录下的相关文件
+  ```bash
+  rm -rf /usr/local/lib/node /usr/local/lib/node_modules /var/db/receipts/org.nodejs.* 
+  cd /usr/local/lib
+  rm -rf node*
+  rm -rf /usr/local/lib/dtrace/node.d
+  ```
+  5. 删除 /usr/local/include 下 node 和 node_modules 目录
+  ```bash
+  cd /usr/local/include
+  sudo rm -rf node*
+  ```
+  6. 删除 /usr/local/bin 下 node 执行文件
+  ```bash
+  cd /usr/local/bin
+  rm /usr/local/bin/npm
+  rm /usr/local/bin/node
+  ls -las 仔细查看，全局安装的npm包一般会在这个目录下创建软连接，发现就删除
+  ```
+  7. 最后查看版本，检查是否卸载
+  ```bash
+  node  -v
+  npm  -v
+  ```
+- 安装
+  - 下载命令
+    - 从github下载nvm仓库到 ~/目录
+    - `git clone https://github.com/nvm-sh/nvm.git`
+  - 执行install.sh
+      - 进入 nvm目录中执行install.sh 等待执行完成，执行的操作方法就是直接将文件拖入终端然后回车
+
 ## node版本不兼容
 - 忽略错误后重新yarn install
   `yarn config set ignore-engines true`
