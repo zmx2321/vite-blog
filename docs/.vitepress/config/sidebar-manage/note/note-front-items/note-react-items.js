@@ -18,7 +18,10 @@ const reactCourseConfig = [
 ];
 
 // react积累
-const reactConfig = [{ text: "react积累-1", link: `${baseUrl}/react-note-1` },{ text: "React实现todolist", link: `${baseUrl}/react-note-2` }];
+const reactConfig = [
+  { text: "React实现todolist", link: `${baseUrl}/react-note-1` },
+  { text: "react积累-1", link: `${baseUrl}/react-note-2` },
+];
 
 module.exports = [
   { text: "react", items: [] },

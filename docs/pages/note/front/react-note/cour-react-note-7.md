@@ -3,7 +3,7 @@
 ## 1. jsx简述
 > jsx中大括号里面为js语法
 - 函数允许调用组件，组件也可以调用函数
-  - {函数名()}
+  - `{函数名()}`
 ```html
 <!-- 核心js -->
 <script src="../react/react.js"></script>
