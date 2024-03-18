@@ -23,6 +23,7 @@ export const noteBack = {
 
 /**
  * 其他笔记
+ *
  */
 const setOtherNote = obj => {
   if (obj) {

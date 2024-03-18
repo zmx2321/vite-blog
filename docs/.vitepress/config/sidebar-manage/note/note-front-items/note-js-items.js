@@ -30,6 +30,11 @@ const jsToolsConfig = [
   { text: "常用js工具方法", link: `${baseUrl}/js-tools-note-2` },
 ];
 
+// ts笔记
+const tsNoteConfig = [
+  { text: "ts的常见使用", link: `${baseUrl}/ts-note-1` },
+];
+
 module.exports = [
   { text: "js笔记", items: [] },
   { text: "", items: jsBaseConfig },
@@ -37,4 +42,5 @@ module.exports = [
   { text: "", items: jsSyncConfig },
   { text: "", items: jsRegConfig },
   { text: "", items: jsToolsConfig },
+  { text: "ts笔记", items: tsNoteConfig },
 ];
