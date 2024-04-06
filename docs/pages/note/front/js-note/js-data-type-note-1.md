@@ -495,3 +495,34 @@ export function mapToOptions(map) {
   ]
 }
 ```
+
+## reduce用法
+- reduce 函数的基本语法为：array.reduce(callbackfn, initialValue)。
+- callbackfn 是回调函数，它接受四个参数：前一个值（prev）、当前值（current）、当前索引（index）和数组本身（array）
+- initialValue 是初始值，可选参数。
+```js
+let arr = [
+  { count: 10, num: 3, name: '张三' },
+  { count: 2, num: 22, name: '李四' },
+  { count: 13, num: 5, name: '王五' },
+  { count: 56, num: 4, name: '朱六' },
+  { count: 33, num: 12, name: '赵二' }
+];
+let res = arr.reduce((prev, next) => prev + next.count * next.num, 0);
+console.log(res); // 759
+
+/**
+ * 在这个例子里，reduce 函数对数组arr中的每个元素执行count和num相乘，然后将乘积加到前一个值prev中。由于初始值为 0，因此当遍历数组的第一个元素时，prev 的初始值为 0，next.count * next.num 的值为 30，这两个值相加得到 30。接下来，prev 的值变为 30，next.count * next.num 的值为 44，这两个值相加得到 74。以此类推，直到遍历完整个数组，得到最终的结果 759。
+ */
+```
+
+```js
+let keys = ['name', 'age'];
+let values = ['张三', 18];
+let res = keys.reduce((prev, next, index, arr) => (prev[next] = values[index], prev), {});
+console.log(res); // {name: '张三', age: 18}
+
+/**
+ * 这段代码的作用是将两个数组keys和values合并成一个对象。在reduce方法中，prev 参数的初始值为一个空对象 {}，然后将keys数组中的每个元素依次作为next参数传入回调函数。在回调函数中，通过prev[next] = values[index]将prev中对应的属性值设置为values数组中对应的元素值，最后返回prev对象。由于reduce方法会遍历整个keys数组，因此最终得到的对象包含了keys数组中的所有元素和它们对应的values数组中的元素。最终输出结果为 {name: '张三', age: 18}。
+ */
+```

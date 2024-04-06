@@ -547,3 +547,72 @@ const fullScreen = () => {
   }
 };
 ```
+
+## 计算scale实现自适应
+```html
+<div class="container">
+  <!-- 大屏展示区 -->
+  <div class="screen" ref="screen"></div>
+</div>
+```
+
+```css
+.container {
+  width: 100vw;
+  height: 100vh;
+  /* background */
+  background-size: cover
+
+  .screen {
+    position: fixed;
+    width: 1920px;
+    height: 1080px;
+    /* background: */
+    left: 50%;
+    top: 50%;
+  }
+}
+```
+
+```js
+import { ref, onMounted } from 'vue'
+
+// 获取大屏盒子的dom
+let screen = ref(null)
+
+onMounted(()=> {
+  // 控制屏幕放大缩小
+  // let box = document.querySelector('.box')
+  // box.style.transform = `scale(${getScale()}) translate(-50%, -50%)`
+
+  screen.value.style.transform = `scale(${getScale()}) translate(-50%, -50%)`
+})
+
+// 计算缩放比例
+const getScale = (w=1920, h=1080) =>{
+  const ww = window.innerWidth / w
+  const wh = window.innerHeight / h
+
+  return ww < wh ? ww : wh
+}
+
+// 监听视口变化
+window.onresize = () => {
+  box.style.transform = `scale(${getScale()}) translate(-50%, -50%)`
+}
+
+// 或者使用 autofit npm包
+import autofit from 'autofit.js'
+
+// autofit.init()
+/* autofit.init(
+  {
+    dh: 1080,
+    dw: 1920,
+    el: '#app',
+    // resize: true,
+    ignore: ['.demo_wrap']
+  },
+  false
+) */
+```
