@@ -125,3 +125,15 @@ nvm npm_mirror https://npm.taobao.org/mirrors/npm
 ## node版本不兼容
 - 忽略错误后重新yarn install
   `yarn config set ignore-engines true`
+
+## pnpm 安装
+- 安装ol
+  - pnpm add ol
+- 更新
+  - pnpm add -g pnpm to update
+- 查看源
+  - pnpm config get registry
+- 切换淘宝源
+  - pnpm config set registry https://registry.npmmirror.com/
+- 移除
+  - pnpm remove 包  
