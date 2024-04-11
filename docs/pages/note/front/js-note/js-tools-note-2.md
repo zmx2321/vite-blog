@@ -550,10 +550,10 @@ const fullScreen = () => {
 
 ## 计算scale实现自适应
 ```html
-<div class="container">
+<section class="container">
   <!-- 大屏展示区 -->
   <div class="screen" ref="screen"></div>
-</div>
+</section>
 ```
 
 ```css
@@ -561,7 +561,7 @@ const fullScreen = () => {
   width: 100vw;
   height: 100vh;
   /* background */
-  background-size: cover
+  background-size: cover;
 
   .screen {
     position: fixed;
@@ -580,14 +580,6 @@ import { ref, onMounted } from 'vue'
 // 获取大屏盒子的dom
 let screen = ref(null)
 
-onMounted(()=> {
-  // 控制屏幕放大缩小
-  // let box = document.querySelector('.box')
-  // box.style.transform = `scale(${getScale()}) translate(-50%, -50%)`
-
-  screen.value.style.transform = `scale(${getScale()}) translate(-50%, -50%)`
-})
-
 // 计算缩放比例
 const getScale = (w=1920, h=1080) =>{
   const ww = window.innerWidth / w
@@ -595,6 +587,14 @@ const getScale = (w=1920, h=1080) =>{
 
   return ww < wh ? ww : wh
 }
+
+onMounted(()=> {
+  // 控制屏幕放大缩小
+  // let box = document.querySelector('.box')
+  // box.style.transform = `scale(${getScale()}) translate(-50%, -50%)`
+
+  screen.value.style.transform = `scale(${getScale()}) translate(-50%, -50%)`
+})
 
 // 监听视口变化
 window.onresize = () => {
