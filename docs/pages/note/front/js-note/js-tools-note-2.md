@@ -691,6 +691,7 @@ export default {
 </template>
 
 <script setup name="screen">
+import { ref } from "vue";
 import ScaleBox from '@/components/SacaleAuto/index.vue'
 
 const scaleConfig = ref({
