@@ -598,7 +598,7 @@ export const debounce = (fn, delay = 500) => {
     </section>
 </template>
 
-<script setup>
+<script setup name="ScaleBox",>
 import {
     onMounted, onUnmounted, ref, reactive, toRef, watch,
 } from "vue";
@@ -608,11 +608,11 @@ const props = defineProps({
     height: Number, */
     width: {
         type: Number,
-        default: '1920'
+        default: 1920
     },
     height: {
         type: Number,
-        default: '1080'
+        default: 1080
     },
 });
 const width = ref(props.width)
@@ -653,11 +653,6 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener("resize", reCalc);
 });
-</script>
-<script>
-export default {
-    name: "ScaleBox",
-};
 </script>
 
 <style lang="scss" scoped>
