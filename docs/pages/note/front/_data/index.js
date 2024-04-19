@@ -19,6 +19,12 @@ const siteData = [
       },
       {
         icon: "",
+        name: "gis笔记",
+        desc: "",
+        link: `${base}/pages/note/front/gis-note/`,
+      },
+      {
+        icon: "",
         name: "v8学习笔记",
         desc: "",
         link: `${base}/pages/note/front/v8-note/v8-note-1`,

@@ -19,12 +19,13 @@ module.exports = {
   // 前端相关
   "/pages/note/front/js-note": note.noteFront.js, // js学习笔记
   "/pages/note/front/node-note": note.noteFront.node, // node学习笔记
+  "/pages/note/front/gis-note": note.noteFront.gis, // gis学习笔记
+  "/pages/note/front/v8-note": note.noteFront.v8, // v8学习笔记
   "/pages/note/front/vue-note": note.noteFront.vue, // vue学习笔记
   "/pages/note/front/css-note": note.noteFront.css, // css学习笔记
   "/pages/note/front/algorithm-note": note.noteFront.algorithm, // 算法笔记
   "/pages/note/front/uniapp-note": note.noteFront.uniapp, // uniapp笔记
   "/pages/note/front/react-note": note.noteFront.react, // react学习笔记
-  "/pages/note/front/v8-note": note.noteFront.v8, // v8学习笔记
 
   // 后端相关
   "/pages/note/back/java-note": note.noteBack.java, // java学习笔记

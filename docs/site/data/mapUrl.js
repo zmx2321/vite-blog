@@ -93,6 +93,17 @@ const siteData = [
     ],
   },
   {
+    title: "openlayer",
+    items: [
+      {
+        icon: "",
+        name: "openlayer api",
+        desc: "和Leaflet类似，一个开源比较能方便加载geojson的地图工具",
+        link: "https://openlayers.org/",
+      },
+    ],
+  },
+  {
     title: "三维地图",
     items: [
       {
