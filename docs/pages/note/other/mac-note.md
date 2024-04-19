@@ -393,3 +393,8 @@
   - 修改后的root
     - listen: 6080
     - /Users/zmx2321/Documents/code/_poj
+
+## 查看ip
+```bash
+ifconfig | grep "inet " | awk '{print $2}'
+```
