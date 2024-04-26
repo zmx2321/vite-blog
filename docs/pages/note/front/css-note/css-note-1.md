@@ -426,3 +426,31 @@ border-top: 5px solid #f00;
     align-items: end;
 }
 ```
+
+## el-tree通过class实现单选
+```scss
+:deep .el-tree {
+    max-width: 600px;
+    height: 65vh;
+    overflow-y: auto;
+    background: rgb(255 255 255 / 0%);
+
+    .el-tree-node__content {
+      transition: .2s linear;
+      border-radius: 10px;
+
+      &:hover {
+        background: #2c94fe;
+        color: #ffffff;
+      }
+    }
+
+    .el-tree-node .is-leaf+.el-checkbox .el-checkbox__inner {
+      display: inline-block;
+    }
+
+    .el-tree-node .el-checkbox .el-checkbox__inner {
+      display: none;
+    }
+  }
+```
