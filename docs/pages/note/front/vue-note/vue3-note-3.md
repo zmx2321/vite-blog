@@ -754,3 +754,23 @@ const defaultTime = reactive([new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 23, 
 
 let itemTitle = ref("光伏");
 ```
+
+## proxy.$modal相关方法
+```js
+// poxy对象
+const { proxy } = getCurrentInstance();
+
+proxy.$modal.msgError('msg');
+proxy.$modal.alert('msg');
+proxy.$modal.msgWarning('msg');
+proxy.$modal.msgSuccess('msg');
+proxy.$modal.loading("正在提交，请稍候...");
+proxy.$modal.closeLoading();
+
+proxy.$modal.confirm(
+    `确定移除 ${file.name} ?`
+).then(
+    () => true,
+    () => false
+)
+```
