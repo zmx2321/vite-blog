@@ -1386,3 +1386,346 @@ dom0Option() {
         }
     },
 ```
+
+## echarts引入地图
+```vue
+<template>
+  <section
+    ref="refChart"
+    class="chart_wrap"
+    :class="className"
+    :style="{ height: height, width: width }"
+  ></section>
+</template>
+
+<script setup>
+import { onMounted, onBeforeUnmount, ref, watch, nextTick } from "vue";
+import * as echarts from "echarts";
+import nbGeoJSON from "./GEOJSON/nbGeoJSON.json";
+
+/**
+ * 父组件参数
+ */
+const props = defineProps({
+  className: {
+    type: String,
+    default: "chart",
+  },
+  width: {
+    type: String,
+    default: "100%",
+  },
+  height: {
+    type: String,
+    default: "100%",
+  },
+  chartFontColor: {
+    type: String,
+    default: "#000",
+  },
+  autoResize: {
+    type: Boolean,
+    default: true,
+  },
+  chartData: {
+    type: Object,
+    required: true,
+  },
+  txtFontSize: {
+    type: Number,
+    default: 15,
+  },
+});
+
+/**
+ * 定义变量
+ */
+let myChart = null; // 图表
+const refChart = ref(null); // 图表ref
+
+/**
+ * 监听数据
+ */
+watch(
+  props.chartData,
+  (val) => {
+    setOption(val);
+  },
+  { deep: true }
+);
+
+/**
+ * 方法
+ */
+/**
+ * 工具方法
+ */
+const setProxyData = (proxyData) => JSON.parse(JSON.stringify(proxyData));
+
+/**
+ * 图表相关
+ */
+// 销毁图表
+const destroyChart = (next) => {
+  if (myChart) {
+    myChart.dispose();
+    myChart = null;
+
+    if (next) {
+      next();
+    }
+  }
+};
+// 重置图表
+const resetChart = () => {
+  // console.log("初始化图表", myChart)
+
+  destroyChart(() => {
+    // 重新启动图表
+    initChart();
+  });
+};
+// 初始化图表
+const initChart = () => {
+  myChart = echarts.init(refChart.value);
+  echarts.registerMap("ningbo", nbGeoJSON);
+  setOption(props.chartData);
+};
+
+let mTime = null;
+let dataIndex = 0;
+
+// 地图高亮轮播
+const mapActive = (mapData) => {
+  if (!myChart) {
+    return;
+  }
+  const dataLength = mapData.length;
+  // 用定时器控制高亮
+  mTime = setInterval(() => {
+    // 清除之前的高亮
+    myChart.dispatchAction({
+      type: "downplay",
+      seriesIndex: 0,
+      dataIndex: dataIndex,
+    });
+    dataIndex++;
+    // 当前下标高亮
+    myChart.dispatchAction({
+      type: "highlight",
+      seriesIndex: 0,
+      dataIndex: dataIndex,
+    });
+    myChart.dispatchAction({
+      type: "showTip",
+      seriesIndex: 0,
+      dataIndex: dataIndex,
+    });
+    if (dataIndex > dataLength) {
+      dataIndex = 0;
+    }
+  }, 3000);
+  myChart.on("mouseover", () => {
+    console.log("mouseover");
+    // 停止定时器，清除之前的高亮
+    clearInterval(mTime);
+    mTime = "";
+    console.log(mTime);
+    myChart.dispatchAction({
+      type: "downplay",
+      seriesIndex: 0,
+      dataIndex: dataIndex,
+    });
+  });
+  // 鼠标划出重新定时器开始
+  myChart.on("mouseout", () => {
+    mapActive(mapData, myChart);
+  });
+};
+
+// 设置图表
+const setOption = ({ mapData } = {}) => {
+  // 绘制图表
+  myChart.setOption(
+    // ----------------------------  图表配置开始
+    {
+      tooltip: {
+        textStyle: {
+          fontSize: 15,
+          color: "#fff",
+        },
+        trigger: "item",
+        backgroundColor: "rgba(0,0,0,0)",
+        formatter: (params) => {
+          // console.log(params);
+
+          let { data } = params;
+          // console.log(data);
+
+          let str = `
+            <div class="chart_tooltip">
+              <h3>${data.name}</h3>
+              <ul>
+                <li>
+                  <dl>
+                    <dt>近30天健康度平均分:</dt>
+                    <dd>${data.data1}</dd>
+                  </dl>  
+                </li>  
+                <li>
+                  <dl>
+                    <dt>投诉数量:</dt>
+                    <dd>${data.data2}</dd>
+                  </dl>  
+                </li>  
+                <li>
+                  <dl>
+                    <dt>故障工单:</dt>
+                    <dd>${data.data3}</dd>
+                  </dl>  
+                </li>  
+                <li>
+                  <dl>
+                    <dt>采编未处理:</dt>
+                    <dd>${data.data4}</dd>
+                  </dl>  
+                </li>  
+                <li>
+                  <dl>
+                    <dt>其他关键信息:</dt>
+                    <dd>${data.data5}</dd>
+                  </dl>  
+                </li>  
+              </ul>
+            </div>
+          `;
+
+          return str;
+        },
+      },
+      series: [
+        {
+          type: "map",
+          map: "ningbo",
+          layoutCenter: ["50%", "50%"],
+          layoutSize: "100%",
+          data: mapData,
+          roam: true, // 开启拖拽和缩放
+          itemStyle: {
+            // 地图样式
+            borderColor: "rgba(0, 178, 255, 1)",
+            borderWidth: 2,
+            areaColor: "#0b3eb3",
+            /* areaColor: new echarts.graphic.LinearGradient(
+              0,
+              1,
+              0,
+              0,
+              [
+                { offset: 0, color: "rgba(0, 137, 208, 0.32)" },
+                { offset: 1, color: "rgba(0, 66, 164, 0.32)" },
+              ],
+              false
+            ), */
+            shadowColor: "RGBA(7, 59, 115, .1)",
+            shadowOffsetX: -2,
+            shadowOffsetY: 2,
+            shadowBlur: 10,
+          },
+          emphasis: {
+            // 鼠标移入动态的时候显示的默认样式
+            itemStyle: {
+              areaColor: "#00ade0",
+              borderColor: "#00ade0",
+              borderWidth: 2,
+            },
+            label: {
+              // 文字
+              show: true,
+              color: "#fff",
+              fontSize: 20,
+            },
+          },
+          // 选中样式
+          select: {
+            label: {
+              // 选中区域的label(文字)样式
+              color: "#fff",
+            },
+            itemStyle: {
+              color: "#fff",
+              // 选中区域
+              areaColor: "#00ade0",
+              // 选中区域边框
+              borderColor: "#00ade0",
+              borderWidth: 3,
+            },
+          },
+          // 地图默认label样式
+          label: {
+            show: true,
+            color: "#fff",
+            fontSize: 11,
+            fontWeight: 600,
+          },
+        },
+      ],
+    }
+    // ----------------------------  图表配置结束
+  );
+
+  // mapActive(mapData);
+  window.onresize = function () {
+    // 自适应大小
+    myChart.resize();
+  };
+};
+
+/**
+ * 生命周期
+ */
+onMounted(() => {
+  nextTick(() => {
+    initChart(); // 初始化图表
+  });
+});
+onBeforeUnmount(() => {
+  destroyChart(); // 销毁图表
+});
+
+/**
+ * 暴露方法
+ */
+defineExpose({
+  resetChart,
+});
+</script>
+
+<style lang="scss" scoped>
+.chart_wrap {
+  min-height: 100px;
+
+  :deep .chart_tooltip {
+    h3 {
+    }
+
+    ul {
+      li {
+        margin-bottom: 1px;
+
+        dl {
+          dt,
+          dd {
+            display: inline-block;
+          }
+
+          dt {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
+```
