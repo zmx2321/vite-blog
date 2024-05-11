@@ -146,3 +146,13 @@ draw.on('drawend', function (event) {
     }
 })()
 ```
+
+## 根据contextmenu(右键菜单)获取feature
+```js
+const coordinate = olMap.getEventCoordinate(e)
+const pixel = olMap.getPixelFromCoordinate(coordinate)
+const feature = olMap.forEachFeatureAtPixel(pixel, feature => {
+  return feature
+})
+console.log(feature)
+```

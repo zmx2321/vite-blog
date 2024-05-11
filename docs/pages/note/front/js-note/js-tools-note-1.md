@@ -961,3 +961,22 @@ const mapTabClick = (e) => {
   console.log(textContent)
 }
 ```
+
+## js数组去重转字符串以逗号隔开
+```js
+let tempStr = Array.from(new Set(tempArr)).join(",")
+```
+
+## js拷贝到剪切板
+```js
+export const copyTextToClipboard = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    console.log("Text copied to clipboard");
+  } catch (err) {
+    console.error("Failed to copy: ", err);
+  }
+}
+
+copyTextToClipboard("要复制eeee的文本内容");
+```
