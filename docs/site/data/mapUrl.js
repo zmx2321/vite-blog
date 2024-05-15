@@ -104,6 +104,17 @@ const siteData = [
     ],
   },
   {
+    title: "天地图",
+    items: [
+      {
+        icon: "",
+        name: "天地图网页开发文档",
+        desc: "天地图各种js示例",
+        link: "http://lbs.tianditu.gov.cn/api/js4.0/examples.html",
+      },
+    ],
+  },
+  {
     title: "三维地图",
     items: [
       {
