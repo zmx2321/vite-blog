@@ -99,7 +99,6 @@ setMarkerConfig(lonlat, mapPopup, markerClass, isTab=false, item) {
 ## mapbox封装
 - mapconfig
 ```js
-// 正式环境用
 export const glMapConfig = (id, geoData, center, zoom) => {
   return {
     container: id, //容器的id
