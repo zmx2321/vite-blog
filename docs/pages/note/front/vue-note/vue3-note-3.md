@@ -775,6 +775,21 @@ proxy.$modal.confirm(
 )
 ```
 
+## 封装api
+```js
+// api 封装
+export const apiCommon = (api, params, header = undefined) => {
+  return new Promise((resolve, reject) => {
+    api(params, header).then(res => {
+      resolve(res)
+    }).catch(err => {
+      reject(err)
+      return
+    })
+  })
+}
+```
+
 ## 模糊搜索封装
 ```vue
 <template>
