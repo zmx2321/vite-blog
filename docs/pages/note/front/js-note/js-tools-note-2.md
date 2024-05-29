@@ -715,3 +715,38 @@ import autofit from 'autofit.js'
   false
 ) */
 ```
+
+## js拷贝
+```js
+export const copyTextToClipboard = async (text, next) => {
+  // navigator clipboard 需要https等安全上下文
+  if (navigator.clipboard && window.isSecureContext) {
+    // navigator clipboard 向剪贴板写文本
+    next(text)
+    return navigator.clipboard.writeText(text);
+  } else {
+    // document.execCommand('copy') 向剪贴板写文本
+    let input = document.createElement('input')
+    input.style.position = 'fixed'
+    input.style.top = '-10000px'
+    input.style.zIndex = '-999'
+    document.body.appendChild(input)
+    input.value = text
+    input.focus()
+    input.select()
+    try {
+      let result = document.execCommand('copy')
+      document.body.removeChild(input)
+      if (!result || result === 'unsuccessful') {
+        console.log('复制失败')
+      } else {
+        // console.log('复制成功')
+        next(text)
+      }
+    } catch (e) {
+      document.body.removeChild(input)
+      alert('当前浏览器不支持复制功能，请检查更新或更换其他浏览器操作')
+    }
+  }
+}
+```

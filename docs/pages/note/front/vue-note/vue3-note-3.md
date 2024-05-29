@@ -774,3 +774,188 @@ proxy.$modal.confirm(
     () => false
 )
 ```
+
+## 模糊搜索封装
+```vue
+<template>
+  <el-form ref="ruleFormRef" :inline="true" :model="ruleForm" label-width="80px">
+    <!-- <xxxxxx -->
+
+    <el-form-item label="" style="margin-left: 13px">
+      <el-autocomplete v-model="ruleForm.dynamicFieldsValue" :fetch-suggestions="querySearch"
+        @select="selectGisSearchSubmit" style="width: 400px" placeholder="请输入" clearable :trigger-on-focus="true"
+        :debounce="100" :disabled="renderFlag">
+        <template #prepend>
+          <el-select v-model="ruleForm.searchType" style="width: 115px" @change="selectSearchCriteria">
+            <el-option v-for="(item, index) in searchCriteriaList" :key="index" :label="item.label"
+              :value="item.prop" />
+          </el-select>
+        </template>
+        <template #default="{ item }">
+          <div class="auto_cellname_item_wrap">
+            <!-- 自定义搜索列表 -->
+            <!-- ...... -->
+          </div>
+        </template>
+        <template #append>
+          <el-button type="primary" @click="setGisSearchSubmit">
+            <el-icon>
+              <Search />
+            </el-icon>
+          </el-button>
+        </template>
+      </el-autocomplete>
+    </el-form-item>
+  </el-form>
+</template>
+
+<script setup>
+import { ref, computed } from "vue";
+// 组件传参
+import mittBus from "@/utils/mittBus"; // mitt
+// api相关
+import { apiCommon } from "@/utils/index.js";
+import * as gisApi from "@/api/gis/gis";
+
+const ruleFormRef = ref(null);
+let currentZoom = ref(0);
+let currentMinRenderZoom = 0;
+
+let renderFlag = computed(() => {
+  return parseInt(currentZoom.value) < currentMinRenderZoom;
+});
+
+// 搜索条件
+const searchCriteriaList = ref([
+  {
+    label: "xxx",
+    prop: "name",
+    eventName: "searchByName",
+    isShowSelect: true,
+  },
+  {
+    label: "xxx",
+    prop: "name",
+    eventName: "searchByName1",
+    isShowSelect: false,
+  },
+]);
+
+const ruleForm = ref({
+  searchType: searchCriteriaList.value[0].prop, // 搜索条件
+  dynamicFieldsValue: "", // 动态字段结果
+});
+
+/**
+ * 接收其他组件派发的方法
+ */
+// 获取当前zoom
+mittBus.on("getCurrentZoom", ({ zoom, minRenderZoom }) => {
+  // console.log("当前缩放级别为：" + zoom, minRenderZoom);
+
+  currentZoom.value = zoom;
+  currentMinRenderZoom = minRenderZoom;
+});
+
+/**
+ * 业务
+ */
+// 选择搜索条件
+const selectSearchCriteria = () => {
+  // console.log('搜索类型', ruleForm.value.searchType, ruleForm.value.dynamicFieldsValue)
+
+  ruleForm.value.dynamicFieldsValue = "";
+};
+
+// gis查询
+const setGisSearchSubmit = () => {
+  // console.log('gis查询', ruleForm.value.searchType, ruleForm.value.dynamicFieldsValue)
+
+  // 当输入内容时才派发事件
+  if (ruleForm.value.dynamicFieldsValue !== "") {
+    searchCriteriaList.value.forEach((item) => {
+      switch (ruleForm.value.searchType) {
+        case item.prop:
+          // 根据定义的名称派发事件
+          mittBus.emit(item.eventName, ruleForm.value.dynamicFieldsValue);
+          break;
+      }
+    });
+  }
+};
+
+// 获取下拉框数据接口
+const getSelectDatyAsync = async (queryString) => {
+  let gisData = null;
+
+  // 小区名称
+  if (ruleForm.value.searchType === "name") {
+    let params = {
+      name: queryString,
+    };
+    gisData = await apiCommon(gisApi.queryCellListByName, params);
+
+    gisData.data.forEach((item) => {
+      item.value = item.name;
+    });
+  }
+  // 站点名称名称
+  if (ruleForm.value.searchType === "name1") {
+    let params = {
+      name1: queryString,
+    };
+    gisData = await apiCommon(gisApi.queryCellListByName1, params);
+
+    gisData.data.forEach((item) => {
+      item.value = item.name1;
+    });
+  }
+
+  return gisData.data;
+};
+
+// 获取下拉框数据
+const querySearch = async (queryString, cb) => {
+  searchCriteriaList.value.forEach(async (item) => {
+    // 识别当前搜索条件
+    if (item.prop === ruleForm.value.searchType) {
+      // 如果不需要模糊搜索不显示下拉框
+      if (!item.isShowSelect) {
+        cb([]);
+      } else {
+        if (queryString !== "") {
+          getSelectDatyAsync(queryString).then((gisData) => {
+            // console.log(gisData)
+            cb(gisData);
+          });
+        } else {
+          cb([]);
+        }
+      }
+    }
+  });
+};
+
+// 搜索框下拉选择
+const selectGisSearchSubmit = (val) => {
+  // console.log('搜索框下拉选择', val)
+
+  mittBus.emit("selectGisSearchSubmit", val);
+};
+</script>
+
+<style lang="scss" scoped>
+.el-popper.is-pure {
+  .auto_cellname_item_wrap {
+    // background: #f00;
+    border-bottom: solid 1px #efefef;
+    // padding-bottom: 10px;
+
+    span {
+      display: block;
+      margin-top: -15px;
+    }
+  }
+}
+</style>
+```
