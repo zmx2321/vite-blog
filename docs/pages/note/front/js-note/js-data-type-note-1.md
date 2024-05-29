@@ -526,3 +526,10 @@ console.log(res); // {name: '张三', age: 18}
  * 这段代码的作用是将两个数组keys和values合并成一个对象。在reduce方法中，prev 参数的初始值为一个空对象 {}，然后将keys数组中的每个元素依次作为next参数传入回调函数。在回调函数中，通过prev[next] = values[index]将prev中对应的属性值设置为values数组中对应的元素值，最后返回prev对象。由于reduce方法会遍历整个keys数组，因此最终得到的对象包含了keys数组中的所有元素和它们对应的values数组中的元素。最终输出结果为 {name: '张三', age: 18}。
  */
 ```
+
+## 根据数组的值删除某一项
+```js
+menuMethods = menuMethods.filter(function (item) {
+return item !== "xxxxxx"
+});
+```

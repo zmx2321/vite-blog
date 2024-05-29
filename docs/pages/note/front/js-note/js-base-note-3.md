@@ -297,3 +297,12 @@ this.$el.parentNode.querySelectorAll(calss).forEach(item=> {
     }
 })
 ```
+
+## 批量删除dom
+```js
+let flickerPointDom = document.querySelectorAll('.flicker_point')
+
+flickerPointDom.forEach(item => {
+    item.classList.remove('flicker_point')
+})
+```
