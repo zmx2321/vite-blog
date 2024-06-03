@@ -572,6 +572,27 @@ export const getAllLayer = (olMap, next) => {
   }
 }
 
+// 根据条件移除要素
+export const removeByCondition = (olMap, condition) => {
+  getAllLayer(olMap, layerItem => {
+    let currentFeature = layerItem.getSource().getFeatures()[0]
+
+    if (condition(currentFeature)) {
+      olMap.removeLayer(layerItem)
+    }
+  })
+}
+
+// 刷新地图需要移除的元素
+export const removeByReflashMap = (olMap) => {
+  // 根据条件移除要素
+  removeByCondition(olMap, currentFeature => {
+    return currentFeature.get('tempType')
+  })
+
+  removeAllOverlay()  // 移除地图Overlay元素
+}
+
 // 取消绘制(点线面)
 export const cancelDrawInteraction = (olMap) => {
   // console.log('取消绘制(点线面)', olMap)
@@ -740,12 +761,16 @@ export const featureToMaxTop = (olMap, feature) => {
     zIndex: 999 // zIndex全地图最大
   });
 
-  getAllLayer(olMap, layerItem => {
+  /* getAllLayer(olMap, layerItem => {
     let currentFeature = layerItem.getSource().getFeatures()[0]
 
     if (currentFeature.get('temp')) {
       olMap.removeLayer(layerItem)
     }
+  }) */
+  // 根据条件移除要素
+  removeByCondition(olMap, currentFeature => {
+    return currentFeature.get('temp')
   })
 
   topLayer.setOpacity(1)
@@ -775,15 +800,12 @@ export const addTextPoint = (olMap, text, position, textPointConfig = {}, isRemo
   });
 
   if (isRemove) {
-    // 清除某类图层
-    getAllLayer(olMap, layerItem => {
-      let currentFeature = layerItem.getSource().getFeatures()[0]
-
-      isRemove(layerItem, currentFeature)
+    // 根据条件移除要素
+    removeByCondition(olMap, currentFeature => {
+      return isRemove(currentFeature)
     })
+
   }
-
-
 
   // 创建文本特征
   const feature = new Feature({
@@ -1191,13 +1213,9 @@ export const testDistance = (olMap, next) => {
 export const cancelTestDistance = (olMap) => {
   // console.log('取消测距', olMap)
 
-  // 清除某类图层
-  getAllLayer(olMap, layerItem => {
-    let currentFeature = layerItem.getSource().getFeatures()[0]
-
-    if (currentFeature.get('tempType') === 'testDistanceTemp') {
-      olMap.removeLayer(layerItem)
-    }
+  // 根据条件移除要素
+  removeByCondition(olMap, currentFeature => {
+    currentFeature.get('tempType') === 'testDistanceTemp'
   })
 
   cancelDrawInteraction(olMap)
@@ -2333,7 +2351,7 @@ $zoomMargin: 10em;
 
 ## svg
 - back.svg
-```svg
+```txt
 <svg t="1713927038909" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1547" width="200" height="200"><path d="M482.7 249.9V106.1c0-37.4-45.3-56.2-71.7-29.7L140.3 347c-16.4 16.4-16.4 43 0 59.4L410.9 677c26.5 26.5 71.7 7.7 71.7-29.7v-155c96.1-0.3 271.5-10.7 271.5 227.7 0 118.1-92.8 216.8-216 239.6 198.1-24.4 326-236 326-361.9 0.1-292.6-309.4-346.3-381.4-347.8z" fill="#494949" p-id="1548"></path></svg>
 ```
 

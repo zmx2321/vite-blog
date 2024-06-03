@@ -974,3 +974,14 @@ const selectGisSearchSubmit = (val) => {
 }
 </style>
 ```
+
+## vue3设置全局变量
+```js
+app.config.globalProperties.msg = 'hello'
+
+onMounted(() => {
+    // 通过getCurrentInstance().appContext访问全局属性
+    const { msg } = getCurrentInstance().appContext.config.globalProperties
+    console.log('msg', msg)
+})
+```
