@@ -322,3 +322,105 @@ export const testDistance = (olMap, next) => {
   });
 }
 ```
+
+## 添加带箭头的线
+```js
+// 添加带箭头的线
+export const addArrowLine = (olMap, position, src = '../src/components/OpenlayerBaseMap/icon/arrow.svg', businessType = 'arrowLine') => {
+  // console.log('添加带箭头的线', olMap)
+
+  function stylefunction(feature) {
+    const geometry = feature.getGeometry()
+    // 轨迹地理长度
+    const totalLength = geometry.getLength()
+    // 像素间隔步长
+    let step = 50
+    // 将像素步长转实际地理距离步长
+    let StepLength = step * olMap.getView().getResolution()
+    // 箭头总数
+    let arrowNum = Math.floor(totalLength / StepLength)
+
+    const styles = [
+      // linestring
+      new Style({
+        stroke: new Stroke({
+          // color: 'rgb(164 164 162 / 88%)',
+          color: '#42b983',
+          width: 5,
+        }),
+      }),
+    ];
+
+    const rotations = [];
+    const distances = [0];
+    geometry.forEachSegment(function (start, end) {
+      let dx = end[0] - start[0];
+      let dy = end[1] - start[1];
+      let rotation = Math.atan2(dy, dx);
+      distances.unshift(Math.sqrt(dx ** 2 + dy ** 2) + distances[0]);
+      rotations.push(rotation);
+    });
+
+    for (let i = 1; i < arrowNum; i++) {
+      let arrow_coor = geometry.getCoordinateAt(i * 1.0 / arrowNum)
+      const d = i * StepLength;
+      const grid = distances.findIndex((x) => x <= d);
+      styles.push(
+        new Style({
+          geometry: new Point(arrow_coor),
+          image: new Icon({
+            src,
+            opacity: 1,
+            anchor: [0.5, 0.5],
+            rotateWithView: true,
+            rotation: - rotations[distances.length - grid - 1],
+            scale: 0.8
+          })
+        })
+      )
+    }
+
+    return styles
+  }
+
+
+
+  /* const styleFunction = function (feature) {
+    const geometry = feature.getGeometry();
+    const styles = [
+      // linestring
+      new Style({
+        stroke: new Stroke({
+          color: 'rgb(164 164 162 / 88%)',
+          width: 5,
+        }),
+      }),
+    ];
+
+    geometry.forEachSegment(function (start, end) {
+      const dx = end[0] - start[0];
+      const dy = end[1] - start[1];
+      const rotation = Math.atan2(dy, dx);
+      const coord = [start[0] + dx / 2, start[1] + dy / 2]
+      // arrows
+      styles.push(
+        new Style({
+          geometry: new Point(coord),
+          image: new Icon({
+            src,
+            anchor: [0.75, 0.5],
+            rotateWithView: true,
+            rotation: -rotation,
+            scale: 0.03
+          }),
+        })
+      );
+    });
+
+    return styles;
+  }; */
+
+  addLine(olMap, position, { businessType }, stylefunction)
+  // addLine(olMap, position, { businessType }, styleFunction)
+}
+```

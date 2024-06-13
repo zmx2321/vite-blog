@@ -750,3 +750,24 @@ export const copyTextToClipboard = async (text, next) => {
   }
 }
 ```
+
+## 判断数组是否为空
+```js
+export function arraysIsEmpty(...arrays) {
+  return arrays.every(array => Array.isArray(array) && array.length === 0);
+}
+```
+
+## 判断多个数组是否为空
+```js
+export function allArraysIsEmpty(arrays) {
+  return arrays.every(function (array) {
+    return array.length === 0;
+  });
+}
+
+// 示例使用
+var arrays = [[], [], [], [], [], [], [], [], [], []];
+var result = areAllArraysEmpty(arrays);
+console.log(result); // 输出 true 如果所有数组都是空的，否则输出 false
+```
