@@ -16,6 +16,33 @@ import "./styles/rainbow.css";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 
+// #48a6c0;
+console.log(
+  `%c
+                                       #    
+                                 # # #  
+         #                     #        
+       # # # # # #             #        
+     # # # # # # #               # #    
+     #   #       #                 # #  
+                 # #                 #  
+                 #             # # #    
+               # #           #          
+           # # #             #          
+       # # #                   # #      
+       # #           # # # #     # #    
+       # #         # # # # # #   # #    
+       # #     # # #         # # #      
+   # # # # # # # #           # # # #    
+         # # #             #   # # #    
+   # #                     # #   # # #  
+                             #    
+    `,
+  `
+    color: #df6a6a
+    `,
+);
+
 export default {
   ...DefaultTheme,
   NotFound: () => "404", // <- this is a Vue 3 functional component
