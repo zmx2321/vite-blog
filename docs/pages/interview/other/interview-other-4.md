@@ -363,11 +363,3 @@
 ## 介绍最近两个公司的工作经历
 
 ## javascirpt中的数字在计算机内存储为多少Byte？
-
-
-## 
-
-(function () {
-var a = b = 5;
-})()；
-console.log(b); console.log(a);
