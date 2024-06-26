@@ -49,8 +49,8 @@ import { siteData } from "../model/homeSiteData.js";
 
 /**首页网址推荐**/
 .ui-home {
-  // width: 1152px;
-  width: 923px;
+  width: 1152px;
+  // width: 923px;
   margin: 0 auto 20px;
 
   .ui-title {
