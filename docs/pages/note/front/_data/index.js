@@ -19,6 +19,12 @@ const siteData = [
       },
       {
         icon: "",
+        name: "harmonyOS笔记",
+        desc: "",
+        link: `${base}/pages/note/front/harmonyOS-note/`,
+      },
+      {
+        icon: "",
         name: "gis笔记",
         desc: "",
         link: `${base}/pages/note/front/gis-note/`,

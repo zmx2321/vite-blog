@@ -19,6 +19,7 @@ module.exports = {
   // 前端相关
   "/pages/note/front/js-note": note.noteFront.js, // js学习笔记
   "/pages/note/front/node-note": note.noteFront.node, // node学习笔记
+  "/pages/note/front/harmonyOS-note": note.noteFront.harmonyOS, // harmonyOS学习笔记
   "/pages/note/front/gis-note": note.noteFront.gis, // gis学习笔记
   "/pages/note/front/v8-note": note.noteFront.v8, // v8学习笔记
   "/pages/note/front/vue-note": note.noteFront.vue, // vue学习笔记

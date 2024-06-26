@@ -23,6 +23,7 @@
 <script setup>
 import { computed } from "vue";
 import { slugify } from "@mdit-vue/shared";
+
 const props = defineProps({
   title: String,
   data: {
@@ -36,6 +37,7 @@ const createTitle = computed(() => {
   return slugify(props.title);
 });
 </script>
+
 <style lang="scss" scoped>
 /*单行文本省略号*/
 @mixin single-ellipsis {
