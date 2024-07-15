@@ -363,6 +363,32 @@ const addWaterMarker = (str, parentNode, font, textColor) => {
   parentNode.style.backgroundImage = `url(${can.toDataURL('image/png')})`
 }
 
+const addWaterMarkerLine = (str, parentNode, font, textColor) => {
+  str = "这是一个多行\n水印示例\n第三行"
+
+  /// 水印文字，父元素，字体，文字颜色
+  let can = document.createElement('canvas')
+  parentNode.appendChild(can)
+  can.width = 360
+  can.height = 250
+  can.style.display = 'none'
+  let ctx = can.getContext('2d')
+  ctx.rotate((-20 * Math.PI) / 180)
+  ctx.font = font || '16px Microsoft JhengHei'
+  ctx.fillStyle = textColor || 'rgba(180, 180, 180, 0.3)'
+  ctx.textAlign = 'left'
+  ctx.textBaseline = 'Middle'
+  var lines = str.split('\n');
+  var y = can.height / 2;
+  var lineHeight = ctx.measureText('M').width + 10;
+  // 绘制多行水印
+  lines.forEach(function (line) {
+    ctx.fillText(line, can.width / 2, y);
+    y += lineHeight;
+  });
+  parentNode.style.backgroundImage = `url(${can.toDataURL('image/png')})`
+}
+
 const waterMarker = {
   mounted(el, binding) {
     addWaterMarker(binding.value.text, el, binding.value.font, binding.value.textColor)
