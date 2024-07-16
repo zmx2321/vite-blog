@@ -400,8 +400,7 @@ export default waterMarker
 
 ## dom添加水印,全部层级可用
 ```js
-
-const watermark = () => {
+const watermark = (settings) => {
     // 默认设置
     const defaultSettings = {
         watermark_txt: "text",
