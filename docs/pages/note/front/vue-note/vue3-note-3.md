@@ -985,3 +985,226 @@ onMounted(() => {
     console.log('msg', msg)
 })
 ```
+
+## vue3解析excel
+- uploadtools
+```vue
+<template>
+    <el-upload class="upload_wrap" multiple :limit="limitNum" :file-list="fileList" :auto-upload="false"
+        :before-remove="beforeRemove" :on-exceed="handleExceed" :on-preview="handlePreview" :on-change="changeFile">
+        <el-button>点击上传</el-button>
+        <template #tip>
+            <div class="el-upload__tip">
+                <slot name="tip"></slot>
+            </div>
+        </template>
+    </el-upload>
+</template>
+
+<script setup>
+import { ref, getCurrentInstance } from 'vue';
+import { ElMessage } from 'element-plus';
+
+// poxy对象
+const { proxy } = getCurrentInstance();
+
+// 子组件自定义事件
+const emit = defineEmits(['verifyFileType', 'getFile'])
+
+const fileList = ref([])
+const limitNum = ref(1)
+
+// 删除文件之前的钩子
+const beforeRemove = (file) => {
+    return proxy.$modal.confirm(
+        `确定移除 ${file.name} ?`
+    ).then(
+        () => true,
+        () => false
+    )
+}
+
+// 限制提示
+const handleExceed = () => {
+    ElMessage.warning(`当前限制选择 ${limitNum.value} 个文件`)
+}
+
+// 点击文件
+const handlePreview = file => {
+    console.log("点击文件", file)
+}
+
+// 校验文件类型
+const verifyFileType = (file, next) => {
+    emit('verifyFileType', file, flag => {
+        if (!flag) {
+            fileList.value = fileList.value.pop()
+        }
+
+        next(flag)
+    })
+}
+
+// 文件改变后触发
+const changeFile = file => {
+    let flag = verifyFileType(file, flag => {
+        if (flag) {
+            emit('getFile', file)
+        }
+    })
+}
+</script>
+
+<style lang="scss" scoped>
+.upload_wrap {
+    width: 275px;
+
+    :deep .el-upload-list {
+        max-height: 100px;
+        overflow-y: auto;
+    }
+}
+</style>
+```
+- 使用
+```vue
+<template>
+  <section>
+    <upload-tool @verifyFileType="verifyFileType" @getFile="getFile">
+      <template #tip>
+        <span>请上传xls或者xlsx格式</span>
+      </template>
+    </upload-tool>
+
+    <div class="detail_wrap">
+      <div class="detail_cont" v-if="JSON.stringify(excelResData) !== '[]'" v-for="(item, index) in excelResData"
+        :key="index">
+        <h3>{{ item.sheetName }}</h3>
+        <div class="table_detail" v-html="dealExcel(item.sheetList)"></div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+import * as XLSX from 'xlsx';
+
+const excelResData = ref([])
+
+const readFile = (file) => {
+  return new Promise((resolve) => {
+    let reader = new FileReader()
+    reader.readAsBinaryString(file)
+    reader.onload = (ev) => {
+      resolve(ev.target?.result)
+    }
+  })
+}
+
+const sheetToTable = sheet => {
+  // 创建一个<table>元素
+  var table = document.createElement('table');
+  // table.setAttribute('border', '1');
+  // 遍历XLSX.utils.sheet_to_json的结果
+  sheet.forEach(function (row) {
+    // 创建一个<tr>元素
+    var tr = document.createElement('tr');
+    // 遍历每一行的键值对
+    for (var key in row) {
+      // 创建一个<td>元素
+      var td = document.createElement('td');
+      // 设置<td>元素的文本
+      td.appendChild(document.createTextNode(row[key]));
+      // 将<td>元素添加到<tr>元素中
+      tr.appendChild(td);
+    }
+    // 将<tr>元素添加到<table>元素中
+    table.appendChild(tr);
+  });
+  // 将<table>元素添加到HTML文档中
+  return table
+  // document.body.appendChild(table);
+}
+
+const verifyFileType = (file, next) => {
+  if (!/\.(xls|xlsx)$/.test(file.name.toLowerCase())) {
+    ElMessage({
+      message: "上传格式不正确，请上传xls或者xlsx格式！",
+      type: "error",
+    });
+    next(false)
+    return
+  }
+  next(true)
+}
+
+const getFile = async (file) => {
+  let dataBinary = await readFile(file.raw);
+  let workbook = XLSX.read(dataBinary, { type: 'binary', cellDates: true });
+
+  workbook.SheetNames.forEach(SheetName => {
+    // workbook.Sheets[SheetName] = XLSX.utils.sheet_to_json(workbook.Sheets[SheetName], { range: 1, header: 1, defval: '' })
+    workbook.Sheets[SheetName] = XLSX.utils.sheet_to_json(workbook.Sheets[SheetName], { header: 1, defval: '' })
+  })
+
+  for (let key in workbook.Sheets) {
+    excelResData.value.push({
+      sheetName: key,
+      sheetList: workbook.Sheets[key]
+    })
+  }
+};
+
+const dealExcel = (sheetList) => {
+  return sheetToTable(sheetList).outerHTML
+}
+</script>
+
+<style lang="scss" scoped>
+.detail_wrap {
+  padding: 20px;
+  width: 95%;
+  height: 80vh;
+  border: solid 1px #ccc;
+  margin: 0 auto;
+  overflow: auto;
+
+  .detail_cont {
+    &:not(:last-child) {
+      margin-bottom: 50px;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+    }
+
+    :deep .table_detail {
+      table {
+        tbody {
+          tr {
+            &:first-child {
+              background-color: #a3a3a3;
+            }
+
+            &:not(:first-child) {
+              &:nth-child(odd) {
+                background-color: rgb(206, 206, 206);
+              }
+            }
+          }
+        }
+
+        td {
+          padding: 5px;
+          min-width: 100px;
+          border: solid 1px #efefef;
+          text-align: center;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+</style>
+```
