@@ -1,6 +1,6 @@
 # echarts问题集锦
 
-## 1. vue中echarts图表
+## vue中echarts图表
 - `yarn add echarts`
 - main.js
 ```js
@@ -238,7 +238,7 @@ methods: {
 ```
 
 
-## 2.图表电池样式
+## 图表电池样式
 ```js
 // var barData = [0, ~~(Math.random() * 100), ~~(Math.random() * 100), ~~(Math.random() * 100), ~~(Math.random() * 100)];
 var barData = [60, 30, 52, 34, 90];
@@ -387,7 +387,7 @@ symbolOffset: [75, 0],  // 电池位置
 }
 ```
 
-## 3. 柱状图定制
+## 柱状图定制
 ```js
 {
   tooltip: {
@@ -575,7 +575,7 @@ symbolOffset: [75, 0],  // 电池位置
 }
 ```
 
-## 4. 图表横向重叠
+## 图表横向重叠
 ```js
 {
   color: this.lineColors,
@@ -644,7 +644,7 @@ export const industrialTalentData1 = {
 }
 ```
 
-## 5. echarts在lend上添加百分比
+## echarts在lend上添加百分比
 ```js
 formatter (name) {
   let { fieldData, legend } = that.chartData
@@ -677,7 +677,7 @@ formatter (name) {
 }
 ```
 
-## 6. 在图例上做点击事件
+## 在图例上做点击事件
 ```js
 this.chart.on('legendselectchanged', obj=> {
   // console.log(this.chartData, obj)
@@ -690,7 +690,7 @@ this.chart.on('legendselectchanged', obj=> {
 })
 ```
 
-## 66. echarts日历
+## echarts日历
 ```js
 const fxrl = ()=> {
   var graphData1 = [
@@ -793,7 +793,7 @@ var graphData2 = [
 }
 ```
 
-## 68. echarts警告
+## echarts警告
 > There is a chart instance already initialized on the dom
 ```js
 // 资金下拉框
@@ -844,7 +844,7 @@ changeMoney(val) {
 },
 ```
 
-## 69. 在计算属性中获取echarts
+## 在计算属性中获取echarts
 ```js
 // 地区柱状图配置
 areaOption() {
@@ -945,7 +945,7 @@ areaChartDom() {
 },
 ```
 
-## 71. 柱状图配置
+## 柱状图配置
 ```js
 data() {
     return {
@@ -1056,7 +1056,7 @@ areaOption() {
 },
 ```
 
-## 75. echarts柱状图（滚动条）
+## echarts柱状图（滚动条）
 ```js
 // 柱状图配置
 barWid: 25, // 柱子宽
@@ -1198,7 +1198,7 @@ areaOption() {
 },
 ```
 
-## 78. 多个echart
+## 多个echart
 ```js
 // 
 computed: {
@@ -1246,13 +1246,13 @@ getBoard() {
 },
 ```
 
-## 79. 解决echarts报There is a chart instance already initialized on the dom.错误
+## 解决echarts报There is a chart instance already initialized on the dom.错误
 ```js
  echarts.init(document.getElementById("echartsTest5")).dispose();//解决echarts dom已经加载的报错
  myChart = echarts.init(document.getElementById("echartsTest5"));
 ```
 
-## 80. 动态echart示例
+## 动态echart示例
 ```js
 for(let i=1; i<=3; i++) {
     let myChart = null;
@@ -1276,7 +1276,7 @@ for(let i=1; i<=3; i++) {
 }
 ```
 
-## 84. echarts饼状图进度条
+## echarts饼状图进度条
 ```js
 dom0Option() {
       return {
@@ -1728,4 +1728,9 @@ defineExpose({
   }
 }
 </style>
+```
+
+## echarts三维地图
+```vue
+
 ```

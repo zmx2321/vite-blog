@@ -980,3 +980,9 @@ export const copyTextToClipboard = async (text) => {
 
 copyTextToClipboard("要复制eeee的文本内容");
 ```
+
+## js通过路径获取文件名
+```js
+fileName = filePath.split(/[/\\]/).pop()
+console.log(fileName)
+```
