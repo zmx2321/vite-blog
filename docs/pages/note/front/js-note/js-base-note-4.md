@@ -1732,5 +1732,831 @@ defineExpose({
 
 ## echarts三维地图
 ```vue
+<template>
+  <section ref="refChart" class="chart_wrap" :class="className" :style="{ height: height, width: width, }"></section>
+</template>
 
+<script setup>
+import { onMounted, onBeforeUnmount, ref, watch, nextTick } from "vue";
+import * as echarts from "echarts";
+import nbGeoJSON from "./GEOJSON/nbGeoJSON.json";
+import 'echarts-gl';
+import mapbg from '@/assets/images//screen/mapbg.png'
+
+/**
+ * 父组件参数
+ */
+const props = defineProps({
+  className: {
+    type: String,
+    default: "chart",
+  },
+  width: {
+    type: String,
+    default: "100%",
+  },
+  height: {
+    type: String,
+    default: "100%",
+  },
+  chartFontColor: {
+    type: String,
+    default: "#000",
+  },
+  autoResize: {
+    type: Boolean,
+    default: true,
+  },
+  chartData: {
+    type: Object,
+    required: true,
+  },
+  txtFontSize: {
+    type: Number,
+    default: 15,
+  },
+});
+
+/**
+ * 定义变量
+ */
+let myChart = null; // 图表
+const refChart = ref(null); // 图表ref
+
+/**
+ * 监听数据
+ */
+watch(() => props.chartData, val => {
+  setOption(val)
+})
+
+/**
+ * 方法
+ */
+/**
+ * 工具方法
+ */
+const setProxyData = (proxyData) => JSON.parse(JSON.stringify(proxyData));
+
+/**
+ * 图表相关
+ */
+// 销毁图表
+const destroyChart = (next) => {
+  if (myChart) {
+    myChart.dispose();
+    myChart = null;
+
+    if (next) {
+      next();
+    }
+  }
+};
+// 重置图表
+const resetChart = () => {
+  // console.log("初始化图表", myChart)
+
+  destroyChart(() => {
+    // 重新启动图表
+    initChart();
+  });
+};
+// 初始化图表
+const initChart = () => {
+  myChart = echarts.init(refChart.value);
+  echarts.registerMap("ningbo", nbGeoJSON);
+  setOption(props.chartData);
+};
+
+// 设置图表
+const setOption = ({ mapData } = {}) => {
+  // 绘制图表
+  myChart.setOption(
+    // ----------------------------  图表配置开始
+    {
+
+      tooltip: {
+        show: true,
+        textStyle: {
+          fontSize: 13,
+          color: "#fff",
+        },
+        trigger: "item",
+        backgroundColor: "rgba(0,0,0,0.3)",
+        borderColor: '#4ABEFE',
+        borderWidth: 2.5,
+        formatter: (params) => {
+          let { data } = params;
+
+          let str = `
+            <div class="chart_tooltip">
+              <h3>${data.name}</h3>
+              <ul>
+                <li>
+                  <dl>
+                    <dt>近30天健康度平均分:</dt>
+                    <dd>${data.data1}</dd>
+                  </dl>  
+                </li>  
+                <li>
+                  <dl>
+                    <dt>投诉数量:</dt>
+                    <dd>${data.data2}</dd>
+                  </dl>  
+                </li>  
+                <li>
+                  <dl>
+                    <dt>故障工单:</dt>
+                    <dd>${data.data3}</dd>
+                  </dl>  
+                </li>  
+                <li>
+                  <dl>
+                    <dt>采编未处理:</dt>
+                    <dd>${data.data4}</dd>
+                  </dl>  
+                </li>  
+                <li>
+                  <dl>
+                    <dt>其他关键信息:</dt>
+                    <dd>${data.data5}</dd>
+                  </dl>  
+                </li>  
+              </ul>
+            </div>
+          `;
+
+          return str;
+        },
+      },
+      series: [
+        {
+          type: 'map3D', // 系列类型
+          map: "ningbo",
+          data: mapData,
+          label: {
+            // 标签的相关设置
+            show: true, // (地图上的城市名称)是否显示标签 [ default: false ]
+            // textStyle: {
+            // 标签的字体样式
+            color: '#fff', // 地图初始化区域字体颜色
+            fontSize: 11, // 字体大小
+            opacity: .8, // 字体透明度
+            // }
+          },
+
+          itemStyle: {
+            color: '#0b3eb3', // 地图板块的颜色
+            borderWidth: 0.5, // (地图板块间的分隔线)图形描边的宽度。加上描边后可以更清晰的区分每个区域   [ default: 0 ]
+            borderColor: 'rgba(0, 178, 255, 1)' // 图形描边的颜色。[ default: #333 ]
+          },
+          emphasis: {
+            label: {
+              show: true, // 是否显示高亮
+              color: '#fff', // 高亮文字颜色
+              fontSize: 15,
+            },
+            itemStyle: {
+              color: '#00ade0', // 地图高亮颜色
+              borderWidth: 10, // 分界线wdith
+              borderColor: '#00ade0' // 分界线颜色
+            }
+          },
+          shading: 'realistic',
+          groundPlane: {
+            // 地面可以让整个组件有个“摆放”的地方，从而使整个场景看起来更真实，更有模型感。
+            show: false, // 是否显示地面。[ default: false ]
+            color: '#0C264D' // 地面颜色。[ default: '#aaa' ]
+          },
+
+          shading: 'realistic', // 三维地理坐标系组件中三维图形的着色效果，echarts-gl 中支持下面三种着色方式:
+          realisticMaterial: {
+            // detailTexture: 'https://cdn.polyhaven.com/asset_img/primary/kloppenheim_06_puresky.png?height=780', // 纹理贴图
+            detailTexture: mapbg, // 纹理贴图
+            textureTiling: 1, // 纹理平铺，1是拉伸，数字表示纹理平铺次数
+            roughness: .8, // 材质粗糙度，0完全光滑，1完全粗糙
+            metalness: 0, // 0材质是非金属 ，1金属
+          }, // 真实感材质相关的配置项，在 shading 为'realistic'时有效。
+          light: {
+            // 光照相关的设置。在 shading 为 'color' 的时候无效。  光照的设置会影响到组件以及组件所在坐标系上的所有图表。合理的光照设置能够让整个场景的明暗变得更丰富，更有层次。
+            main: {
+              color: '#ffe',
+              intensity: 1.1,
+              shadow: true,
+              shadowQuality: 'high',
+              alpha: 25,
+              beta: 40
+            },
+            ambient: {
+              // 全局的环境光设置。
+              color: '#fff', // 环境光的颜色。[ default: #fff ]
+              intensity: 1 // 环境光的强度。[ default: 0.2 ]
+            }
+          },
+
+          viewControl: {
+            // 用于鼠标的旋转，缩放等视角控制。
+            projection: 'orthographic', // 投影方式，默认为透视投影'perspective'，也支持设置为正交投影'orthographic'。
+            autoRotate: false, // 是否开启视角绕物体的自动旋转查看。[ default: false ]
+            autoRotateDirection: 'ccw', // 物体自传的方向。默认是 'cw' 也就是从上往下看是顺时针方向，也可以取 'ccw'，既从上往下看为逆时针方向。
+            autoRotateSpeed: 10, // 物体自传的速度。单位为角度 / 秒，默认为10 ，也就是36秒转一圈。
+            autoRotateAfterStill: 3, // 在鼠标静止操作后恢复自动旋转的时间间隔。在开启 autoRotate 后有效。[ default: 3 ]
+            damping: 0, // 鼠标进行旋转，缩放等操作时的迟滞因子，在大于等于 1 的时候鼠标在停止操作后，视角仍会因为一定的惯性继续运动（旋转和缩放）。[ default: 0.8 ]
+            rotateSensitivity: 1, // 旋转操作的灵敏度，值越大越灵敏。支持使用数组分别设置横向和纵向的旋转灵敏度。默认为1, 设置为0后无法旋转。	rotateSensitivity: [1, 0]——只能横向旋转； rotateSensitivity: [0, 1]——只能纵向旋转。
+            zoomSensitivity: 1, // 缩放操作的灵敏度，值越大越灵敏。默认为1,设置为0后无法缩放。
+            panSensitivity: 1, // 平移操作的灵敏度，值越大越灵敏。默认为1,设置为0后无法平移。支持使用数组分别设置横向和纵向的平移灵敏度
+            panMouseButton: 'middle', // 平移操作使用的鼠标按键，支持：'left' 鼠标左键（默认）;'middle' 鼠标中键 ;'right' 鼠标右键(注意：如果设置为鼠标右键则会阻止默认的右键菜单。)
+            rotateMouseButton: 'left', // 旋转操作使用的鼠标按键，支持：'left' 鼠标左键;'middle' 鼠标中键（默认）;'right' 鼠标右键(注意：如果设置为鼠标右键则会阻止默认的右键菜单。)
+
+            alpha: 23, // 视角绕 x 轴，即上下旋转的角度。配合 beta 可以控制视角的方向。[ default: 40 ]
+            beta: 40, // 视角绕 y 轴，即左右旋转的角度。[ default: 0 ]
+            minAlpha: 5, // 上下旋转的最小 alpha 值。即视角能旋转到达最上面的角度。[ default: 5 ]
+            maxAlpha: 50, // 上下旋转的最大 alpha 值。即视角能旋转到达最下面的角度。[ default: 90 ]
+            minBeta: -360, // 左右旋转的最小 beta 值。即视角能旋转到达最左的角度。[ default: -80 ]
+            maxBeta: 360, // 左右旋转的最大 beta 值。即视角能旋转到达最右的角度。[ default: 80 ]
+
+            center: [-3, 3, -1.5], // 视角中心点，旋转也会围绕这个中心点旋转，默认为[0,0,0]。
+
+            animation: true, // 是否开启动画。[ default: true ]
+            animationDurationUpdate: 1000, // 过渡动画的时长。[ default: 1000 ]
+            animationEasingUpdate: 'cubicInOut', // 过渡动画的缓动效果。[ default: cubicInOut ]
+
+
+            // 缩放大小，数值越大，地图越小
+            zoomSensitivity: 0.5
+          },
+        },
+      ],
+    }
+    // ----------------------------  图表配置结束
+  );
+
+  // mapActive(mapData);
+  window.onresize = function () {
+    // 自适应大小
+    myChart.resize();
+  };
+};
+
+/**
+ * 生命周期
+ */
+onMounted(() => {
+  nextTick(() => {
+    initChart(); // 初始化图表
+  });
+});
+onBeforeUnmount(() => {
+  destroyChart(); // 销毁图表
+});
+
+/**
+ * 暴露方法
+ */
+defineExpose({
+  resetChart,
+});
+</script>
+
+<style lang="scss" scoped>
+.chart_wrap {
+  min-height: 100px;
+  padding: 10px;
+
+  :deep .chart_tooltip {
+    h3 {
+      margin-bottom: 6px;
+      letter-spacing: 1.5px;
+    }
+
+    ul {
+      li {
+        margin-bottom: 1px;
+
+        dl {
+
+          dt,
+          dd {
+            display: inline-block;
+          }
+
+          dt {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
+```
+
+## 渐变双色柱状图
+```vue
+<template>
+  <section ref="refChart" class="chart_wrap" :class="className" :style="{ height: height, width: width }"></section>
+</template>
+
+<script setup>
+import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue'
+import * as echarts from 'echarts'
+
+/**
+ * 父组件参数
+ */
+const props = defineProps({
+  className: {
+    type: String,
+    default: 'chart'
+  },
+  width: {
+    type: String,
+    default: '100%'
+  },
+  height: {
+    type: String,
+    default: '100%'
+  },
+  chartFontColor: {
+    type: String,
+    default: '#000'
+  },
+  autoResize: {
+    type: Boolean,
+    default: true
+  },
+  chartData: {
+    type: Object,
+    required: true
+  },
+  txtFontSize: {
+    type: Number,
+    default: 15
+  }
+})
+
+/**
+ * 定义变量
+ */
+let myChart = null // 图表
+const refChart = ref(null) // 图表ref
+
+const chartConfig = {
+  barWidth: '10',
+  textStyle: {
+    color: '#fff',
+    fontSize: 9,
+  },
+  lineStyle: {
+    color: 'rgba(255, 255, 255, .6)', // 设置横坐标线颜色
+    // width: 2, // 设置横坐标线宽度
+  }
+}
+
+/**
+ * 监听数据
+ */
+// setoption解构传参用这种监听
+/* watch(
+  props.chartData,
+  (val) => {
+    setOption(val)
+  },
+  { deep: true }
+) */
+watch(() => props.chartData, val => {
+  setOption(val)
+})
+
+/**
+ * 方法
+ */
+/**
+ * 工具方法
+ */
+const setProxyData = (proxyData) => JSON.parse(JSON.stringify(proxyData))
+
+/**
+ * 图表相关
+ */
+// 销毁图表
+const destroyChart = (next) => {
+  if (myChart) {
+    myChart.dispose()
+    myChart = null
+
+    if (next) {
+      next()
+    }
+  }
+}
+// 重置图表
+const resetChart = () => {
+  // console.log("初始化图表", myChart)
+
+  destroyChart(() => {
+    // 重新启动图表
+    initChart()
+  })
+}
+// 初始化图表
+const initChart = () => {
+  myChart = echarts.init(refChart.value, 'macarons')
+  setOption(props.chartData);
+  window.onresize = function () {
+    // 自适应大小
+    myChart.resize()
+  }
+}
+
+// 设置图表
+const setOption = (chartData) => {
+  if (!chartData) {
+    return
+  }
+
+  // 绘制图表
+  myChart.setOption(
+    // ----------------------------  图表配置开始
+    {
+      tooltip: {
+        trigger: 'axis',
+        textStyle: {
+          color: '#000',
+          fontSize: 11,
+        },
+        axisPointer: {
+          type: 'cross',
+          crossStyle: {
+            color: '#fff'
+          }
+        }
+      },
+      legend: {
+        itemWidth: 8,
+        itemHeight: 8,
+        right: 0,
+        top: '4%',
+        right: '3%',
+        textStyle: chartConfig.textStyle,
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '5%',
+        height: '76%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        offset: 13,
+        axisTick: {
+          show: false,  // 隐藏刻度线
+        },
+        axisLine: {
+          lineStyle: chartConfig.lineStyle
+        },
+        axisLabel: {
+          padding: [0, 0, 0, -11],
+          interval: 0, // 横轴信息全部显示
+          rotate: 30,
+          ...chartConfig.textStyle,
+          align: 'left',
+        },
+        data: chartData.map(item => item.name),
+      },
+      yAxis: {
+        type: 'value',
+        splitLine: {
+          show: false,
+        },
+        axisTick: {
+          show: false,  // 隐藏刻度线
+        },
+        axisLine: {
+          show: true, // 显示y轴线
+          lineStyle: chartConfig.lineStyle
+        },
+        axisLabel: {
+          color: '#fff',
+          fontSize: 10,
+        }
+      },
+      series: [
+        {
+          name: '月平均',
+          type: 'bar',
+          barWidth: chartConfig.barWidth,
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: 'rgb(17,85,231)' },
+              // { offset: 1, color: 'rgb(17,85,231,0)' },
+              { offset: 1, color: 'rgba(22, 62, 112, 0)' },
+            ]),
+          },
+          data: chartData.map(item => item.monthlyAverage),
+        },
+        {
+          name: '日平均',
+          type: 'bar',
+          barWidth: chartConfig.barWidth,
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: 'rgb(63,222,172)' },
+              // { offset: 1, color: 'rgba(63,222,172,0)' },
+              { offset: 1, color: 'rgba(22, 62, 112, 0)' },
+            ]),
+          },
+          data: chartData.map(item => item.dailyAverage),
+        },
+      ]
+    }
+    // ----------------------------  图表配置结束
+  )
+
+}
+
+/**
+ * 生命周期
+ */
+onMounted(() => {
+  nextTick(() => {
+    initChart() // 初始化图表
+  })
+})
+onBeforeUnmount(() => {
+  destroyChart() // 销毁图表
+})
+
+/**
+ * 暴露方法
+ */
+defineExpose({
+  resetChart
+})
+</script>
+
+<style lang="scss" scoped>
+.chart_wrap {
+  min-height: 100px;
+  // cursor: pointer;
+}
+</style>
+```
+
+## 雷达图
+```vue
+<template>
+  <section ref="refChart" class="chart_wrap" :class="className" :style="{ height: height, width: width }"></section>
+</template>
+
+<script setup>
+import { onMounted, onBeforeUnmount, ref, watch, computed, nextTick } from 'vue'
+import * as echarts from 'echarts'
+
+/**
+ * 父组件参数
+ */
+const props = defineProps({
+  className: {
+    type: String,
+    default: 'chart'
+  },
+  width: {
+    type: String,
+    default: '100%'
+  },
+  height: {
+    type: String,
+    default: '100%'
+  },
+  chartFontColor: {
+    type: String,
+    default: '#000'
+  },
+  autoResize: {
+    type: Boolean,
+    default: true
+  },
+  chartData: {
+    type: Object,
+    required: true
+  },
+  txtFontSize: {
+    type: Number,
+    default: 15
+  }
+})
+
+/**
+ * 定义变量
+ */
+let myChart = null // 图表
+const refChart = ref(null) // 图表ref
+
+const chartConfig = {
+  barWidth: '12',
+  textStyle: {
+    color: '#fff',
+    fontSize: 9,
+  },
+  lineStyle: {
+    color: 'rgba(255, 255, 255, .6)', // 设置横坐标线颜色
+    // width: 2, // 设置横坐标线宽度
+  }
+}
+
+const indicator = computed(() => {
+  if (JSON.stringify(props.chartData) === '[]') {
+    return [  //配置各个维度的最大值
+      { name: '', max: 0 },
+    ]
+  }
+  return props.chartData.map(item => {
+    return {
+      name: item.name,
+      max: 100
+    }
+  })
+})
+
+/**
+ * 监听数据
+ */
+watch(() => props.chartData, val => {
+  setOption(val)
+})
+
+/**
+ * 方法
+ */
+/**
+ * 工具方法
+ */
+const setProxyData = (proxyData) => JSON.parse(JSON.stringify(proxyData))
+
+/**
+ * 图表相关
+ */
+// 销毁图表
+const destroyChart = (next) => {
+  if (myChart) {
+    myChart.dispose()
+    myChart = null
+
+    if (next) {
+      next()
+    }
+  }
+}
+// 重置图表
+const resetChart = () => {
+  // console.log("初始化图表", myChart)
+
+  destroyChart(() => {
+    // 重新启动图表
+    initChart()
+  })
+}
+// 初始化图表
+const initChart = () => {
+  myChart = echarts.init(refChart.value, 'macarons')
+  setOption(props.chartData);
+  window.onresize = function () {
+    // 自适应大小
+    myChart.resize()
+  }
+}
+
+// 设置图表
+const setOption = (chartData) => {
+  if (!chartData) {
+    return
+  }
+  // 绘制图表
+  myChart.setOption(
+    // ----------------------------  图表配置开始
+    {
+      tooltip: {
+        trigger: 'item',
+        textStyle: {
+          color: '#000',
+          fontSize: 11,
+        },
+      },
+      legend: {
+        itemWidth: 9,
+        itemHeight: 9,
+        icon: "rect",
+        textStyle: {
+          color: "#fff",
+          fontSize: 10
+        },
+        left: 'left',
+        top: '3.5%',
+        left: '2.6%',
+      },
+      radar: {
+        center: ['53%', '50%'],
+        radius: '60%',
+        splitNumber: 5,
+        shape: 'circle', // 设置为圆形
+        indicator: indicator.value,
+        /* indicator: chartData.map(item => {
+          if (item) {
+            return {
+              name: item.name,
+              max: 100
+            }
+          }
+        }), */
+        /* indicator: [  //配置各个维度的最大值
+          { name: '基站环境', max: 100 },
+          { name: '故障告警', max: 100 },
+          { name: '站点价值', max: 100 },
+          { name: '用户感知', max: 100 },
+          { name: '网络质量', max: 100 }
+        ], */
+        axisLine: {
+          show: true,
+          lineStyle: {
+            color: 'rgba(255,255,255,0.6)',
+            type: 'dashed'
+          }
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: 'rgba(255,255,255,0.5)',
+            type: 'dashed'
+          }
+        },
+        splitArea: {
+          show: true,
+          areaStyle: {
+            color: ['rgba(17,85,231,.3)', 'transparent']
+          }
+        }
+      },
+      series: [
+        {
+          type: 'radar',
+          animation: true,
+          data: [{
+            name: "当日各维度评分",
+            value: chartData.map(item => item.value),
+            areaStyle: {
+              // 填充区颜色
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                { offset: 0, color: 'rgba(22, 62, 112, .8)' },
+                { offset: 1, color: 'rgb(74,190,254,.6)' },
+
+              ])
+            },
+            // 线条样式
+            lineStyle: {
+              color: 'rgb(74,194,254,.5)',
+              width: 1.5
+            },
+            symbol: 'circle', // 拐点形状，rect=矩形，circle=圆形
+            // 拐点的大小
+            symbolSize: 5,
+            // 小圆点（拐点）设置为白色
+            itemStyle: {
+              color: '#4abefe'
+            },
+          }]
+        },
+      ]
+    }
+    // ----------------------------  图表配置结束
+  )
+
+}
+
+/**
+ * 生命周期
+ */
+onMounted(() => {
+  nextTick(() => {
+    initChart() // 初始化图表
+  })
+})
+onBeforeUnmount(() => {
+  destroyChart() // 销毁图表
+})
+
+/**
+ * 暴露方法
+ */
+defineExpose({
+  resetChart
+})
+</script>
+
+<style lang="scss" scoped>
+.chart_wrap {
+  min-height: 100px;
+}
+</style>
 ```

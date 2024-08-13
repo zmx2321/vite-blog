@@ -1208,3 +1208,36 @@ const dealExcel = (sheetList) => {
 }
 </style>
 ```
+
+## vue3的计算属性
+```js
+import { computed } from 'vue'
+const indicator = computed(() => {
+  if (JSON.stringify(props.chartData) === '[]') {
+    return [  //配置各个维度的最大值
+      { name: '', max: 0 },
+    ]
+  }
+  return props.chartData.map(item => {
+    return {
+      name: item.name,
+      max: 100
+    }
+  })
+})
+```
+
+## vue3的监听
+```js
+// setoption解构传参用这种监听
+/* watch(
+  props.chartData,
+  (val) => {
+    setOption(val)
+  },
+  { deep: true }
+) */
+watch(() => props.chartData, val => {
+  setOption(val)
+})
+```
