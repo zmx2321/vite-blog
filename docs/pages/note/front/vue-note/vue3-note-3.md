@@ -1242,7 +1242,6 @@ watch(() => props.chartData, val => {
 })
 ```
 
-
 ## 全屏
 ```js
 let isFullscreen = false  // 是否全屏
