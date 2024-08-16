@@ -1246,37 +1246,33 @@ watch(() => props.chartData, val => {
 ```js
 let isFullscreen = false  // 是否全屏
 
-// 全屏
-const setFullScreen = () => {
-  let element = document.documentElement;
-  // 判断是否已经是全屏
-  // 如果是全屏，退出
-  if (isFullscreen) {
+export const setFullScreen = (falg, next) => {
+  if (!falg) {
+    // 全屏
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      document.documentElement.msRequestFullscreen();
+    }
+  } else {
+    // 退出全屏
     if (document.exitFullscreen) {
       document.exitFullscreen();
-    } else if (document.webkitCancelFullScreen) {
-      document.webkitCancelFullScreen();
     } else if (document.mozCancelFullScreen) {
       document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
     } else if (document.msExitFullscreen) {
       document.msExitFullscreen();
     }
-
-    // console.log('已还原！');
-  } else {    // 否则，进入全屏
-    if (element.requestFullscreen) {
-      element.requestFullscreen();
-    } else if (element.webkitRequestFullScreen) {
-      element.webkitRequestFullScreen();
-    } else if (element.mozRequestFullScreen) {
-      element.mozRequestFullScreen();
-    } else if (element.msRequestFullscreen) {
-      // IE11
-      element.msRequestFullscreen();
-    }
-
-    isFullscreen = !isFullscreen
-    // console.log('已全屏！');
   }
+
+  next()
 }
+
+<div class="title" @click="setFullScreen(isFullscreen, () => { isFullscreen = !isFullscreen })">
 ```
