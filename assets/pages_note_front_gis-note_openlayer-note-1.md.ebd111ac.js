@@ -223,3 +223,4 @@ import{_ as s,o as n,c as a,e as l}from"./app.eca400a4.js";const b=JSON.parse('{
 <span class="line"><span style="color:#24292E;">  </span><span style="color:#D73A49;">return</span><span style="color:#24292E;"> feature</span></span>
 <span class="line"><span style="color:#24292E;">})</span></span>
 <span class="line"><span style="color:#24292E;">console.</span><span style="color:#6F42C1;">log</span><span style="color:#24292E;">(feature)</span></span></code></pre><div class="line-numbers-wrapper" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div>`,22),e=[o];function r(c,t,E,y,i,u){return n(),a("div",null,e)}const d=s(p,[["render",r]]);export{b as __pageData,d as default};
+//# sourceMappingURL=pages_note_front_gis-note_openlayer-note-1.md.ebd111ac.js.map
