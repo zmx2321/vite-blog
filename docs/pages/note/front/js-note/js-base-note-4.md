@@ -2907,3 +2907,94 @@ defineExpose({
 }
 </style>
 ```
+
+## echarts轮播
+- 方案一
+```js
+// 轮播
+const chartAuto = (option) => {
+  let index = 0
+  let timer = null
+
+  const chartData = option.series[0].data
+
+  const autoPlay = () => {
+    if (index === chartData.length) {
+      index = 0
+    }
+
+    myChart.dispatchAction({
+      type: 'highlight',
+      seriesIndex: 0,
+      dataIndex: index
+    })
+
+    myChart.dispatchAction({
+      type: 'showTip',
+      seriesIndex: 0,
+      dataIndex: index
+    })
+
+    index++
+  }
+}
+```
+- 方案二
+```js
+// 轮播
+const chartAuto = (option) => {
+  if (JSON.stringify(props.chartData) === '{}') {
+    return
+  }
+
+  let intervaltime = 2000
+
+  if (changePieInterval) {
+    clearInterval(changePieInterval)
+  }
+
+  let currentIndex = -1; // 当前高亮图形在饼图数据中的下标
+  changePieInterval = setInterval(selectChart, intervaltime); // 设置自动切换高亮图形的定时器
+
+  function highlightChart() { // 取消所有高亮并高亮当前图形
+    if (!myChart) {
+      return
+    }
+
+    for (var idx in option.series[0].data)
+      // 遍历饼图数据，取消所有图形的高亮效果
+      myChart.dispatchAction({
+        type: 'showTip',
+        seriesIndex: 0,
+        dataIndex: idx
+      });
+    // 高亮当前图形
+    myChart.dispatchAction({
+      type: 'showTip',
+      seriesIndex: 0,
+      dataIndex: currentIndex
+    });
+  }
+
+  myChart.on('mouseover', (params) => { // 用户鼠标悬浮到某一图形时，停止自动切换并高亮鼠标悬浮的图形
+    if (changePieInterval)
+      clearInterval(changePieInterval);
+    currentIndex = params.dataIndex;
+    highlightChart();
+  });
+
+  myChart.on('mouseout', (params) => { // 用户鼠标移出时，重新开始自动切换
+    if (changePieInterval)
+      clearInterval(changePieInterval);
+    changePieInterval = setInterval(selectChart, intervaltime);
+  });
+
+  function selectChart() { // 高亮效果切换到下一个图形
+    if (option.series[0].data) {
+      var dataLen = option.series[0].data.length;
+      currentIndex = (currentIndex + 1) % dataLen;
+      highlightChart();
+    }
+  }
+}
+```
