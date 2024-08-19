@@ -2560,3 +2560,350 @@ defineExpose({
 }
 </style>
 ```
+
+## 饼图轮播
+```vue
+<template>
+  <section ref="refChart" class="chart_wrap" :class="className" :style="{ height: height, width: width }"></section>
+</template>
+
+<script setup>
+import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue'
+import * as echarts from 'echarts'
+import { myDebounce } from '@/utils/index'
+
+/**
+ * 父组件参数
+ */
+const props = defineProps({
+  className: {
+    type: String,
+    default: 'chart'
+  },
+  width: {
+    type: String,
+    default: '100%'
+  },
+  height: {
+    type: String,
+    default: '100%'
+  },
+  chartFontColor: {
+    type: String,
+    default: '#000'
+  },
+  autoResize: {
+    type: Boolean,
+    default: true
+  },
+  chartData: {
+    type: Object,
+    required: true
+  },
+  txtFontSize: {
+    type: Number,
+    default: 15
+  }
+})
+
+/**
+ * 定义变量
+ */
+let myChart = null // 图表
+const refChart = ref(null) // 图表ref
+
+let changePieInterval = null
+
+const chartConfig = {
+  barWidth: '12',
+  textStyle: {
+    color: '#fff',
+    fontSize: 10.5,
+  },
+  lineStyle: {
+    color: 'rgba(255, 255, 255, .6)', // 设置横坐标线颜色
+    // width: 2, // 设置横坐标线宽度
+  }
+}
+
+/**
+ * 监听数据
+ */
+/* watch(
+  props.chartData,
+  (val) => {
+    setOption(val)
+  },
+  { deep: true }
+) */
+watch(() => props.chartData, val => {
+  setOption(val)
+})
+
+/**
+ * 方法
+ */
+/**
+ * 工具方法
+ */
+const setProxyData = (proxyData) => JSON.parse(JSON.stringify(proxyData))
+
+/**
+ * 图表相关
+ */
+// 销毁图表
+const destroyChart = (next) => {
+  if (myChart) {
+    myChart.dispose()
+    myChart = null
+
+    if (next) {
+      next()
+    }
+  }
+}
+// 重置图表
+const resetChart = () => {
+  // console.log("初始化图表", myChart)
+
+  destroyChart(() => {
+    // 重新启动图表
+    initChart()
+  })
+}
+// 初始化图表
+const initChart = () => {
+  myChart = echarts.init(refChart.value, 'macarons')
+  setOption(props.chartData);
+
+  window.onresize = function () {
+    // 自适应大小
+    myChart.resize()
+  }
+}
+
+// 轮播
+const chartAuto = (option) => {
+  if (JSON.stringify(props.chartData) === '{}') {
+    return
+  }
+
+  let intervaltime = 2000
+
+  if (changePieInterval) {
+    clearInterval(changePieInterval)
+  }
+
+  let currentIndex = -1; // 当前高亮图形在饼图数据中的下标
+  changePieInterval = setInterval(selectPie, intervaltime); // 设置自动切换高亮图形的定时器
+
+  function highlightPie() { // 取消所有高亮并高亮当前图形
+    if (!myChart) {
+      return
+    }
+
+    for (var idx in option.series[0].data)
+      // 遍历饼图数据，取消所有图形的高亮效果
+      myChart.dispatchAction({
+        type: 'downplay',
+        seriesIndex: 0,
+        dataIndex: idx
+      });
+    // 高亮当前图形
+    myChart.dispatchAction({
+      type: 'highlight',
+      seriesIndex: 0,
+      dataIndex: currentIndex
+    });
+  }
+
+  myChart.on('mouseover', (params) => { // 用户鼠标悬浮到某一图形时，停止自动切换并高亮鼠标悬浮的图形
+    if (changePieInterval)
+      clearInterval(changePieInterval);
+    currentIndex = params.dataIndex;
+    highlightPie();
+  });
+
+  myChart.on('mouseout', (params) => { // 用户鼠标移出时，重新开始自动切换
+    if (changePieInterval)
+      clearInterval(changePieInterval);
+    changePieInterval = setInterval(selectPie, intervaltime);
+  });
+
+  function selectPie() { // 高亮效果切换到下一个图形
+    if (option.series[0].data) {
+      var dataLen = option.series[0].data.length;
+      currentIndex = (currentIndex + 1) % dataLen;
+      highlightPie();
+    }
+  }
+}
+
+// 设置图表
+// const setOption = ({ fieldData, contData } = {}) => {
+const setOption = (chartData) => {
+  if (!chartData) {
+    return
+  }
+
+  // ----------------------------  图表配置开始
+  const option = {
+    tooltip: {
+      trigger: 'item',
+      textStyle: {
+        color: '#000',
+        fontSize: 11,
+      },
+      formatter(val) {
+        const { name } = val
+        let curData = null
+        let sum = 0
+
+        chartData.forEach(item => {
+          if (item.name === name)
+            curData = item
+
+          sum += item.value
+        })
+
+        return `${curData.name}：${curData.value}个 (${parseFloat(curData.value / sum * 100).toFixed(2)}%)`
+      }
+    },
+    title: {
+      text: '基站个数',
+      right: "24.2%",
+      top: "16%",
+      textAlign: "center",
+      show: true,
+      textStyle: {
+        color: "#fff",
+        fontSize: 12,
+        align: "center",
+        fontWeight: 800,
+      },
+    },
+    legend: {
+      show: true,
+      orient: 'vertical',
+      itemWidth: 11,
+      itemHeight: 11,
+      icon: "rect",
+      top: '32%',
+      right: '8%',
+      padding: [0, 0, 0, 0],
+      height: '100%',
+      itemGap: 18,       // 设置图例项之间的间隔
+      textStyle: {
+        color: '#fff',
+        fontSize: '11.5px'
+      },
+      tooltip: {
+        show: false
+      },
+      formatter: name => {
+        let curData = null
+        let sum = 0
+        let avage = 0
+
+        chartData.forEach(item => {
+          if (item.name === name)
+            curData = item
+
+          sum += item.value
+        })
+
+        if (sum !== 0) {
+          avage = parseFloat(curData.value / sum * 100).toFixed(2)
+        }
+
+        return `${curData.name}：${curData.value} 个 (${avage}%)`
+      }
+    },
+    series: [
+      {
+        type: 'pie',
+        radius: ['49%', '81.5%'],
+        center: ['28.5%', '51.5%'],
+        data: chartData,
+        labelLine: {
+          show: false
+        },
+        label: {
+          show: false,
+          position: 'center',
+          formatter(val) {
+            const { name } = val
+            let curData = null
+
+            chartData.forEach(item => {
+              if (item.name === name) {
+                curData = item
+              }
+            })
+
+            return `{title|${name}} \n\n {num|${curData.value}个}`
+          }
+        },
+        emphasis: {
+          label: {
+            show: true,
+            rich: {
+              // 标题
+              title: {
+                color: "#fff",
+                fontSize: 16,
+                fontWeight: 800,
+              },
+              num: {
+                color: "#4ABEFE",
+                fontSize: 22,
+                fontWeight: 900,
+              },
+            }
+          }
+        },
+      }
+    ]
+  }
+  // ----------------------------  图表配置结束
+
+  // 绘制图表
+  myChart.setOption(option)
+  // 轮播
+  chartAuto(option)
+}
+
+const setColor = (color1, color2) => {
+  return new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: color1 },
+    { offset: 1, color: color2 }
+  ])
+}
+
+/**
+ * 生命周期
+ */
+onMounted(() => {
+  nextTick(() => {
+    initChart() // 初始化图表
+  })
+})
+onBeforeUnmount(() => {
+  destroyChart() // 销毁图表
+})
+
+/**
+ * 暴露方法
+ */
+defineExpose({
+  resetChart,
+  setColor
+})
+</script>
+
+<style lang="scss" scoped>
+.chart_wrap {
+  min-height: 100px;
+}
+</style>
+```

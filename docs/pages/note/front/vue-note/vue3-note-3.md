@@ -1274,5 +1274,28 @@ export const setFullScreen = (falg, next) => {
   next()
 }
 
+watch(() => isFullscreen.value, () => {
+  setTimeout(() => {
+    nextTick(() => {
+      refLeftPage.value && refLeftPage.value.resetChart()
+      refCenterPage.value && refCenterPage.value.resetChart()
+      refRightPage.value && refRightPage.value.resetChart()
+    })
+  }, 500)
+})
+
+// 监听全屏状态修改标识
+const setFullScreenFlag = (e) => {
+  window.addEventListener('fullscreenchange', (event) => {
+    if (document.fullscreenElement) {
+      // console.log('进入全屏模式');
+      isFullscreen.value = true
+    } else {
+      // console.log('退出全屏模式');
+      isFullscreen.value = false
+    }
+  });
+}
+
 <div class="title" @click="setFullScreen(isFullscreen, () => { isFullscreen = !isFullscreen })">
 ```
