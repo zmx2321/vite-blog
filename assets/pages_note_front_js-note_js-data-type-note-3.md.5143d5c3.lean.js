@@ -1,2 +1,0 @@
-import{_ as s,o as n,c as a,e as l}from"./app.eca400a4.js";const u=JSON.parse('{"title":"js中的对象","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/js-note/js-data-type-note-3.md","filePath":"pages/note/front/js-note/js-data-type-note-3.md","lastUpdated":1700187933000}'),p={name:"pages/note/front/js-note/js-data-type-note-3.md"},o=l("",53),e=[o];function c(r,t,E,y,i,b){return n(),a("div",null,e)}const m=s(p,[["render",c]]);export{u as __pageData,m as default};
-//# sourceMappingURL=pages_note_front_js-note_js-data-type-note-3.md.5143d5c3.js.map
