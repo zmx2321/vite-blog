@@ -925,3 +925,47 @@ setInterval(() => {
   console.log(getDateFormate())
 }, 1000);
 ```
+
+## 全屏
+```js
+watch(() => isFullscreen.value, () => {
+  resetAllChart()
+})
+
+// 监听esc
+const getESC = () => {
+  // 监听esc退出全屏
+  window.addEventListener('keydown', (e) => {
+    // console.log('监听esc')
+    if (e.keyCode === 27) {
+      resetAllChart()
+    }
+  });
+}
+
+// 判断是否全屏
+const getIsFullScreenStatus = (into, out) => {
+  if (document.fullscreenElement || document.webkitIsFullScreen || document.mozFullScreen) {
+    isFullscreen.value = true
+
+    if (into) { into() }
+  } else {
+    isFullscreen.value = false
+
+    if (out) { out() }
+  }
+}
+
+// 监听全屏状态修改标识
+const setFullScreenFlag = (e) => {
+  getIsFullScreenStatus() // 判断是否全屏
+
+  window.addEventListener('fullscreenchange', (event) => {
+    getIsFullScreenStatus(() => {
+      // console.log('进入全屏模式');
+    }, () => {
+      // console.log('退出全屏模式');
+    })
+  });
+}
+```
