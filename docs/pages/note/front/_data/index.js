@@ -7,6 +7,12 @@ const siteData = [
     items: [
       {
         icon: "",
+        name: "项目笔记",
+        desc: "项目中遇到的开发中的问题及解决方案",
+        link: `${base}/pages/note/front/project-note/`,
+      },
+      {
+        icon: "",
         name: "js笔记",
         desc: "",
         link: `${base}/pages/note/front/js-note/js-base-note-1`,
@@ -19,9 +25,9 @@ const siteData = [
       },
       {
         icon: "",
-        name: "harmonyOS笔记",
+        name: "vue笔记",
         desc: "",
-        link: `${base}/pages/note/front/harmonyOS-note/`,
+        link: `${base}/pages/note/front/vue-note/`,
       },
       {
         icon: "",
@@ -31,7 +37,7 @@ const siteData = [
       },
       {
         icon: "",
-        name: "v8学习笔记",
+        name: "v8笔记",
         desc: "",
         link: `${base}/pages/note/front/v8-note/v8-note-1`,
       },
@@ -43,13 +49,13 @@ const siteData = [
       },
       {
         icon: "",
-        name: "vue学习笔记",
+        name: "css笔记",
         desc: "",
-        link: `${base}/pages/note/front/vue-note/`,
+        link: `${base}/pages/note/front/css-note/css-note-1`,
       },
       {
         icon: "",
-        name: "react学习笔记",
+        name: "react笔记",
         desc: "",
         link: `${base}/pages/note/front/react-note/cour-react-note-1`,
       },
@@ -61,10 +67,11 @@ const siteData = [
       },
       {
         icon: "",
-        name: "css笔记",
+        name: "harmonyOS笔记",
         desc: "",
-        link: `${base}/pages/note/front/css-note/css-note-1`,
-      },
+        link: `${base}/pages/note/front/harmonyOS-note/`,
+      }
+      
     ],
   },
 ];
