@@ -13,7 +13,6 @@ export const noteFront = {
   react: require("./note-front-items/note-react-items"), // react笔记
   uniapp: require("./note-front-items/note-uniapp-items"), // uniapp笔记
   harmonyOS: require("./note-front-items/note-harmonyOS-items"), // harmonyOS笔记
-  
 };
 
 /**
