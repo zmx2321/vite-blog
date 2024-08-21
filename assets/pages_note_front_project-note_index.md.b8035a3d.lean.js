@@ -1,2 +1,0 @@
-import{_ as e,o as t,c as o,e as a}from"./app.6900ae0b.js";const x=JSON.parse('{"title":"项目笔记","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/project-note/index.md","filePath":"pages/note/front/project-note/index.md","lastUpdated":1724206117000}'),r={name:"pages/note/front/project-note/index.md"},n=a("",4),c=[n];function s(p,i,_,d,l,h){return t(),o("div",null,c)}const u=e(r,[["render",s]]);export{x as __pageData,u as default};
-//# sourceMappingURL=pages_note_front_project-note_index.md.b8035a3d.js.map

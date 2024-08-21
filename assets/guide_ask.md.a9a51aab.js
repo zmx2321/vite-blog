@@ -1,0 +1,2 @@
+import{_ as t,r as a,o as s,c as n,a as o}from"./app.6312079b.js";const f=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"guide/ask.md","filePath":"guide/ask.md","lastUpdated":1719385205000}'),r={name:"guide/ask.md"};function i(d,c,p,l,_,m){const e=a("inside-page");return s(),n("div",null,[o(e,{url:"https://yiyan.baidu.com/",width:"201%",height:"450",style:"margin-left: -208px"},null,8,["url"])])}const g=t(r,[["render",i]]);export{f as __pageData,g as default};
+//# sourceMappingURL=guide_ask.md.a9a51aab.js.map
