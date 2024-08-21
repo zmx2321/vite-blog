@@ -1,0 +1,2 @@
+import{_ as s,o as n,c as a,e as l}from"./app.6900ae0b.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/js-note/js-tools-note-2.md","filePath":"pages/note/front/js-note/js-tools-note-2.md","lastUpdated":1724142708000}'),p={name:"pages/note/front/js-note/js-tools-note-2.md"},o=l("",63),e=[o];function r(c,t,E,y,i,F){return n(),a("div",null,e)}const m=s(p,[["render",r]]);export{u as __pageData,m as default};
+//# sourceMappingURL=pages_note_front_js-note_js-tools-note-2.md.2d3369cc.js.map

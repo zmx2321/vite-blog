@@ -1,0 +1,2 @@
+import{_ as e,o as a,c as t,e as r}from"./app.6900ae0b.js";const m=JSON.parse('{"title":"关于我","description":"","frontmatter":{},"headers":[],"relativePath":"about/index.md","filePath":"about/index.md","lastUpdated":1701324118000}'),i={name:"about/index.md"},o=r("",7),l=[o];function h(n,s,d,c,u,_){return a(),t("div",null,l)}const f=e(i,[["render",h]]);export{m as __pageData,f as default};
+//# sourceMappingURL=about_index.md.67c2b5b7.js.map
