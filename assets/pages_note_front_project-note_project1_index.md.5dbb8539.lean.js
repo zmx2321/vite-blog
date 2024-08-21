@@ -1,2 +1,0 @@
-import{_ as e,o as a,c as o,e as t}from"./app.6312079b.js";const q=JSON.parse('{"title":"项目一","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/project-note/project1/index.md","filePath":"pages/note/front/project-note/project1/index.md","lastUpdated":1724206117000}'),r={name:"pages/note/front/project-note/project1/index.md"},l=t("",20),c=[l];function n(i,h,d,s,u,p){return a(),o("div",null,c)}const k=e(r,[["render",n]]);export{q as __pageData,k as default};
-//# sourceMappingURL=pages_note_front_project-note_project1_index.md.5dbb8539.js.map
