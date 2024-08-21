@@ -44,6 +44,7 @@ export default install
 ```
 
 ## 3. 创建全局组件弹窗
+- `@/components/global/ExportDialog.vue`
 ```vue
 <template>
   <el-dialog class="export_dialog" width="20%" v-model="showDialog" :close-on-click-modal="false"
@@ -167,6 +168,7 @@ defineExpose({ show });
 ```
 
 ## 最后在页面上使用
+- 不需要引入直接就可以在各个页面使用
 ```vue
 <el-button type="primary" icon="Download" @click="refExportDialog.show(queryParams)">导出</el-button>
 
