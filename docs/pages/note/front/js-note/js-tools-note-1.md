@@ -986,3 +986,18 @@ copyTextToClipboard("要复制eeee的文本内容");
 fileName = filePath.split(/[/\\]/).pop()
 console.log(fileName)
 ```
+
+## js监听dom是否发生改变
+```js
+// 创建Observer实例，并指定回调函数
+const observer = new MutationObserver(function (mutations) {
+  mutations.forEach(function (mutation) {
+    // 处理DOM变化
+    resetAllChart()
+  });
+});
+
+const targetNode = document.querySelector('.app-wrapper');
+// observer.observe(targetNode, { childList: true, subtree: true, attributes: true, characterData: true });
+observer.observe(targetNode, { attributes: true, attributeFilter: ['class'] });
+```
