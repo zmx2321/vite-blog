@@ -141,7 +141,7 @@ export default {
       external: ["@vue/repl"],
     },
     build: {
-      sourcemap: true,
+      sourcemap: false,
       chunkSizeWarningLimit: 1800,
       rollupOptions: {
         output: {
