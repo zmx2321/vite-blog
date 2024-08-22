@@ -166,8 +166,9 @@ defineExpose({ show });
 }
 </style>
 ```
+- 注意事项: 我们使用`router.currentRoute.value`获取当前路由的`meta.title`
 
-## 最后在页面上使用
+## 4. 最后在页面上使用
 - 不需要引入直接就可以在各个页面使用
 ```vue
 <el-button type="primary" icon="Download" @click="refExportDialog.show(queryParams)">导出</el-button>
