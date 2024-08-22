@@ -417,3 +417,68 @@ setWaterMarker()
 import mittBus from "@/utils/mittBus"; // mitt - 组件传参工具
 mittBus.emit("setWaterMarker", 130);
 ```
+
+## 最后的彩蛋
+- 最后发现以上的方案还是有问题,痛定思痛,换了个角度思考
+- 能不能让水印固定在页面上不随页面的滚动而滚动
+- 将上面的代码作如下变化
+```js
+// ......
+
+let watermarker_wrap = document.createElement("div");
+watermarker_wrap.style.position = "fixed";
+watermarker_wrap.style.top = "0";
+watermarker_wrap.style.left = "0";
+watermarker_wrap.style.width = "100%";
+watermarker_wrap.style.height = "100%";
+watermarker_wrap.style.zIndex = "999999";
+watermarker_wrap.style.pointerEvents = 'none';
+document.body.appendChild(watermarker_wrap);
+
+// ......
+watermarker_wrap.appendChild(oTemp);
+```
+- 但转念一想,如果只是遍历水印内容,用css固定,完全可以不用这么麻烦
+```vue
+<div v-if="JSON.stringify(urlObj) !== '{}'" class="watermarker_wrap">
+  <div class="item_warp"  v-for="(item1, i1) in 8" :key="i1" :style="`top:${140 * i1}px`">
+    <div class="item" v-for="(item, i) in 10" :key="i" :style="`left:${200 * i + 20}px`">
+      <p style="margin-bottom: 3px">{{ urlObj.userName }}&nbsp;&nbsp;{{ urlObj.suffixPhone }}</p>
+      <p>
+        {{ `${new Date().getFullYear()}`.slice(2) }}
+        {{ `${new Date().getMonth() + 1}`.padStart(2, "0") }}
+        {{ `${new Date().getDate()}`.padStart(2, "0") }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+.watermarker_wrap {
+  position: fixed;
+  width: 100%;
+  height: 1080px;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+  pointer-events: none;
+
+  .item_warp {
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    left: 0;
+    .item {
+      position: absolute;
+      top: 10px;
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.2);
+      transform: rotateZ(-25deg);
+    }
+  }
+}
+</style>
+```
+<br />
+  🤣 🤣 🤣  🐶 🐶 🐶
