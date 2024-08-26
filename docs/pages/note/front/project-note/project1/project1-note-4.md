@@ -10,14 +10,14 @@
 - DialogInfo.vue
 ```vue
 <template>
-  <el-dialog :width="dialogWidth" v-model="showDialog" :close-on-click-modal="false" :modal-append-to-body="false" :close-on-press-escape="false">
+  <el-dialog :width="dialogWidth" v-model="showDialog" :close-on-click-modal="false" :modal-append-to-body="false" :close-on-press-escape="false" class="dialog_info_wrap">
     <template #header>
       <slot name="DialogTitle"></slot>
     </template>
     <div class="container">
       <slot name="DialogContainer"></slot>
     </div>
-    <template #footer>
+    <template #footer v-if="isShowFotter">
       <span class="dialog-footer">
         <slot name="extendBtn"></slot>
         <el-button @click="showDialog = false">关闭</el-button>
@@ -28,6 +28,13 @@
 
 <script setup>
 import { ref } from "vue";
+
+const props = defineProps({
+  isShowFotter: {
+    type: Boolean,
+    default: true,
+  },
+});
 
 let dialogWidth = '75%'
 
@@ -50,6 +57,13 @@ const hide = () => {
 
 defineExpose({ show, hide, setDialogWidth });
 </script>
+
+<style lang="scss">
+.dialog_info_wrap {
+  max-height: 83vh;
+  overflow: auto;
+}
+</style>
 ```
 
 ## 使用组件
@@ -74,7 +88,7 @@ const getIndexDialog = (row) => {
 - `indexDialogInfo.vue`弹窗组件,即直接使用封装组件
 ```vue
 <template>
-    <dialog-info ref="refIndexDialogInfo" class="dialog_info_wrap">
+    <dialog-info ref="refIndexDialogInfo" class="dialog_info_wrap" :isShowFotter="false">
         <!-- 标题 -->
         <template #DialogTitle>
             <span>xxxxx</span>
