@@ -1,5 +1,5 @@
 # 大屏开发技巧整理
-> 此次项目大屏的需求是需要嵌入管理页面中,并且需要放大缩小时两边不能留白,即因不能等比缩放,所以不能使用市面上使用比较多的transform: scale的方法,后来使用vw方案,效果不是很理想,最终使用百分比以及弹性盒子方案来做整体框架布局,为了不影响使用,需要呀在页面变形前加入滚动条,上下滚动的话在各个子模块中使用滚动,不在全局使用
+> 此次项目大屏的需求是需要嵌入管理页面中,并且需要放大缩小时两边不能留白,即因不能等比缩放,所以不能使用市面上使用比较多的transform: scale的方法,后来使用vw方案,效果不是很理想,最终使用百分比以及弹性盒子方案来做整体框架布局,为了不影响使用,需要在页面变形前加入滚动条,上下滚动的话在各个子模块中使用滚动,不在全局使用
 
 ## 自适应方案
 - 鉴于以上需求,并且在页面缩小的时候不影响使用效果,我们在最外层盒子上面添加如下样式
@@ -117,7 +117,6 @@ $marginBetween: 8px;
             height: 100%;
             min-height: 678px;  // 滚动区域
             overflow: hidden;
-
         }
     }
 
@@ -424,8 +423,16 @@ if (targetNode) {
 ```
 
 ## echarts封装,新的取值方式
-> vue3种echart的封装使用方式大体和之前相同,但里面随着页面的缩小放大,echarts需要重新渲染的功能之前使用mix的方式写的,vue3中我们来重新弄一下
+> - vue3种echart的封装使用方式大体和之前相同,但里面随着页面的缩小放大,echarts需要重新渲染的功能之前使用mix的方式写的,vue3中我们来重新弄一下
+> - 这里将echart组件整个粘贴过来了,后面组件主要是在option里面作了修改,大体结构都是一样的,其他echart组件都可以参考本节
 ### 修改之后的echarts封装
+- 在页面使用时,echarts子组件的渲染会在父组件之前,即先渲染子组件,再渲染父组件
+- 这样导致了,每次echarts里面是没有数据的,同时数据传递是异步的,就更加影响组件的渲染了
+- 梳理一下,我们不做任何操作,页面逻辑是这样的   子组件渲染(数据默认为空) => 父组件渲染 => 异步获取接口数据
+- 但是我们需要 父组件渲染 => 异步获取接口数据 => 子组件渲染
+- 所以我们需要设置监听从父组件传到子组件的数据,在数据加载完成之后再进行渲染
+- 有两种方式,一种是设置flag,在数据请求完成之后,flag为true,再进行渲染图表,但这种方案在echart组件比较多的时候比较麻烦
+- 我们使用第二种,监听,但监听有一个弊端,echart组件是一直存在的,就是数据为空的时候会进行一次加载,所以在echarts里面需要进行一次非空判断
 - 注: 里面还包含了轮播代码
 ```vue
 <template>
@@ -502,7 +509,7 @@ const chartConfig = {
   },
   { deep: true }
 ) */
-// 监听重新修改之后
+// 重新修改传值方式之后,监听需要修改
 watch(() => props.chartData, val => {
   setOption(val)
 })
@@ -540,12 +547,14 @@ const resetChart = () => {
 }
 // 初始化图表
 const initChart = () => {
-  myChart = echarts.init(refChart.value, 'macarons')
-  setOption(props.chartData);
+    myChart = echarts.init(refChart.value, 'macarons')
+    setOption(props.chartData);
 
-  window.addEventListener('resize', myDebounce(() => {
-    resetChart()
-  }));
+    // 使用防抖减少渲染次数
+    // 在页面放大或缩小时,重新渲染echart
+    window.addEventListener('resize', myDebounce(() => {
+        resetChart()
+    }));
 }
 
 // 轮播
@@ -665,7 +674,7 @@ const setOption = (chartData) => {
         ...chartConfig.textStyle,
         align: 'left',
       },
-      data: chartData.map(item => item.name),
+      data: chartData.map(item => item.name),  // 对象数组使用map转换成name的数组传入
     },
     yAxis: {
       type: 'value',
@@ -738,14 +747,8 @@ defineExpose({
 ```
 
 ### 在页面中使用
-- 在页面使用时,echarts子组件的渲染会在父组件之前,即先渲染子组件,再渲染父组件
-- 这样导致了,每次echarts里面是没有数据的,同时数据传递是异步的,就更加影响组件的渲染了
-- 梳理一下,我们不做任何操作,页面逻辑是这样的   子组件渲染(数据默认为空) => 父组件渲染 => 异步获取接口数据
-- 但是我们需要 父组件渲染 => 异步获取接口数据 => 子组件渲染
-- 所以我们需要设置监听从父组件传到子组件的数据,在数据加载完成之后再进行渲染
-- 有两种方式,一种是设置flag,在数据请求完成之后,flag为true,再进行渲染图表,但这种方案在echart组件比较多的时候比较麻烦
-- 我们使用第二种,监听,但监听有一个弊端,echart组件是一直存在的,就是数据为空的时候会进行一次加载,所以在echarts里面需要进行一次非空判断
-- 具体封装代码见上
+- 在之前的封装中,是字段名和值分开传入,每次都需要将对象数组重组传入,我们现在直接将对象数组传入echart组件中,用map的形式将数组传入
+- 具体代码见上
 ```vue
 <right-chart-1 ref="refRightChart1" :chart-data="rightChart1Data" />
 
@@ -763,7 +766,7 @@ const getRightChart1Data = async () => {
   // 数据处理
   // ......
 
-  // 假数据
+  // 假数据 - 使用对象数组
   rightChart1Data.value = [
     { name: '慈溪市', value: 85 },
     { name: '余姚市', value: 66 },
@@ -816,9 +819,642 @@ export const myDebounce = (fn, delay = 500) => {
 ```
 
 ## 进行全屏时遇到的一些问题
+> 因为大屏是作为子页面的,有时候有菜单栏,有时候没有,有时候菜单栏收起,有时候展开,有4种情况
+- 全屏代码 - 常规的全屏按钮
+```js
+// falg为当前的全屏状态
+export const setFullScreen = (falg) => {
+  if (!falg) {
+    // 全屏
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      document.documentElement.msRequestFullscreen();
+    }
+  } else {
+    // 退出全屏
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+  }
+}
+
+// 使用
+// api相关
+import { setFullScreen } from "@/utils/index.js";
+<button class="title" @click="setFullScreen(isFullscreen)">{{ isFullscreen ? '退出全屏' : '全屏' }}<button>
+```
+- 上面是根据状态来进行全屏操作的,所以需要监听全屏状态的变化,来修改flag状态,上面那个方法才能生效
+- 如果在全屏的状态,点击跳转到单独的大屏页面,页面是重新加载了,但状态值还没有发生改变,所以要在页面一加载的时候就判断当前的全屏状态
+```js
+// 判断是否全屏方法封装
+const getIsFullScreenStatus = (into, out) => {
+  if (document.fullscreenElement || document.webkitIsFullScreen || document.mozFullScreen) {
+    isFullscreen.value = true
+
+    if (into) { into() }
+  } else {
+    isFullscreen.value = false
+
+    if (out) { out() }
+  }
+}
+
+// 监听全屏状态修改标识
+const setFullScreenFlag = (e) => {
+  getIsFullScreenStatus() // 页面一加载就先判断是否全屏
+
+  // 监听是否全屏事件
+  window.addEventListener('fullscreenchange', () => {
+    // 可以写一些进出全屏的回调
+    getIsFullScreenStatus(() => {
+        // console.log('进入全屏模式');
+    }, () => {
+        // console.log('退出全屏模式');
+    })
+  });
+}
+
+const initPage = ()=> {
+    setFullScreenFlag() // 监听全屏状态修改标识
+}
+```
 
 ## echarts三维地图是怎么形成的
+- 这里贴出三维地图的echart配置
+```js
+<center-chart-1 ref="refCenterChart1" :chart-data="centerChart1Data" />
+
+centerChart1Data.value = [
+    {
+      name: "aaaa",
+      data1: 99, 
+    },
+    {
+      name: "bbbb",
+      data1: 85,
+    },
+    {
+      name: "cccc",
+      data1: 88,
+    },
+];
+
+<section ref="refChart"></section>
+import nbGeoJSON from "./GEOJSON/nbGeoJSON.json";
+// 初始化图表
+const initChart = () => {
+  myChart = echarts.init(refChart.value);
+  echarts.registerMap("ningbo", nbGeoJSON);
+  setOption(props.chartData);
+};
+
+const option = {
+    tooltip: {
+        show: true,
+        textStyle: {
+            fontSize: 13,
+            color: "#fff",
+        },
+        trigger: "item",
+        backgroundColor: "rgba(0,0,0,0.3)",
+        borderColor: 'rgba(74,190,254,0.5)',
+        borderWidth: 2.5,
+        formatter: (params) => {
+            let { data } = params;
+
+            let str = `
+                <div class="chart_tooltip">
+                    <h3>${data.name}</h3>
+                    <ul>
+                        <li>
+                            <dl>
+                                <dt>xxxxxx:</dt>
+                                <dd>${data.data1}</dd>
+                            </dl>  
+                        </li>  
+                    </ul>
+                </div>
+            `;
+
+            return str;
+        },
+    },
+    series: [
+        {
+            type: 'map3D', // 系列类型
+            map: "ningbo",
+            data: chartData,
+            label: {
+                // 标签的相关设置
+                show: true, // (地图上的城市名称)是否显示标签 [ default: false ]
+                // 标签的字体样式
+                color: '#fff', // 地图初始化区域字体颜色
+                fontSize: 11, // 字体大小
+                opacity: .8, // 字体透明度
+            },
+            itemStyle: {
+                color: '#0b3eb3', // 地图板块的颜色
+                borderWidth: 0.5, // (地图板块间的分隔线)图形描边的宽度。加上描边后可以更清晰的区分每个区域   [ default: 0 ]
+                borderColor: 'rgba(0, 178, 255, 1)' // 图形描边的颜色。[ default: #333 ]
+            },
+            emphasis: {
+                label: {
+                    show: true, // 是否显示高亮
+                    color: '#fff', // 高亮文字颜色
+                    fontSize: 15,
+                },
+                itemStyle: {
+                    color: '#00ade0', // 地图高亮颜色
+                    borderWidth: 10, // 分界线wdith
+                    borderColor: '#00ade0' // 分界线颜色
+                }
+            },
+            shading: 'realistic',
+            groundPlane: {
+                // 地面可以让整个组件有个“摆放”的地方，从而使整个场景看起来更真实，更有模型感。
+                show: false, // 是否显示地面。[ default: false ]
+                color: '#0C264D' // 地面颜色。[ default: '#aaa' ]
+            },
+            shading: 'realistic', // 三维地理坐标系组件中三维图形的着色效果，echarts-gl 中支持下面三种着色方式:
+            realisticMaterial: {
+                // detailTexture: 'https://cdn.polyhaven.com/asset_img/primary/kloppenheim_06_puresky.png?height=780', // 纹理贴图
+                detailTexture: mapbg, // 纹理贴图
+                textureTiling: 1, // 纹理平铺，1是拉伸，数字表示纹理平铺次数
+                roughness: .8, // 材质粗糙度，0完全光滑，1完全粗糙
+                metalness: 0, // 0材质是非金属 ，1金属
+            }, // 真实感材质相关的配置项，在 shading 为'realistic'时有效。
+            light: {
+                // 光照相关的设置。在 shading 为 'color' 的时候无效。  光照的设置会影响到组件以及组件所在坐标系上的所有图表。合理的光照设置能够让整个场景的明暗变得更丰富，更有层次。
+                main: {
+                    color: '#ffe',
+                    intensity: 1.1,
+                    shadow: true,
+                    shadowQuality: 'high',
+                    alpha: 25,
+                    beta: 40
+                },
+                ambient: {
+                    // 全局的环境光设置。
+                    color: '#fff', // 环境光的颜色。[ default: #fff ]
+                    intensity: 1 // 环境光的强度。[ default: 0.2 ]
+                }
+            },
+            viewControl: {
+                // 用于鼠标的旋转，缩放等视角控制。
+                projection: 'orthographic', // 投影方式，默认为透视投影'perspective'，也支持设置为正交投影'orthographic'。
+                autoRotate: false, // 是否开启视角绕物体的自动旋转查看。[ default: false ]
+                autoRotateDirection: 'ccw', // 物体自传的方向。默认是 'cw' 也就是从上往下看是顺时针方向，也可以取 'ccw'，既从上往下看为逆时针方向。
+                autoRotateSpeed: 10, // 物体自传的速度。单位为角度 / 秒，默认为10 ，也就是36秒转一圈。
+                autoRotateAfterStill: 3, // 在鼠标静止操作后恢复自动旋转的时间间隔。在开启 autoRotate 后有效。[ default: 3 ]
+                damping: 0, // 鼠标进行旋转，缩放等操作时的迟滞因子，在大于等于 1 的时候鼠标在停止操作后，视角仍会因为一定的惯性继续运动（旋转和缩放）。[ default: 0.8 ]
+                rotateSensitivity: 1, // 旋转操作的灵敏度，值越大越灵敏。支持使用数组分别设置横向和纵向的旋转灵敏度。默认为1, 设置为0后无法旋转。	rotateSensitivity: [1, 0]——只能横向旋转； rotateSensitivity: [0, 1]——只能纵向旋转。
+                zoomSensitivity: 1, // 缩放操作的灵敏度，值越大越灵敏。默认为1,设置为0后无法缩放。
+                panSensitivity: 1, // 平移操作的灵敏度，值越大越灵敏。默认为1,设置为0后无法平移。支持使用数组分别设置横向和纵向的平移灵敏度
+                panMouseButton: 'middle', // 平移操作使用的鼠标按键，支持：'left' 鼠标左键（默认）;'middle' 鼠标中键 ;'right' 鼠标右键(注意：如果设置为鼠标右键则会阻止默认的右键菜单。)
+                rotateMouseButton: 'left', // 旋转操作使用的鼠标按键，支持：'left' 鼠标左键;'middle' 鼠标中键（默认）;'right' 鼠标右键(注意：如果设置为鼠标右键则会阻止默认的右键菜单。)
+
+                alpha: 23, // 视角绕 x 轴，即上下旋转的角度。配合 beta 可以控制视角的方向。[ default: 40 ]
+                beta: 40, // 视角绕 y 轴，即左右旋转的角度。[ default: 0 ]
+                minAlpha: 5, // 上下旋转的最小 alpha 值。即视角能旋转到达最上面的角度。[ default: 5 ]
+                maxAlpha: 50, // 上下旋转的最大 alpha 值。即视角能旋转到达最下面的角度。[ default: 90 ]
+                minBeta: -360, // 左右旋转的最小 beta 值。即视角能旋转到达最左的角度。[ default: -80 ]
+                maxBeta: 360, // 左右旋转的最大 beta 值。即视角能旋转到达最右的角度。[ default: 80 ]
+
+                center: [-3, 3, -1.5], // 视角中心点，旋转也会围绕这个中心点旋转，默认为[0,0,0]。
+
+                animation: true, // 是否开启动画。[ default: true ]
+                animationDurationUpdate: 1000, // 过渡动画的时长。[ default: 1000 ]
+                animationEasingUpdate: 'cubicInOut', // 过渡动画的缓动效果。[ default: cubicInOut ]
+
+
+                // 缩放大小，数值越大，地图越小
+                zoomSensitivity: 0.5
+            },
+        },
+    ],
+}
+```
 
 ## 如何让eacharts饼图颜色渐变
+- 如果要单独设置饼图数据的颜色,需要在series的data属性里面单独作配置
+```js
+<section ref="refChart"></section>
+
+// 设置图表
+const setOption = (chartData) => {
+  if (!chartData) {
+    return
+  }
+
+  // ----------------------------  图表配置开始
+  const option = {
+    tooltip: {
+      trigger: 'item',
+      textStyle: {
+        color: '#000',
+        fontSize: 11,
+      },
+      formatter(val) {
+        const { name } = val
+        let curData = null
+        let sum = 0
+
+        chartData.forEach(item => {
+          if (item.name === name)
+            curData = item
+
+          sum += item.value
+        })
+
+        return `${curData.name}：${curData.value}个 (${parseFloat(curData.value / sum * 100).toFixed(2)}%)`
+      }
+    },
+    title: {
+      text: '基站个数',
+      right: "24.2%",
+      top: "16%",
+      textAlign: "center",
+      show: true,
+      textStyle: {
+        color: "#fff",
+        fontSize: 12,
+        align: "center",
+        fontWeight: 800,
+      },
+    },
+    legend: {
+      show: true,
+      orient: 'vertical',
+      itemWidth: 11,
+      itemHeight: 11,
+      icon: "rect",
+      top: '32%',
+      right: '8%',
+      padding: [0, 0, 0, 0],
+      height: '100%',
+      itemGap: 18,       // 设置图例项之间的间隔
+      textStyle: {
+        color: '#fff',
+        fontSize: '11.5px'
+      },
+      tooltip: {
+        show: false
+      },
+      formatter: name => {
+        let curData = null
+        let sum = 0
+        let avage = 0
+
+        chartData.forEach(item => {
+          if (item.name === name)
+            curData = item
+
+          sum += item.value
+        })
+
+        if (sum !== 0) {
+          avage = parseFloat(curData.value / sum * 100).toFixed(2)
+        }
+
+        return `${curData.name}：${curData.value} 个 (${avage}%)`
+      }
+    },
+    series: [
+      {
+        type: 'pie',
+        radius: ['49%', '81.5%'],
+        center: ['28.5%', '51.5%'],
+        data: chartData,  // 在这里使用数据
+        labelLine: {
+          show: false
+        },
+        label: {
+          show: false,
+          position: 'center',
+          formatter(val) {
+            const { name } = val
+            let curData = null
+
+            chartData.forEach(item => {
+              if (item.name === name) {
+                curData = item
+              }
+            })
+
+            return `{title|${name}} \n\n {num|${curData.value}个}`
+          }
+        },
+        emphasis: {
+          label: {
+            show: true,
+            rich: {
+              // 标题
+              title: {
+                color: "#fff",
+                fontSize: 16,
+                fontWeight: 800,
+              },
+              num: {
+                color: "#4ABEFE",
+                fontSize: 22,
+                fontWeight: 900,
+              },
+            }
+          }
+        },
+      }
+    ]
+  }
+  // ----------------------------  图表配置结束
+
+  // 绘制图表
+  myChart.setOption(option)
+  // 轮播
+  chartAuto(option)
+}
+
+// 对外供出渐变色方法
+const setColor = (color1, color2) => {
+  return new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: color1 },
+    { offset: 1, color: color2 }
+  ])
+}
+
+/**
+ * 生命周期
+ */
+onMounted(() => {
+  nextTick(() => {
+    initChart() // 初始化图表
+  })
+})
+
+onBeforeUnmount(() => {
+  destroyChart() // 销毁图表
+})
+
+/**
+ * 暴露方法
+ */
+defineExpose({
+  resetChart,
+  setColor
+})
+```
+- 使用
+```js
+<left-chart-2 ref="refLeftChart2" :chart-data="leftChart2Data" />
+
+const refLeftChart2 = ref(null)
+const leftChart2Data = ref([])
+
+// 接口数据
+const getLeftChart2Data = async () => {
+  // 获取接口数据接口
+  const resDataData = await apiCommon(screenApi.getDistributionInfo);
+
+  const opacity = '.35'
+
+  // const colorArr = ['#D65755', '#8B6BE9', '#F0D18C', '#4389F6', '#EE9D73']
+  const colorArr = [
+    refLeftChart2.value.setColor('#D65755', `rgba(214, 87, 85, ${opacity})`),
+    refLeftChart2.value.setColor('#8B6BE9', `rgba(139, 107, 233, ${opacity})`),
+    refLeftChart2.value.setColor('#F0D18C', `rgba(240, 107, 140, ${opacity})`),
+    refLeftChart2.value.setColor('#4389F6', `rgba(67, 137, 246, ${opacity})`),
+    refLeftChart2.value.setColor('#EE9D73', `rgba(238, 157, 115, ${opacity})`)
+  ]
+
+  // 数据处理
+  leftChart2Data.value = resDataData.data.map((item, index) => {
+    return {
+      name: item.section,
+      value: item.stationCount,
+      itemStyle: { color: colorArr[index] }
+    }
+  })
+
+  // 假数据 -- 数据处理已完成,使用接口数据,假数据注释即可
+  leftChart2Data.value = [
+    {
+      name: '90-100分', value: 2, itemStyle: {
+        color: refLeftChart2.value.setColor('#D65755', `rgba(214, 87, 85, ${opacity})`),
+      }
+    },
+    {
+      name: '80-90分', value: 3, itemStyle: {
+        color: refLeftChart2.value.setColor('#8B6BE9', `rgba(139, 107, 233, ${opacity})`),
+      }
+    },
+    {
+      name: '70-80分', value: 4, itemStyle: {
+        color: refLeftChart2.value.setColor('#F0D18C', `rgba(240, 107, 140, ${opacity})`),
+      }
+    },
+    {
+      name: '60-70分', value: 10, itemStyle: {
+        color: refLeftChart2.value.setColor('#4389F6', `rgba(67, 137, 246, ${opacity})`),
+      }
+    },
+    {
+      name: '60分以下', value: 3, itemStyle: {
+        color: refLeftChart2.value.setColor('#EE9D73', `rgba(238, 157, 115, ${opacity})`)
+      }
+    },
+  ]
+}
+
+// 初始化图表数据
+const initChartData = () => {
+  getLeftChart2Data()
+}
+```
 
 ## echarts轮播是怎么实现的
+```js
+let changePieInterval = null
+
+// 轮播
+const chartAuto = (option) => {
+  if (JSON.stringify(props.chartData) === '{}') {
+    return
+  }
+
+  let intervaltime = 3000
+
+  if (changePieInterval) {
+    clearInterval(changePieInterval)
+  }
+
+  let currentIndex = -1; // 当前高亮图形在饼图数据中的下标
+  changePieInterval = setInterval(selectChart, intervaltime); // 设置自动切换高亮图形的定时器
+
+  // 取消所有高亮并高亮当前图形
+  const highlightChart = ()=> {
+    if (!myChart) {
+      return
+    }
+
+    for (var idx in option.series[0].data) {
+      // 遍历饼图数据，取消所有图形的高亮效果
+      myChart.dispatchAction({
+        type: 'showTip',
+        seriesIndex: 0,
+        dataIndex: idx
+      });
+    }
+    // 高亮当前图形
+    myChart.dispatchAction({
+      type: 'showTip',
+      seriesIndex: 0,
+      dataIndex: currentIndex
+    });
+  }
+
+  // 用户鼠标悬浮到某一图形时，停止自动切换并高亮鼠标悬浮的图形
+  myChart.on('mouseover', (params) => {
+    if (changePieInterval) {
+      clearInterval(changePieInterval);
+    }
+    currentIndex = params.dataIndex;
+    highlightChart();
+  });
+
+  // 用户鼠标移出时，重新开始自动切换
+  myChart.on('mouseout', (params) => {
+    if (changePieInterval) {
+      clearInterval(changePieInterval);
+    }
+    changePieInterval = setInterval(selectChart, intervaltime);
+  });
+
+  // 高亮效果切换到下一个图形
+  const selectChart = ()=> {
+    if (option.series[0].data) {
+      var dataLen = option.series[0].data.length;
+      currentIndex = (currentIndex + 1) % dataLen;
+      highlightChart();
+    }
+  }
+}
+```
+
+## 让雷达图好看一些
+```js
+const chartConfig = {
+  barWidth: '12',
+  textStyle: {
+    color: '#fff',
+    fontSize: 10.5,
+  },
+  lineStyle: {
+    color: 'rgba(255, 255, 255, .6)', // 设置横坐标线颜色
+    // width: 2, // 设置横坐标线宽度
+  }
+}
+
+const indicator = computed(() => {
+  if (JSON.stringify(props.chartData) === '[]') {
+    return [  //配置各个维度的最大值
+      { name: '', max: 0 },
+    ]
+  }
+  return props.chartData.map(item => {
+    return {
+      name: item.name,
+      max: 100
+    }
+  })
+})
+
+// ----------------------------  图表配置开始
+const option = {
+    tooltip: {
+      trigger: 'item',
+      textStyle: {
+        color: '#000',
+        fontSize: 11,
+      },
+    },
+    legend: {
+      itemWidth: 9,
+      itemHeight: 9,
+      icon: "rect",
+      textStyle: {
+        color: "#fff",
+        fontSize: 10
+      },
+      left: 'left',
+      top: '3.5%',
+      left: '3.1%',
+    },
+    radar: {
+      center: ['50%', '57.5%'],
+      radius: '60%',
+      splitNumber: 5,
+      shape: 'circle', // 设置为圆形
+      indicator: indicator.value,
+      axisLine: {
+        show: true,
+        lineStyle: {
+          color: 'rgba(255,255,255,0.6)',
+          type: 'dashed'
+        }
+      },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: 'rgba(255,255,255,0.5)',
+          type: 'dashed'
+        }
+      },
+      splitArea: {
+        show: true,
+        areaStyle: {
+          color: ['rgba(17,85,231,.3)', 'transparent']
+        }
+      }
+    },
+    series: [
+      {
+        type: 'radar',
+        animation: true,
+        data: [{
+          name: "当日各维度评分(分)",
+          value: chartData.map(item => item.value),
+          areaStyle: {
+            // 填充区颜色
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: 'rgba(22, 62, 112, .8)' },
+              { offset: 1, color: 'rgb(74,190,254,.6)' },
+            ])
+          },
+          // 线条样式
+          lineStyle: {
+            color: 'rgb(74,194,254,.5)',
+            width: 1.5
+          },
+          symbol: 'circle', // 拐点形状，rect=矩形，circle=圆形
+          // 拐点的大小
+          symbolSize: 5,
+          // 小圆点（拐点）设置为白色
+          itemStyle: {
+            color: '#4abefe'
+          },
+        }]
+      },
+    ]
+}
+// ----------------------------  图表配置结束
+```
