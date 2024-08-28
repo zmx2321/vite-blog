@@ -254,28 +254,26 @@ const dataDotList = ref([])
 <ul class="btn_list" @click="btnListLink">
     <li>
         <div class="box"><b></b></div>
-        <span>网络质量</span>
+        <span>aaaa</span>
     </li>
     <li>
         <div class="box"><b></b></div>
-        <span>故障告警</span>
+        <span>bbbb</span>
     </li>
     <li>
         <div class="box"><b></b></div>
-        <span>基站环境</span>
+        <span>cccc</span>
     </li>
     <li>
         <div class="box"><b></b></div>
-        <span>价值收益</span>
+        <span>dddd</span>
     </li>
     <li>
         <div class="box"><b></b></div>
-        <span>用户感知</span>
+        <span>eeee</span>
     </li>
 </ul>
 </template>
-
-<script setup></script>
 
 <style lang="scss" scoped>
 // 整个盒子我们设置绝对定位,不过这里和我们要说的点没有关系
@@ -360,8 +358,36 @@ ul.btn_list {
     }
 }
 </style>
+
+<script setup>
+// 使用冒泡的方式捕获dom并设置dom下的所有事件
+const btnListLink = (e) => {
+  const { target } = e
+  const { innerText } = target
+  // console.log(innerText)
+
+  switch (innerText) {
+    case 'aaaa':
+      console.log('aaaa')
+      break
+    case 'bbbb':
+      console.log('bbbb')
+      break
+    case 'cccc':
+      console.log('cccc')
+      break
+    case 'dddd':
+      console.log('dddd')
+      break
+    case 'eeee':
+      console.log('eeee')
+      break
+  }
+}
+</script>
 ```
 - 以上就完成了在渐变色遇上过度效果时,如何共存的问题,主要就是使用加一个div上去用来显示鼠标移入后的效果,默认为透明,然后鼠标移入的时候,改变透明度,这样就可以实现渐变色和过度效果共存了
+- 同时为了方便,直接使用冒泡去捕获`btn_list`盒子下的所有dom,并为其设置事件
 
 ## 监听dom以到达自适应效果
 > 怎么做到若伊框架侧边栏展开或收起时,大屏页面自适应
