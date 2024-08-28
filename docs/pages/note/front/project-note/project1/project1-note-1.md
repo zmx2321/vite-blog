@@ -1350,7 +1350,7 @@ const chartAuto = (option) => {
 }
 ```
 
-## 让雷达图好看一些
+## 如何让雷达图好看一些
 ```js
 const chartConfig = {
   barWidth: '12',
