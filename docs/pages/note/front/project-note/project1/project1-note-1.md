@@ -132,7 +132,7 @@ $marginBetween: 8px;
         // 接下来设置左右两边内部一个个子模块的高度,宽度则是100%
         .dt_scrn_item {
             width: 100%;
-            height: calc(100% / 3);  // 高度为了精确,我们直接进行计算,三等分
+            height: calc(100% / 3);  // 高度为z了精确,我们直接进行计算,三等分
             overflow: hidden;
         }
     }
@@ -246,6 +246,122 @@ const dataDotList = ref([])
 }
 </style>
 ```
+
+## 遇到渐变色时,如果使用transition过渡属性
+- 页面上我们需要做一个平行四边形效果,背景色渐变,并且需要过渡效果,但是在渐变的时候transition失效,于是我使用了另外一种方案尽量避开渐变和transition的冲突
+```vue
+<template>
+<ul class="btn_list" @click="btnListLink">
+    <li>
+        <div class="box"><b></b></div>
+        <span>网络质量</span>
+    </li>
+    <li>
+        <div class="box"><b></b></div>
+        <span>故障告警</span>
+    </li>
+    <li>
+        <div class="box"><b></b></div>
+        <span>基站环境</span>
+    </li>
+    <li>
+        <div class="box"><b></b></div>
+        <span>价值收益</span>
+    </li>
+    <li>
+        <div class="box"><b></b></div>
+        <span>用户感知</span>
+    </li>
+</ul>
+</template>
+
+<script setup></script>
+
+<style lang="scss" scoped>
+// 整个盒子我们设置绝对定位,不过这里和我们要说的点没有关系
+ul.btn_list {
+    position: absolute;
+    top: 7px;
+    left: 10px;
+    z-index: 1;
+    cursor: pointer;
+
+    // 我们使用li来作为每个需要添加效果的盒子,并设置相对定位
+    li {
+        position: relative;
+        display: inline-block;  // 横向排列
+        width: 88px;
+        height: 26px;
+        cursor: pointer;
+
+        &:not(:last-child) {
+            margin-right: 10px;  // 刨去最后一个,给每个盒子设置间距
+        }
+
+        // 上下两个大盒子,一个是用来作效果的,一个用来放文字
+        .box, span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-width: 88px
+        }
+
+        // 这里开始效果展示 - 核心代码
+        // 这个box就是平行四边形
+        .box {
+            display: block;
+            width: 100%;
+            height: 100%;
+            transform: skew(-20deg);  // 旋转 - 平行四边形核心代码
+            // transform: skew(23deg);
+            background: linear-gradient(to left, #1F4F8A, #0f275a);
+            border-radius: 5px;
+
+            // 平行四边形里面的小盒子用来展示鼠标移入的渐变效果
+            // 默认是隐藏,即透明度为0
+            // 鼠标移入实际上是移到b标签这个位置
+            b {
+                display: block;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to right, #1F4F8A, #0f275a);
+                opacity: 0;
+                transition: .5s linear;
+                border-radius: 5px;
+            }
+
+            // + 表示兄弟属性,这里的文字也需要在鼠标移入的时候变亮
+            &+span {
+                display: block;
+                left: 51%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                font-family: $mainFontFamily;
+                font-size: 16px;
+                color: #4ABEFE;
+                line-height: 100%;
+                text-align: center;
+                opacity: .8;
+                transition: .8s linear;
+            }
+        }
+
+        // 在鼠标移入box的时候触发hover效果
+        // 并且需要作用在box的兄弟元素span和b上
+        &:hover {
+            .box {
+                &+span,
+                    b {
+                    opacity: 1;
+                    transition: .8s linear;
+                }
+            }
+        }
+    }
+}
+</style>
+```
+- 以上就完成了在渐变色遇上过度效果时,如何共存的问题,主要就是使用加一个div上去用来显示鼠标移入后的效果,默认为透明,然后鼠标移入的时候,改变透明度,这样就可以实现渐变色和过度效果共存了
 
 ## 监听dom以到达自适应效果
 > 怎么做到若伊框架侧边栏展开或收起时,大屏页面自适应
@@ -672,8 +788,6 @@ export const myDebounce = (fn, delay = 500) => {
   }
 }
 ```
-
-## 遇到渐变色时,如果使用transition过渡属性
 
 ## 进行全屏时遇到的一些问题
 
