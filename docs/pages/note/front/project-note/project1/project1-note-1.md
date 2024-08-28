@@ -892,10 +892,11 @@ const initPage = ()=> {
 
 ## echarts三维地图是怎么形成的
 - 这里贴出三维地图的echart配置
-```js
+```vue
 <center-chart-1 ref="refCenterChart1" :chart-data="centerChart1Data" />
 
-centerChart1Data.value = [
+<script setup>
+const centerChart1Data.value = [
     {
       name: "aaaa",
       data1: 99, 
@@ -909,8 +910,11 @@ centerChart1Data.value = [
       data1: 88,
     },
 ];
+</script>
 
 <section ref="refChart"></section>
+
+<script setup>
 import nbGeoJSON from "./GEOJSON/nbGeoJSON.json";
 // 初始化图表
 const initChart = () => {
@@ -1044,13 +1048,15 @@ const option = {
         },
     ],
 }
+</script>
 ```
 
 ## 如何让eacharts饼图颜色渐变
 - 如果要单独设置饼图数据的颜色,需要在series的data属性里面单独作配置
-```js
+```vue
 <section ref="refChart"></section>
 
+<script setup>
 // 设置图表
 const setOption = (chartData) => {
   if (!chartData) {
@@ -1212,11 +1218,13 @@ defineExpose({
   resetChart,
   setColor
 })
+<script setup>
 ```
 - 使用
-```js
+```vue
 <left-chart-2 ref="refLeftChart2" :chart-data="leftChart2Data" />
 
+<script setup>
 const refLeftChart2 = ref(null)
 const leftChart2Data = ref([])
 
@@ -1279,6 +1287,7 @@ const getLeftChart2Data = async () => {
 const initChartData = () => {
   getLeftChart2Data()
 }
+</script>
 ```
 
 ## echarts轮播是怎么实现的
