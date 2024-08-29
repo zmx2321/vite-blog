@@ -1,7 +1,7 @@
 # 封装el-card和表格
 > 项目要求在一个弹窗中显示一个个card模块,并且在里面加入表格,因为card比较多,字段也比较多,所以还是需要进行封装
 
-## 1. 封装card核心代码
+## 封装card核心代码
 - IndexDialogInfo
 ```vue
 <template>
