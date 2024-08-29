@@ -1,9 +1,6 @@
 # 项目一
 > 项目基于若依框架,采用vue3+element-plus开发,大部分是表格,有几个基于openlayer开发的地图模块,还有一个大屏模块
 
-## 项目一功能介绍
-> 项目一功能介绍
-
 ## 项目一技术栈
 > vue3+element-plus+openlayer+echarts
 
