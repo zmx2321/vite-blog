@@ -14,12 +14,18 @@
     - theme: brand
       text: AI 搜索
       link: /guide/ask
+    # - theme: alt
+    #   text: 我的vuepress
+    #   link: https://zmx2321.github.io/blog/
     - theme: alt
-      text: 我的vuepress
-      link: https://zmx2321.github.io/blog/
+      text: react-demo
+      link: https://zmx2321.github.io/hooks-admin-demo/
     - theme: alt
-      text: 我的GitHub
-      link: https://github.com/zmx2321
+      text: vue-demo
+      link: https://zmx2321.github.io/vue3-admin-demo/
+    # - theme: alt
+    #   text: 我的GitHub
+    #   link: https://github.com/zmx2321
 ---
 
 <home />

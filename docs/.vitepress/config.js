@@ -126,7 +126,7 @@ export default {
     }, */
     server: {
       host: true,
-      port: 6080,
+      port: 7080,
       cors: true,
       fs: {
         // for when developing with locally linked theme
