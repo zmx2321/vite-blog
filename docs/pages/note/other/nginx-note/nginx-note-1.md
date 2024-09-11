@@ -34,7 +34,7 @@ server {
       root   E:\workspace\_poj;
       index  index.html index.htm;
 
-      include       nginx_cors;
+      include       nginx_cors;  #引入文件,解决跨域问题
   }
 
   error_page   500 502 503 504  /50x.html;
@@ -43,6 +43,7 @@ server {
   }
 }
 
+// 在nginx.conf同级目录下添加nginx_cors文件,整个拷贝
 // nginx_cors
 #坑：1、'Access-Control-Allow-Credentials': true 是不能*  可以 add_header 'Access-Control-Allow-Origin' $http_origin;
 
