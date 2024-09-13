@@ -1299,3 +1299,140 @@ const setFullScreenFlag = (e) => {
 
 <div class="title" @click="setFullScreen(isFullscreen, () => { isFullscreen = !isFullscreen })">
 ```
+
+## 在el-dialog中添加锚点
+```vue
+ <!-- 内容 -->
+<template #DialogContainer>
+    <div class="dialog_wrap">
+        <div class="steps">
+            <ul>
+                <li v-for="(item, index) in title_list" :key="index">
+                    <span ref="spans" :style="{ color: activeStep === index ? '#1987e1' : '#000000' }"
+                        @click="jump(index)">
+                        <i class="el-icon-thumb"></i>{{ item.title }}
+                    </span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="result" @scroll="onScroll">
+            <div class="scroll-item"><span>第一项项</span></div>
+            <div class="scroll-item"><span>第二项项</span></div>
+            <div class="scroll-item"><span>第三项项</span></div>
+            <div class="scroll-item"><span>第四项项</span></div>
+            <div class="scroll-item"><span>第五项项</span></div>
+            <div class="scroll-item"><span>第六项项</span></div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+let activeStep = 0
+let title_list = [
+    { title: '第一项项' },
+    { title: '第二项项' },
+    { title: '第三项项' },
+    { title: '第四项项' },
+    { title: '第五项项' },
+    { title: '第六项项' },
+]
+
+const jump = (index) => {
+    var items = document.querySelectorAll(".scroll-item");
+    for (var i = 0; i < items.length; i++) {
+        if (index === i) {
+            items[i].scrollIntoView({
+                block: "start",//默认跳转到顶部
+                behavior: "smooth"//滚动的速度
+            });
+        }
+    }
+}
+const onScroll = (e) => {
+    let scrollItems = document.querySelectorAll(".scroll-item");
+    for (let i = scrollItems.length - 1; i >= 0; i--) {
+        // 判断滚动条滚动距离是否大于当前滚动项可滚动距离
+        let judge =
+            e.target.scrollTop >= scrollItems[i].offsetTop - scrollItems[0].offsetTop;
+        if (judge) {
+            activeStep = i;
+            break;
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+.el-dialog {
+  overflow: hidden;
+
+  .steps {
+    background-color: #fff;
+    max-height: calc(-16px + 100vh);
+    position: fixed;
+    width: 98px;
+    top: 90px;
+    right: 2%;
+
+    ul {
+      list-style: none;
+      padding-left: 5px;
+      margin: 12px 0;
+    }
+
+    li {
+      margin: 7px 5px;
+
+      span {
+        cursor: pointer;
+
+        &:hover {
+          color: #88bcec !important;
+        }
+
+        i {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+  .result {
+    position: absolute;
+    left: 10px;
+    top: 54px;
+    bottom: 70px;
+    right: 0;
+    padding: 0;
+    overflow-y: scroll;
+
+    .scroll-item {
+      width: 100%;
+      height: 500px;
+      margin-top: 20px;
+      background: rgb(137, 238, 238);
+
+      >span {
+        font-size: 20px;
+      }
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        height: 500px;
+      }
+    }
+  }
+
+  .el-dialog__footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+</style>
+```
