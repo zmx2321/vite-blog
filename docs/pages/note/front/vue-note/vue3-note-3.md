@@ -1436,3 +1436,46 @@ const onScroll = (e) => {
 }
 </style>
 ```
+
+## 选项卡点击恢复到初始状态
+```js
+const jump = (index, e) => {
+    // 侧边栏样式
+    let titleDom = document.querySelectorAll(".anchor_wrap ul li")
+    titleDom.forEach((item, i) => {
+        item.classList.remove('selected')
+    })
+    if (index && e) {
+        e.target.parentNode.classList.add('selected')
+    } else {
+        titleDom[0].classList.add('selected')
+    }
+
+    // 滚动
+    let items = document.querySelectorAll(".scroll-item");
+    if (!index) {
+        items[0].scrollIntoView({
+            block: "start", // 默认跳转到顶部
+            behavior: "smooth" // 滚动的速度
+        });
+
+        return
+    }
+    for (var i = 0; i < items.length; i++) {
+        if (index === i) {
+            items[i].scrollIntoView({
+                block: "start", // 默认跳转到顶部
+                behavior: "smooth" // 滚动的速度
+            });
+        }
+    }
+}
+
+const show = (val) => {
+    nextTick(() => {
+        setTimeout(() => {
+            jump()
+        }, 300);
+    })
+};
+```
