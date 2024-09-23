@@ -302,3 +302,161 @@ export const cardTableData = {
 
 ## 公共DialogInfo代码
 > 具体使用方法可以移步前文 -> [封装一个公共的dialog组件](/pages/note/front/project-note/project1/project1-note-4) 查阅
+
+## 在侧边栏新增锚点
+> 在弹出框中,因为数据量很多,所以需要新增锚点,方便用户快速定位到指定位置
+```vue
+<template>
+    <div class="anchor_wrap">
+        <ul>
+            <li v-for="(item, index) in cardColumnTitle.card4GColumnTitle" :key="index">
+                <span ref="spans" @click="jump(index, $event)">
+                    {{ item }}
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="index_cont" @scroll="onScroll">
+        <index-card class="scroll-item" v-for='(item, index) in cardColumnData.card4GColumnList'
+            :key="index" :indexCardTitle="cardColumnTitle.card4GColumnTitle[getListNum(index)]"
+            :indexCardColumns="item" :indexCardTableData="getCardItemData(4, index)" />
+    </div>
+</template>
+
+<script>
+// 数据
+import { cardColumnData, cardColumnTitle } from './data/cardColumnData'
+import { cardTableData } from './data/cardTableData'  // mock数据
+
+const getListNum = (name) => {
+    return name.split('List')[1]
+}
+
+// 遍历获取表格数据
+const getCardItemData = (type, index) => {
+    return eval(`cardTableData.card${type}GDataList.card${type}GDataList${getListNum(index)}`)
+}
+
+const jump = (index, e) => {
+    // 侧边栏样式
+    let titleDom = document.querySelectorAll(".anchor_wrap ul li")
+    titleDom.forEach((item, i) => {
+        item.classList.remove('selected')
+    })
+    if (index && e) {
+        e.target.parentNode.classList.add('selected')
+    } else {
+        titleDom[0].classList.add('selected')
+    }
+
+    // 滚动
+    let items = document.querySelectorAll(".scroll-item");
+    if (!index) {
+        items[0].scrollIntoView({
+            block: "start", // 默认跳转到顶部
+            behavior: "smooth" // 滚动的速度
+        });
+
+        return
+    }
+    for (var i = 0; i < items.length; i++) {
+        if (index === i) {
+            items[i].scrollIntoView({
+                block: "start", // 默认跳转到顶部
+                behavior: "smooth" // 滚动的速度
+            });
+        }
+    }
+}
+
+const onScroll = (e) => {
+    let scrollItems = document.querySelectorAll(".scroll-item");
+    for (let i = scrollItems.length - 1; i >= 0; i--) {
+        // 判断滚动条滚动距离是否大于当前滚动项可滚动距离
+        let judge =
+            e.target.scrollTop >= scrollItems[i].offsetTop - scrollItems[0].offsetTop;
+        if (judge) {
+            activeStep = i;
+            break;
+        }
+    }
+}
+
+nextTick(() => {
+    setTimeout(() => {
+        jump()
+    }, 300);
+})
+</script>
+
+<style lang="scss" scoped>
+.dialog_info_wrap {
+    .dialog_wrap {
+        .index_wrap {
+            display: flex;
+            justify-content: space-between;
+
+            .anchor_wrap {
+                width: 19%;
+                height: 100%;
+                overflow: auto;
+
+                ul {
+                    width: 95%;
+
+                    li {
+                        margin-bottom: 3px;
+                        padding: 0 10px;
+                        min-height: 30px;
+                        font-size: 13px;
+                        line-height: 30px;
+                        cursor: pointer;
+                        transition: .3s linear;
+
+                        span {
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                            transition: .5s;
+                        }
+
+                        &:hover,
+                        &.selected {
+                            background: #409eff;
+                            border-radius: 5px;
+
+                            span {
+                                // background: #f00;
+                                color: #fff;
+                                transition: .3s linear;
+                            }
+                        }
+
+                        &:hover {
+                            span {
+                                padding-left: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .index_cont {
+                flex: 1;
+                height: 74vh;
+                overflow: auto;
+                scrollbar-width: none;
+
+                .el-card {
+                    cursor: pointer;
+
+                    &:not(:last-child) {
+                        margin-bottom: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+</style>
+```
