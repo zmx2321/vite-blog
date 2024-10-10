@@ -2998,3 +2998,556 @@ const chartAuto = (option) => {
   }
 }
 ```
+
+## echarts简单的折线图
+```vue
+<template>
+  <section ref="refChart" class="chart_wrap" :class="className" :style="{ height: height, width: width }"></section>
+</template>
+
+<script setup>
+import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue'
+import * as echarts from 'echarts'
+import { myDebounce } from '@/utils/index'
+
+/**
+ * 父组件参数
+ */
+const props = defineProps({
+  className: {
+    type: String,
+    default: 'chart'
+  },
+  width: {
+    type: String,
+    default: '100%'
+  },
+  height: {
+    type: String,
+    default: '100%'
+  },
+  chartFontColor: {
+    type: String,
+    default: '#000'
+  },
+  autoResize: {
+    type: Boolean,
+    default: true
+  },
+  chartData: {
+    type: Object,
+    required: true
+  },
+  txtFontSize: {
+    type: Number,
+    default: 15
+  }
+})
+
+/**
+ * 定义变量
+ */
+let myChart = null // 图表
+const refChart = ref(null) // 图表ref
+
+const chartConfig = {
+  barWidth: '10',
+  textStyle: {
+    color: '#000',
+    fontSize: 10.5,
+  },
+  lineStyle: {
+    color: '#000', // 设置横坐标线颜色
+    // width: 2, // 设置横坐标线宽度
+  }
+}
+
+/**
+ * 监听数据
+ */
+// setoption解构传参用这种监听
+/* watch(
+  props.chartData,
+  (val) => {
+    setOption(val)
+  },
+  { deep: true }
+) */
+watch(() => props.chartData, val => {
+  setOption(val)
+})
+
+/**
+ * 方法
+ */
+/**
+ * 工具方法
+ */
+const setProxyData = (proxyData) => JSON.parse(JSON.stringify(proxyData))
+
+/**
+ * 图表相关
+ */
+// 销毁图表
+const destroyChart = (next) => {
+  if (myChart) {
+    myChart.dispose()
+    myChart = null
+
+    if (next) {
+      next()
+    }
+  }
+}
+// 重置图表
+const resetChart = () => {
+  // console.log("初始化图表", myChart)
+
+  destroyChart(() => {
+    // 重新启动图表
+    initChart()
+  })
+}
+// 初始化图表
+const initChart = () => {
+  myChart = echarts.init(refChart.value, 'macarons')
+  setOption(props.chartData);
+
+  window.addEventListener('resize', myDebounce(() => {
+    resetChart()
+  }));
+}
+
+// 设置图表
+const setOption = (chartData) => {
+  if (!chartData) {
+    return
+  }
+
+  // 绘制图表
+  myChart.setOption(
+    // ----------------------------  图表配置开始
+    {
+      title: {
+        text: '单位(分)',
+        top: "-5",
+        right: '2%',
+        textStyle: {
+          color: '#000',
+          fontSize: 10,
+        }
+      },
+      tooltip: {
+        trigger: 'axis',
+        textStyle: {
+          color: '#000',
+          fontSize: 11,
+        },
+        axisPointer: {
+          type: 'cross',
+          crossStyle: {
+            color: '#000'
+          }
+        }
+      },
+      grid: {
+        left: '0',
+        right: '5%',
+        bottom: '8%',
+        height: '80%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        offset: 18,
+        axisTick: {
+          show: true,  // 隐藏刻度线
+        },
+        axisLine: {
+          lineStyle: chartConfig.lineStyle
+        },
+        axisLabel: {
+          padding: [-10, 0, 0, 0],
+          interval: 0, // 横轴信息全部显示
+          rotate: 0,
+          ...chartConfig.textStyle,
+        },
+        data: chartData.map(item => item.name),
+      },
+      yAxis: {
+        type: 'value',
+        splitLine: {
+          show: false,
+        },
+        axisTick: {
+          show: false,  // 隐藏刻度线
+        },
+        axisLine: {
+          show: true, // 显示y轴线
+          lineStyle: chartConfig.lineStyle
+        },
+        axisLabel: {
+          color: '#000',
+          fontSize: 10,
+        }
+      },
+      series: [
+        {
+          name: '趋势',
+          type: 'line',
+          barWidth: chartConfig.barWidth,
+          smooth: true,
+          showSymbol: true, // 在 tooltip hover 的时候显示
+          data: chartData.map(item => item.value),
+          label: {
+            show: true, //开启显示
+            position: 'top', //在上方显示
+            color: '#333',
+            fontSize: 10.5,
+            formatter: '{c}',
+            fontWeight: 800
+          },
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: '#00D3FC' },
+              { offset: 1, color: 'rgba(0,211,252,0)' },
+            ]),
+          },
+          areaStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: 'rgba(0,211,252,30%)' },
+              { offset: 1, color: 'rgba(0,211,252,0)' },
+            ]),
+          }
+        }
+      ]
+    }
+    // ----------------------------  图表配置结束
+  )
+
+  /* myChart.dispatchAction({
+    type: 'showTip',
+    seriesIndex: 0,
+    dataIndex: 1
+  }) */
+}
+
+/**
+ * 生命周期
+ */
+onMounted(() => {
+  nextTick(() => {
+    initChart() // 初始化图表
+  })
+})
+
+onBeforeUnmount(() => {
+  destroyChart() // 销毁图表
+})
+
+/**
+ * 暴露方法
+ */
+defineExpose({
+  resetChart
+})
+</script>
+
+<style lang="scss" scoped>
+.chart_wrap {
+  min-height: 100px;
+  // cursor: pointer;
+}
+</style>
+```
+```vue
+<qushi :chart-data="qushiData" />
+
+<script>
+// 假数据
+let qushiData = ref([
+    { name: '周一', value: 85 },
+    { name: '周二', value: 66 },
+    { name: '周三', value: 88 },
+    { name: '周四', value: 78 },
+    { name: '周五', value: 70 },
+    { name: '周六', value: 12 },
+    { name: '周日', value: 72 },
+])
+</script>
+```
+
+## echarts简单的柱状图
+```vue
+<template>
+  <section ref="refChart" class="chart_wrap" :class="className" :style="{ height: height, width: width }"></section>
+</template>
+
+<script setup>
+import { onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue'
+import * as echarts from 'echarts'
+import { myDebounce } from '@/utils/index'
+
+/**
+ * 父组件参数
+ */
+const props = defineProps({
+  className: {
+    type: String,
+    default: 'chart'
+  },
+  width: {
+    type: String,
+    default: '100%'
+  },
+  height: {
+    type: String,
+    default: '100%'
+  },
+  chartFontColor: {
+    type: String,
+    default: '#000'
+  },
+  autoResize: {
+    type: Boolean,
+    default: true
+  },
+  chartData: {
+    type: Object,
+    required: true
+  },
+  txtFontSize: {
+    type: Number,
+    default: 15
+  }
+})
+
+/**
+ * 定义变量
+ */
+let myChart = null // 图表
+const refChart = ref(null) // 图表ref
+
+const chartConfig = {
+  barWidth: '10',
+  textStyle: {
+    color: '#000',
+    fontSize: 10.5,
+  },
+  lineStyle: {
+    color: '#000', // 设置横坐标线颜色
+    // width: 2, // 设置横坐标线宽度
+  }
+}
+
+/**
+ * 监听数据
+ */
+// setoption解构传参用这种监听
+/* watch(
+  props.chartData,
+  (val) => {
+    setOption(val)
+  },
+  { deep: true }
+) */
+watch(() => props.chartData, val => {
+  setOption(val)
+})
+
+/**
+ * 方法
+ */
+/**
+ * 工具方法
+ */
+const setProxyData = (proxyData) => JSON.parse(JSON.stringify(proxyData))
+
+/**
+ * 图表相关
+ */
+// 销毁图表
+const destroyChart = (next) => {
+  if (myChart) {
+    myChart.dispose()
+    myChart = null
+
+    if (next) {
+      next()
+    }
+  }
+}
+// 重置图表
+const resetChart = () => {
+  // console.log("初始化图表", myChart)
+
+  destroyChart(() => {
+    // 重新启动图表
+    initChart()
+  })
+}
+// 初始化图表
+const initChart = () => {
+  myChart = echarts.init(refChart.value, 'macarons')
+  setOption(props.chartData);
+
+  window.addEventListener('resize', myDebounce(() => {
+    resetChart()
+  }));
+}
+
+// 设置图表
+const setOption = (chartData) => {
+  if (!chartData) {
+    return
+  }
+
+  // 绘制图表
+  myChart.setOption(
+    // ----------------------------  图表配置开始
+    {
+      title: {
+        text: '单位(分)',
+        top: "-5",
+        right: '2%',
+        textStyle: {
+          color: '#000',
+          fontSize: 10,
+        }
+      },
+      tooltip: {
+        trigger: 'axis',
+        textStyle: {
+          color: '#000',
+          fontSize: 11,
+        },
+        axisPointer: {
+          type: 'cross',
+          crossStyle: {
+            color: '#000'
+          }
+        }
+      },
+      grid: {
+        left: '0',
+        right: '5%',
+        bottom: '4.5%',
+        height: '79%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        offset: 18,
+        axisTick: {
+          show: false,  // 隐藏刻度线
+        },
+        axisLine: {
+          lineStyle: chartConfig.lineStyle
+        },
+        axisLabel: {
+          padding: [0, 0, 0, -11],
+          interval: 0, // 横轴信息全部显示
+          rotate: 30,
+          ...chartConfig.textStyle,
+          align: 'left',
+        },
+        data: chartData.map(item => item.name),
+      },
+      yAxis: {
+        type: 'value',
+        splitLine: {
+          show: false,
+        },
+        axisTick: {
+          show: false,  // 隐藏刻度线
+        },
+        axisLine: {
+          show: true, // 显示y轴线
+          lineStyle: chartConfig.lineStyle
+        },
+        axisLabel: {
+          color: '#000',
+          fontSize: 10,
+        }
+      },
+      series: [
+        {
+          name: '趋势',
+          type: 'bar',
+          barWidth: chartConfig.barWidth,
+          // itemStyle: {
+          //   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          //     { offset: 0, color: 'rgb(17,85,231)' },
+          //     // { offset: 1, color: 'rgb(17,85,231,0)' },
+          //     { offset: 1, color: 'rgba(22, 62, 112, 0)' },
+          //   ]),
+          // },
+          data: chartData.map(item => item.value),
+          label: {
+            show: true, //开启显示
+            position: 'top', //在上方显示
+            color: '#333',
+            fontSize: 10.5,
+            formatter: '{c}',
+            fontWeight: 800
+          },
+        }
+      ]
+    }
+    // ----------------------------  图表配置结束
+  )
+
+  /* myChart.dispatchAction({
+    type: 'showTip',
+    seriesIndex: 0,
+    dataIndex: 1
+  }) */
+}
+
+/**
+ * 生命周期
+ */
+onMounted(() => {
+  nextTick(() => {
+    initChart() // 初始化图表
+  })
+})
+
+onBeforeUnmount(() => {
+  destroyChart() // 销毁图表
+})
+
+/**
+ * 暴露方法
+ */
+defineExpose({
+  resetChart
+})
+</script>
+
+<style lang="scss" scoped>
+.chart_wrap {
+  min-height: 100px;
+  // cursor: pointer;
+}
+</style>
+```
+```vue
+<script>
+<quxian :chart-data="quxianData" />
+
+// 假数据
+let quxianData = ref([
+    { name: '慈溪市', value: 85 },
+    { name: '余姚市', value: 66 },
+    { name: '海曙区', value: 88 },
+    { name: '江北区', value: 78 },
+    { name: '镇海区', value: 70 },
+    { name: '奉化区', value: 12 },
+    { name: '鄞州区', value: 72 },
+    { name: '北仑区', value: 33 },
+    { name: '宁海县', value: 95 },
+    { name: '象山县', value: 75 },
+])
+</script>
+```

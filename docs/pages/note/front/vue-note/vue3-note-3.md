@@ -1479,3 +1479,27 @@ const show = (val) => {
     })
 };
 ```
+
+## 插槽传值
+- 父组件
+```vue
+<template>
+    <section class="overview_num_box">
+        <h3>{{ title }}</h3>
+
+        <slot :scoreNum="scoreNum"></slot>
+    </section>
+</template>
+
+<script setup>
+const scoreNum = ref(0)
+</script>
+```
+- 子组件
+```js
+<overview-num-box :title="'今日平均分'">
+    <template v-slot:default="slotProps">
+        <p>{{ slotProps.scoreNum }}分</p>
+    </template>
+</overview-num-box>
+```
