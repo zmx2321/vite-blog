@@ -1001,3 +1001,64 @@ const targetNode = document.querySelector('.app-wrapper');
 // observer.observe(targetNode, { childList: true, subtree: true, attributes: true, characterData: true });
 observer.observe(targetNode, { attributes: true, attributeFilter: ['class'] });
 ```
+
+## 简易的选项卡操作
+```js
+const btnList = document.querySelectorAll(".btn_list li")
+console.log(btnList, target.parentNode)
+
+btnList.forEach((item) => {
+  item.classList.remove("current")
+
+  target.parentNode.classList.add("current")
+})
+```
+
+## 用for...of...遍历数组
+> 需要每隔一秒执行一次方法
+```js
+nextTick(() => {
+  let arr = ['f1', 'f2', 'f3', 'f4', 'f5']
+  for (let i = 0; i < arr.length; i++) {
+    //立即执行函数
+    (() => {
+      setTimeout(() => {
+        refCenterPage.value.setMenuBtn(arr[i]);
+
+        console.log(i, arr[i])
+      }, 1000 * i)
+    })(i)
+  } 
+})
+```
+
+## 递归反复执行循环
+```js
+const AutoClickMenu = () => {
+  const btnList = document.querySelectorAll(".btn_list li")
+  let loopTime = 5000
+
+  const clickTool = (i) => {
+    btnList[i].click()
+    btnList.forEach((item) => {
+      item.classList.remove("current")
+
+      btnList[i].classList.add("current")
+    })
+  }
+
+  for (let i = 0; i < btnList.length; i++) {
+    //立即执行函数
+    (() => {
+      setTimeout(() => {
+        clickTool(i)
+        if (btnList.length === i + 1) {
+          setTimeout(() => {
+            AutoClickMenu()
+          }, loopTime);
+        }
+      }, loopTime * i)
+    })(i)
+  }
+}
+```
