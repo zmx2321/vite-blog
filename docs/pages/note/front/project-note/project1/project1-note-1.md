@@ -1218,8 +1218,9 @@ defineExpose({
   resetChart,
   setColor
 })
-<script setup>
+</script>
 ```
+
 - 使用
 ```vue
 <left-chart-2 ref="refLeftChart2" :chart-data="leftChart2Data" />
@@ -1466,4 +1467,35 @@ const option = {
     ]
 }
 // ----------------------------  图表配置结束
+```
+
+## 如何自动点击按钮,并让他们一直循环
+```js
+const AutoClickMenu = () => {
+  const btnList = document.querySelectorAll(".btn_list li")
+  let loopTime = 5000
+
+  const clickTool = (i) => {
+    btnList[i].click()
+    btnList.forEach((item) => {
+      item.classList.remove("current")
+
+      btnList[i].classList.add("current")
+    })
+  }
+
+  for (let i = 0; i < btnList.length; i++) {
+    //立即执行函数
+    (() => {
+      setTimeout(() => {
+        clickTool(i)
+        if (btnList.length === i + 1) {
+          setTimeout(() => {
+            AutoClickMenu()
+          }, loopTime);
+        }
+      }, loopTime * i)
+    })(i)
+  }
+}
 ```
