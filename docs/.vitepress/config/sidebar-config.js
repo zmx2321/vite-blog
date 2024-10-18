@@ -29,7 +29,6 @@ module.exports = {
   "/pages/note/front/uniapp-note": note.noteFront.uniapp, // uniapp笔记
   "/pages/note/front/harmonyOS-note": note.noteFront.harmonyOS, // harmonyOS笔记
   
-  
   // 后端相关
   "/pages/note/back/java-note": note.noteBack.java, // java笔记
   "/pages/note/back/mysql-note": note.noteBack.mysql, // mysql笔记
@@ -37,6 +36,7 @@ module.exports = {
   // 其他笔记
   "/pages/note/other/git-note": note.noteOther.git, // git笔记
   "/pages/note/other/nginx-note": note.noteOther.nginx, // nginx笔记
+  "/pages/note/other/http-note": note.noteOther.http, // http笔记
   "/pages/note/other/elk-note": note.noteOther.elk, // elk笔记
   "/pages/note/other": note.noteOther.other, // 其他笔记
 };
