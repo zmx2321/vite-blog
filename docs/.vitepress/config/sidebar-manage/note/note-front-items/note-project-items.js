@@ -10,6 +10,10 @@ const project1Config = [
   { text: "实现全局水印功能", link: `${baseUrl}/project1/project1-note-3` },
   { text: "封装一个公共的dialog组件", link: `${baseUrl}/project1/project1-note-4` },
   { text: "封装el-card和表格", link: `${baseUrl}/project1/project1-note-5` },
+  { text: "openlayer工具库封装流程", link: `${baseUrl}/project1/project1-note-6` },
+  { text: "openlayer主要工具", link: `${baseUrl}/project1/project1-note-7` },
+  { text: "openlayer点、线、面的加载和绘制", link: `${baseUrl}/project1/project1-note-8` },
+  { text: "openlayer其他功能的封装", link: `${baseUrl}/project1/project1-note-9` },
 ];
 
 // 项目二 - 项目笔记
