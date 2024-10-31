@@ -1062,3 +1062,10 @@ const AutoClickMenu = () => {
   }
 }
 ```
+
+## js数组根据数值大小取前三以及后三的数值和索引
+```js
+let topThree = tempArr.map((num, index) => ({ num, index })).sort((a, b) => b.num - a.num).slice(0, 3);
+let lastThree = tempArr.map((num, index) => ({ num, index })).sort((a, b) => b.num - a.num).slice(-3);
+console.log(topThree, lastThree);
+```
