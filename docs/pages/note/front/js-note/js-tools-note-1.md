@@ -1069,3 +1069,46 @@ let topThree = tempArr.map((num, index) => ({ num, index })).sort((a, b) => b.nu
 let lastThree = tempArr.map((num, index) => ({ num, index })).sort((a, b) => b.num - a.num).slice(-3);
 console.log(topThree, lastThree);
 ```
+
+## js对象数组根据数值大小修改前三和后三的数据
+```js
+let topThree = overviewData.value.todayDistrictAverage.map((item, index) => ({ ...item, index })).sort((a, b) => b.value - a.value).slice(0, 3)
+let lastThree = overviewData.value.todayDistrictAverage.map((item, index) => ({ ...item, index })).sort((a, b) => b.value - a.value).slice(-3)
+console.log(topThree, lastThree);
+
+topThree.forEach(item => {
+    overviewData.value.todayDistrictAverage[item.index].itemStyle = {
+        color: '#92cc76'
+    }
+})
+lastThree.forEach(item => {
+    overviewData.value.todayDistrictAverage[item.index].itemStyle = {
+        color: '#a90000'
+    }
+})
+```
+
+## js箭头函数自执行
+```js
+data: (() => {
+  let tempArr = []
+  chartData.forEach(item => {
+    if (!(item instanceof Array)) {
+      tempArr.push(item)
+    }
+  })
+  return tempArr.map(item => item.name)
+})()
+
+// 等价于
+
+data: function() {
+  let tempArr = []
+  chartData.forEach(item => {
+    if (!(item instanceof Array)) {
+      tempArr.push(item)
+    }
+  })
+  return tempArr.map(item => item.name)
+}()
+```
