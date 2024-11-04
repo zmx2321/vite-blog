@@ -3551,3 +3551,85 @@ let quxianData = ref([
 ])
 </script>
 ```
+
+## echarts中使用markPoint标记前三项和后三项
+```js
+const setTodayDistrictAverageSort = () => {
+  // 前三
+  let topThree = overviewData.value.todayDistrictAverage.map((item, index) => ({ ...item, index })).sort((a, b) => b.value - a.value).slice(0, 3)
+  // 后三
+  let lastThree = overviewData.value.todayDistrictAverage.map((item, index) => ({ ...item, index })).sort((a, b) => b.value - a.value).slice(-3)
+
+  // 存到数据中
+  overviewData.value.todayDistrictAverage.push({
+      topThree, lastThree,
+  })
+  // console.log(overviewData.value.todayDistrictAverage)
+
+  // echarts单独类型换颜色 
+  topThree.forEach((item, index) => {
+      overviewData.value.todayDistrictAverage[item.index].itemStyle = {
+          color: '#92cc76'
+      }
+  })
+  lastThree.forEach(item => {
+      overviewData.value.todayDistrictAverage[item.index].itemStyle = {
+          color: '#a90000'
+      }
+  })
+}
+
+markPoint: {
+  data: (() => {
+    let tempArr = []
+    chartData.forEach(item => {
+      if (item.topThree) {
+        const { topThree, lastThree } = item
+        // console.log(topThree, lastThree)
+        topThree.forEach((jItem, jIndex) => {
+          tempArr.push({
+            name: jItem.name, value: jItem.value, xAxis: jItem.index, yAxis: parseInt(jItem.value) + 1, itemStyle: {
+              color: '#92cc76',
+            },
+            label: {
+              textStyle: {
+                color: '#0d2c01',
+              },
+              formatter: () => {
+                return jIndex + 1
+              },
+            }
+          })
+        })
+        let lastThreeReverse = lastThree.map((item) => ({ ...item })).sort((a, b) => a.value - b.value)
+        lastThreeReverse.forEach((jItem, jIndex) => {
+          tempArr.push({
+            name: jItem.name, value: jItem.value, xAxis: jItem.index, yAxis: parseInt(jItem.value) + 1, itemStyle: {
+              color: '#a90000'
+            },
+            label: {
+              textStyle: {
+                color: '#fff',
+              },
+              formatter: () => {
+                return chartData.length - jIndex + 1
+              },
+            },
+          })
+        })
+      }
+    })
+
+    return tempArr
+  })(),
+  symbolSize: 32,
+  symbolOffset: [0, -15],
+  label: {
+    show: true,
+    textStyle: {
+      fontSize: 10,
+      fontFamily: 'Arial'
+    }
+  }
+},
+```
