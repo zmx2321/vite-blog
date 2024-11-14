@@ -15,7 +15,8 @@
             ├── DetailDialog.vue  // 弹窗封装
             ├── Lend.vue  // 图例
             ├── SwitchBaseLayer.vue  // 底图切换工具
-            ├── SelectDetailDialog.vue  // 公共弹窗
+            ├── SelectDetailDialog.vue  // 公共弹窗 - 个性化定制
+            ├── SetTokenDialog.vue  // 自定义token - 个性化定制
         ├── icon
         ├── index.vue  // openlayer核心组件,供出核心方法
         ├── mapUtils.js  // openlayer核心封装代码
@@ -34,6 +35,7 @@
 // map core
 import 'ol/ol.css'
 import { Map, View } from 'ol';
+// ......其他引入
 
 /******************************
  * openlayer功能方法封装
@@ -42,6 +44,7 @@ import { Map, View } from 'ol';
 export const removeAllLayer = (olMap) => {
   // 以removeAllLayer移除所有图层为例
 }
+// ......其他方法
 ```
 
 ## openlayer核心组件
@@ -53,15 +56,11 @@ export const removeAllLayer = (olMap) => {
 </template>
 
 <script setup>
-// vue - core
-import { ref, onMounted, defineEmits, nextTick } from "vue";
 // map - core
 import * as mapUtils from "./mapUtils.js";
 
 // 移除所有图层
 const removeAllLayer = (olMap) => {
-  // console.log(olMap, type);
-
   mapUtils.removeAllLayer(olMap);
 };
 
@@ -76,7 +75,6 @@ const resetOlMap = () => {
   mapInit(olMap); // 地图加载完初始化做的一些操作
   getMapInitInfo(olMap); // 地图加载完初始化后获取地图的一些信息
   setOlmap(olMap); // 设置地图
-  // console.log("地图加载完成");
 }
 
 onMounted(() => {
