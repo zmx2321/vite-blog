@@ -35,7 +35,34 @@
 // map core
 import 'ol/ol.css'
 import { Map, View } from 'ol';
-// ......其他引入
+import WebGLTile from 'ol/layer/WebGLTile'; // 瓦片
+// map 加载底图相关
+import { /* OSM, */ XYZ, Vector as VectorSource, Cluster } from 'ol/source';
+// map 坐标相关
+import { fromLonLat, transform, toLonLat } from 'ol/proj';
+import { getTopLeft, getBottomRight, getCenter } from 'ol/extent';
+import { toStringHDMS } from 'ol/coordinate';
+// map 控件相关
+import { FullScreen, Zoom, ZoomSlider, ScaleLine } from "ol/control";
+// map 图层相关
+import Feature from 'ol/Feature';
+import { Point, Circle, Polygon, LineString } from "ol/geom";
+import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';  // VectorLayer表示珊格图层
+import LinearRing from 'ol/geom/LinearRing';
+import Overlay from 'ol/Overlay';  // 气泡
+import { getLength } from 'ol/sphere';
+// map 样式
+import { Circle as CircleStyle, Fill, Stroke, Style, Text, Icon } from 'ol/style';
+// kml
+import { KML, GeoJSON } from 'ol/format';
+// 选择多边形
+import { Draw, defaults/* , Modify, Snap */ } from 'ol/interaction';
+// render
+import { getVectorContext } from "ol/render";
+// 菜单栏
+// import menuUtils from './menuUtils.js'
+// store
+// import { gisDataStore } from '@/store/modules/gis.js'
 
 /******************************
  * openlayer功能方法封装

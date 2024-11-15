@@ -391,6 +391,38 @@ export const getAllLayer = (olMap, next) => {
   }
 }
 
+// 公共动态选项判断
+const setCommonMenuMethod = (condition, commonDynamicMenuMethod) => {
+  if (condition) {
+    if (condition instanceof Array) {
+      if (condition.length !== 0) {
+        // console.log(condition.get('tempType'))
+
+        menuAddSingleMethod(commonDynamicMenuMethod)
+      }
+
+      if (condition.length === 0) {
+        menuUtils.commonMenuMethodsArr = menuUtils.commonMenuMethodsArr.filter(item => item !== commonDynamicMenuMethod)
+      }
+    } else {
+      if (condition instanceof Feature) {
+        if (!condition.get('tempType')) {
+          menuAddSingleMethod(commonDynamicMenuMethod)
+        }
+      } else {
+        menuAddSingleMethod(commonDynamicMenuMethod)
+
+        if (condition.length === 0) {
+          menuUtils.commonMenuMethodsArr = menuUtils.commonMenuMethodsArr.filter(item => item !== commonDynamicMenuMethod)
+        }
+      }
+    }
+  }
+  if (!condition && menuUtils.commonMenuMethodsArr.includes(commonDynamicMenuMethod)) {
+    menuUtils.commonMenuMethodsArr = menuUtils.commonMenuMethodsArr.filter(item => item !== commonDynamicMenuMethod)
+  }
+}
+
 // 设置鼠标右键属性
 export const setContextmenu = (olMap, next, setMenuConfig) => {
   const { commonDynamicMenu, singleMenu } = menuUtils.menuMethodBtn  // 公共动态选项,每个页面有需要才显示
