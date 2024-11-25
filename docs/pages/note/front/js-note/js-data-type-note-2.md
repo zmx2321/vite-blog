@@ -157,3 +157,8 @@ const result = `${name}${score > 60?'的考试成绩及格':'的考试成绩不�
 ```js
 user.phone.slice(-4)
 ```
+
+## js删除字符串指定字符
+```js
+seriesName = seriesName.replace(/[\(分\)]/g, '')
+```

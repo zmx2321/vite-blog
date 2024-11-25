@@ -3633,3 +3633,19 @@ markPoint: {
   }
 },
 ```
+
+## echarts中自定义tooltip
+```js
+formatter(res) {
+  let str = ''
+  res.forEach(item => {
+    const { seriesName, value, marker } = item
+    seriesName = seriesName.replace(/[\(分\)]/g, '')
+
+    if (value !== '-') {
+      str += `${marker} ${seriesName}: ${value}` + '<br />'
+    }
+  })
+  return str
+}
+```
