@@ -398,3 +398,10 @@
 ```bash
 ifconfig | grep "inet " | awk '{print $2}'
 ```
+
+## mac各种服务操作
+- tomcat
+  - `brew services start tomcat`
+  - `catalina start`
+  - 查找tomcat路径
+    - `brew ls tomcat`
