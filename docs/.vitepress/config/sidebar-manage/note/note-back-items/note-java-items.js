@@ -9,4 +9,6 @@ module.exports = [
   { text: "java入门练习题2", link: `${baseUrl}/java-note-3` },
   { text: "java面向对象相关", link: `${baseUrl}/java-note-4` },
   { text: "搭建spring boot框架", link: `${baseUrl}/java-note-5` },
+  { text: "javase的基础知识点", link: `${baseUrl}/java-note-6` },
+  { text: "javase小练习", link: `${baseUrl}/java-note-7` },
 ];
