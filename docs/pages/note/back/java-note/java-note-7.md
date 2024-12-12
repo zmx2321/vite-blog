@@ -165,6 +165,11 @@ public class BookStore {
 
     // 下架书籍
     public static void removeBook(){
+        if(bookList.isEmpty()){
+            System.out.println("暂无书籍,快去上新书籍吧!\n");
+            return;
+        }
+        
         System.out.println("请录入要下架的书籍编号:");
         int bNo = input.nextInt();
 
