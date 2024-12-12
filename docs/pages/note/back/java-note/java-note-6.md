@@ -618,3 +618,71 @@ public class Test {
     }
 }
 ```
+
+## IO流
+### 基本概念    
+- 方向
+  - 输入流、输出流
+- 处理单元
+  - 字节流、字符流
+- 功能
+  - 节点流、处理流
+
+## 代码示例
+- 字符输入流
+```java
+package com.my.test11;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Test {
+    public static void main(String[] args) throws IOException {
+        // 对文件进行操作,必须将文件封装为具体的file类对象
+        File file = new File("/Users/zmx2321/Documents/code/_poj/aa.txt");
+        // 输入字符流
+        FileReader fr = new FileReader(file);
+
+        // 开始动作 - 读取
+        /*int n1 = fr.read();
+        System.out.println(n1);*/
+        int n = fr.read();
+        // 当读取到-1时,表示没有数据流,终止循环
+        while (n != -1) {
+            System.out.println(n);
+            n = fr.read();
+        }
+
+        // 关闭流
+        fr.close();
+    }
+}
+```
+- 字符输出流
+```java
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+/**
+ * 将程序中的内容输出到文件中
+ */
+public class Test1 {
+    public static void main(String[] args) throws IOException {
+        String str = "233333";
+
+        // 对文件进行操作,必须将文件封装为具体的file类对象
+        File file = new File("/Users/zmx2321/Documents/code/_poj/aa.txt");
+
+        // 输出字符流
+        FileWriter fw = new FileWriter(file);
+
+        // 开始动作
+        fw.write(str);
+
+        // 关闭流
+        fw.close();
+    }
+}
+```
