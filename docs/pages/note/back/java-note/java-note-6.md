@@ -799,6 +799,7 @@ public class Test {
 - socket就是应用层和传输层之间的桥梁
 
 ### 代码示例
+#### 单向通信
 - 服务端
 ```java
 package com.my.test13;
@@ -867,6 +868,186 @@ public class TestClient {
         dos.close();
         os.close();
         s.close();
+    }
+}
+```
+#### 双向通信
+- 客户端
+```java
+package com.my.test13;
+
+import java.io.*;
+import java.net.Socket;
+
+/**
+ * 客户端
+ */
+public class TestClient {
+    public static void main(String[] args) throws IOException {
+        System.out.println("客户端启动");
+
+        // 套接字 - 指定服务器的ip和端口
+        Socket s = new Socket("192.168.2.1", 8888);
+
+        // 利用输出流传送数据
+        OutputStream os = s.getOutputStream();
+        // 数据流
+        DataOutputStream dos = new DataOutputStream(os);
+
+        // 利用数据流往外传送数据
+        dos.writeUTF("你好, 服务器, 我是客户端");
+
+        // 对服务器返回的数据做处理
+        InputStream is = s.getInputStream();
+        DataInputStream dis = new DataInputStream(is);
+        String str = dis.readUTF();
+        System.out.println("服务器对我说:" + str);
+
+        // 流、网络资源关闭
+        dos.close();
+        os.close();
+        s.close();
+    }
+}
+```
+- 服务端
+```java
+package com.my.test13;
+
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class TestServer {
+    public static void main(String[] args) throws IOException {
+        System.out.println("服务器端启动");
+
+        // 套接字
+        ServerSocket ss = new ServerSocket(8888);
+
+        // 等待客户端发送数据
+        Socket s = ss.accept();
+
+        // 服务器感受到输入流
+        InputStream is = s.getInputStream();
+        DataInputStream dis = new DataInputStream(is);
+
+        // 接收客户端发送的数据
+        String str = dis.readUTF();
+        System.out.println("客户端:" + str);
+
+        // 向客户端发送数据
+        OutputStream os =  s.getOutputStream();
+        DataOutputStream dos = new DataOutputStream(os);
+
+        dos.writeUTF("你好客户端,我接收到你的信息了");
+
+        // 流、网络资源关闭
+        // 从下往上关闭
+        dis.close();
+        is.close();
+        s.close();
+        ss.close();
+    }
+}
+```
+
+## XML
+### 基本概念
+- XML（可扩展标记语言，EXtensible Markup Language）
+- XML的作用
+  - XMKL不会做任何事情,它是被设计用来结构化、存储以及传输信息的,它仅仅是纯文本
+  - 它仅仅将信息包装在xml标签中
+  - 我们需要写程序,才能传送、接收和显示出这个文档
+- 定义XML
+  - 必须有声明语句
+    - XML声明是文档的第一句,格式如下
+      - `<?xml version="1.0" encoding="UTF-8"?>`
+  - 只有一个根元素
+  - 注意大小写
+  - 所有标记必须关闭
+  - 属性值使用引号
+  - 可以加入注释
+
+### 代码示例
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+ 注释
+ version: 版本号
+ encoding: 文档编号
+ <students> 根元素
+ <student> 子元素
+-->
+<students>
+    <student id="1">
+        <name>aaa</name>
+        <age>11</age>
+        <sex>男</sex>
+        <score>66</score>
+    </student>
+    <student id="2">
+        <name>bbb</name>
+        <age>22</age>
+        <sex>男</sex>
+        <score>44</score>
+    </student>
+    <student id="3">
+        <name>ccc</name>
+        <age>33</age>
+        <sex>男</sex>
+        <score>99</score>
+    </student>
+</students>
+```
+- 解析XML(需要导入demo4.jar包)
+```java
+package com.my.test01;
+
+import org.dom4j.Attribute;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
+import java.io.File;
+import java.util.Iterator;
+import java.util.List;
+
+public class Test {
+    public static void main(String[] args) {
+        // 创建SAXReader对象
+        // 创建一个xml解析器对象(就是一个流)
+        SAXReader saxReader = new SAXReader();
+
+        try {
+            // 读取XML文件并返回Document对象
+            Document document = saxReader.read(new File("javaXMLModule/XML/test.xml"));
+            // System.out.println(document);
+
+            // 获取根元素
+            Element rootElement = document.getRootElement();
+
+            // 获取根节点下的多个子节点
+            Iterator<Element> iterator = rootElement.elementIterator();
+            while (iterator.hasNext()) {
+                // 获取到子节点
+                Element element = iterator.next();
+                // 获取子节点的属性
+                List<Attribute> atts = element.attributes();
+                for (Attribute attribute : atts) {
+                    System.out.println("该子节点的属性:" + attribute.getName() + "---" + attribute.getText());
+                }
+                // 获取到子节点的子节点
+                Iterator<Element> iterator2 = element.elementIterator();
+                while (iterator2.hasNext()) {
+                    Element element2 = iterator2.next();
+                    System.out.println("节点:" + element2.getName() + "---" + element2.getText());
+                }
+            }
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
     }
 }
 ```
