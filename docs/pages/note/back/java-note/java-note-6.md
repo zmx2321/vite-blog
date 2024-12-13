@@ -1001,6 +1001,7 @@ public class TestServer {
 </students>
 ```
 - 解析XML(需要导入demo4.jar包)
+- 一般框架里面都会封装
 ```java
 package com.my.test01;
 
