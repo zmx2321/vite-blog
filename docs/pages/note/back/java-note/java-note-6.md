@@ -688,6 +688,7 @@ public class Test1 {
 ```
 
 ## 程序、进程、线程
+### 概念
 - 程序
   - 是一段静态的代码,存放在某个地方
 - 进程
@@ -698,3 +699,174 @@ public class Test1 {
   - 一个程序可以包含多个进程,一个进程可以包含多个线程
   - 进程时操作系统进行资源分配的基本单位
   - 线程时操作系统调度执行的基本单位
+
+### 线程的创建
+- 继承Thread类
+- 实现Runnable接口
+- 实现Callable接口
+
+### 代码示例
+- 这里只展示继承Thread类的方式
+- 线程类
+```java
+package com.my.test12;
+
+/**
+ * 创建一个线程类 - 具备多线程能力
+ */
+public class TestThread extends Thread {
+    // 线程对应的任务放在一个方法
+    @Override
+    public void run() {
+        for (int i = 0; i < 1000; i++) {
+            System.out.println("子线程----" + i);
+        }
+    }
+}
+```
+- 主类
+```java
+package com.my.test12;
+
+/**
+ * 线程
+ * 继承Thread类
+ * 程序中无论有多少个线程,总有一个主线程,就是main方法
+ */
+public class Test {
+    // main方法作为程序的入口,里面执行的逻辑/任务就是主线程的任务
+    public static void main(String[] args) {
+        for (int i = 0; i < 1000; i++) {
+            System.out.println("main---" + i);
+        }
+
+        // 创建子线程对象,执行任务
+        TestThread t = new TestThread();
+        // 执行任务,不是直接调用run方法,而是要将线程启动
+        // 一旦子线程启动,就会和主线程争抢cpu资源
+        t.start();
+
+        // 主线程中再加一个循环
+        for (int i = 0; i < 1000; i++) {
+            System.out.println("main--main----" + i);
+        }
+    }
+}
+```
+
+## 网络
+### 概念
+- 网络编程
+  - 在网络通信中进行的编程
+- 网络编程三要素
+  - IP地址
+    - 用来定位计算机
+  - 端口号
+    - 用来定位具体的应用程序
+  - 协议
+    - 通信的规则
+- 网络通信协议的分层
+  - 名义上的标准
+    - ISO/OSI参考模型
+  - 事实上的标准
+    - TCP/IP协议栈(internet使用的协议)
+- ISO/OSI参考模型
+  - 应用层
+    - 程序实现需求
+  - 表示层
+    - 解决不同系统的通信问题 => 如linux给windows发消息
+  - 会话层
+    - 自动发包,自动寻址功能
+  - 传输层
+    - 当传输内容过大时,对发出去的数据进行封装
+  - 网络层
+    - 传输过程中选择最优路径(路由器、交换机那些具有寻址功能的设备所实现的功能)
+  - 数据链路层
+    - 确保数据传输正确.提供检测和纠错功能
+  - 物理层
+    - 定义物理设备的标准:网线的接口类型、光纤的接口类型、各种传输介质的传输速率等变成010101从物理设备中传输出去
+- TCP/IP协议栈
+  - 应用层
+  - 传输层
+  - 网络层
+  - 数据链路层
+  - 物理层
+
+## 套接字
+### 概念
+- 套接字就像传输层为应用层开的一个小口,应用程序通过这个小口向远程发送数据,或接收远程发来的数据,而这个小口以内,也就是数据进入这个小口之后,或者数据从这个口出来之前,是不知道也不需要知道的,数据传输的细节,由传输层来处理
+- 套接字是传输层提供给应用程序编程接口,应用程序通过套接字向传输层发送数据,传输层通过套接字接收应用程序发送的数据
+- socket就是应用层和传输层之间的桥梁
+
+### 代码示例
+- 服务端
+```java
+package com.my.test13;
+
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class TestServer {
+    public static void main(String[] args) throws IOException {
+        System.out.println("服务器端启动");
+
+        // 套接字
+        ServerSocket ss = new ServerSocket(8888);
+
+        // 等待客户端发送数据
+        Socket s = ss.accept();
+
+        // 服务器感受到输入流
+        InputStream is = s.getInputStream();
+        DataInputStream dis = new DataInputStream(is);
+
+        // 接收客户端发送的数据
+        String str = dis.readUTF();
+        System.out.println(str);
+
+        // 流、网络资源关闭
+        // 从下往上关闭
+        dis.close();
+        is.close();
+        s.close();
+        ss.close();
+    }
+}
+```
+- 客户端
+```java
+package com.my.test13;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
+
+/**
+ * 客户端
+ */
+public class TestClient {
+    public static void main(String[] args) throws IOException {
+        System.out.println("客户端启动");
+
+        // 套接字 - 指定服务器的ip和端口
+        Socket s = new Socket("192.168.2.1", 8888);
+
+        // 利用输出流传送数据
+        OutputStream os = s.getOutputStream();
+        // 数据流
+        DataOutputStream dos = new DataOutputStream(os);
+
+        // 利用数据流往外传送数据
+        dos.writeUTF("hello");
+
+        // 流、网络资源关闭
+        dos.close();
+        os.close();
+        s.close();
+    }
+}
+```
