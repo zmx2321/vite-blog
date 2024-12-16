@@ -1052,3 +1052,182 @@ public class Test {
     }
 }
 ```
+
+## 注解
+### 基本概念
+- 注解是代码里的特殊标记，这些标记可以在编译、类加载、运行时被读取，并执行相应的处理。通过使用注解，程序员可以在不改变原有代码和逻辑的情况下，给代码增加额外的信息，从而实现不同的功能。
+- 使用注解时要在前面增加`@`符号,并把该注解当成一个修饰符使用.用于修饰它支持的程序元素(包、类、构造器、方法、成员变量、参数、局部变量)
+- 在javase中，注解的作用比较简单，就是起到标记作用，没有其他功能 .在javaee中，注解开始发挥重要的作用，很多框架(如:mybatis、spring)都大量使用注解,例如用来配置应用程序的任何切面,代替javaEE旧版中所遗留的繁冗代码和XML配置等,未来的开发模式都是基于注解的,一定程度上可以说: 框架=注解+反射+设计模式
+  
+## JDBC
+### 基本概念
+- JDBC(Java Database Connectivity,java数据库连接)是一种用于执行SQL语句的Java API
+- 是SUN公司定义的一套接口(规范)
+- java程序 => JDBC规范 => mysql数据库厂商实现mysql驱动、Oracle驱动、sqlserver驱动 => mysql数据库、Oracle数据库、sqlserver数据库
+
+### 使用步骤
+1. 加载Driver驱动
+2. 建立连接(Connection)
+3. 创建会话(Statement)
+4. 通过会话执行SQL语句,并得到结果
+5. 处理结果
+6. 关闭连接(ResultSet、Statement、Connection)
+
+### 代码示例
+```java
+package com.my.test01;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class TestJDBC {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        // 加载驱动
+        Class.forName("com.mysql.jdbc.Driver");
+
+        // 获取连接
+        String url = "jdbc:mysql://localhost:3306/myTest";
+        String user = "root";
+        String password = "123456";
+        Connection conn = DriverManager.getConnection(url, user, password);
+
+        // 创建会话
+        Statement sta =  conn.createStatement();
+
+        // 发送sql
+        int i = sta.executeUpdate("INSERT INTO Users values(11, 'ysrt', '女', 7, 1)");
+        // 处理结果 - 表示影响了i条数据
+        // 证明对数据库的数据条数有影响
+        if(i > 0) {
+            System.out.println("插入成功");
+        }
+
+        // 关闭资源
+        sta.close();
+        conn.close();
+    }
+}
+```
+- 优化后
+- jdbcinfo.properties
+```java
+mysql.driver=com.mysql.jdbc.Driver
+mysql.url=jdbc:mysql://localhost:3306/myTest
+mysql.user=root
+mysql.password=123456
+```
+- TestJDBC
+```java
+package com.my.test02;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+public class TestJDBC {
+    private static  String DRIVER;
+    private static  String URL;
+    private static  String USER;
+    private static  String PASSWORD;
+
+    public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
+        //用来存放从配置文件中读取的信息
+        Properties props = new Properties();
+        //读取配置文件，转成流
+        InputStream ism = TestJDBC.class.getResourceAsStream("jdbcinfo.properties");
+        //读取流中的信息
+        props.load(ism);
+
+        // 获取流中的信息存储到静态变量中
+        // 加载驱动
+        DRIVER = props.getProperty("mysql.driver");
+        URL = props.getProperty("mysql.url");
+        USER = props.getProperty("mysql.user");
+        PASSWORD = props.getProperty("mysql.password");
+        System.out.println(DRIVER);
+
+        // 获取连接
+        Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
+        // 创建会话
+        Statement sta =  conn.createStatement();
+
+        // 发送sql
+        int i = sta.executeUpdate("INSERT INTO Users values(12, 'ysrt', '女', 7, 1)");
+        // 处理结果 - 表示影响了i条数据
+        // 证明对数据库的数据条数有影响
+        if(i > 0) {
+            System.out.println("插入成功");
+        }
+
+        // 关闭资源
+        sta.close();
+        conn.close();
+    }
+}
+```
+- 查询数据
+```java
+package com.my.test02;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Properties;
+
+public class TestQuery {
+    private static  String DRIVER;
+    private static  String URL;
+    private static  String USER;
+    private static  String PASSWORD;
+
+    public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
+        //用来存放从配置文件中读取的信息
+        Properties props = new Properties();
+        //读取配置文件，转成流
+        InputStream ism = TestJDBC.class.getResourceAsStream("jdbcinfo.properties");
+        //读取流中的信息
+        props.load(ism);
+
+        // 获取流中的信息存储到静态变量中
+        // 加载驱动
+        DRIVER = props.getProperty("mysql.driver");
+        URL = props.getProperty("mysql.url");
+        USER = props.getProperty("mysql.user");
+        PASSWORD = props.getProperty("mysql.password");
+        System.out.println(DRIVER);
+
+        // 获取连接
+        Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
+        // 创建会话
+        Statement sta =  conn.createStatement();
+
+        // 发送sql - 结果集
+        ResultSet rs = sta.executeQuery("select * from Users");
+
+        // 处理结果
+        // 判断是否有记录存在
+        while (rs.next()) {
+            System.out.println(
+                "id:" + rs.getString(1) +
+                " 昵称:" + rs.getString(2) +
+                " 性别:" + rs.getString(3) +
+                " 星座:" + rs.getString(4) +
+                " 血型:" + rs.getString(5)
+            );
+        }
+
+        // 关闭资源
+        sta.close();
+        conn.close();
+    }
+}
+```
