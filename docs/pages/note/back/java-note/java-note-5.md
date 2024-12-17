@@ -1,4 +1,4 @@
-# 搭建spring boot框架
+# 启动javaWeb服务
 
 ## spring boot简介
 - spring boot是基于spring框架的开源框架,其设计目的是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置,尽可能减少开发者的工作量 .
@@ -14,7 +14,7 @@
 ## 前后端流程
 - 客户端(即前端) => api层(get/post/put/delete) => service层(具体业务逻辑) => dao层(即数据访问层,与数据库交互,将关系型数据转化为面向对象的对象) => 数据库
 
-## 初始化spring boot应用
+## 初始化javaWeb项目
 ### 第一种
 - idea新建项目 => java => intellij => 创建
 - 选择项目 => 右上角查找 => 搜索add iframe support => 选择web application => 点击ok
