@@ -1503,3 +1503,28 @@ const scoreNum = ref(0)
     </template>
 </overview-num-box>
 ```
+
+## 导入
+```vue
+<template>
+  <el-dialog v-model="importDialogVisible" title="导入文件" width="400">
+    <el-form label-width="120px">
+      <el-form-item label="文件上传">
+        <el-upload :action="uploadFileUrl" class="upload-demo" :headers="headers">
+          <el-button type="primary">上传</el-button>
+        </el-upload>
+      </el-form-item>
+      <el-form-item label="模版下载">
+        <a @click="downloadTemplate" class="download-link">退服清单.xlsx</a>
+      </el-form-item>
+    </el-form>
+  </el-dialog>
+</template>
+
+<script setup>
+import { getToken } from '@/utils/auth'
+
+const uploadFileUrl = ref(import.meta.env.VITE_APP_BASE_API + "/exitManage/xxxxxx"); // 上传文件服务器地址
+const headers = ref({ Authorization: "Bearer " + getToken() });
+</script>
+```
