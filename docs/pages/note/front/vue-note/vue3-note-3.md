@@ -1528,3 +1528,32 @@ const uploadFileUrl = ref(import.meta.env.VITE_APP_BASE_API + "/exitManage/xxxxx
 const headers = ref({ Authorization: "Bearer " + getToken() });
 </script>
 ```
+
+## 表格排序
+```vue
+<template>
+  <el-table :data="exitTableData"  @sort-change="sortChange" @filter-change="filterChange">
+    <el-table-column prop="exitTime" label="退服时间" width="100" :formatter="dateFormatter" sortable="custom" />
+  </el-table>
+</template>  
+
+<script setup>
+function dateFormatter(row, column, cellValue, index) {
+    if (!cellValue) { return }
+    // 创建一个新的 Date 对象
+    var originalDate = new Date(cellValue);
+
+    // 获取年、月、日、时、分、秒
+    var year = originalDate.getFullYear();
+    var month = ("0" + (originalDate.getMonth() + 1)).slice(-2);
+    var day = ("0" + originalDate.getDate()).slice(-2);
+    var hours = ("0" + originalDate.getHours()).slice(-2);
+    var minutes = ("0" + originalDate.getMinutes()).slice(-2);
+    var seconds = ("0" + originalDate.getSeconds()).slice(-2);
+
+    // 格式化输出
+    var formattedDateTimeString = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+    return formattedDateTimeString;
+}
+</script>
+```

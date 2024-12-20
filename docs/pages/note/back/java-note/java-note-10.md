@@ -49,3 +49,6 @@ OS name: "mac os x", version: "15.1.1", arch: "aarch64", family: "mac"
       <url>https://maven.aliyun.com/nexus/content/groups/public</url>
 </mirror>
 ```
+
+## 在idea中使用maven
+- 创建maven项目

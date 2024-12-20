@@ -399,13 +399,6 @@
 ifconfig | grep "inet " | awk '{print $2}'
 ```
 
-## mac各种服务操作
-- tomcat
-  - `brew services start tomcat`
-  - `catalina start`
-  - 查找tomcat路径
-    - `brew ls tomcat`
-
 ## 配置maven
 - 在(官网)[https://maven.apache.org/download.cgi]下载maven
 - 解压到某个文件夹
@@ -444,3 +437,22 @@ OS name: "mac os x", version: "15.1.1", arch: "aarch64", family: "mac"
       <url>https://maven.aliyun.com/repository/public</url>
 </mirror>
 ```
+
+## mac各种服务操作
+- tomcat
+  - `brew services start tomcat`
+  - `catalina start`
+  - 查找tomcat路径
+    - `brew ls tomcat`
+- redis
+  - `brew services start redis`
+  - `redis-server`
+- postgres
+  - `brew services start postgresql`
+  - `createdb --owner=postgres mydb`
+  - `psql -U postgres -d mydb`
+  - 删除数据库
+    - `SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE datname='mydb' AND pid<>pg_backend_pid();`
+      - pg_terminate_backend：用来终止与数据库的连接的进程id的函数。
+      - pg_stat_activity：是一个系统表，用于存储服务进程的属性和状态。
+      - pg_backend_pid()：是一个系统函数，获取附加到当前会话的服务器进程的ID。
