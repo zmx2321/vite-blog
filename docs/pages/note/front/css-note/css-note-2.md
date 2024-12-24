@@ -66,3 +66,6 @@
 }
 </style>
 ```
+
+## 一行变灰代码
+- `style="filter:grayscale(1);-webkit-filter:grayscale(1)"`
