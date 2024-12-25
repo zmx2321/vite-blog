@@ -1112,3 +1112,25 @@ data: function() {
   return tempArr.map(item => item.name)
 }()
 ```
+
+## 自定义ref防抖
+```js
+export const debounceRef = (value, delay = 500) => {
+    return customRef((track, trigger) => {
+        let timeout;
+        return {
+            get() {
+                track();
+                return value;
+            },
+            set(newValue) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    value = newValue;
+                    trigger();
+                }, delay);
+            }
+        };
+    });
+};
+```
