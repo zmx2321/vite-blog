@@ -6,6 +6,14 @@ export const interviewFoundation = [
   },
 ];
 
+// 前端进阶面试题
+export const interviewAdvanced = [
+  {
+    text: "前端基础面试题",
+    items: [...require("./interview-items/interview-advanced-items")],
+  },
+];
+
 // 前端面试题积累
 export const interviewAccumulate = [
   {
