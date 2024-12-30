@@ -1503,3 +1503,112 @@ const scoreNum = ref(0)
     </template>
 </overview-num-box>
 ```
+
+## dialog-info
+```vue
+<template>
+  <el-dialog :width="dialogWidth" v-model="showDialog" :close-on-click-modal="false" :modal-append-to-body="false"
+    :close-on-press-escape="false" @closed="closeDialog">
+    <template #header>
+      <slot name="DialogTitle"></slot>
+    </template>
+    <div class="container">
+      <slot name="DialogContainer"></slot>
+    </div>
+    <template #footer v-if="isShowFotter">
+      <span class="dialog-footer">
+        <slot name="extendBtn"></slot>
+        <el-button @click="showDialog = false">关闭</el-button>
+      </span>
+    </template>
+  </el-dialog>
+</template>
+
+<script setup>
+import { ref } from "vue";
+
+// 自定义事件
+const emit = defineEmits(["closeDialog"]);
+
+const props = defineProps({
+  isShowFotter: {
+    type: Boolean,
+    default: true,
+  },
+});
+
+let dialogWidth = '75%'
+
+const showDialog = ref(false);
+
+// 可以通过这个方法动态设置宽度
+const setDialogWidth = (width) => {
+  dialogWidth = width;
+}
+const closeDialog = () => {
+  // console.log('closeDialog')
+  emit('closeDialog')
+}
+
+/**
+ * 父组件调弹框显示方法
+ */
+const show = () => {
+  showDialog.value = true;
+};
+const hide = () => {
+  showDialog.value = false;
+};
+
+defineExpose({ show, hide, setDialogWidth });
+</script>
+```
+```vue
+<template>
+    <dialog-info ref="refDialogInfo" class="dialog_info_wrap" :isShowFotter="false" @closeDialog="closeDialog">
+        <!-- 标题 -->
+        <template #DialogTitle>
+            <span>{{ title }}</span>
+        </template>
+        <!-- 内容 -->
+        <template #DialogContainer>
+            <div class="dialog_wrap">
+                <slot></slot>
+            </div>
+        </template>
+    </dialog-info>
+</template>
+
+<script setup>
+import { ref, nextTick, defineProps, onMounted } from "vue";
+import { ElMessage } from "element-plus";
+
+// 自定义事件
+const emit = defineEmits(["closeDialog"]);
+
+const props = defineProps({
+    title: {
+        type: String,
+        default: '',
+    }
+})
+
+const refDialogInfo = ref(null)
+
+/**
+ * 业务
+ */
+const show = (val) => {
+    refDialogInfo.value.show();
+    // refDialogInfo.value.setDialogWidth('30%');
+};
+const closeDialog = () => {
+    // console.log('关闭');
+    emit('closeDialog');
+}
+
+defineExpose({
+    show,
+});
+</script>
+```
