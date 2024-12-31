@@ -9,6 +9,7 @@ const jsBaseConfig = [
   { text: "js中的时间", link: `${baseUrl}/js-base-note-2` },
   { text: "js中的dom操作", link: `${baseUrl}/js-base-note-3` },
   { text: "echarts问题集锦", link: `${baseUrl}/js-base-note-4` },
+  { text: "事件循环", link: `${baseUrl}/js-base-note-5` },
 ];
 
 // js数据类型

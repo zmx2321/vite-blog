@@ -9,4 +9,5 @@ module.exports = [
   { text: "Vue和React对比", link: `${baseUrl}-3` },
   { text: "2024面试题汇总", link: `${baseUrl}-4` },
   { text: "整理面试题 - 2024-10-18 - 开始", link: `${baseUrl}-5` },
+  { text: "浏览器面试题", link: `${baseUrl}-6` },
 ];
