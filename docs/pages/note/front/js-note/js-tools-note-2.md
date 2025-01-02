@@ -969,3 +969,18 @@ const setFullScreenFlag = (e) => {
   });
 }
 ```
+
+## 数组求平均数
+```js
+function calculateAverage(numbers) {
+  if (numbers.length === 0) return 0; // 防止除以0
+  const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue);
+  const average = sum / numbers.length;
+  return average.toFixed(4);
+}
+
+// 示例使用
+const numbers = [1, 2, 3, 4, 5];
+const average = calculateAverage(numbers);
+console.log(average); // 输出: 3
+```
