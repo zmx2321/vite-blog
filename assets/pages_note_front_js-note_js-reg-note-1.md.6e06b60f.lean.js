@@ -1,1 +1,2 @@
 import{_ as s,o as n,c as a,e as l}from"./app.7f3ff873.js";const C=JSON.parse('{"title":"js中的正则","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/js-note/js-reg-note-1.md","filePath":"pages/note/front/js-note/js-reg-note-1.md","lastUpdated":1728713439000}'),p={name:"pages/note/front/js-note/js-reg-note-1.md"},o=l("",25),e=[o];function t(c,r,y,E,F,i){return n(),a("div",null,e)}const B=s(p,[["render",t]]);export{C as __pageData,B as default};
+//# sourceMappingURL=pages_note_front_js-note_js-reg-note-1.md.6e06b60f.js.map

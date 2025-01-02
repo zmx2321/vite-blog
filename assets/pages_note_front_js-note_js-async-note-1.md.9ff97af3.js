@@ -561,3 +561,4 @@ import{_ as a,o as l,c as p,e as n,b as s}from"./app.7f3ff873.js";const d=JSON.p
 <span class="line"><span style="color:#24292E;">        </span><span style="color:#6F42C1;">reject</span><span style="color:#24292E;">(error);</span></span>
 <span class="line"><span style="color:#24292E;">    })</span></span>
 <span class="line"><span style="color:#24292E;">})</span></span></code></pre><div class="line-numbers-wrapper" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div>`,1),t=[e,c,r];function E(y,i,b,u,F,m){return l(),p("div",null,t)}const D=a(o,[["render",E]]);export{d as __pageData,D as default};
+//# sourceMappingURL=pages_note_front_js-note_js-async-note-1.md.9ff97af3.js.map
