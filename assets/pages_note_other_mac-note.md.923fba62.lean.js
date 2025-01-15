@@ -1,2 +1,0 @@
-import{_ as l,o as s,c as e,e as a}from"./app.f281e89b.js";const b=JSON.parse('{"title":"mac相关笔记","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/other/mac-note.md","filePath":"pages/note/other/mac-note.md","lastUpdated":1713497626000}'),n={name:"pages/note/other/mac-note.md"},i=a("",58),o=[i];function c(r,t,p,u,d,h){return s(),e("div",null,o)}const y=l(n,[["render",c]]);export{b as __pageData,y as default};
-//# sourceMappingURL=pages_note_other_mac-note.md.923fba62.js.map

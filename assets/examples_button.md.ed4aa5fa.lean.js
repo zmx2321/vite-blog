@@ -1,0 +1,2 @@
+import{_ as s,o as n,c as a,e as l}from"./app.df41ffd2.js";const d=JSON.parse('{"title":"Button 按钮","description":"","frontmatter":{},"headers":[],"relativePath":"examples/button.md","filePath":"examples/button.md","lastUpdated":1700471686000}'),t={name:"examples/button.md"},p=l("",19),o=[p];function e(r,c,E,y,u,i){return n(),a("div",null,o)}const g=s(t,[["render",e]]);export{d as __pageData,g as default};
+//# sourceMappingURL=examples_button.md.ed4aa5fa.js.map
