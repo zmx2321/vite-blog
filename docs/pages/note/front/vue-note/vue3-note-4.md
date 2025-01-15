@@ -386,10 +386,10 @@ const generatePage = formJson => {
 ```vue
 <template>
     <section class="vformRender">
-        <el-button @click="renderFrom">生成表单</el-button>
+        <el-button @click="renderFrom">重新生成表单</el-button>
         <el-button @click="back">返回</el-button>
 
-        <div class="render_wrap" v-loading="false">
+        <div class="render_wrap" v-loading="!renderFlag">
             <v-form-render v-if="renderFlag" :form-json="formJson" :form-data="formData" ref="vFormRenderRef" />
         </div>
     </section>
@@ -404,25 +404,24 @@ const router = useRouter();
 const route = useRoute();
 
 const vFormRenderRef = ref(null)
-let renderFlag = ref(false)
+let renderFlag = ref(true)
+let renderLoading = ref(false)
 
 let formJson = reactive({})
 const formData = reactive({})
 
 const renderFrom = async () => {
+    renderFlag.value = false
+
     const dbName = 'myVFormDB', storeName = 'myVFormStore'
     const db = await indexDb.openDB(dbName, storeName, 1)
 
     let data = await indexDb.getDataByKey(db, storeName, 'myVFormId_1')
 
     formJson = JSON.parse(data.config)
-    console.log(formJson)
+    // console.log(formJson)
 
     renderFlag.value = true
-
-    // formJson = JSON.parse(data.config)
-
-    // renderFlag.value = false
 
     /* setTimeout(() => {
         if (route.query.formJson) {
@@ -432,6 +431,7 @@ const renderFrom = async () => {
         }
     }, 1000); */
 }
+renderFrom()
 
 const back = async () => {
     router.push('/complain/vform')
@@ -439,6 +439,7 @@ const back = async () => {
 }
 
 onUnmounted(async () => {
+    const db = await indexDb.openDB(dbName, storeName, 1)
     await indexDb.closeDB(db)
 })
 </script>
