@@ -212,17 +212,11 @@ export const closeDB = db => {
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from "vue-router";
-
-import * as indexDb from '@/utils/indexDb.js'
 import { ElMessage } from 'element-plus';
+import * as indexDb from '@/utils/indexDb.js'
 
 const router = useRouter();
-
 const VFormDesignerRef = ref(null)
-
-/* let formData = {
-    config: null
-} */
 
 // 禁止显示的表单组件
 const bannedWidgets = [
@@ -328,22 +322,8 @@ const generatePage = formJson => {
     // console.log('generatePage', formJson)
 
     initIndexDb(formJson)
-
     router.push("/complain/vformRender")
-
-    /* router.push({
-        path: "/complain/vformRender",
-        query: { formJson: JSON.stringify(formJson) },
-    }); */
 }
-
-// 保存表单
-/* function saveFormJson() {
-    let formJson = VFormDesignerRef.value.getFormJson()
-    formData.config = JSON.stringify(formJson)
-
-    console.log('formData数据', formJson)
-} */
 </script>
 
 <style lang="scss" scoped>
@@ -397,11 +377,10 @@ const generatePage = formJson => {
 
 <script setup>
 import { ref, reactive, onUnmounted } from 'vue'
-import { useRouter, useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import * as indexDb from '@/utils/indexDb.js'
 
 const router = useRouter();
-const route = useRoute();
 
 const vFormRenderRef = ref(null)
 let renderFlag = ref(true)
@@ -411,11 +390,12 @@ let formJson = reactive({})
 const formData = reactive({})
 
 const dbName = 'myVFormDB', storeName = 'myVFormStore'
+let db = null
 
 const renderFrom = async () => {
     renderFlag.value = false
 
-    const db = await indexDb.openDB(dbName, storeName, 1)
+    db = await indexDb.openDB(dbName, storeName, 1)
 
     let data = await indexDb.getDataByKey(db, storeName, 'myVFormId_1')
 
@@ -423,24 +403,16 @@ const renderFrom = async () => {
     // console.log(formJson)
 
     renderFlag.value = true
-
-    /* setTimeout(() => {
-        if (route.query.formJson) {
-            formJson = JSON.parse(route.query.formJson)
-
-            renderFlag.value = true
-        }
-    }, 1000); */
 }
-renderFrom()
 
 const back = async () => {
     router.push('/complain/vform')
     await indexDb.deleteDBAll('myVFormDB')
 }
 
+renderFrom()
+
 onUnmounted(async () => {
-    const db = await indexDb.openDB(dbName, storeName, 1)
     await indexDb.closeDB(db)
 })
 </script>
