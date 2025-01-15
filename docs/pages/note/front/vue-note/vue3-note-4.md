@@ -410,10 +410,11 @@ let renderLoading = ref(false)
 let formJson = reactive({})
 const formData = reactive({})
 
+const dbName = 'myVFormDB', storeName = 'myVFormStore'
+
 const renderFrom = async () => {
     renderFlag.value = false
 
-    const dbName = 'myVFormDB', storeName = 'myVFormStore'
     const db = await indexDb.openDB(dbName, storeName, 1)
 
     let data = await indexDb.getDataByKey(db, storeName, 'myVFormId_1')
@@ -444,5 +445,13 @@ onUnmounted(async () => {
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.render_wrap {
+    width: 95%;
+    height: 80vh;
+    margin: 20px auto 0;
+    margin-top: 20px;
+    overflow-y: auto
+}
+</style>
 ```
