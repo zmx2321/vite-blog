@@ -1,0 +1,2 @@
+import{_ as s,o as n,c as a,e as l}from"./app.1cd486c1.js";const F=JSON.parse('{"title":"js中基础理论及常用api","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/js-note/js-base-note-1.md","filePath":"pages/note/front/js-note/js-base-note-1.md","lastUpdated":1700187933000}'),p={name:"pages/note/front/js-note/js-base-note-1.md"},o=l("",31),e=[o];function t(c,r,E,y,i,b){return n(),a("div",null,e)}const d=s(p,[["render",t]]);export{F as __pageData,d as default};
+//# sourceMappingURL=pages_note_front_js-note_js-base-note-1.md.f6f5637f.js.map

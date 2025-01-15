@@ -1,0 +1,2 @@
+import{_ as s,o as n,c as a,e as l}from"./app.1cd486c1.js";const b=JSON.parse('{"title":"openlayer库完整代码","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/gis-note/openlayer-note-4.md","filePath":"pages/note/front/gis-note/openlayer-note-4.md","lastUpdated":1731576063000}'),p={name:"pages/note/front/gis-note/openlayer-note-4.md"},o=l("",24),e=[o];function c(r,t,E,y,i,u){return n(),a("div",null,e)}const m=s(p,[["render",c]]);export{b as __pageData,m as default};
+//# sourceMappingURL=pages_note_front_gis-note_openlayer-note-4.md.f45e2566.js.map

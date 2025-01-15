@@ -1,2 +1,0 @@
-import{_ as s,o as n,c as a,e as l}from"./app.7f3ff873.js";const u=JSON.parse('{"title":"echarts问题集锦","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/js-note/js-base-note-4.md","filePath":"pages/note/front/js-note/js-base-note-4.md","lastUpdated":1730691026000}'),p={name:"pages/note/front/js-note/js-base-note-4.md"},o=l("",61),e=[o];function c(r,t,E,y,i,b){return n(),a("div",null,e)}const m=s(p,[["render",c]]);export{u as __pageData,m as default};
-//# sourceMappingURL=pages_note_front_js-note_js-base-note-4.md.84deba44.js.map
