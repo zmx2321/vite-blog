@@ -1504,56 +1504,111 @@ const scoreNum = ref(0)
 </overview-num-box>
 ```
 
-## 导入
+## dialog-info
 ```vue
 <template>
-  <el-dialog v-model="importDialogVisible" title="导入文件" width="400">
-    <el-form label-width="120px">
-      <el-form-item label="文件上传">
-        <el-upload :action="uploadFileUrl" class="upload-demo" :headers="headers">
-          <el-button type="primary">上传</el-button>
-        </el-upload>
-      </el-form-item>
-      <el-form-item label="模版下载">
-        <a @click="downloadTemplate" class="download-link">退服清单.xlsx</a>
-      </el-form-item>
-    </el-form>
+  <el-dialog :width="dialogWidth" v-model="showDialog" :close-on-click-modal="false" :modal-append-to-body="false"
+    :close-on-press-escape="false" @closed="closeDialog">
+    <template #header>
+      <slot name="DialogTitle"></slot>
+    </template>
+    <div class="container">
+      <slot name="DialogContainer"></slot>
+    </div>
+    <template #footer v-if="isShowFotter">
+      <span class="dialog-footer">
+        <slot name="extendBtn"></slot>
+        <el-button @click="showDialog = false">关闭</el-button>
+      </span>
+    </template>
   </el-dialog>
 </template>
 
 <script setup>
-import { getToken } from '@/utils/auth'
+import { ref } from "vue";
 
-const uploadFileUrl = ref(import.meta.env.VITE_APP_BASE_API + "/exitManage/xxxxxx"); // 上传文件服务器地址
-const headers = ref({ Authorization: "Bearer " + getToken() });
+// 自定义事件
+const emit = defineEmits(["closeDialog"]);
+
+const props = defineProps({
+  isShowFotter: {
+    type: Boolean,
+    default: true,
+  },
+});
+
+let dialogWidth = '75%'
+
+const showDialog = ref(false);
+
+// 可以通过这个方法动态设置宽度
+const setDialogWidth = (width) => {
+  dialogWidth = width;
+}
+const closeDialog = () => {
+  // console.log('closeDialog')
+  emit('closeDialog')
+}
+
+/**
+ * 父组件调弹框显示方法
+ */
+const show = () => {
+  showDialog.value = true;
+};
+const hide = () => {
+  showDialog.value = false;
+};
+
+defineExpose({ show, hide, setDialogWidth });
 </script>
 ```
-
-## 表格排序
 ```vue
 <template>
-  <el-table :data="exitTableData"  @sort-change="sortChange" @filter-change="filterChange">
-    <el-table-column prop="exitTime" label="退服时间" width="100" :formatter="dateFormatter" sortable="custom" />
-  </el-table>
-</template>  
+    <dialog-info ref="refDialogInfo" class="dialog_info_wrap" :isShowFotter="false" @closeDialog="closeDialog">
+        <!-- 标题 -->
+        <template #DialogTitle>
+            <span>{{ title }}</span>
+        </template>
+        <!-- 内容 -->
+        <template #DialogContainer>
+            <div class="dialog_wrap">
+                <slot></slot>
+            </div>
+        </template>
+    </dialog-info>
+</template>
 
 <script setup>
-function dateFormatter(row, column, cellValue, index) {
-    if (!cellValue) { return }
-    // 创建一个新的 Date 对象
-    var originalDate = new Date(cellValue);
+import { ref, nextTick, defineProps, onMounted } from "vue";
+import { ElMessage } from "element-plus";
 
-    // 获取年、月、日、时、分、秒
-    var year = originalDate.getFullYear();
-    var month = ("0" + (originalDate.getMonth() + 1)).slice(-2);
-    var day = ("0" + originalDate.getDate()).slice(-2);
-    var hours = ("0" + originalDate.getHours()).slice(-2);
-    var minutes = ("0" + originalDate.getMinutes()).slice(-2);
-    var seconds = ("0" + originalDate.getSeconds()).slice(-2);
+// 自定义事件
+const emit = defineEmits(["closeDialog"]);
 
-    // 格式化输出
-    var formattedDateTimeString = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
-    return formattedDateTimeString;
+const props = defineProps({
+    title: {
+        type: String,
+        default: '',
+    }
+})
+
+const refDialogInfo = ref(null)
+
+/**
+ * 业务
+ */
+const show = (val) => {
+    refDialogInfo.value.show();
+    // refDialogInfo.value.setDialogWidth('30%');
+};
+const closeDialog = () => {
+    // console.log('关闭');
+    emit('closeDialog');
 }
+
+defineExpose({
+    show,
+});
 </script>
 ```

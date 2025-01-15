@@ -17,6 +17,7 @@ const vue3Config = [
   { text: "初识Vue3.0 + vite", link: `${baseUrl}/vue3-note-1` },
   { text: "Vue3.0中新特性及Compiler原理", link: `${baseUrl}/vue3-note-2` },
   { text: "vue3工作积累", link: `${baseUrl}/vue3-note-3` },
+  { text: "vform3跨页面存储,使用indexdb", link: `${baseUrl}/vue3-note-4` },
 ];
 
 module.exports = [
