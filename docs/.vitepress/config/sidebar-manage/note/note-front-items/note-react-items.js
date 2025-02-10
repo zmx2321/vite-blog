@@ -21,6 +21,7 @@ const reactCourseConfig = [
 const reactConfig = [
   { text: "React实现todolist", link: `${baseUrl}/react-note-1` },
   { text: "react积累-1", link: `${baseUrl}/react-note-2` },
+  { text: "react常用功能", link: `${baseUrl}/react-note-3` },
 ];
 
 module.exports = [
