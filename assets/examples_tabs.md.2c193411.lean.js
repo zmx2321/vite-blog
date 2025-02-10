@@ -1,0 +1,2 @@
+import{_ as s,o as t,c as a,e as n}from"./app.bb9a9939.js";const b=JSON.parse('{"title":"Tabs 标签页","description":"","frontmatter":{},"headers":[],"relativePath":"examples/tabs.md","filePath":"examples/tabs.md","lastUpdated":1700471686000}'),l={name:"examples/tabs.md"},o=n("",9),p=[o];function e(r,c,E,y,d,i){return t(),a("div",null,p)}const g=s(l,[["render",e]]);export{b as __pageData,g as default};
+//# sourceMappingURL=examples_tabs.md.2c193411.js.map
