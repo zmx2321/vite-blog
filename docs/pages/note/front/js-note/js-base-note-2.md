@@ -460,3 +460,12 @@ let str = "2020-07-27 09:00:00";
 let res = str.split(":")[0].split(" ")[1].split("")[1];
 console.log(res);
 ```
+
+## 获取前几天
+```js
+let currentDate = new Date();
+currentDate.setDate(currentDate.getDate() - 7);
+const queryParams = ref({
+    createStartEnd: [currentDate, new Date()]
+})
+```
