@@ -1,2 +1,0 @@
-import{_ as a,o as t,c as e,e as i}from"./app.bb9a9939.js";const u=JSON.parse('{"title":"springBoot","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/back/java-note/java-note-11.md","filePath":"pages/note/back/java-note/java-note-11.md","lastUpdated":1734423506000}'),o={name:"pages/note/back/java-note/java-note-11.md"},l=i("",7),r=[l];function n(s,p,c,d,_,h){return t(),e("div",null,r)}const m=a(o,[["render",n]]);export{u as __pageData,m as default};
-//# sourceMappingURL=pages_note_back_java-note_java-note-11.md.e37d1308.js.map
