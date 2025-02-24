@@ -23,6 +23,12 @@ const siteData = [
         desc: "",
         link: `${base}/pages/note/back/linux-note/linux-note-1`,
       },
+      {
+        icon: "",
+        name: "python学习笔记",
+        desc: "",
+        link: `${base}/pages/note/back/python-note/python-note-1`,
+      },
     ],
   },
 ];

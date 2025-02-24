@@ -29,11 +29,12 @@ module.exports = {
   "/pages/note/front/react-note": note.noteFront.react, // react笔记
   "/pages/note/front/uniapp-note": note.noteFront.uniapp, // uniapp笔记
   "/pages/note/front/harmonyOS-note": note.noteFront.harmonyOS, // harmonyOS笔记
-  
+
   // 后端相关
   "/pages/note/back/java-note": note.noteBack.java, // java笔记
   "/pages/note/back/mysql-note": note.noteBack.mysql, // mysql笔记
   "/pages/note/back/linux-note": note.noteBack.linux, // linux笔记
+  "/pages/note/back/python-note": note.noteBack.python, // python笔记
   // 其他笔记
   "/pages/note/other/git-note": note.noteOther.git, // git笔记
   "/pages/note/other/nginx-note": note.noteOther.nginx, // nginx笔记

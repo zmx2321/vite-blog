@@ -22,6 +22,7 @@ export const noteBack = {
   java: [{ items: [...require("./note-back-items/note-java-items")] }],
   mysql: [{ items: [...require("./note-back-items/note-mysql-items")] }],
   linux: [{ items: [...require("./note-back-items/note-linux-items")] }],
+  python: [{ items: [...require("./note-back-items/note-python-items")] }],
 };
 
 /**
