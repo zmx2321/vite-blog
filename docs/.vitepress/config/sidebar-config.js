@@ -40,5 +40,6 @@ module.exports = {
   "/pages/note/other/nginx-note": note.noteOther.nginx, // nginx笔记
   "/pages/note/other/http-note": note.noteOther.http, // http笔记
   "/pages/note/other/elk-note": note.noteOther.elk, // elk笔记
+  "/pages/note/other/computer-note": note.noteOther.computer, // 计算机常识笔记
   "/pages/note/other": note.noteOther.other, // 其他笔记
 };

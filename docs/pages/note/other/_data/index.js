@@ -29,6 +29,12 @@ const siteData = [
         desc: "",
         link: `${base}/pages/note/other/elk-note/elk-note-1`,
       },
+      {
+        icon: "",
+        name: "计算机常识",
+        desc: "",
+        link: `${base}/pages/note/other/computer-note/computer-note-1`,
+      },
     ],
   },
 ];

@@ -55,5 +55,9 @@ export const noteOther = {
     { text: "", items: [...require("./note-other-items/note-list-items")] },
     { text: "elk笔记", items: [...require("./note-other-items/other-elk-items")] },
   ]),
+  computer: setOtherNote([
+    { text: "", items: [...require("./note-other-items/note-list-items")] },
+    { text: "计算机常识笔记", items: [...require("./note-other-items/other-computer-items")] },
+  ]),
   other: setOtherNote([]),
 };
