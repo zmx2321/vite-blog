@@ -1,2 +1,0 @@
-import{_ as e,o as p,c as r,e as t}from"./app.e5ec5305.js";const _=JSON.parse('{"title":"浏览器面试题","description":"","frontmatter":{},"headers":[],"relativePath":"pages/interview/other/interview-other-6.md","filePath":"pages/interview/other/interview-other-6.md","lastUpdated":1735636132000}'),a={name:"pages/interview/other/interview-other-6.md"},o=t("",60),n=[o];function s(i,d,c,h,l,f){return p(),r("div",null,n)}const m=e(a,[["render",s]]);export{_ as __pageData,m as default};
-//# sourceMappingURL=pages_interview_other_interview-other-6.md.5e4cff6b.js.map

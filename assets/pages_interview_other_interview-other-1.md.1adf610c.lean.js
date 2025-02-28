@@ -1,0 +1,2 @@
+import{_ as s,o as a,c as n,e}from"./app.1d3e5273.js";const u=JSON.parse('{"title":"如何让const [a,b] = {a:1,b:2}这行代码成立","description":"","frontmatter":{},"headers":[],"relativePath":"pages/interview/other/interview-other-1.md","filePath":"pages/interview/other/interview-other-1.md","lastUpdated":1703733994000}'),l={name:"pages/interview/other/interview-other-1.md"},p=e("",3),o=[p];function t(r,c,i,y,b,E){return a(),n("div",null,o)}const h=s(l,[["render",t]]);export{u as __pageData,h as default};
+//# sourceMappingURL=pages_interview_other_interview-other-1.md.1adf610c.js.map

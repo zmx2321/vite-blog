@@ -1,2 +1,0 @@
-import{_ as s,o as n,c as a,e as l}from"./app.e5ec5305.js";const u=JSON.parse('{"title":"vform3跨页面存储,使用indexdb","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/vue-note/vue3-note-4.md","filePath":"pages/note/front/vue-note/vue3-note-4.md","lastUpdated":1736920341000}'),p={name:"pages/note/front/vue-note/vue3-note-4.md"},o=l("",10),e=[o];function r(c,t,E,y,i,F){return n(),a("div",null,e)}const m=s(p,[["render",r]]);export{u as __pageData,m as default};
-//# sourceMappingURL=pages_note_front_vue-note_vue3-note-4.md.c5327550.js.map

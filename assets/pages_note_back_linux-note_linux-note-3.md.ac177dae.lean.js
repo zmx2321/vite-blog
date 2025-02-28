@@ -1,0 +1,2 @@
+import{_ as l,o as i,c as e,e as a}from"./app.1d3e5273.js";const x=JSON.parse('{"title":"linux简单命令积累","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/back/linux-note/linux-note-3.md","filePath":"pages/note/back/linux-note/linux-note-3.md","lastUpdated":1700105199000}'),t={name:"pages/note/back/linux-note/linux-note-3.md"},o=a("",21),n=[o];function r(s,c,u,d,h,p){return i(),e("div",null,n)}const m=l(t,[["render",r]]);export{x as __pageData,m as default};
+//# sourceMappingURL=pages_note_back_linux-note_linux-note-3.md.ac177dae.js.map

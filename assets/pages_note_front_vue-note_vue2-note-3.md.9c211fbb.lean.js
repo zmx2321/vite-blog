@@ -1,0 +1,2 @@
+import{_ as s,o as n,c as a,e as l}from"./app.1d3e5273.js";const u=JSON.parse('{"title":"vue2工具库","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/vue-note/vue2-note-3.md","filePath":"pages/note/front/vue-note/vue2-note-3.md","lastUpdated":1700206476000}'),p={name:"pages/note/front/vue-note/vue2-note-3.md"},o=l("",45),e=[o];function c(r,t,E,y,i,F){return n(),a("div",null,e)}const m=s(p,[["render",c]]);export{u as __pageData,m as default};
+//# sourceMappingURL=pages_note_front_vue-note_vue2-note-3.md.9c211fbb.js.map

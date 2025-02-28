@@ -1,2 +1,0 @@
-import{_ as s,o as n,c as a,e as l}from"./app.e5ec5305.js";const u=JSON.parse('{"title":"Nginx配置前端 web 服务","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/other/nginx-note/nginx-note-2.md","filePath":"pages/note/other/nginx-note/nginx-note-2.md","lastUpdated":1702602853000}'),p={name:"pages/note/other/nginx-note/nginx-note-2.md"},e=l("",17),o=[e];function r(c,t,E,y,i,b){return n(),a("div",null,o)}const d=s(p,[["render",r]]);export{u as __pageData,d as default};
-//# sourceMappingURL=pages_note_other_nginx-note_nginx-note-2.md.3d779f8f.js.map

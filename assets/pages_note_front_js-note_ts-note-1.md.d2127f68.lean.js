@@ -1,0 +1,2 @@
+import{_ as s,o as n,c as a,e as l}from"./app.1d3e5273.js";const u=JSON.parse('{"title":"ts的常见使用","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/js-note/ts-note-1.md","filePath":"pages/note/front/js-note/ts-note-1.md","lastUpdated":1710739767000}'),p={name:"pages/note/front/js-note/ts-note-1.md"},o=l("",38),e=[o];function c(r,t,y,E,i,F){return n(),a("div",null,e)}const m=s(p,[["render",c]]);export{u as __pageData,m as default};
+//# sourceMappingURL=pages_note_front_js-note_ts-note-1.md.d2127f68.js.map

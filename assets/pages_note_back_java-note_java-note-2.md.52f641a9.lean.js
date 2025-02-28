@@ -1,2 +1,0 @@
-import{_ as s,o as n,c as a,e as l}from"./app.e5ec5305.js";const b=JSON.parse('{"title":"java入门练习题1","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/back/java-note/java-note-2.md","filePath":"pages/note/back/java-note/java-note-2.md","lastUpdated":1700105199000}'),p={name:"pages/note/back/java-note/java-note-2.md"},o=l("",142),e=[o];function t(c,r,E,y,i,F){return n(),a("div",null,e)}const m=s(p,[["render",t]]);export{b as __pageData,m as default};
-//# sourceMappingURL=pages_note_back_java-note_java-note-2.md.52f641a9.js.map
