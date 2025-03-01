@@ -5,5 +5,5 @@ const baseUrl = "/pages/note/other/computer-note";
 
 module.exports = [
   { text: "计算机硬件", link: `${baseUrl}/computer-note-1` },
-  { text: "计算机常识1", link: `${baseUrl}/computer-note-2` },
+  { text: "什么是编程语言", link: `${baseUrl}/computer-note-2` },
 ];
