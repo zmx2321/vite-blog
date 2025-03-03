@@ -12,3 +12,5 @@
 - SessionBox - Multi login => 多开账号
 - 标签分组扩展
 - (谷歌浏览器插件)[https://developer.chrome.com/docs/extensions?hl=zh-cn]
+
+## chrome浏览器performance调试工具
