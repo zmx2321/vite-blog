@@ -469,3 +469,29 @@ const queryParams = ref({
     createStartEnd: [currentDate, new Date()]
 })
 ```
+
+## 上个月21到这个月0
+```js
+const getDateRange = (time) => {
+    // console.log(new Date().toLocaleDateString())
+
+    let tempDateRange = []
+    let currentDate = new Date(time);
+    let year = currentDate.getFullYear();
+    let month = currentDate.getMonth() + 1
+    let day = currentDate.getDate()
+    let dayRes = day <= 20 ? day : 20
+
+    /**
+     * 上个月21日 - 当前月份20
+     */
+    if (month == 1) {
+        tempDateRange = [`${year - 1}-12-21`, `${year}-${month}-${dayRes}`]
+    } else {
+        tempDateRange = [`${year}-${month - 1}-21`, `${year}-${month}-${dayRes}`]
+    }
+
+    // console.log(tempDateRange)
+    return [new Date(tempDateRange[0]), new Date(tempDateRange[1])]
+}
+```
