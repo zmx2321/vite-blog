@@ -161,3 +161,18 @@ git config user.email
 - 只需要在commit 后面追加 --no-verify  就可以解决
   - git commit -m 'merge' --no-verify
   - 不进行校验
+
+## 删除分支
+- 删除本地分支
+  - `git branch --delete 分支名`
+  - `git branch -D zmx2321`
+- 删除远程分支
+  - `git push origin --delete 分支名`
+  - `git push origin --delete zmx2321`
+
+## 替换分支
+```bash
+git checkout master // 切换到旧的分支
+git reset --hard develop// 将本地的旧分支 master 重置成 develop
+git push origin master --force // 再推送到远程仓库
+```
