@@ -1,0 +1,2 @@
+import{_ as s,o as n,c as a,e as l}from"./app.c9c6cc3c.js";const u=JSON.parse('{"title":"java面向对象相关","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/back/java-note/java-note-4.md","filePath":"pages/note/back/java-note/java-note-4.md","lastUpdated":1700105199000}'),p={name:"pages/note/back/java-note/java-note-4.md"},o=l("",9),e=[o];function c(r,t,E,y,i,F){return n(),a("div",null,e)}const m=s(p,[["render",c]]);export{u as __pageData,m as default};
+//# sourceMappingURL=pages_note_back_java-note_java-note-4.md.e79714a9.js.map

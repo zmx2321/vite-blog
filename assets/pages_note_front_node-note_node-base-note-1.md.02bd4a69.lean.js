@@ -1,2 +1,0 @@
-import{_ as s,o as n,c as a,e as l}from"./app.ef4be69b.js";const u=JSON.parse('{"title":"node爬虫相关","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/node-note/node-base-note-1.md","filePath":"pages/note/front/node-note/node-base-note-1.md","lastUpdated":1703488604000}'),p={name:"pages/note/front/node-note/node-base-note-1.md"},o=l("",34),e=[o];function r(c,t,E,y,i,F){return n(),a("div",null,e)}const m=s(p,[["render",r]]);export{u as __pageData,m as default};
-//# sourceMappingURL=pages_note_front_node-note_node-base-note-1.md.02bd4a69.js.map
