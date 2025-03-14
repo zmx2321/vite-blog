@@ -1,6 +1,14 @@
 # linux简单命令积累
 
-## 1. 如何使用cmder远程连接服务器
+## linux常用指令
+- 查询进程id
+  - netstat -ano | findstr :<端口号>
+  - netstat -ano | findstr :8080
+- 杀进程
+  - taskkill /PID <PID> /F
+  - taskkill /PID 1234 /F
+
+## 如何使用cmder远程连接服务器
 - 如果有端口
     - `ssh -p port user@ip`
     - 例：`ssh -p 233 zmx@192.168.0.64`
@@ -8,18 +16,18 @@
     - `ssh user@ip`
     - 例：`ssh zmx@192.168.0.64`
 
-## 2. 测试linux是否能访问外网
+## 测试linux是否能访问外网
 - `curl -l http://www.baidu.com` 
     - 输出百度页面的HTML
 - `wget http://www.baidu.com`
     - 下载百度页面并在当前文件夹保存为index
 
-## 3. 查看端口占用
+## 查看端口占用
 - `lsof -i:端口号`
     - 用于查看某一端口的占用情况
     - 例：`lsof -i:8000` 查看8000端口使用情况
 
-## 4. 查看Nginx是否已经安装
+## 查看Nginx是否已经安装
 1. 查看进程列表
 > Linux每个应用运行都会产生一个进程，那么我们就可以通过查看Nginx进程是否存在来判断它是否启动。
 - 用ps -ef列出进程列表，然后通过grep过滤
@@ -37,7 +45,7 @@
 ## 7. 要将所有 jpeg的后缀名图片文件修改为 jpg文件
 - `rename .jpeg .jpg *.jpeg`
 
-## 8. centos7安装Jenkins
+## centos7安装Jenkins
 - JAVA安装
     - yum list installed |grep java
     - yum -y list java* => 查看
@@ -64,3 +72,4 @@
         - systemctl stop jenkins
         - systemctl start jenkins
     - cat /var/lib/jenkins/secrets/initialAdminPassword => 查看密码
+
