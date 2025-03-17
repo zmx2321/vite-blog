@@ -1,2 +1,0 @@
-import{_ as s,o as n,c as a,e as l}from"./app.eee70fb9.js";const F=JSON.parse('{"title":"vue2配置","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/vue-note/vue2-note-4.md","filePath":"pages/note/front/vue-note/vue2-note-4.md","lastUpdated":1700204718000}'),p={name:"pages/note/front/vue-note/vue2-note-4.md"},o=l("",31),e=[o];function r(c,t,E,y,i,u){return n(),a("div",null,e)}const m=s(p,[["render",r]]);export{F as __pageData,m as default};
-//# sourceMappingURL=pages_note_front_vue-note_vue2-note-4.md.d5e41f66.js.map

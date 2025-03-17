@@ -1,2 +1,0 @@
-import{_ as s,o as n,c as a,e as p}from"./app.eee70fb9.js";const d=JSON.parse('{"title":"css高级用法","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/css-note/css-note-2.md","filePath":"pages/note/front/css-note/css-note-2.md","lastUpdated":1735031358000}'),l={name:"pages/note/front/css-note/css-note-2.md"},o=p("",7),e=[o];function r(c,t,E,i,y,b){return n(),a("div",null,e)}const u=s(l,[["render",r]]);export{d as __pageData,u as default};
-//# sourceMappingURL=pages_note_front_css-note_css-note-2.md.9a8fe4f0.js.map

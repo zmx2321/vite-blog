@@ -1,2 +1,0 @@
-import{_ as e,o,c as r,e as a}from"./app.eee70fb9.js";const u=JSON.parse('{"title":"chrome相关笔记","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/other/chrome-note.md","filePath":"pages/note/other/chrome-note.md","lastUpdated":1740965359000}'),t={name:"pages/note/other/chrome-note.md"},c=a("",6),h=[c];function l(i,n,s,m,d,_){return o(),r("div",null,h)}const f=e(t,[["render",l]]);export{u as __pageData,f as default};
-//# sourceMappingURL=pages_note_other_chrome-note.md.7dba8a28.js.map
