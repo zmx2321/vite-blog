@@ -1,0 +1,2 @@
+import{_ as s,o as n,c as a,e as l}from"./app.eee70fb9.js";const D=JSON.parse('{"title":"js中的时间","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/js-note/js-base-note-2.md","filePath":"pages/note/front/js-note/js-base-note-2.md","lastUpdated":1741589169000}'),p={name:"pages/note/front/js-note/js-base-note-2.md"},o=l("",21),e=[o];function t(r,c,y,E,i,F){return n(),a("div",null,e)}const u=s(p,[["render",t]]);export{D as __pageData,u as default};
+//# sourceMappingURL=pages_note_front_js-note_js-base-note-2.md.2ed98c41.js.map

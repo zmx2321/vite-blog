@@ -1,2 +1,0 @@
-import{_ as s,o as a,c as n,e as l}from"./app.c9c6cc3c.js";const d=JSON.parse('{"title":"事件循环","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/js-note/js-base-note-5.md","filePath":"pages/note/front/js-note/js-base-note-5.md","lastUpdated":1735636132000}'),p={name:"pages/note/front/js-note/js-base-note-5.md"},o=l("",60),e=[o];function t(r,c,i,E,y,u){return a(),n("div",null,e)}const b=s(p,[["render",t]]);export{d as __pageData,b as default};
-//# sourceMappingURL=pages_note_front_js-note_js-base-note-5.md.b9a4cbd6.js.map

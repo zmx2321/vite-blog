@@ -1,0 +1,2 @@
+import{_ as s,o as a,c as n,e as t}from"./app.eee70fb9.js";const b=JSON.parse('{"title":"Modal 对话框","description":"","frontmatter":{},"headers":[],"relativePath":"examples/modal.md","filePath":"examples/modal.md","lastUpdated":1700471686000}'),l={name:"examples/modal.md"},o=t("",9),p=[o];function e(r,c,E,y,d,u){return a(),n("div",null,p)}const g=s(l,[["render",e]]);export{b as __pageData,g as default};
+//# sourceMappingURL=examples_modal.md.ba3d2587.js.map

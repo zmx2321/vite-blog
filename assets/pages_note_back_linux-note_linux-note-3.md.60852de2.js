@@ -1,0 +1,2 @@
+import{_ as e,o as t,c as n}from"./app.eee70fb9.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/back/linux-note/linux-note-3.md","filePath":"pages/note/back/linux-note/linux-note-3.md","lastUpdated":1741931730000}'),a={name:"pages/note/back/linux-note/linux-note-3.md"};function o(s,c,r,i,l,p){return t(),n("div")}const _=e(a,[["render",o]]);export{u as __pageData,_ as default};
+//# sourceMappingURL=pages_note_back_linux-note_linux-note-3.md.60852de2.js.map

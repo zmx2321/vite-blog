@@ -1,0 +1,2 @@
+import{_ as s,o as n,c as a,e as l}from"./app.eee70fb9.js";const u=JSON.parse('{"title":"openlayer测试案例","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/gis-note/openlayer-note-2.md","filePath":"pages/note/front/gis-note/openlayer-note-2.md","lastUpdated":1716862823000}'),p={name:"pages/note/front/gis-note/openlayer-note-2.md"},o=l("",14),e=[o];function r(c,t,E,y,i,F){return n(),a("div",null,e)}const m=s(p,[["render",r]]);export{u as __pageData,m as default};
+//# sourceMappingURL=pages_note_front_gis-note_openlayer-note-2.md.bf113264.js.map
