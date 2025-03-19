@@ -4,6 +4,7 @@
 - 查询进程id
   - `netstat -ano | findstr :<端口号>`
   - `netstat -ano | findstr :8080`
+  - `sudo lsof -i :8080`
 - 杀进程
   - `taskkill /PID <PID> /F`
   - `taskkill /PID 1234 /F`
