@@ -19,6 +19,12 @@ export const uniqueArr = (arr)=> {
 }
 ```
 
+## set去重并转成数组
+```js
+let timeArr = [...new Set(testJson.map(item => item.event_date))]
+console.log('timeArr', timeArr);
+```
+
 ## 去字符串所有空格
 ```js
 // 去字符串所有空格
