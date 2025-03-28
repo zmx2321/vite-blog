@@ -3654,171 +3654,16 @@ formatter(res) {
 - 普通数据格式
 ```json
 [
-    {
-        "event_date": "2025-03-19",
-        "county": "余姚市",
-        "count_county_alarm": 5
-    },
-    {
-        "event_date": "2025-03-19",
-        "county": "北仑区",
-        "count_county_alarm": 59
-    },
-    {
-        "event_date": "2025-03-19",
-        "county": "奉化区",
-        "count_county_alarm": 11
-    },
-    {
-        "event_date": "2025-03-19",
-        "county": "宁海县",
-        "count_county_alarm": 6
-    },
-    {
-        "event_date": "2025-03-19",
-        "county": "慈溪市",
-        "count_county_alarm": 66
-    },
-    {
-        "event_date": "2025-03-19",
-        "county": "江北区",
-        "count_county_alarm": 5
-    },
-    {
-        "event_date": "2025-03-19",
-        "county": "海曙区",
-        "count_county_alarm": 5
-    },
-    {
-        "event_date": "2025-03-19",
-        "county": "鄞州区",
-        "count_county_alarm": 18
-    },
-    {
-        "event_date": "2025-03-19",
-        "county": "镇海区",
-        "count_county_alarm": 1
-    },
-    {
-        "event_date": "2025-03-20",
-        "county": "余姚市",
-        "count_county_alarm": 8
-    },
-    {
-        "event_date": "2025-03-20",
-        "county": "北仑区",
-        "count_county_alarm": 6
-    },
-    {
-        "event_date": "2025-03-20",
-        "county": "奉化区",
-        "count_county_alarm": 14
-    },
-    {
-        "event_date": "2025-03-20",
-        "county": "宁海县",
-        "count_county_alarm": 1
-    },
-    {
-        "event_date": "2025-03-20",
-        "county": "慈溪市",
-        "count_county_alarm": 12
-    },
-    {
-        "event_date": "2025-03-20",
-        "county": "海曙区",
-        "count_county_alarm": 6
-    },
-    {
-        "event_date": "2025-03-20",
-        "county": "象山县",
-        "count_county_alarm": 3
-    },
-    {
-        "event_date": "2025-03-20",
-        "county": "鄞州区",
-        "count_county_alarm": 16
-    },
-    {
-        "event_date": "2025-03-20",
-        "county": "镇海区",
-        "count_county_alarm": 11
-    },
-    {
-        "event_date": "2025-03-21",
-        "county": "余姚市",
-        "count_county_alarm": 12
-    },
-    {
-        "event_date": "2025-03-25",
-        "county": "奉化区",
-        "count_county_alarm": 6
-    },
-    {
-        "event_date": "2025-03-25",
-        "county": "慈溪市",
-        "count_county_alarm": 27
-    },
-    {
-        "event_date": "2025-03-25",
-        "county": "江北区",
-        "count_county_alarm": 2
-    },
-    {
-        "event_date": "2025-03-25",
-        "county": "海曙区",
-        "count_county_alarm": 25
-    },
-    {
-        "event_date": "2025-03-25",
-        "county": "象山县",
-        "count_county_alarm": 1
-    },
-    {
-        "event_date": "2025-03-25",
-        "county": "鄞州区",
-        "count_county_alarm": 33
-    },
-    {
-        "event_date": "2025-03-25",
-        "county": "镇海区",
-        "count_county_alarm": 1
-    },
-    {
-        "event_date": "2025-03-26",
-        "county": "余姚市",
-        "count_county_alarm": 21
-    },
-    {
-        "event_date": "2025-03-26",
-        "county": "北仑区",
-        "count_county_alarm": 37
-    },
-    {
-        "event_date": "2025-03-26",
-        "county": "奉化区",
-        "count_county_alarm": 29
-    },
-    {
-        "event_date": "2025-03-26",
-        "county": "宁海县",
-        "count_county_alarm": 1
-    },
-    {
-        "event_date": "2025-03-27",
-        "county": "镇海区",
-        "count_county_alarm": 15
-    }
+    { "event_date": "2023-01-01", "county": "A", "count_county_alarm": 5 },
+    { "event_date": "2023-01-01", "county": "B", "count_county_alarm": 3 },
+    { "event_date": "2023-01-02", "county": "A", "count_county_alarm": 2 }
 ]
 ```
 - 前端处理
 ```js
-function initCountyBar() {
-    var myChart = echarts.init(document.getElementById("echart"))
-    var option;
-
+const resolveChartData = () => {
     // 数组根据event_date字段是否相同进行重组,相同则将对应的county字段值放入children数组中
-    let chartData = testJson.reduce((acc, item) => {
+    return testJson.reduce((acc, item) => {
         const existingDate = acc.find((entry) => entry.date === item.event_date);
         if (existingDate) {
             existingDate.children.push({
@@ -3838,38 +3683,36 @@ function initCountyBar() {
         }
         return acc;
     }, [])
+}
 
-    /**
-     * 类似这种数据格式
-     let chartData = [
-        {
-            date: '3月1日',
-            children: [
-                {
-                    county: '海曙',
-                    value: 10
-                },
-                {
-                    county: '江北',
-                    value: 120
-                },
-            ]
-        }, {
-            date: '3月2日',
-            children: [
-                {
-                    county: '海曙',
-                    value: 10
-                },
-                {
-                    county: '江北',
-                    value: 120
-                },
-            ]
+let chartData = resolveChartData()
+// console.log('chartData', chartData)
 
-        }
-    ]
-     */
+/**
+ * 转换成的数据格式为:
+ 
+ [
+    {
+        "date": "2023-01-01",
+        "children": [
+            { "county": "A", "value": 5 },
+            { "county": "B", "value": 3 }
+        ]
+    },
+    {
+        "date": "2023-01-02",
+        "children": [
+            { "county": "A", "value": 2 }
+        ]
+    }
+]
+ */
+
+initCountyBar(chartData)
+
+const initCountyBar = (chartData) => {
+    var myChart = echarts.init(document.getElementById("echart"))
+    var option;
 
     option = {
         tooltip: {
@@ -3891,6 +3734,8 @@ function initCountyBar() {
             }
         },
         xAxis: {
+            // type: 'category',
+            // boundaryGap: false,
             type: 'category',
             axisTick: {
                 show: false,  // 隐藏刻度线
@@ -3908,6 +3753,7 @@ function initCountyBar() {
                 align: 'center',
                 margin: 20
             },
+            // data: dateArr,
             data: chartData.map(item => item.date),
         },
         yAxis: {
