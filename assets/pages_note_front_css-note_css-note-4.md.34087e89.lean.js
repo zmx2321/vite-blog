@@ -1,2 +1,0 @@
-import{_ as s,o as n,c as a,e as l}from"./app.4d0300d2.js";const F=JSON.parse('{"title":"你不知道的 CSS 之包含块","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/css-note/css-note-4.md","filePath":"pages/note/front/css-note/css-note-4.md","lastUpdated":1735636132000}'),p={name:"pages/note/front/css-note/css-note-4.md"},o=l("",74),e=[o];function t(c,r,E,y,i,d){return n(),a("div",null,e)}const u=s(p,[["render",t]]);export{F as __pageData,u as default};
-//# sourceMappingURL=pages_note_front_css-note_css-note-4.md.34087e89.js.map

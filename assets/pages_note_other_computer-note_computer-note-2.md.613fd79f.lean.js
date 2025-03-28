@@ -1,0 +1,2 @@
+import{_ as l,o as i,c as a,e}from"./app.2ecb963c.js";const m=JSON.parse('{"title":"编程语言","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/other/computer-note/computer-note-2.md","filePath":"pages/note/other/computer-note/computer-note-2.md","lastUpdated":1741077154000}'),t={name:"pages/note/other/computer-note/computer-note-2.md"},o=e("",16),r=[o];function u(n,c,h,s,d,p){return i(),a("div",null,r)}const b=l(t,[["render",u]]);export{m as __pageData,b as default};
+//# sourceMappingURL=pages_note_other_computer-note_computer-note-2.md.613fd79f.js.map

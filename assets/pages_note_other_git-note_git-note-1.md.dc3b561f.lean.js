@@ -1,0 +1,2 @@
+import{_ as s,o as a,c as l,e as n}from"./app.2ecb963c.js";const y=JSON.parse('{"title":"git相关笔记","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/other/git-note/git-note-1.md","filePath":"pages/note/other/git-note/git-note-1.md","lastUpdated":1741761430000}'),e={name:"pages/note/other/git-note/git-note-1.md"},o=n("",53),p=[o];function i(t,c,r,u,g,d){return a(),l("div",null,p)}const b=s(e,[["render",i]]);export{y as __pageData,b as default};
+//# sourceMappingURL=pages_note_other_git-note_git-note-1.md.dc3b561f.js.map
