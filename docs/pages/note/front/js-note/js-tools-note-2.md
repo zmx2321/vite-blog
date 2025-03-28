@@ -990,3 +990,28 @@ const numbers = [1, 2, 3, 4, 5];
 const average = calculateAverage(numbers);
 console.log(average); // 输出: 3
 ```
+
+## 数组根据event_date字段是否相同进行重组,相同则将对应的county字段值放入children数组中
+```js
+let chartData = testJson.reduce((acc, item) => {
+    const existingDate = acc.find((entry) => entry.date === item.event_date);
+    if (existingDate) {
+        existingDate.children.push({
+            county: item.county,
+            value: item.count_county_alarm
+        });
+    } else {
+        acc.push({
+            date: item.event_date,
+            children: [
+                {
+                    county: item.county,
+                    value: item.count_county_alarm
+                }
+            ]
+        });
+    }
+    return acc;
+}, [])
+console.log('testJsonGroup', chartData)
+```

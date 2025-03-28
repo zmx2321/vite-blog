@@ -3649,3 +3649,280 @@ formatter(res) {
   return str
 }
 ```
+
+## 后端返回普通的对象数组,前端重组数据并渲染图表
+- 普通数据格式
+```json
+[
+    {
+        "event_date": "2025-03-19",
+        "county": "余姚市",
+        "count_county_alarm": 5
+    },
+    {
+        "event_date": "2025-03-19",
+        "county": "北仑区",
+        "count_county_alarm": 59
+    },
+    {
+        "event_date": "2025-03-19",
+        "county": "奉化区",
+        "count_county_alarm": 11
+    },
+    {
+        "event_date": "2025-03-19",
+        "county": "宁海县",
+        "count_county_alarm": 6
+    },
+    {
+        "event_date": "2025-03-19",
+        "county": "慈溪市",
+        "count_county_alarm": 66
+    },
+    {
+        "event_date": "2025-03-19",
+        "county": "江北区",
+        "count_county_alarm": 5
+    },
+    {
+        "event_date": "2025-03-19",
+        "county": "海曙区",
+        "count_county_alarm": 5
+    },
+    {
+        "event_date": "2025-03-19",
+        "county": "鄞州区",
+        "count_county_alarm": 18
+    },
+    {
+        "event_date": "2025-03-19",
+        "county": "镇海区",
+        "count_county_alarm": 1
+    },
+    {
+        "event_date": "2025-03-20",
+        "county": "余姚市",
+        "count_county_alarm": 8
+    },
+    {
+        "event_date": "2025-03-20",
+        "county": "北仑区",
+        "count_county_alarm": 6
+    },
+    {
+        "event_date": "2025-03-20",
+        "county": "奉化区",
+        "count_county_alarm": 14
+    },
+    {
+        "event_date": "2025-03-20",
+        "county": "宁海县",
+        "count_county_alarm": 1
+    },
+    {
+        "event_date": "2025-03-20",
+        "county": "慈溪市",
+        "count_county_alarm": 12
+    },
+    {
+        "event_date": "2025-03-20",
+        "county": "海曙区",
+        "count_county_alarm": 6
+    },
+    {
+        "event_date": "2025-03-20",
+        "county": "象山县",
+        "count_county_alarm": 3
+    },
+    {
+        "event_date": "2025-03-20",
+        "county": "鄞州区",
+        "count_county_alarm": 16
+    },
+    {
+        "event_date": "2025-03-20",
+        "county": "镇海区",
+        "count_county_alarm": 11
+    },
+    {
+        "event_date": "2025-03-21",
+        "county": "余姚市",
+        "count_county_alarm": 12
+    },
+    {
+        "event_date": "2025-03-25",
+        "county": "奉化区",
+        "count_county_alarm": 6
+    },
+    {
+        "event_date": "2025-03-25",
+        "county": "慈溪市",
+        "count_county_alarm": 27
+    },
+    {
+        "event_date": "2025-03-25",
+        "county": "江北区",
+        "count_county_alarm": 2
+    },
+    {
+        "event_date": "2025-03-25",
+        "county": "海曙区",
+        "count_county_alarm": 25
+    },
+    {
+        "event_date": "2025-03-25",
+        "county": "象山县",
+        "count_county_alarm": 1
+    },
+    {
+        "event_date": "2025-03-25",
+        "county": "鄞州区",
+        "count_county_alarm": 33
+    },
+    {
+        "event_date": "2025-03-25",
+        "county": "镇海区",
+        "count_county_alarm": 1
+    },
+    {
+        "event_date": "2025-03-26",
+        "county": "余姚市",
+        "count_county_alarm": 21
+    },
+    {
+        "event_date": "2025-03-26",
+        "county": "北仑区",
+        "count_county_alarm": 37
+    },
+    {
+        "event_date": "2025-03-26",
+        "county": "奉化区",
+        "count_county_alarm": 29
+    },
+    {
+        "event_date": "2025-03-26",
+        "county": "宁海县",
+        "count_county_alarm": 1
+    },
+    {
+        "event_date": "2025-03-27",
+        "county": "镇海区",
+        "count_county_alarm": 15
+    }
+]
+```
+- 前端处理
+```js
+function initCountyBar() {
+    var myChart = echarts.init(document.getElementById("echart"))
+    var option;
+
+    // 数组根据event_date字段是否相同进行重组,相同则将对应的county字段值放入children数组中
+    let chartData = testJson.reduce((acc, item) => {
+        const existingDate = acc.find((entry) => entry.date === item.event_date);
+        if (existingDate) {
+            existingDate.children.push({
+                county: item.county,
+                value: item.count_county_alarm
+            });
+        } else {
+            acc.push({
+                date: item.event_date,
+                children: [
+                    {
+                        county: item.county,
+                        value: item.count_county_alarm
+                    }
+                ]
+            });
+        }
+        return acc;
+    }, [])
+
+    /**
+     * 类似这种数据格式
+     let chartData = [
+        {
+            date: '3月1日',
+            children: [
+                {
+                    county: '海曙',
+                    value: 10
+                },
+                {
+                    county: '江北',
+                    value: 120
+                },
+            ]
+        }, {
+            date: '3月2日',
+            children: [
+                {
+                    county: '海曙',
+                    value: 10
+                },
+                {
+                    county: '江北',
+                    value: 120
+                },
+            ]
+
+        }
+    ]
+     */
+
+    option = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: chartData[0].children.map(item => item.county),
+            bottom: 0
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '8%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            axisTick: {
+                show: false,  // 隐藏刻度线
+            },
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(255, 255, 255, .6)', // 设置横坐标线颜色
+                }
+            },
+            axisLabel: {
+                interval: 0, // 横轴信息全部显示
+                rotate: 30,
+                color: '#333',
+                fontSize: 10.5,
+                align: 'center',
+                margin: 20
+            },
+            data: chartData.map(item => item.date),
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: chartData[0].children.map((child, index) => {
+            return {
+                name: child.county,
+                type: 'line',
+                stack: 'Total',
+                data: chartData.map(item => item.children[index]?.value || 0)
+            };
+        }),
+    };
+
+    option && myChart.setOption(option);
+}
+```
