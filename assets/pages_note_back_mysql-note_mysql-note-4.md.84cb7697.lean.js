@@ -1,0 +1,2 @@
+import{_ as s,o as n,c as a,e as l}from"./app.53099fc7.js";const F=JSON.parse('{"title":"mybatits工作积累","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/back/mysql-note/mysql-note-4.md","filePath":"pages/note/back/mysql-note/mysql-note-4.md","lastUpdated":1743644085000}'),p={name:"pages/note/back/mysql-note/mysql-note-4.md"},o=l("",18),e=[o];function t(c,r,E,y,i,m){return n(),a("div",null,e)}const d=s(p,[["render",t]]);export{F as __pageData,d as default};
+//# sourceMappingURL=pages_note_back_mysql-note_mysql-note-4.md.84cb7697.js.map

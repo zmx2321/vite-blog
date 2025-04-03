@@ -1,0 +1,2 @@
+import{_ as e,o as a,c as r,e as o}from"./app.53099fc7.js";const f=JSON.parse('{"title":"chrome浏览器performance调试工具","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/other/chrome-note-0.md","filePath":"pages/note/other/chrome-note-0.md","lastUpdated":1740965359000}'),l={name:"pages/note/other/chrome-note-0.md"},i=o("",18),t=[i];function c(h,n,s,m,d,u){return a(),r("div",null,t)}const b=e(l,[["render",c]]);export{f as __pageData,b as default};
+//# sourceMappingURL=pages_note_other_chrome-note-0.md.5d0c048a.js.map

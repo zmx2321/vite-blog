@@ -1,0 +1,2 @@
+import{_ as a,o as t,c as e,e as o}from"./app.53099fc7.js";const u=JSON.parse('{"title":"启动javaWeb服务","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/back/java-note/java-note-5.md","filePath":"pages/note/back/java-note/java-note-5.md","lastUpdated":1734423506000}'),i={name:"pages/note/back/java-note/java-note-5.md"},r=o("",12),l=[r];function n(s,g,c,d,p,h){return t(),e("div",null,l)}const m=a(i,[["render",n]]);export{u as __pageData,m as default};
+//# sourceMappingURL=pages_note_back_java-note_java-note-5.md.12e54008.js.map

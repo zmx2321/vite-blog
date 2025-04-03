@@ -1,2 +1,0 @@
-import{_ as s,o,c as n,e as a}from"./app.2ecb963c.js";const F=JSON.parse('{"title":"vscode相关笔记","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/other/vscode-note.md","filePath":"pages/note/other/vscode-note.md","lastUpdated":1700192468000}'),l={name:"pages/note/other/vscode-note.md"},t=a("",20),p=[t];function e(c,r,E,u,y,q){return o(),n("div",null,p)}const d=s(l,[["render",e]]);export{F as __pageData,d as default};
-//# sourceMappingURL=pages_note_other_vscode-note.md.6d96dc6f.js.map

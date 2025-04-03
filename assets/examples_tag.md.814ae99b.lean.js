@@ -1,2 +1,0 @@
-import{_ as s,o as n,c as a,e as l}from"./app.2ecb963c.js";const g=JSON.parse('{"title":"Tag 标签","description":"","frontmatter":{},"headers":[],"relativePath":"examples/tag.md","filePath":"examples/tag.md","lastUpdated":1700471686000}'),p={name:"examples/tag.md"},t=l("",19),o=[t];function e(r,c,E,y,u,i){return n(),a("div",null,o)}const d=s(p,[["render",e]]);export{g as __pageData,d as default};
-//# sourceMappingURL=examples_tag.md.814ae99b.js.map

@@ -1,0 +1,2 @@
+import{_ as s,o as n,c as a,e as l}from"./app.53099fc7.js";const u=JSON.parse('{"title":"express登陆和注册","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/front/node-note/node-express-2.md","filePath":"pages/note/front/node-note/node-express-2.md","lastUpdated":1703488604000}'),p={name:"pages/note/front/node-note/node-express-2.md"},o=l("",20),e=[o];function r(c,t,E,y,i,F){return n(),a("div",null,e)}const A=s(p,[["render",r]]);export{u as __pageData,A as default};
+//# sourceMappingURL=pages_note_front_node-note_node-express-2.md.f244511f.js.map

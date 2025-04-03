@@ -1,0 +1,2 @@
+import{_ as a,o as l,c as i,e}from"./app.53099fc7.js";const b=JSON.parse('{"title":"AGI到来","description":"","frontmatter":{},"headers":[],"relativePath":"pages/note/back/python-note/python-ai-note-1.md","filePath":"pages/note/back/python-note/python-ai-note-1.md","lastUpdated":1740758730000}'),t={name:"pages/note/back/python-note/python-ai-note-1.md"},o=e("",17),n=[o];function r(h,u,s,d,c,_){return l(),i("div",null,n)}const m=a(t,[["render",r]]);export{b as __pageData,m as default};
+//# sourceMappingURL=pages_note_back_python-note_python-ai-note-1.md.90dd03aa.js.map
