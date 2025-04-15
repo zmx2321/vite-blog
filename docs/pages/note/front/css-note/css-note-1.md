@@ -454,3 +454,12 @@ border-top: 5px solid #f00;
     }
   }
 ```
+
+## css选择器class包含某个字符串
+```css
+:deep(.ol-overlaycontainer-stopevent) {
+    div[class*="ol-zoom"] {
+        display: none;
+    }
+}
+```
