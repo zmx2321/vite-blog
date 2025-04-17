@@ -260,3 +260,112 @@ const feature = olMap.forEachFeatureAtPixel(pixel, feature => {
 })
 console.log(feature)
 ```
+
+## 计算网格的经纬度坐标点
+```js
+function getGridCoordinates({ minLongitude, maxLongitude, minLatitude, maxLatitude, gridSize = 10 }) {
+  const coordinates = [];
+  const lonStep = (maxLongitude - minLongitude) / gridSize;
+  const latStep = (maxLatitude - minLatitude) / gridSize;
+
+  for (let i = 0; i < gridSize; i++) {
+    for (let j = 0; j < gridSize; j++) {
+      const lon = minLongitude + i * lonStep + lonStep / 2;
+      const lat = minLatitude + j * latStep + latStep / 2;
+      coordinates.push({
+        lon: lon,
+        lat: lat,
+        avgrsrp: 0
+      });
+    }
+  }
+
+  return coordinates;
+}
+```
+
+## 计算网格的经纬度坐标点并合并对象数组
+```js
+function getGridCoordinates({ minLongitude, maxLongitude, minLatitude, maxLatitude, gridSize = 10, points = [] }) {
+  const coordinates = [];
+  const lonStep = (maxLongitude - minLongitude) / gridSize;
+  const latStep = (maxLatitude - minLatitude) / gridSize;
+
+  // 用于存储每个网格是否已有数据
+  const gridHasData = Array(gridSize).fill().map(() => Array(gridSize).fill(false));
+
+  // 遍历对象数组，判断每个点是否在网格范围内
+  points.forEach(point => {
+    if (point.lon >= minLongitude && point.lon <= maxLongitude && point.lat >= minLatitude && point.lat <= maxLatitude) {
+      // 计算该点所在的网格索引
+      const i = Math.floor((point.lon - minLongitude) / lonStep);
+      const j = Math.floor((point.lat - minLatitude) / latStep);
+
+      // 确保索引在有效范围内
+      if (i >= 0 && i < gridSize && j >= 0 && j < gridSize) {
+        // 将该点添加到结果数组中
+        coordinates.push({
+          lon: point.lon,
+          lat: point.lat,
+          avgrsrp: point.avgrsrp
+        });
+        // 标记该网格已有数据
+        gridHasData[i][j] = true;
+      }
+    }
+  });
+
+  // 遍历网格，为没有数据的网格添加默认点
+  for (let i = 0; i < gridSize; i++) {
+    for (let j = 0; j < gridSize; j++) {
+      if (!gridHasData[i][j]) {
+        const lon = minLongitude + i * lonStep + lonStep / 2;
+        const lat = minLatitude + j * latStep + latStep / 2;
+        coordinates.push({
+          lon: lon,
+          lat: lat,
+          avgrsrp: 0
+        });
+      }
+    }
+  }
+
+  return coordinates;
+}
+```
+
+- 打点
+```js
+// 打点
+export const renderPoint = (olMap, pointData) => {
+  console.log('打点', olMap, pointData);
+
+  const style = new Style({
+    image: new CircleStyle({
+      radius: 9,
+      fill: new Fill({
+        color: '#409eff'
+      }),
+      stroke: new Stroke({
+        color: '#4440ff',
+        width: 1
+      })
+    })
+  });
+
+  const features = pointData.map(item => {
+    return new Feature({
+      geometry: new Point(fromLonLat([item.lon, item.lat])), // 使用 fromLonLat 将经纬度转换为地图坐标
+    });
+  })
+  const vectorSource = new VectorSource({
+    features
+  });
+  const vectorLayer = new VectorLayer({
+    source: vectorSource,
+    opacity: 0.8,
+    style: style
+  });
+  olMap.addLayer(vectorLayer);
+}
+```
