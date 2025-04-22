@@ -306,3 +306,12 @@ flickerPointDom.forEach(item => {
     item.classList.remove('flicker_point')
 })
 ```
+
+## dom字符串转换成dom对象
+```js
+// 实例化 DOMParser
+const parser = new DOMParser();
+// 将 HTML 字符串转换为 DOM 对象
+const doc = parser.parseFromString(response.data, 'text/html');
+const resDoc = doc.body.querySelector('#app');
+```
