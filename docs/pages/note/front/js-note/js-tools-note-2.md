@@ -1015,3 +1015,15 @@ let chartData = testJson.reduce((acc, item) => {
 }, [])
 console.log('testJsonGroup', chartData)
 ```
+
+## 计算逆序索引
+```js
+let new111 = historySessions.map((item, index) => {
+        // 计算逆序索引
+        const reverseIndex = historySessions.length - 1 - index;
+        return {
+            ...item,
+            index: reverseIndex
+        };
+    })
+```
