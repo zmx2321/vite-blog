@@ -12,4 +12,11 @@
 - 检查 PostgreSQL 版本
   - SELECT version();
 
-
+## 批量插入
+```sql
+INSERT INTO nhp_complaints_delay_wechat_group(county, group_id)
+VALUES
+('北仑', 'xxx@chatroom'),
+('慈溪', 'xxx@chatroom'),
+('奉化', 'xxx@chatroom'),
+```
