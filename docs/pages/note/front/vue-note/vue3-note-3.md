@@ -1612,3 +1612,26 @@ defineExpose({
 });
 </script>
 ```
+
+## 在index.html中使用env的变量
+```js
+// vite.config.js
+import { createHtmlPlugin } from 'vite-plugin-html'
+plugins: [
+    ......,
+    createHtmlPlugin({
+      inject: {
+        data: {
+          VITE_APP_TITLE: env.VITE_APP_TITLE
+        }
+      }
+    })
+  ],
+
+// env
+// # 页面标题
+VITE_APP_TITLE = xxxx系统
+
+// index.html
+<title><%= VITE_APP_TITLE %></title>
+```
