@@ -1134,3 +1134,55 @@ export const debounceRef = (value, delay = 500) => {
     });
 };
 ```
+
+## js去重通用
+```js
+const arr = [
+  {a: 1, b: 2},
+  {a: 1, b: 2},
+  {a: 1, b: 2, c: { d: 3, e: 4 }},
+]
+
+// 对象数组去重,只要对象的所有属性值相同,表示相同对象
+// 判断是否为对象
+const isObject = val => val === 'object' && typeof val !== null
+
+// 判断两个对象是否相等
+const isEqual = (val1, val2) => {
+  if (!isObject(val1) || !isObject(val2)) {
+    return Object.is( val1, val2 )
+  }
+  const keys1 = Object.keys(val1)
+  const keys2 = Object.keys(val2)
+  if (keys1.length !== keys2.length) {
+    return false
+  }
+  for(const key of keys1) {
+    if(!keys2.includes(key)) {
+      return false
+    }
+    if(!isEqual(val1[key], val2[key])) {
+      return false
+    }
+  }
+  return true
+} 
+
+const result = []
+for(const item of arr) {
+  let isFind = false
+
+  for(const r of result) {
+    if(isEqual(item, r)) {
+      isFind = true
+      break
+    }
+  }
+
+  if(!isFind) {
+    result.push(item)
+  }
+}
+
+console.log(result)
+```
