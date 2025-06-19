@@ -171,3 +171,17 @@ public class CinemaMovieVo {
     b.last_handle_time ASC
 </if>
 ```
+
+## mybatis中使用foreach,多选
+```xml
+<!-- 前端传 -->
+reasonOpinion: '1,2,3'
+
+<!-- xml -->
+<if test="reasonOpinion != null and reasonOpinion != ''">
+    AND d.closure_opinion IN
+    <foreach item="item" collection="reasonOpinion.split(',')" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+</if>
+```
