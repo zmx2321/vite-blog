@@ -88,7 +88,7 @@ const siteData = [
       {
         icon: "",
         name: "我的简历",
-        desc: "旅游-云南-小视频",
+        desc: "我的简历",
         link: `${base}/about/about-my-resume`,
       },
     ],
