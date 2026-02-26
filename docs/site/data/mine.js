@@ -80,9 +80,16 @@ const siteData = [
     title: "关于我",
     items: [
       {
-        icon: "自我介绍",
-        name: "对自身做一个检查",
+        icon: "",
+        name: "自我介绍",
+        desc: "对自身做一个检查",
         link: `${base}/about/about-my-work`,
+      },
+      {
+        icon: "",
+        name: "我的简历",
+        desc: "旅游-云南-小视频",
+        link: `${base}/about/about-my-resume`,
       },
     ],
   },
