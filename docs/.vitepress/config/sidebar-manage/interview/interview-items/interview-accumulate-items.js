@@ -9,4 +9,5 @@ module.exports = [
   { text: "汇总已知的前端手写代码", link: `${baseUrl}-3` },
   { text: "汇总构建工具相关面试题", link: `${baseUrl}-4` },
   { text: "至20260115面试题积累", link: `${baseUrl}-5` },
+  { text: "前端开发面试题集 - 针对简历修改", link: `${baseUrl}-6` },
 ];

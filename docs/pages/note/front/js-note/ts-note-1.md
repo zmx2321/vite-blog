@@ -38,7 +38,7 @@ let v5: 1 | 2 | 3 | 4 | 5 = 3
 let arr: number[] = [1, 2, 3]  
 let arr1: Array<number> = [1, 2, 3]
 
-// 元祖
+// 元组
 let t1: [number, string, number] = [1, 'a', 3]
 let t2: [number, string, number?] = [1, 'a']  // ?表示可选
 
