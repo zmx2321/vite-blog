@@ -15,16 +15,13 @@ function handleScroll() {
   let top = Math.floor(document.documentElement.scrollTop || document.body.scrollTop);
   showIcon.value = top > 200;
 }
+const onScrollDebounced = debounce(handleScroll, 100);
 onMounted(() => {
-  window.addEventListener(
-    "scroll",
-    debounce(() => {
-      handleScroll();
-    }, 100),
-  );
+  handleScroll();
+  window.addEventListener("scroll", onScrollDebounced);
 });
 onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll);
+  window.removeEventListener("scroll", onScrollDebounced);
 });
 </script>
 <style lang="scss" scoped>

@@ -2,7 +2,7 @@
   <section class="img_viewer">
     <img :src="src" :alt="alt" @click="getImgView" />
 
-    <el-dialog v-model="dialogVisible" :title="imgName" width="100%" height="100%">
+    <ElDialog v-model="dialogVisible" :title="imgName" width="100%" height="100%">
       <img :src="src" :alt="alt" @click="getImgView" />
 
       <!-- <template #footer>
@@ -10,11 +10,13 @@
           <el-button @click="dialogVisible = false">取消</el-button>
         </span>
       </template> -->
-    </el-dialog>
+    </ElDialog>
   </section>
 </template>
 <script setup>
 import { ref } from "vue";
+import { ElDialog } from "element-plus";
+import "element-plus/es/components/dialog/style/css";
 
 const dialogVisible = ref(false);
 const imgName = ref(props.src.substring(props.src.lastIndexOf("/") + 1, props.src.length));

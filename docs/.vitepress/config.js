@@ -50,7 +50,7 @@ export default {
 
     // 编辑链接
     editLink: {
-      pattern: "https://github.com/zmx2321/vite-blog",
+      pattern: "https://github.com/zmx2321/vite-blog/edit/main/docs/:path",
       text: "在 github 上编辑此页",
     },
 
@@ -86,17 +86,8 @@ export default {
     // 假如文档不是放在仓库的根目录下
     docsDir: "docs",
 
-    // 默认是 false, 设置为 true 来启用
-    editLinks: true,
-
-    // 默认为 "Edit this page"
-    editLinkText: "在 GitHub 上编辑此页",
-
     // 启用页面滚动效果
     smoothScroll: true,
-
-    // 是否开启 PWA
-    serviceWorker: true,
 
     socialLinks: [{ icon: "github", link: "https://github.com/zmx2321/vite-blog" }], // 可以连接到 github
 
@@ -106,14 +97,6 @@ export default {
       placement: "vuejsorg",
     }, */
   },
-
-  // 插件
-  plugins: [
-    "@vuepress/active-header-links", // 页面滚动时自动激活侧边栏链接的插件
-    "@vuepress/back-to-top", // 返回顶部插件
-    "@vuepress/medium-zoom", // 图片预览插件
-    "@vuepress/nprogress", //页面顶部进度条
-  ],
 
   vite: {
     define: {
@@ -141,7 +124,8 @@ export default {
       external: ["@vue/repl"],
     },
     build: {
-      sourcemap: true,
+      // 生产 sourcemap 默认关闭；需要时可临时设置 VITEPRESS_SOURCEMAP=true
+      sourcemap: process.env.VITEPRESS_SOURCEMAP === "true",
       rollupOptions: {
         output: {
           chunkSizeWarningLimit: 1800, // 限制警告的大小

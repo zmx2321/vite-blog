@@ -47,7 +47,7 @@ onMounted(() => {
   // 定时器设置时间
   setInterval(() => {
     nowTimeStamp.value = getDateTimeNowFormate();
-  }, 100);
+  }, 1000);
 });
 </script>
 

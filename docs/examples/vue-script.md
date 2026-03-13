@@ -9,7 +9,7 @@
 ```vue
 <template>
   <input class="input" type="text" v-model="input"/>
-  <xl-button type="primary" @click="onSubmit">提交</xl-button>
+  <el-button type="primary" @click="onSubmit">提交</el-button>
   <div style="margin-top: 16px">输出内容：{{ content }}</div>
 </template>
 
@@ -54,7 +54,7 @@ setup typescript 用法。
 ```vue
 <template>
   <input class="input" type="text" v-model="input"/>
-  <xl-button type="primary" @click="onSubmit">提交</xl-button>
+  <el-button type="primary" @click="onSubmit">提交</el-button>
   <div style="margin-top: 16px">输出内容：{{ content }}</div>
 </template>
 
@@ -114,7 +114,7 @@ export default defineComponent({
     return () => (
     <>
       <input class="input input-tsx" type="text" v-model={input.value} />
-      <xl-button type="primary" onClick={onSubmit}>提交</xl-button>
+      <el-button type="primary" onClick={onSubmit}>提交</el-button>
       <div style="margin-top: 16px">输出内容：{ content.value }</div>
     </>)
   }
